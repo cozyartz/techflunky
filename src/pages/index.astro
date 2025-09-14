@@ -1,24 +1,33 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { BentoGrid, BentoBox } from '../components/bento/BentoGridMotion';
+import { Bento3DCard, FloatingElement, GlowingBox } from '../components/bento/Bento3DEffects';
+import { AnimatedStat } from '../components/bento/AnimatedStat';
+import { FeatureCard, IdeaPreview } from '../components/bento/FeatureCard';
 ---
 
 <Layout title="TechFlunky - Marketplace for Validated Business Ideas">
-  <main class="min-h-screen bg-gray-50">
-    <!-- Hero Section -->
-    <section class="relative bg-gradient-to-br from-indigo-900 to-purple-800 text-white">
-      <div class="container mx-auto px-4 py-24">
+  <main class="min-h-screen bg-bento-light">
+    <!-- Hero Section with Bento Grid Overlay -->
+    <section class="relative bg-gradient-to-br from-indigo-900 via-purple-800 to-indigo-900 text-white overflow-hidden">
+      <!-- Grid pattern overlay -->
+      <div class="absolute inset-0 opacity-10">
+        <div class="h-full w-full" style="background-image: url('data:image/svg+xml,%3Csvg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" stroke="%23fff" stroke-width="1"%3E%3Cpath d="M0 0h40v40H0z"/%3E%3C/g%3E%3C/svg%3E'); background-size: 40px 40px;"></div>
+      </div>
+      
+      <div class="container mx-auto px-4 py-24 relative z-10">
         <div class="max-w-4xl mx-auto text-center">
-          <h1 class="text-5xl md:text-6xl font-bold mb-6">
+          <h1 class="text-5xl md:text-6xl font-bold mb-6 animate-fade-in">
             Turn Business Ideas Into Revenue
           </h1>
-          <p class="text-xl md:text-2xl mb-8 text-indigo-100">
+          <p class="text-xl md:text-2xl mb-8 text-indigo-100 animate-slide-up">
             The marketplace for validated business concepts. Buy proven ideas or sell your next million-dollar concept.
           </p>
-          <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="/browse" class="bg-white text-indigo-900 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition">
+          <div class="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up" style="animation-delay: 0.2s">
+            <a href="/browse" class="bg-white text-indigo-900 px-8 py-4 rounded-xl font-semibold hover:bg-gray-100 transition transform hover:scale-105">
               Browse Ideas
             </a>
-            <a href="/sell" class="bg-indigo-700 text-white px-8 py-4 rounded-lg font-semibold hover:bg-indigo-600 transition">
+            <a href="/sell" class="bg-indigo-700/30 backdrop-blur-sm border border-indigo-400 text-white px-8 py-4 rounded-xl font-semibold hover:bg-indigo-600/40 transition transform hover:scale-105">
               Sell Your Idea
             </a>
           </div>
@@ -26,149 +35,219 @@ import Layout from '../layouts/Layout.astro';
       </div>
     </section>
 
-    <!-- Stats Section -->
-    <section class="py-16 bg-white">
+    <!-- Bento Grid Section -->
+    <section class="py-20">
       <div class="container mx-auto px-4">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-          <div>
-            <div class="text-4xl font-bold text-indigo-900">$800M+</div>
-            <div class="text-gray-600 mt-2">Market Opportunity</div>
-          </div>
-          <div>
-            <div class="text-4xl font-bold text-indigo-900">95%</div>
-            <div class="text-gray-600 mt-2">Profit Margins</div>
-          </div>
-          <div>
-            <div class="text-4xl font-bold text-indigo-900">15-19x</div>
-            <div class="text-gray-600 mt-2">Exit Multiples</div>
-          </div>
-        </div>
+        <BentoGrid client:load>
+          <!-- Large Featured Idea Box -->
+          <BentoBox size="large" className="lg:col-span-6 lg:row-span-3 bg-gradient-to-br from-indigo-50 to-purple-50" gradient>
+            <div class="h-full flex flex-col">
+              <div class="text-sm font-bold text-purple-600 mb-2">🔥 TRENDING NOW</div>
+              <h3 class="text-2xl font-bold mb-3">AI-Powered HR Compliance Platform</h3>
+              <p class="text-gray-700 mb-4 flex-grow">Multi-state leave administration system with automated compliance tracking. Ready-to-deploy SaaS with $800M market opportunity.</p>
+              <div class="grid grid-cols-2 gap-4 mb-4">
+                <div class="bg-white/70 rounded-lg p-3">
+                  <div class="text-sm text-gray-600">Market Size</div>
+                  <div class="font-bold text-indigo-900">$800M+</div>
+                </div>
+                <div class="bg-white/70 rounded-lg p-3">
+                  <div class="text-sm text-gray-600">Profit Margin</div>
+                  <div class="font-bold text-indigo-900">95%</div>
+                </div>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-3xl font-bold text-indigo-900">$35,000</span>
+                <a href="/listing/ai-hr-leave-administration-platform" class="bg-indigo-900 text-white px-6 py-2 rounded-lg hover:bg-indigo-800 transition">
+                  View Details
+                </a>
+              </div>
+            </div>
+          </BentoBox>
+
+          <!-- Stats Boxes -->
+          <BentoBox size="medium" className="lg:col-span-3 lg:row-span-2 bg-gradient-to-br from-blue-50 to-indigo-50" gradient>
+            <AnimatedStat value="127" label="Active Listings" suffix="+" client:visible />
+          </BentoBox>
+
+          <BentoBox size="medium" className="lg:col-span-3 lg:row-span-2 bg-gradient-to-br from-green-50 to-emerald-50" gradient>
+            <AnimatedStat value="2.3" label="Avg Exit Multiple" prefix="" suffix="M" client:visible />
+          </BentoBox>
+
+          <!-- How It Works - Seller -->
+          <BentoBox size="wide" className="lg:col-span-4 lg:row-span-2">
+            <FeatureCard 
+              icon="💡"
+              title="For Idea Creators" 
+              description="Package your concept with market research, business plans, and technical specs. List it and get paid when entrepreneurs buy your validated idea."
+              color="purple"
+              client:load
+            />
+          </BentoBox>
+
+          <!-- How It Works - Buyer -->
+          <BentoBox size="wide" className="lg:col-span-4 lg:row-span-2">
+            <FeatureCard 
+              icon="🚀"
+              title="For Entrepreneurs" 
+              description="Skip the ideation phase. Browse validated business concepts with proven market potential and launch faster with everything you need."
+              color="indigo"
+              client:load
+            />
+          </BentoBox>
+
+          <!-- Success Rate -->
+          <BentoBox size="small" className="lg:col-span-2 lg:row-span-1 bg-gradient-to-br from-orange-50 to-amber-50" gradient>
+            <div class="h-full flex items-center justify-center">
+              <AnimatedStat value="89" label="Success Rate" suffix="%" client:visible />
+            </div>
+          </BentoBox>
+
+          <!-- Quick Stat -->
+          <BentoBox size="small" className="lg:col-span-2 lg:row-span-1 bg-gradient-to-br from-purple-50 to-pink-50" gradient>
+            <div class="h-full flex items-center justify-center">
+              <AnimatedStat value="48" label="Hours to Launch" suffix="h" client:visible />
+            </div>
+          </BentoBox>
+
+          <!-- Categories Grid -->
+          <BentoBox size="tall" className="lg:col-span-3 lg:row-span-3 bg-gradient-to-br from-gray-50 to-slate-50" gradient>
+            <h3 class="text-xl font-bold mb-4">Popular Categories</h3>
+            <div class="space-y-3">
+              <a href="/browse?category=saas" class="block p-3 bg-white rounded-lg hover:shadow-md transition">
+                <div class="flex justify-between items-center">
+                  <span class="font-medium">SaaS Platforms</span>
+                  <span class="text-gray-500">23 ideas</span>
+                </div>
+              </a>
+              <a href="/browse?category=marketplace" class="block p-3 bg-white rounded-lg hover:shadow-md transition">
+                <div class="flex justify-between items-center">
+                  <span class="font-medium">Marketplaces</span>
+                  <span class="text-gray-500">18 ideas</span>
+                </div>
+              </a>
+              <a href="/browse?category=ai-ml" class="block p-3 bg-white rounded-lg hover:shadow-md transition">
+                <div class="flex justify-between items-center">
+                  <span class="font-medium">AI/ML Solutions</span>
+                  <span class="text-gray-500">31 ideas</span>
+                </div>
+              </a>
+              <a href="/browse?category=fintech" class="block p-3 bg-white rounded-lg hover:shadow-md transition">
+                <div class="flex justify-between items-center">
+                  <span class="font-medium">FinTech</span>
+                  <span class="text-gray-500">15 ideas</span>
+                </div>
+              </a>
+              <a href="/browse?category=edtech" class="block p-3 bg-white rounded-lg hover:shadow-md transition">
+                <div class="flex justify-between items-center">
+                  <span class="font-medium">EdTech</span>
+                  <span class="text-gray-500">12 ideas</span>
+                </div>
+              </a>
+            </div>
+          </BentoBox>
+
+          <!-- More Featured Ideas -->
+          <BentoBox size="medium" className="lg:col-span-3 lg:row-span-2">
+            <IdeaPreview 
+              category="BLUEPRINT"
+              title="D2C Sustainable Fashion"
+              description="Eco-friendly clothing platform targeting Gen Z consumers with AI-powered size recommendations"
+              price="$15,000"
+              marketSize="$2.4B"
+              color="green"
+              client:load
+            />
+          </BentoBox>
+
+          <BentoBox size="medium" className="lg:col-span-3 lg:row-span-2">
+            <IdeaPreview 
+              category="CONCEPT"
+              title="EdTech Micro-Learning"
+              description="Bite-sized professional development for remote teams with gamification"
+              price="$5,000"
+              marketSize="$350M"
+              color="blue"
+              client:load
+            />
+          </BentoBox>
+
+          <!-- Trust Indicators -->
+          <BentoBox size="wide" className="lg:col-span-6 lg:row-span-1 bg-gradient-to-r from-indigo-900 to-purple-800 text-white" gradient>
+            <div class="flex items-center justify-between h-full">
+              <div>
+                <h4 class="font-bold text-lg">Secure & Trusted</h4>
+                <p class="text-indigo-100">All transactions protected by escrow</p>
+              </div>
+              <div class="flex gap-4 text-3xl opacity-80">
+                🔒 ✓ 🛡️
+              </div>
+            </div>
+          </BentoBox>
+
+          <!-- CTA Box -->
+          <BentoBox size="wide" className="lg:col-span-6 lg:row-span-1 bg-gradient-to-r from-purple-600 to-indigo-600 text-white" gradient>
+            <div class="flex items-center justify-between h-full">
+              <div>
+                <h4 class="font-bold text-lg">Ready to start your journey?</h4>
+                <p class="text-purple-100">Join thousands of entrepreneurs and idea creators</p>
+              </div>
+              <a href="/signup" class="bg-white text-indigo-900 px-6 py-2 rounded-lg font-semibold hover:bg-gray-100 transition">
+                Get Started
+              </a>
+            </div>
+          </BentoBox>
+        </BentoGrid>
       </div>
     </section>
 
-    <!-- How It Works -->
-    <section class="py-20 bg-gray-50">
-      <div class="container mx-auto px-4">
-        <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">How TechFlunky Works</h2>
-        
-        <div class="grid md:grid-cols-2 gap-16 max-w-6xl mx-auto">
-          <!-- For Sellers -->
-          <div>
-            <h3 class="text-2xl font-bold mb-8 text-indigo-900">For Idea Creators</h3>
-            <div class="space-y-6">
-              <div class="flex gap-4">
-                <div class="bg-indigo-100 text-indigo-900 w-10 h-10 rounded-full flex items-center justify-center font-bold">1</div>
-                <div>
-                  <h4 class="font-semibold mb-1">Package Your Concept</h4>
-                  <p class="text-gray-600">Market research, business plan, financial projections, and technical specs</p>
-                </div>
-              </div>
-              <div class="flex gap-4">
-                <div class="bg-indigo-100 text-indigo-900 w-10 h-10 rounded-full flex items-center justify-center font-bold">2</div>
-                <div>
-                  <h4 class="font-semibold mb-1">List Your Idea</h4>
-                  <p class="text-gray-600">Choose your package tier and set your price ($1k-$100k+)</p>
-                </div>
-              </div>
-              <div class="flex gap-4">
-                <div class="bg-indigo-100 text-indigo-900 w-10 h-10 rounded-full flex items-center justify-center font-bold">3</div>
-                <div>
-                  <h4 class="font-semibold mb-1">Get Paid</h4>
-                  <p class="text-gray-600">Secure escrow release when buyer accepts your concept</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- For Buyers -->
-          <div>
-            <h3 class="text-2xl font-bold mb-8 text-indigo-900">For Entrepreneurs</h3>
-            <div class="space-y-6">
-              <div class="flex gap-4">
-                <div class="bg-purple-100 text-purple-900 w-10 h-10 rounded-full flex items-center justify-center font-bold">1</div>
-                <div>
-                  <h4 class="font-semibold mb-1">Browse Validated Ideas</h4>
-                  <p class="text-gray-600">Filter by industry, price, and completeness level</p>
-                </div>
-              </div>
-              <div class="flex gap-4">
-                <div class="bg-purple-100 text-purple-900 w-10 h-10 rounded-full flex items-center justify-center font-bold">2</div>
-                <div>
-                  <h4 class="font-semibold mb-1">Review Package Details</h4>
-                  <p class="text-gray-600">Access market analysis, MVP specs, and growth projections</p>
-                </div>
-              </div>
-              <div class="flex gap-4">
-                <div class="bg-purple-100 text-purple-900 w-10 h-10 rounded-full flex items-center justify-center font-bold">3</div>
-                <div>
-                  <h4 class="font-semibold mb-1">Launch Your Business</h4>
-                  <p class="text-gray-600">Get everything you need to start generating revenue fast</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Featured Listings Preview -->
+    <!-- Newsletter Section -->
     <section class="py-20 bg-white">
       <div class="container mx-auto px-4">
-        <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Featured Business Concepts</h2>
-        <p class="text-center text-gray-600 mb-12">Ready-to-launch ideas with proven market potential</p>
-        
-        <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          <!-- Example Card 1 -->
-          <div class="border rounded-lg p-6 hover:shadow-lg transition">
-            <div class="text-sm text-purple-600 font-semibold mb-2">LAUNCH READY</div>
-            <h3 class="text-xl font-bold mb-2">AI-Powered HR Compliance Platform</h3>
-            <p class="text-gray-600 mb-4">Multi-state leave administration system with $800M market opportunity</p>
-            <div class="flex justify-between items-center">
-              <span class="text-2xl font-bold text-indigo-900">$35,000</span>
-              <a href="#" class="text-indigo-600 hover:text-indigo-800">View Details →</a>
-            </div>
-          </div>
-
-          <!-- Example Card 2 -->
-          <div class="border rounded-lg p-6 hover:shadow-lg transition">
-            <div class="text-sm text-blue-600 font-semibold mb-2">BLUEPRINT</div>
-            <h3 class="text-xl font-bold mb-2">D2C Sustainable Fashion Marketplace</h3>
-            <p class="text-gray-600 mb-4">Eco-friendly clothing platform targeting Gen Z consumers</p>
-            <div class="flex justify-between items-center">
-              <span class="text-2xl font-bold text-indigo-900">$15,000</span>
-              <a href="#" class="text-indigo-600 hover:text-indigo-800">View Details →</a>
-            </div>
-          </div>
-
-          <!-- Example Card 3 -->
-          <div class="border rounded-lg p-6 hover:shadow-lg transition">
-            <div class="text-sm text-green-600 font-semibold mb-2">CONCEPT</div>
-            <h3 class="text-xl font-bold mb-2">EdTech Micro-Learning Platform</h3>
-            <p class="text-gray-600 mb-4">Bite-sized professional development for remote teams</p>
-            <div class="flex justify-between items-center">
-              <span class="text-2xl font-bold text-indigo-900">$5,000</span>
-              <a href="#" class="text-indigo-600 hover:text-indigo-800">View Details →</a>
-            </div>
-          </div>
+        <div class="max-w-2xl mx-auto text-center">
+          <h2 class="text-3xl font-bold mb-4">Stay Updated</h2>
+          <p class="text-gray-600 mb-8">Get notified about new business ideas and exclusive opportunities</p>
+          <form class="flex gap-4 max-w-md mx-auto">
+            <input 
+              type="email" 
+              placeholder="Enter your email" 
+              class="flex-grow px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-indigo-500"
+            />
+            <button 
+              type="submit" 
+              class="bg-indigo-900 text-white px-6 py-3 rounded-lg font-semibold hover:bg-indigo-800 transition"
+            >
+              Subscribe
+            </button>
+          </form>
         </div>
-        
-        <div class="text-center mt-12">
-          <a href="/browse" class="bg-indigo-900 text-white px-8 py-3 rounded-lg font-semibold hover:bg-indigo-800 transition">
-            Browse All Ideas
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="py-20 bg-gradient-to-r from-indigo-900 to-purple-800 text-white">
-      <div class="container mx-auto px-4 text-center">
-        <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Start?</h2>
-        <p class="text-xl mb-8 text-indigo-100">Join the marketplace where business ideas become reality</p>
-        <a href="/signup" class="bg-white text-indigo-900 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition inline-block">
-          Create Your Account
-        </a>
       </div>
     </section>
   </main>
 </Layout>
+
+<style>
+  /* Custom animations */
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.8s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: fade-in 0.5s ease-out forwards;
+  }
+
+  /* Ensure bento items have proper stacking */
+  .grid > * {
+    min-height: 0;
+  }
+</style>

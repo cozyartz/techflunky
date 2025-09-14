@@ -16,9 +16,12 @@
     "@astrojs/tailwind": "^5.0.0",
     "@cloudflare/workers-types": "^4.0.0",
     "astro": "^4.0.0",
+    "clsx": "^2.1.1",
+    "framer-motion": "^11.18.2",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "stripe": "^14.0.0"
+    "stripe": "^14.0.0",
+    "tailwind-merge": "^2.6.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.0",
