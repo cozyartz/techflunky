@@ -1,0 +1,86 @@
+# Claude Configuration for TechFlunky
+
+## Project Overview
+TechFlunky is a Business-in-a-Box deployment platform that enables entrepreneurs to purchase and instantly deploy complete business solutions to their own Cloudflare infrastructure. Operated by Autimind, Inc.
+
+## Key Context
+- **Platform**: Marketplace for deployable business packages
+- **Technology**: Built on Cloudflare (Workers, D1, R2, Pages)
+- **Revenue Model**: 15% platform fee on sales + optional services
+- **Deployment**: Automated via Cloudflare for SaaS
+- **Payment**: Stripe Connect with delayed payouts
+
+## Technical Stack
+- Frontend: Astro + React + Tailwind CSS
+- Backend: Cloudflare Workers
+- Database: Cloudflare D1
+- Storage: Cloudflare R2
+- Payments: Stripe Connect
+- AI: Claude API for validation
+
+## Core Features
+1. **Business Packages**: Complete, deployable business solutions
+2. **One-Click Deployment**: Deploy to buyer's Cloudflare account
+3. **Custom Domains**: Via Cloudflare for SaaS
+4. **Automated Setup**: Workers, databases, storage, DNS
+5. **White-Label Ready**: Buyer's brand, not ours
+
+## Business Package Tiers
+- **Concept ($1-5k)**: Market research + basic assets
+- **Blueprint ($5-25k)**: + Technical architecture + APIs
+- **Launch Ready ($25-100k)**: + Complete application + support
+
+## Key APIs and Integrations
+- Cloudflare API for deployment automation
+- Stripe Connect for marketplace payments
+- Claude API for business idea validation
+- R2 for document storage
+
+## Important Files
+- `/src/lib/deployment/deployment-manager.ts` - Core deployment logic
+- `/src/lib/deployment/cloudflare-saas.ts` - Custom domain management
+- `/src/lib/deployment/package-builder.ts` - Package creation
+- `/cli/index.js` - TechFlunky CLI tool
+- `/packages/*/techflunky.json` - Package definitions
+
+## Deployment Process
+1. Buyer purchases package
+2. Connects Cloudflare account
+3. System deploys all resources
+4. Custom domain configured
+5. Business goes live
+
+## Security Considerations
+- Buyer API tokens handled securely
+- No cross-account access
+- Each deployment isolated
+- Platform fee handled by Stripe
+
+## Support Patterns
+When helping with TechFlunky:
+1. Focus on Cloudflare deployment best practices
+2. Ensure packages are complete and deployable
+3. Validate business ideas are feasible
+4. Check technical architecture is sound
+5. Verify pricing aligns with value
+
+## Common Tasks
+- Creating new business packages
+- Debugging deployment issues
+- Optimizing Cloudflare configurations
+- Implementing new package features
+- Improving buyer experience
+
+## Revenue Tracking
+- Platform fee: 15% of package price
+- Example: $35,000 package = $5,250 to platform
+- Monthly potential: 10 sales = $52,500 revenue
+
+## Future Enhancements
+- AI-powered package creation
+- Automated business validation
+- Performance monitoring dashboard
+- White-label platform offering
+- Investor matchmaking
+
+Remember: TechFlunky transforms ideas into deployable businesses. Every package should be complete, functional, and ready to generate revenue for the buyer.
