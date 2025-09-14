@@ -4,13 +4,29 @@ import { stripe, createSellerAccount } from '../../../lib/stripe-config';
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    const { firstName, lastName, email, businessType, businessName } = await request.json();
-    
+    const formData = await request.json();
+    const {
+      firstName,
+      lastName,
+      email,
+      businessType,
+      businessName,
+      country,
+      hasExperience,
+      platformType,
+      techStack,
+      estimatedValue,
+      hasDocumentation,
+      agreeToTerms,
+      marketingEmails
+    } = formData;
+
     // Create the connected account
     const account = await createSellerAccount({
       email,
       name: businessName || `${firstName} ${lastName}`,
       businessType: businessType as 'individual' | 'company',
+      country,
     });
     
     // Create account link for onboarding

@@ -1,194 +1,169 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import SellerOnboardingForm from '../../components/forms/SellerOnboardingForm.tsx';
 ---
 
 <Layout title="Become a Seller - TechFlunky">
-  <main class="min-h-screen bg-gray-50 py-12">
-    <div class="container mx-auto px-4 max-w-4xl">
-      <h1 class="text-4xl font-bold text-center mb-8">Sell Your Business Ideas on TechFlunky</h1>
-      
-      <!-- How It Works -->
-      <div class="bg-white rounded-lg shadow p-8 mb-8">
-        <h2 class="text-2xl font-bold mb-6">How Selling Works</h2>
-        
-        <div class="grid md:grid-cols-2 gap-8">
-          <div>
-            <h3 class="font-semibold text-lg mb-4">Our Commission Structure</h3>
-            <ul class="space-y-3 text-gray-700">
-              <li class="flex items-start gap-3">
-                <svg class="w-5 h-5 text-green-500 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                </svg>
-                <span><strong>15% platform fee</strong> on successful sales</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <svg class="w-5 h-5 text-green-500 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                </svg>
-                <span><strong>No listing fees</strong> - only pay when you sell</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <svg class="w-5 h-5 text-green-500 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                </svg>
-                <span><strong>Fast payouts</strong> after 3-day review period</span>
-              </li>
-            </ul>
+  <main class="min-h-screen bg-black">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm border-b border-yellow-400/20">
+      <div class="container mx-auto px-4 py-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-3">
+            <img src="/assets/techflunky-logo.png" alt="TechFlunky" class="w-10 h-10">
+            <span class="text-xl font-bold text-white">TechFlunky</span>
           </div>
-          
-          <div>
-            <h3 class="font-semibold text-lg mb-4">Payment Security</h3>
-            <ul class="space-y-3 text-gray-700">
-              <li class="flex items-start gap-3">
-                <svg class="w-5 h-5 text-blue-500 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                </svg>
-                <span>Payments processed by <strong>Stripe Connect</strong></span>
-              </li>
-              <li class="flex items-start gap-3">
-                <svg class="w-5 h-5 text-blue-500 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                </svg>
-                <span>Funds held securely during review period</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <svg class="w-5 h-5 text-blue-500 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                </svg>
-                <span>Direct deposit to your bank account</span>
-              </li>
-            </ul>
+          <div class="hidden md:flex items-center space-x-8">
+            <a href="/" class="text-gray-300 hover:text-yellow-400 transition font-medium">Home</a>
+            <a href="/browse" class="text-gray-300 hover:text-yellow-400 transition font-medium">Browse</a>
+            <a href="/sell" class="text-gray-300 hover:text-yellow-400 transition font-medium">Sell</a>
+            <a href="/about" class="text-gray-300 hover:text-yellow-400 transition font-medium">About</a>
+            <a href="/contact" class="bg-yellow-400 text-black px-4 py-2 rounded-lg font-semibold hover:bg-yellow-300 transition">Contact</a>
           </div>
         </div>
       </div>
+    </nav>
 
-      <!-- Onboarding Form -->
-      <div class="bg-white rounded-lg shadow p-8">
-        <h2 class="text-2xl font-bold mb-2">Create Your Seller Account</h2>
-        <p class="text-gray-600 mb-6">Connect with Stripe to start receiving payments</p>
-        
-        <form id="seller-onboarding-form" class="space-y-6">
-          <div class="grid md:grid-cols-2 gap-6">
-            <div>
-              <label for="firstName" class="block text-sm font-medium text-gray-700 mb-1">
-                First Name
-              </label>
-              <input 
-                type="text" 
-                id="firstName" 
-                name="firstName" 
-                required 
-                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-              />
-            </div>
-            
-            <div>
-              <label for="lastName" class="block text-sm font-medium text-gray-700 mb-1">
-                Last Name
-              </label>
-              <input 
-                type="text" 
-                id="lastName" 
-                name="lastName" 
-                required 
-                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-              />
-            </div>
-          </div>
-          
-          <div>
-            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
-              Email Address
-            </label>
-            <input 
-              type="email" 
-              id="email" 
-              name="email" 
-              required 
-              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-            />
-          </div>
-          
-          <div>
-            <label for="businessType" class="block text-sm font-medium text-gray-700 mb-1">
-              Business Type
-            </label>
-            <select 
-              id="businessType" 
-              name="businessType" 
-              required
-              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-            >
-              <option value="">Select business type</option>
-              <option value="individual">Individual / Sole Proprietor</option>
-              <option value="company">Company / Corporation</option>
-            </select>
-          </div>
-          
-          <div>
-            <label for="businessName" class="block text-sm font-medium text-gray-700 mb-1">
-              Business Name <span class="text-gray-500">(if applicable)</span>
-            </label>
-            <input 
-              type="text" 
-              id="businessName" 
-              name="businessName" 
-              placeholder="e.g., Autimind, Inc."
-              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-            />
-          </div>
-
-          <div class="bg-gray-50 rounded-lg p-4">
-            <h3 class="font-semibold mb-2">What happens next?</h3>
-            <ol class="space-y-2 text-sm text-gray-700">
-              <li>1. We'll create your Stripe Connected Account</li>
-              <li>2. You'll be redirected to Stripe to complete verification</li>
-              <li>3. Once verified, you can start listing business ideas</li>
-              <li>4. Get paid directly to your bank account when ideas sell</li>
-            </ol>
-          </div>
-
-          <button 
-            type="submit"
-            class="w-full bg-indigo-900 text-white py-3 px-6 rounded-lg font-semibold hover:bg-indigo-800 transition"
-          >
-            Continue with Stripe
-          </button>
-          
-          <p class="text-xs text-center text-gray-500">
-            By creating a seller account, you agree to our Terms of Service and Privacy Policy.<br />
-            TechFlunky is operated by Autimind, Inc. Platform fees apply to all transactions.
-          </p>
-        </form>
+    <!-- Header Section -->
+    <section class="relative bg-gradient-to-br from-black via-gray-900 to-black text-white overflow-hidden pt-24 pb-16">
+      <!-- Subtle grid pattern -->
+      <div class="absolute inset-0 opacity-5">
+        <div class="h-full w-full bg-grid-pattern"></div>
       </div>
-    </div>
-  </main>
 
-  <script>
-    document.getElementById('seller-onboarding-form')?.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      
-      const formData = new FormData(e.target as HTMLFormElement);
-      const data = Object.fromEntries(formData);
-      
-      try {
-        // Create Stripe Connected Account
-        const response = await fetch('/api/seller/create-account', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data)
-        });
-        
-        const result = await response.json();
-        
-        if (result.accountLinkUrl) {
-          // Redirect to Stripe onboarding
-          window.location.href = result.accountLinkUrl;
-        }
-      } catch (error) {
-        console.error('Onboarding error:', error);
-        alert('Failed to create seller account. Please try again.');
-      }
-    });
-  </script>
+      <div class="container mx-auto px-4 relative z-10">
+        <div class="max-w-3xl mx-auto text-center mb-16">
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-black leading-tight mb-6 animate-slide-up">
+            <span class="block text-white">Join the</span>
+            <span class="block text-yellow-400">TechFlunky Marketplace</span>
+          </h1>
+          <p class="text-xl text-gray-300 mb-8 animate-slide-up" style="animation-delay: 0.1s">
+            Turn your complete platforms into profitable assets. Get fair compensation for months of development work.
+          </p>
+        </div>
+
+        <!-- Value Proposition Cards -->
+        <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-16">
+          <div class="card-glass p-6 text-center">
+            <div class="w-16 h-16 bg-yellow-400/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Fair Compensation</h3>
+            <p class="text-gray-300 text-sm">Get paid what your platforms are worth - from $15K to $40K+ based on complexity and market potential</p>
+          </div>
+
+          <div class="card-glass p-6 text-center">
+            <div class="w-16 h-16 bg-yellow-400/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.031 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Secure Process</h3>
+            <p class="text-gray-300 text-sm">Your code is protected with enterprise-grade security, encrypted escrow, and legal agreements</p>
+          </div>
+
+          <div class="card-glass p-6 text-center">
+            <div class="w-16 h-16 bg-yellow-400/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Fast Payouts</h3>
+            <p class="text-gray-300 text-sm">Only 15% platform fee on successful sales. No listing fees. Direct deposit to your bank account</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Form Section -->
+    <section class="py-16 bg-gradient-to-br from-gray-900 via-black to-gray-900">
+      <div class="container mx-auto px-4">
+        <SellerOnboardingForm client:load />
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-black border-t border-yellow-400/20">
+      <div class="container mx-auto px-4">
+        <div class="text-center">
+          <div class="flex items-center justify-center space-x-3 mb-4">
+            <img src="/assets/techflunky-logo.png" alt="TechFlunky" class="w-8 h-8">
+            <span class="text-xl font-bold text-white">TechFlunky</span>
+          </div>
+          <p class="text-gray-400 text-sm">
+            © 2024 TechFlunky. Connecting builders with entrepreneurs.
+          </p>
+          <p class="text-xs text-gray-500 mt-2">
+            By creating a seller account, you agree to our Terms of Service and Privacy Policy.<br />
+            Platform fees apply to all successful transactions.
+          </p>
+        </div>
+      </div>
+    </footer>
+  </main>
 </Layout>
+
+<style>
+  /* Import styles from index page for consistency */
+  :root {
+    --yellow-primary: #fbbf24;
+    --yellow-secondary: #f59e0b;
+    --yellow-glow: rgba(251, 191, 36, 0.2);
+    --black-primary: #000000;
+    --gray-primary: #111827;
+    --gray-secondary: #1f2937;
+  }
+
+  .bg-grid-pattern {
+    background-image: url("data:image/svg+xml,%3csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3e%3cg fill='none' stroke='%23fff' stroke-width='1'%3e%3cpath d='M0 0h60v60H0z'/%3e%3c/g%3e%3c/svg%3e");
+    background-size: 60px 60px;
+  }
+
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    opacity: 0;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--gray-primary);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--yellow-primary);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--yellow-secondary);
+  }
+
+  /* Accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+</style>

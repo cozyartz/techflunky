@@ -1,0 +1,265 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Contact TechFlunky - Get In Touch">
+  <main class="min-h-screen bg-black">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm border-b border-brand-yellow-400/20">
+      <div class="container mx-auto px-4 py-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-3">
+            <img src="/assets/techflunky-logo.png" alt="TechFlunky" class="w-10 h-10">
+            <span class="text-xl font-bold text-white">TechFlunky</span>
+          </div>
+          <div class="hidden md:flex items-center space-x-8">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/browse" class="nav-link">Browse</a>
+            <a href="/sell" class="nav-link">Sell</a>
+            <a href="/about" class="nav-link">About</a>
+            <a href="/contact" class="nav-link-active">Contact</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white overflow-hidden flex items-center">
+      <!-- Subtle grid pattern -->
+      <div class="absolute inset-0 opacity-5">
+        <div class="h-full w-full bg-grid-pattern"></div>
+      </div>
+
+      <div class="container mx-auto px-4 relative z-10 pt-24">
+        <div class="max-w-6xl mx-auto">
+          <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+            <!-- Left: Contact Form -->
+            <div class="space-y-8">
+              <div class="space-y-6">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-black leading-tight animate-slide-up">
+                  <span class="block text-white">Let's</span>
+                  <span class="block text-brand-yellow-400">Talk Business</span>
+                </h1>
+                <p class="text-xl text-gray-300 animate-slide-up animation-delay-100">
+                  Ready to discuss a platform? Have questions about the process? Let's have a direct conversation.
+                </p>
+              </div>
+
+              <div class="card-glass p-8 animate-slide-up animation-delay-200">
+                <form class="space-y-6">
+                  <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <label for="firstName" class="block text-sm font-medium text-brand-yellow-400 mb-2">
+                        First Name
+                      </label>
+                      <input
+                        type="text"
+                        id="firstName"
+                        name="firstName"
+                        required
+                        class="w-full px-4 py-3 bg-gray-900/50 border border-brand-yellow-400/30 rounded-lg text-white placeholder-gray-400 focus-brand"
+                        placeholder="Your first name"
+                      >
+                    </div>
+                    <div>
+                      <label for="lastName" class="block text-sm font-medium text-brand-yellow-400 mb-2">
+                        Last Name
+                      </label>
+                      <input
+                        type="text"
+                        id="lastName"
+                        name="lastName"
+                        required
+                        class="w-full px-4 py-3 bg-gray-900/50 border border-brand-yellow-400/30 rounded-lg text-white placeholder-gray-400 focus-brand"
+                        placeholder="Your last name"
+                      >
+                    </div>
+                  </div>
+
+                  <div>
+                    <label for="email" class="block text-sm font-medium text-brand-yellow-400 mb-2">
+                      Email Address
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      required
+                      class="w-full px-4 py-3 bg-gray-900/50 border border-brand-yellow-400/30 rounded-lg text-white placeholder-gray-400 focus-brand"
+                      placeholder="your@email.com"
+                    >
+                  </div>
+
+                  <div>
+                    <label for="interest" class="block text-sm font-medium text-brand-yellow-400 mb-2">
+                      I'm interested in:
+                    </label>
+                    <select
+                      id="interest"
+                      name="interest"
+                      required
+                      class="w-full px-4 py-3 bg-gray-900/50 border border-brand-yellow-400/30 rounded-lg text-white focus-brand"
+                    >
+                      <option value="">Select your primary interest</option>
+                      <option value="buying-platform">Buying a platform</option>
+                      <option value="selling-platform">Selling my platform</option>
+                      <option value="partnership">Partnership opportunities</option>
+                      <option value="general-inquiry">General inquiry</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label for="message" class="block text-sm font-medium text-brand-yellow-400 mb-2">
+                      Message
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      rows="6"
+                      required
+                      class="w-full px-4 py-3 bg-gray-900/50 border border-brand-yellow-400/30 rounded-lg text-white placeholder-gray-400 focus-brand resize-vertical"
+                      placeholder="Tell me about your situation, what platform interests you, or what questions you have. The more specific, the better I can help."
+                    ></textarea>
+                  </div>
+
+                  <button
+                    type="submit"
+                    class="w-full btn-primary"
+                  >
+                    Send Message
+                  </button>
+                </form>
+              </div>
+            </div>
+
+            <!-- Right: Contact Information & Details -->
+            <div class="space-y-8 animate-slide-up animation-delay-300">
+              <div class="card-glass p-8">
+                <h2 class="text-2xl font-bold text-white mb-6">Direct Communication</h2>
+                <div class="space-y-6">
+                  <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 bg-brand-yellow-400/20 rounded-full flex items-center justify-center flex-shrink-0">
+                      <svg class="w-6 h-6 text-brand-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 class="font-semibold text-white mb-1">Email Response</h3>
+                      <p class="text-gray-300 text-sm">I personally respond to all inquiries within 24 hours. No automated responses.</p>
+                    </div>
+                  </div>
+
+                  <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 bg-brand-yellow-400/20 rounded-full flex items-center justify-center flex-shrink-0">
+                      <svg class="w-6 h-6 text-brand-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 class="font-semibold text-white mb-1">Honest Conversations</h3>
+                      <p class="text-gray-300 text-sm">I'll tell you if a platform isn't right for your situation. No sales pressure.</p>
+                    </div>
+                  </div>
+
+                  <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 bg-brand-yellow-400/20 rounded-full flex items-center justify-center flex-shrink-0">
+                      <svg class="w-6 h-6 text-brand-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 class="font-semibold text-white mb-1">Technical Details</h3>
+                      <p class="text-gray-300 text-sm">I can discuss architecture, deployment, and technical requirements in detail.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-glass p-8">
+                <h2 class="text-2xl font-bold text-white mb-6">What to Expect</h2>
+                <div class="space-y-4">
+                  <div class="border-l-4 border-brand-yellow-400 pl-4">
+                    <h3 class="font-semibold text-brand-yellow-400 mb-1">For Buyers</h3>
+                    <p class="text-gray-300 text-sm">We'll discuss your business goals, technical requirements, and whether a specific platform fits your needs and budget.</p>
+                  </div>
+
+                  <div class="border-l-4 border-brand-yellow-400 pl-4">
+                    <h3 class="font-semibold text-brand-yellow-400 mb-1">For Sellers</h3>
+                    <p class="text-gray-300 text-sm">I'll review your platform's technical completeness, market potential, and help determine fair pricing based on development complexity.</p>
+                  </div>
+
+                  <div class="border-l-4 border-brand-yellow-400 pl-4">
+                    <h3 class="font-semibold text-brand-yellow-400 mb-1">General Inquiries</h3>
+                    <p class="text-gray-300 text-sm">Happy to discuss the marketplace concept, my development background, or answer any questions about the process.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-24 bg-gradient-to-br from-black to-gray-900">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+          <div class="text-center mb-16">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white">Common Questions</h2>
+            <p class="text-xl text-gray-300">
+              Quick answers to frequent inquiries
+            </p>
+          </div>
+
+          <div class="space-y-6">
+            <div class="card-glass p-6">
+              <h3 class="text-xl font-bold text-brand-yellow-400 mb-3">How quickly do you respond?</h3>
+              <p class="text-gray-300">Within 24 hours, usually much faster. I personally read and respond to every message.</p>
+            </div>
+
+            <div class="card-glass p-6">
+              <h3 class="text-xl font-bold text-brand-yellow-400 mb-3">Can I see the code before purchasing?</h3>
+              <p class="text-gray-300">Yes, after a brief qualification call, I can provide repository access for technical review. I want you to be confident in what you're buying.</p>
+            </div>
+
+            <div class="card-glass p-6">
+              <h3 class="text-xl font-bold text-brand-yellow-400 mb-3">Do you provide ongoing support?</h3>
+              <p class="text-gray-300">30 days of deployment support is included. After that, you're running your own business. I can recommend developers if you need ongoing help.</p>
+            </div>
+
+            <div class="card-glass p-6">
+              <h3 class="text-xl font-bold text-brand-yellow-400 mb-3">What if my platform doesn't meet your standards?</h3>
+              <p class="text-gray-300">I'll give you honest feedback and suggestions for improvement. Not every platform is marketplace-ready, and that's okay.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-black border-t border-brand-yellow-400/20">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <div class="flex items-center space-x-3 mb-4 md:mb-0">
+            <img src="/assets/techflunky-logo.png" alt="TechFlunky" class="w-8 h-8">
+            <span class="text-xl font-bold text-white">TechFlunky</span>
+          </div>
+
+          <div class="flex items-center space-x-6 text-gray-400">
+            <a href="/about" class="hover:text-brand-yellow-400 transition">About</a>
+            <a href="/contact" class="hover:text-brand-yellow-400 transition">Contact</a>
+            <a href="/terms" class="hover:text-brand-yellow-400 transition">Terms</a>
+            <a href="/privacy" class="hover:text-brand-yellow-400 transition">Privacy</a>
+          </div>
+        </div>
+
+        <div class="text-center mt-8 pt-8 border-t border-gray-800">
+          <p class="text-gray-400">
+            © 2024 TechFlunky. Connecting builders with entrepreneurs.
+          </p>
+        </div>
+      </div>
+    </footer>
+  </main>
+</Layout>

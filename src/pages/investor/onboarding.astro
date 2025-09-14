@@ -1,0 +1,485 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Investor Onboarding - TechFlunky">
+  <main class="min-h-screen bg-black">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm border-b border-yellow-400/20">
+      <div class="container mx-auto px-4 py-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-3">
+            <img src="/assets/techflunky-logo.png" alt="TechFlunky" class="w-10 h-10">
+            <span class="text-xl font-bold text-white">TechFlunky</span>
+          </div>
+          <div class="hidden md:flex items-center space-x-8">
+            <a href="/" class="text-gray-300 hover:text-yellow-400 transition font-medium">Home</a>
+            <a href="/browse" class="text-gray-300 hover:text-yellow-400 transition font-medium">Browse</a>
+            <a href="/invest" class="text-yellow-400 font-medium">Invest</a>
+            <a href="/sell" class="text-gray-300 hover:text-yellow-400 transition font-medium">Sell</a>
+            <a href="/about" class="text-gray-300 hover:text-yellow-400 transition font-medium">About</a>
+            <a href="/contact" class="bg-yellow-400 text-black px-4 py-2 rounded-lg font-semibold hover:bg-yellow-300 transition">Contact</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Header Section -->
+    <section class="relative bg-gradient-to-br from-black via-gray-900 to-black text-white overflow-hidden pt-24 pb-16">
+      <div class="absolute inset-0 opacity-5">
+        <div class="h-full w-full bg-grid-pattern"></div>
+      </div>
+
+      <div class="container mx-auto px-4 relative z-10">
+        <div class="max-w-3xl mx-auto text-center mb-12">
+          <h1 class="text-4xl md:text-5xl font-black leading-tight mb-6 animate-slide-up">
+            <span class="block text-white">Join the Future of</span>
+            <span class="block text-yellow-400">Platform Investing</span>
+          </h1>
+          <p class="text-xl text-gray-300 mb-8 animate-slide-up" style="animation-delay: 0.1s">
+            Access AI-validated platforms before they hit the mainstream market
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Onboarding Form -->
+    <section class="py-16 bg-gradient-to-br from-gray-900 via-black to-gray-900">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+          <!-- Progress Steps -->
+          <div class="flex justify-center mb-12">
+            <div class="flex items-center space-x-4">
+              <div class="flex items-center">
+                <div class="w-10 h-10 rounded-full bg-yellow-400 text-black flex items-center justify-center font-bold">1</div>
+                <div class="ml-2 text-sm text-yellow-400 font-semibold">Application</div>
+              </div>
+              <div class="w-12 h-0.5 bg-gray-700"></div>
+              <div class="flex items-center">
+                <div class="w-10 h-10 rounded-full bg-gray-700 text-gray-400 flex items-center justify-center font-bold">2</div>
+                <div class="ml-2 text-sm text-gray-400">Review</div>
+              </div>
+              <div class="w-12 h-0.5 bg-gray-700"></div>
+              <div class="flex items-center">
+                <div class="w-10 h-10 rounded-full bg-gray-700 text-gray-400 flex items-center justify-center font-bold">3</div>
+                <div class="ml-2 text-sm text-gray-400">Access</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Form Container -->
+          <div class="card-glass p-8">
+            <div class="text-center mb-8">
+              <h2 class="text-2xl font-bold text-white mb-2">Investor Application</h2>
+              <p class="text-gray-300">Tell us about your investment goals and experience</p>
+            </div>
+
+            <form id="investor-application" class="space-y-8">
+              <!-- Investor Tier Selection -->
+              <div>
+                <label class="block text-sm font-medium text-gray-300 mb-4">
+                  Select Investment Tier *
+                </label>
+                <div class="grid md:grid-cols-2 gap-4">
+                  <label class="tier-option cursor-pointer" data-tier="angel">
+                    <input type="radio" name="investorTier" value="angel" class="sr-only" required>
+                    <div class="card-glass p-6 border-2 border-transparent hover:border-yellow-400/40 transition-all duration-300">
+                      <h3 class="text-lg font-bold text-white mb-2">Angel Investor</h3>
+                      <div class="text-yellow-400 font-semibold mb-2">$5K - $250K</div>
+                      <p class="text-sm text-gray-400">Individual investors looking for quality deals</p>
+                    </div>
+                  </label>
+
+                  <label class="tier-option cursor-pointer" data-tier="accredited">
+                    <input type="radio" name="investorTier" value="accredited" class="sr-only" required>
+                    <div class="card-glass p-6 border-2 border-transparent hover:border-yellow-400/40 transition-all duration-300">
+                      <h3 class="text-lg font-bold text-white mb-2">Accredited Investor</h3>
+                      <div class="text-yellow-400 font-semibold mb-2">$25K - $1M</div>
+                      <p class="text-sm text-gray-400">High-net-worth individuals with advanced features</p>
+                    </div>
+                  </label>
+
+                  <label class="tier-option cursor-pointer" data-tier="vc_fund">
+                    <input type="radio" name="investorTier" value="vc_fund" class="sr-only" required>
+                    <div class="card-glass p-6 border-2 border-transparent hover:border-yellow-400/40 transition-all duration-300">
+                      <h3 class="text-lg font-bold text-white mb-2">VC Fund</h3>
+                      <div class="text-yellow-400 font-semibold mb-2">$100K - $10M</div>
+                      <p class="text-sm text-gray-400">Institutional investors and venture funds</p>
+                    </div>
+                  </label>
+
+                  <label class="tier-option cursor-pointer" data-tier="beta_partner">
+                    <input type="radio" name="investorTier" value="beta_partner" class="sr-only" required>
+                    <div class="card-glass p-6 border-2 border-transparent hover:border-purple-400/40 transition-all duration-300">
+                      <h3 class="text-lg font-bold text-white mb-2">Beta Partner</h3>
+                      <div class="text-purple-400 font-semibold mb-2">$10K - $500K + Revenue</div>
+                      <p class="text-sm text-gray-400">Founding investors who shape the platform</p>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Personal Information -->
+              <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label class="block text-sm font-medium text-gray-300 mb-2">
+                    Full Name *
+                  </label>
+                  <input
+                    type="text"
+                    name="fullName"
+                    required
+                    class="w-full px-4 py-3 bg-black/30 border border-yellow-400/20 rounded-xl text-white placeholder-gray-400 focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/20 transition-all duration-300"
+                    placeholder="Your full name"
+                  >
+                </div>
+
+                <div>
+                  <label class="block text-sm font-medium text-gray-300 mb-2">
+                    Email Address *
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    required
+                    class="w-full px-4 py-3 bg-black/30 border border-yellow-400/20 rounded-xl text-white placeholder-gray-400 focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/20 transition-all duration-300"
+                    placeholder="your@email.com"
+                  >
+                </div>
+              </div>
+
+              <!-- Investment Information -->
+              <div class="space-y-6">
+                <h3 class="text-xl font-bold text-white border-b border-yellow-400/20 pb-2">Investment Information</h3>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-2">
+                      Annual Investment Budget *
+                    </label>
+                    <select
+                      name="annualBudget"
+                      required
+                      class="w-full px-4 py-3 bg-black/30 border border-yellow-400/20 rounded-xl text-white focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/20 transition-all duration-300"
+                    >
+                      <option value="">Select budget range</option>
+                      <option value="25k-100k">$25K - $100K</option>
+                      <option value="100k-500k">$100K - $500K</option>
+                      <option value="500k-1m">$500K - $1M</option>
+                      <option value="1m-5m">$1M - $5M</option>
+                      <option value="5m+">$5M+</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-2">
+                      Typical Investment Size *
+                    </label>
+                    <select
+                      name="typicalSize"
+                      required
+                      class="w-full px-4 py-3 bg-black/30 border border-yellow-400/20 rounded-xl text-white focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/20 transition-all duration-300"
+                    >
+                      <option value="">Select investment size</option>
+                      <option value="5k-25k">$5K - $25K</option>
+                      <option value="25k-100k">$25K - $100K</option>
+                      <option value="100k-500k">$100K - $500K</option>
+                      <option value="500k-1m">$500K - $1M</option>
+                      <option value="1m+">$1M+</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-sm font-medium text-gray-300 mb-2">
+                    Investment Experience *
+                  </label>
+                  <select
+                    name="experience"
+                    required
+                    class="w-full px-4 py-3 bg-black/30 border border-yellow-400/20 rounded-xl text-white focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/20 transition-all duration-300"
+                  >
+                    <option value="">Select your experience level</option>
+                    <option value="new">New to investing (0-2 investments)</option>
+                    <option value="some">Some experience (3-10 investments)</option>
+                    <option value="experienced">Experienced (11-50 investments)</option>
+                    <option value="veteran">Veteran investor (50+ investments)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Investment Preferences -->
+              <div class="space-y-6">
+                <h3 class="text-xl font-bold text-white border-b border-yellow-400/20 pb-2">Investment Preferences</h3>
+
+                <div>
+                  <label class="block text-sm font-medium text-gray-300 mb-4">
+                    Industries of Interest (select all that apply)
+                  </label>
+                  <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                    <label class="flex items-center space-x-2 cursor-pointer">
+                      <input type="checkbox" name="industries" value="saas" class="rounded border-yellow-400/20 bg-black/30 text-yellow-400 focus:ring-yellow-400/20">
+                      <span class="text-gray-300 text-sm">SaaS Platforms</span>
+                    </label>
+                    <label class="flex items-center space-x-2 cursor-pointer">
+                      <input type="checkbox" name="industries" value="ecommerce" class="rounded border-yellow-400/20 bg-black/30 text-yellow-400 focus:ring-yellow-400/20">
+                      <span class="text-gray-300 text-sm">E-commerce</span>
+                    </label>
+                    <label class="flex items-center space-x-2 cursor-pointer">
+                      <input type="checkbox" name="industries" value="fintech" class="rounded border-yellow-400/20 bg-black/30 text-yellow-400 focus:ring-yellow-400/20">
+                      <span class="text-gray-300 text-sm">FinTech</span>
+                    </label>
+                    <label class="flex items-center space-x-2 cursor-pointer">
+                      <input type="checkbox" name="industries" value="healthtech" class="rounded border-yellow-400/20 bg-black/30 text-yellow-400 focus:ring-yellow-400/20">
+                      <span class="text-gray-300 text-sm">HealthTech</span>
+                    </label>
+                    <label class="flex items-center space-x-2 cursor-pointer">
+                      <input type="checkbox" name="industries" value="ai-ml" class="rounded border-yellow-400/20 bg-black/30 text-yellow-400 focus:ring-yellow-400/20">
+                      <span class="text-gray-300 text-sm">AI/ML</span>
+                    </label>
+                    <label class="flex items-center space-x-2 cursor-pointer">
+                      <input type="checkbox" name="industries" value="edtech" class="rounded border-yellow-400/20 bg-black/30 text-yellow-400 focus:ring-yellow-400/20">
+                      <span class="text-gray-300 text-sm">EdTech</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-sm font-medium text-gray-300 mb-2">
+                    What motivates your platform investments?
+                  </label>
+                  <textarea
+                    name="motivation"
+                    rows="4"
+                    class="w-full px-4 py-3 bg-black/30 border border-yellow-400/20 rounded-xl text-white placeholder-gray-400 focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/20 transition-all duration-300"
+                    placeholder="Tell us about your investment thesis and what you're looking for in platforms..."
+                  ></textarea>
+                </div>
+              </div>
+
+              <!-- Accreditation & Verification -->
+              <div class="space-y-6">
+                <h3 class="text-xl font-bold text-white border-b border-yellow-400/20 pb-2">Verification</h3>
+
+                <div class="card-glass p-6 space-y-4">
+                  <label class="flex items-start gap-3">
+                    <input type="checkbox" name="accredited" class="mt-1 h-4 w-4 text-yellow-400 bg-black/30 border-yellow-400/20 rounded focus:ring-yellow-400">
+                    <div>
+                      <span class="text-white font-medium">I am an accredited investor</span>
+                      <p class="text-sm text-gray-400 mt-1">
+                        As defined by SEC regulations (income >$200K or net worth >$1M)
+                      </p>
+                    </div>
+                  </label>
+
+                  <label class="flex items-start gap-3">
+                    <input type="checkbox" name="betaInterest" class="mt-1 h-4 w-4 text-purple-400 bg-black/30 border-purple-400/20 rounded focus:ring-purple-400">
+                    <div>
+                      <span class="text-white font-medium">I'm interested in becoming a Beta Partner</span>
+                      <p class="text-sm text-gray-400 mt-1">
+                        Help shape the platform while earning revenue sharing on successful deals
+                      </p>
+                    </div>
+                  </label>
+
+                  <label class="flex items-start gap-3">
+                    <input type="checkbox" name="agreeToTerms" required class="mt-1 h-4 w-4 text-yellow-400 bg-black/30 border-yellow-400/20 rounded focus:ring-yellow-400">
+                    <div>
+                      <span class="text-white font-medium">I agree to the Terms of Service and Privacy Policy *</span>
+                      <p class="text-sm text-gray-400 mt-1">
+                        By applying, you agree to our investor terms and due diligence processes
+                      </p>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <!-- What Happens Next -->
+              <div class="card-glass p-6 bg-yellow-400/5 border-yellow-400/20">
+                <h3 class="text-lg font-semibold text-yellow-400 mb-3">What Happens Next?</h3>
+                <ol class="space-y-2 text-sm text-gray-300">
+                  <li class="flex items-start gap-3">
+                    <span class="text-yellow-400 font-bold mt-0.5">1.</span>
+                    <span>We review your application within 24-48 hours</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="text-yellow-400 font-bold mt-0.5">2.</span>
+                    <span>For accredited/institutional investors, we may schedule a brief call</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="text-yellow-400 font-bold mt-0.5">3.</span>
+                    <span>Upon approval, you'll get access to the investor portal immediately</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="text-yellow-400 font-bold mt-0.5">4.</span>
+                    <span>Browse AI-validated platforms and start investing</span>
+                  </li>
+                </ol>
+              </div>
+
+              <!-- Submit Button -->
+              <div class="text-center pt-6">
+                <button
+                  type="submit"
+                  class="bg-yellow-400 text-black px-10 py-4 rounded-xl font-bold text-lg hover:bg-yellow-300 transition-all duration-300 transform hover:scale-105"
+                >
+                  Submit Application
+                </button>
+                <p class="text-xs text-gray-400 mt-3">
+                  Processing time: 24-48 hours • No fees until your first investment
+                </p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-black border-t border-yellow-400/20">
+      <div class="container mx-auto px-4">
+        <div class="text-center">
+          <div class="flex items-center justify-center space-x-3 mb-4">
+            <img src="/assets/techflunky-logo.png" alt="TechFlunky" class="w-8 h-8">
+            <span class="text-xl font-bold text-white">TechFlunky</span>
+          </div>
+          <p class="text-gray-400 text-sm">
+            © 2024 TechFlunky. The future of platform investing.
+          </p>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // Tier selection interactivity
+    document.querySelectorAll('.tier-option').forEach(option => {
+      option.addEventListener('click', function() {
+        // Remove selected state from all options
+        document.querySelectorAll('.tier-option').forEach(opt => {
+          const div = opt.querySelector('div');
+          div.classList.remove('border-yellow-400', 'border-purple-400');
+          div.classList.add('border-transparent');
+        });
+
+        // Add selected state to clicked option
+        const selectedDiv = this.querySelector('div');
+        const tier = this.dataset.tier;
+
+        if (tier === 'beta_partner') {
+          selectedDiv.classList.remove('border-transparent');
+          selectedDiv.classList.add('border-purple-400');
+        } else {
+          selectedDiv.classList.remove('border-transparent');
+          selectedDiv.classList.add('border-yellow-400');
+        }
+
+        // Check the radio button
+        this.querySelector('input[type="radio"]').checked = true;
+      });
+    });
+
+    // Form submission
+    document.getElementById('investor-application')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(e.target);
+      const data = Object.fromEntries(formData);
+
+      // Collect checkbox arrays
+      data.industries = Array.from(document.querySelectorAll('input[name="industries"]:checked')).map(cb => cb.value);
+      data.accredited = document.querySelector('input[name="accredited"]').checked;
+      data.betaInterest = document.querySelector('input[name="betaInterest"]').checked;
+      data.agreeToTerms = document.querySelector('input[name="agreeToTerms"]').checked;
+
+      try {
+        const response = await fetch('/api/investors/onboarding', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            userId: 'temp_user_' + Date.now(), // In production, get from auth
+            investorTier: data.investorTier,
+            personalInfo: {
+              fullName: data.fullName,
+              email: data.email,
+              accredited: data.accredited
+            },
+            investmentInfo: {
+              annualBudget: data.annualBudget,
+              typicalSize: data.typicalSize,
+              experience: data.experience
+            },
+            preferences: {
+              industries: data.industries,
+              motivation: data.motivation
+            },
+            betaPartnerInterest: data.betaInterest
+          })
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          // Show success message
+          document.querySelector('main').innerHTML = `
+            <div class="min-h-screen bg-black flex items-center justify-center">
+              <div class="text-center max-w-2xl mx-auto px-4">
+                <div class="w-20 h-20 bg-yellow-400/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <svg class="w-10 h-10 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  </svg>
+                </div>
+                <h1 class="text-4xl font-bold text-white mb-4">Application Submitted!</h1>
+                <p class="text-xl text-gray-300 mb-6">${result.message}</p>
+                <div class="bg-yellow-400/10 border border-yellow-400/20 rounded-xl p-6 mb-8">
+                  <h3 class="text-lg font-semibold text-yellow-400 mb-3">Next Steps:</h3>
+                  <ul class="text-left space-y-2">
+                    ${result.nextSteps.map(step => `<li class="text-gray-300">• ${step}</li>`).join('')}
+                  </ul>
+                </div>
+                <a href="/" class="bg-yellow-400 text-black px-8 py-3 rounded-xl font-bold hover:bg-yellow-300 transition">
+                  Return Home
+                </a>
+              </div>
+            </div>
+          `;
+        } else {
+          alert(result.error || 'Failed to submit application');
+        }
+      } catch (error) {
+        console.error('Application error:', error);
+        alert('Failed to submit application. Please try again.');
+      }
+    });
+  </script>
+</Layout>
+
+<style>
+  :root {
+    --yellow-primary: #fbbf24;
+    --yellow-secondary: #f59e0b;
+    --black-primary: #000000;
+    --gray-primary: #111827;
+  }
+
+  .bg-grid-pattern {
+    background-image: url("data:image/svg+xml,%3csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3e%3cg fill='none' stroke='%23fff' stroke-width='1'%3e%3cpath d='M0 0h60v60H0z'/%3e%3c/g%3e%3c/svg%3e");
+    background-size: 60px 60px;
+  }
+
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    opacity: 0;
+  }
+</style>

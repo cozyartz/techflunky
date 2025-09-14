@@ -1,0 +1,234 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global CSS Variables for TechFlunky Brand */
+:root {
+  --color-brand-yellow-primary: #fbbf24;
+  --color-brand-yellow-secondary: #f59e0b;
+  --color-brand-yellow-glow: rgba(251, 191, 36, 0.2);
+  --color-brand-black-primary: #000000;
+  --color-brand-black-secondary: #09090b;
+  --color-brand-gray-primary: #111827;
+  --color-brand-gray-secondary: #1f2937;
+  --color-brand-gray-tertiary: #374151;
+}
+
+/* Global Base Styles */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-black text-white antialiased;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  /* Custom scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-900;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-brand-yellow-400 rounded;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-brand-yellow-500;
+  }
+
+  /* Firefox scrollbar */
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: #fbbf24 #111827;
+  }
+}
+
+/* Component Layer for Reusable Styles */
+@layer components {
+  /* Navigation styles */
+  .nav-link {
+    @apply text-gray-300 hover:text-brand-yellow-400 transition-colors duration-200 font-medium;
+  }
+
+  .nav-link-active {
+    @apply text-brand-yellow-400 font-medium;
+  }
+
+  .nav-button {
+    @apply bg-brand-yellow-400 text-black px-4 py-2 rounded-lg font-semibold hover:bg-brand-yellow-500 transition-all duration-200 transform hover:scale-105;
+  }
+
+  /* Button components */
+  .btn-primary {
+    @apply bg-brand-yellow-400 text-black px-8 py-4 rounded-xl font-bold text-lg hover:bg-brand-yellow-500 transition-all duration-300 transform hover:scale-105 hover:shadow-xl;
+  }
+
+  .btn-secondary {
+    @apply bg-transparent border-2 border-brand-yellow-400 text-brand-yellow-400 px-8 py-4 rounded-xl font-bold text-lg hover:bg-brand-yellow-400 hover:text-black transition-all duration-300 transform hover:scale-105;
+  }
+
+  /* Card components */
+  .card-glass {
+    @apply bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-3xl border border-brand-yellow-400/20 hover:border-brand-yellow-400/40 transition-all duration-500;
+  }
+
+  .card-hover {
+    @apply hover:transform hover:scale-[1.02] transition-all duration-300;
+  }
+
+  /* Grid pattern utility */
+  .bg-grid-pattern {
+    background-image: url("data:image/svg+xml,%3csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3e%3cg fill='none' stroke='%23fff' stroke-width='1'%3e%3cpath d='M0 0h60v60H0z'/%3e%3c/g%3e%3c/svg%3e");
+    background-size: 60px 60px;
+  }
+
+  /* Animation helpers */
+  .animate-on-scroll {
+    @apply opacity-0 translate-y-8 transition-all duration-700 ease-out;
+  }
+
+  .animate-on-scroll.visible {
+    @apply opacity-100 translate-y-0;
+  }
+
+  /* Text styles */
+  .text-gradient {
+    @apply bg-gradient-to-r from-brand-yellow-400 to-brand-yellow-500 bg-clip-text text-transparent;
+  }
+
+  .text-shadow-glow {
+    text-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
+  }
+}
+
+/* Utility Layer for Custom Utilities */
+@layer utilities {
+  /* Backdrop blur utilities */
+  .backdrop-blur-xs {
+    backdrop-filter: blur(2px);
+  }
+
+  /* Custom border utilities */
+  .border-brand-glow {
+    border-color: var(--color-brand-yellow-glow);
+  }
+
+  /* Animation delay utilities */
+  .animation-delay-100 {
+    animation-delay: 0.1s;
+  }
+
+  .animation-delay-200 {
+    animation-delay: 0.2s;
+  }
+
+  .animation-delay-300 {
+    animation-delay: 0.3s;
+  }
+
+  .animation-delay-400 {
+    animation-delay: 0.4s;
+  }
+
+  .animation-delay-500 {
+    animation-delay: 0.5s;
+  }
+
+  .animation-delay-600 {
+    animation-delay: 0.6s;
+  }
+
+  .animation-delay-700 {
+    animation-delay: 0.7s;
+  }
+
+  /* Responsive text utilities */
+  .text-responsive-sm {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+  }
+
+  .text-responsive-md {
+    font-size: clamp(2rem, 5vw, 3rem);
+  }
+
+  .text-responsive-lg {
+    font-size: clamp(3rem, 6vw, 4rem);
+  }
+
+  .text-responsive-xl {
+    font-size: clamp(4rem, 8vw, 6rem);
+  }
+
+  /* Focus styles */
+  .focus-brand {
+    @apply focus:outline-none focus:ring-2 focus:ring-brand-yellow-400 focus:ring-offset-2 focus:ring-offset-black;
+  }
+}
+
+/* Accessibility and Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-slide-up,
+  .animate-fade-in,
+  .animate-fade-in-scale,
+  .animate-bounce,
+  .animate-float,
+  .animate-glow,
+  .animate-glow-pulse {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --color-brand-yellow-primary: #ffff00;
+    --color-brand-black-primary: #000000;
+  }
+
+  .border-brand-yellow-400\/20 {
+    @apply border-brand-yellow-400;
+  }
+
+  .bg-black\/50 {
+    @apply bg-black;
+  }
+}
+
+/* Print styles */
+@media print {
+  * {
+    background: white !important;
+    color: black !important;
+  }
+
+  .bg-black {
+    background: white !important;
+  }
+
+  .text-white {
+    color: black !important;
+  }
+
+  .text-brand-yellow-400 {
+    color: #000000 !important;
+    font-weight: bold;
+  }
+}

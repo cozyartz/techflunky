@@ -32,10 +32,10 @@ export const BentoBox: React.FC<BentoBoxProps> = ({
 
   const baseClasses = twMerge(clsx(
     'rounded-2xl p-6 transition-all duration-300',
-    gradient ? 'bg-gradient-to-br' : 'bg-white',
-    hover ? 'hover:shadow-xl hover:-translate-y-1' : '',
+    gradient ? 'bg-gradient-to-br' : 'bg-gray-900/20',
+    hover ? 'hover:shadow-xl hover:-translate-y-1 hover:border-yellow-400/60' : '',
     glow ? 'animate-glow' : '',
-    'border border-bento-border overflow-hidden relative'
+    'border border-yellow-400/20 overflow-hidden relative'
   ));
 
   return (
@@ -47,7 +47,7 @@ export const BentoBox: React.FC<BentoBoxProps> = ({
       whileHover={hover ? { scale: 1.02 } : {}}
     >
       {glow && (
-        <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-indigo-400 opacity-0 hover:opacity-20 transition-opacity duration-300 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-yellow-600 opacity-0 hover:opacity-10 transition-opacity duration-300 pointer-events-none" />
       )}
       {children}
     </motion.div>
@@ -62,7 +62,7 @@ interface BentoGridProps {
 export const BentoGrid: React.FC<BentoGridProps> = ({ children, className = '' }) => {
   return (
     <div className={twMerge(
-      'grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-4 auto-rows-[120px]',
+      'grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-6 auto-rows-[140px]',
       className
     )}>
       {children}

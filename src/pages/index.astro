@@ -1,236 +1,513 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { BentoGrid, BentoBox } from '../components/bento/BentoGridMotion';
-import { Bento3DCard, FloatingElement, GlowingBox } from '../components/bento/Bento3DEffects';
-import { AnimatedStat } from '../components/bento/AnimatedStat';
-import { FeatureCard, IdeaPreview } from '../components/bento/FeatureCard';
 ---
 
 <Layout title="TechFlunky - Marketplace for Validated Business Ideas">
-  <main class="min-h-screen bg-bento-light">
-    <!-- Hero Section with Bento Grid Overlay -->
-    <section class="relative bg-gradient-to-br from-indigo-900 via-purple-800 to-indigo-900 text-white overflow-hidden">
-      <!-- Grid pattern overlay -->
-      <div class="absolute inset-0 opacity-10">
-        <div class="h-full w-full" style="background-image: url('data:image/svg+xml,%3Csvg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" stroke="%23fff" stroke-width="1"%3E%3Cpath d="M0 0h40v40H0z"/%3E%3C/g%3E%3C/svg%3E'); background-size: 40px 40px;"></div>
+  <main class="min-h-screen bg-black">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm border-b border-yellow-400/20">
+      <div class="container mx-auto px-4 py-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-3">
+            <img src="/assets/techflunky-logo.png" alt="TechFlunky" class="w-10 h-10">
+            <span class="text-xl font-bold text-white">TechFlunky</span>
+          </div>
+          <div class="hidden md:flex items-center space-x-8">
+            <a href="/browse" class="text-gray-300 hover:text-yellow-400 transition font-medium">Browse</a>
+            <a href="/invest" class="text-gray-300 hover:text-yellow-400 transition font-medium">Invest</a>
+            <a href="/sell" class="text-gray-300 hover:text-yellow-400 transition font-medium">Sell</a>
+            <a href="/about" class="text-gray-300 hover:text-yellow-400 transition font-medium">About</a>
+            <a href="/contact" class="bg-yellow-400 text-black px-4 py-2 rounded-lg font-semibold hover:bg-yellow-300 transition">Contact</a>
+          </div>
+        </div>
       </div>
-      
-      <div class="container mx-auto px-4 py-24 relative z-10">
-        <div class="max-w-4xl mx-auto text-center">
-          <h1 class="text-5xl md:text-6xl font-bold mb-6 animate-fade-in">
-            Turn Business Ideas Into Revenue
-          </h1>
-          <p class="text-xl md:text-2xl mb-8 text-indigo-100 animate-slide-up">
-            The marketplace for validated business concepts. Buy proven ideas or sell your next million-dollar concept.
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white overflow-hidden flex items-center">
+      <!-- Subtle grid pattern -->
+      <div class="absolute inset-0 opacity-5">
+        <div class="h-full w-full" style="background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" stroke="%23fff" stroke-width="1"%3E%3Cpath d="M0 0h60v60H0z"/%3E%3C/g%3E%3C/svg%3E'); background-size: 60px 60px;"></div>
+      </div>
+
+      <div class="container mx-auto px-4 relative z-10">
+        <div class="max-w-6xl mx-auto">
+          <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <!-- Left: Typography-first content -->
+            <div class="space-y-8">
+              <div class="space-y-4">
+                <h1 class="text-6xl md:text-7xl lg:text-8xl font-black leading-[0.9] tracking-tight">
+                  <span class="block text-white animate-slide-up">Turn</span>
+                  <span class="block text-yellow-400 animate-slide-up" style="animation-delay: 0.1s">Code</span>
+                  <span class="block text-white animate-slide-up" style="animation-delay: 0.2s">Into</span>
+                  <span class="block text-yellow-400 animate-slide-up" style="animation-delay: 0.3s">Capital</span>
+                </h1>
+              </div>
+
+              <p class="text-xl md:text-2xl text-gray-300 max-w-2xl leading-relaxed animate-slide-up" style="animation-delay: 0.4s">
+                The marketplace for <strong class="text-yellow-400">AI-validated business platforms</strong>. Built by developers, verified by AI, funded by entrepreneurs.
+              </p>
+
+              <!-- AI Validation Badge -->
+              <div class="flex items-center gap-3 p-4 bg-yellow-400/10 border border-yellow-400/20 rounded-xl animate-slide-up" style="animation-delay: 0.45s">
+                <div class="w-8 h-8 bg-yellow-400/20 rounded-full flex items-center justify-center">
+                  <svg class="w-4 h-4 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="text-sm font-semibold text-yellow-400">AI-Verified Platforms</div>
+                  <div class="text-xs text-gray-400">Every codebase examined for quality & truthfulness without exposing trade secrets</div>
+                </div>
+              </div>
+
+              <div class="flex flex-col lg:flex-row gap-4 animate-slide-up" style="animation-delay: 0.5s">
+                <a href="/invest" class="group bg-yellow-400 text-black px-8 py-4 rounded-xl font-bold text-lg hover:bg-yellow-300 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
+                  <span class="flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                    </svg>
+                    Start Investing
+                    <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                    </svg>
+                  </span>
+                </a>
+                <a href="/browse" class="bg-transparent border-2 border-yellow-400 text-yellow-400 px-8 py-4 rounded-xl font-bold text-lg hover:bg-yellow-400 hover:text-black transition-all duration-300 transform hover:scale-105">
+                  Browse Platforms
+                </a>
+                <a href="/sell" class="bg-transparent border-2 border-gray-600 text-gray-300 px-8 py-4 rounded-xl font-bold text-lg hover:bg-gray-600 hover:text-white transition-all duration-300 transform hover:scale-105">
+                  List Your Project
+                </a>
+              </div>
+
+              <!-- Trust indicators -->
+              <div class="flex items-center space-x-8 pt-8 animate-slide-up" style="animation-delay: 0.6s">
+                <div class="text-center">
+                  <div class="text-2xl font-bold text-yellow-400">$35K</div>
+                  <div class="text-sm text-gray-400">Average Platform Value</div>
+                </div>
+                <div class="text-center">
+                  <div class="text-2xl font-bold text-yellow-400">18+</div>
+                  <div class="text-sm text-gray-400">Months of Work</div>
+                </div>
+                <div class="text-center">
+                  <div class="text-2xl font-bold text-yellow-400">100%</div>
+                  <div class="text-sm text-gray-400">Complete Packages</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Featured platform preview -->
+            <div class="relative animate-slide-up" style="animation-delay: 0.7s">
+              <div class="bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-3xl p-8 border border-yellow-400/20 hover:border-yellow-400/40 transition-all duration-500 hover:transform hover:scale-105">
+                <div class="space-y-6">
+                  <div class="flex items-center justify-between">
+                    <span class="bg-yellow-400/20 text-yellow-400 px-3 py-1 rounded-full text-sm font-semibold">FEATURED</span>
+                    <span class="text-green-400 font-semibold">Available Now</span>
+                  </div>
+
+                  <h3 class="text-2xl font-bold text-white">AI-Powered HR Compliance Platform</h3>
+
+                  <p class="text-gray-300 leading-relaxed">
+                    Complete multi-state leave administration system with automated compliance tracking. Built on Cloudflare with AI automation.
+                  </p>
+
+                  <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-black/50 rounded-lg p-4 border border-yellow-400/10">
+                      <div class="text-sm text-yellow-400 font-medium">Market Size</div>
+                      <div class="text-xl font-bold text-white">$800M+</div>
+                    </div>
+                    <div class="bg-black/50 rounded-lg p-4 border border-yellow-400/10">
+                      <div class="text-sm text-yellow-400 font-medium">Profit Margin</div>
+                      <div class="text-xl font-bold text-white">95%</div>
+                    </div>
+                  </div>
+
+                  <div class="flex items-center justify-between pt-4">
+                    <div>
+                      <div class="text-sm text-gray-400">Complete Package</div>
+                      <div class="text-3xl font-bold text-yellow-400">$35,000</div>
+                    </div>
+                    <a href="/listing/ai-hr-leave-administration-platform" class="bg-yellow-400 text-black px-6 py-3 rounded-lg font-semibold hover:bg-yellow-300 transition group">
+                      <span class="flex items-center gap-2">
+                        View Details
+                        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                        </svg>
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Floating elements for visual interest -->
+              <div class="absolute -top-4 -right-4 w-24 h-24 bg-yellow-400/10 rounded-full blur-xl animate-pulse"></div>
+              <div class="absolute -bottom-8 -left-8 w-32 h-32 bg-yellow-400/5 rounded-full blur-2xl animate-pulse" style="animation-delay: 1s"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <svg class="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+        </svg>
+      </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="py-24 bg-gradient-to-br from-black to-gray-900">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white">How It Works</h2>
+          <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+            Simple, transparent process connecting builders with entrepreneurs
           </p>
-          <div class="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up" style="animation-delay: 0.2s">
-            <a href="/browse" class="bg-white text-indigo-900 px-8 py-4 rounded-xl font-semibold hover:bg-gray-100 transition transform hover:scale-105">
-              Browse Ideas
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+          <!-- For Builders -->
+          <div class="space-y-8">
+            <div class="text-center lg:text-left">
+              <h3 class="text-3xl font-bold text-yellow-400 mb-4">For Builders</h3>
+              <p class="text-gray-300 text-lg">Turn your completed projects into capital</p>
+            </div>
+
+            <div class="space-y-6">
+              <div class="flex gap-4">
+                <div class="flex-shrink-0 w-12 h-12 bg-yellow-400/20 rounded-full flex items-center justify-center">
+                  <span class="text-yellow-400 font-bold">1</span>
+                </div>
+                <div>
+                  <h4 class="text-xl font-semibold text-white mb-2">Submit Your Platform</h4>
+                  <p class="text-gray-300">Upload your complete codebase, documentation, and business materials</p>
+                </div>
+              </div>
+
+              <div class="flex gap-4">
+                <div class="flex-shrink-0 w-12 h-12 bg-yellow-400/20 rounded-full flex items-center justify-center">
+                  <span class="text-yellow-400 font-bold">2</span>
+                </div>
+                <div>
+                  <h4 class="text-xl font-semibold text-white mb-2">We Verify & Package</h4>
+                  <p class="text-gray-300">Our team validates functionality and creates professional presentation</p>
+                </div>
+              </div>
+
+              <div class="flex gap-4">
+                <div class="flex-shrink-0 w-12 h-12 bg-yellow-400/20 rounded-full flex items-center justify-center">
+                  <span class="text-yellow-400 font-bold">3</span>
+                </div>
+                <div>
+                  <h4 class="text-xl font-semibold text-white mb-2">Get Paid</h4>
+                  <p class="text-gray-300">Receive fair compensation for months of development work</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-4">
+              <a href="/sell" class="inline-flex items-center gap-2 bg-yellow-400 text-black px-6 py-3 rounded-lg font-semibold hover:bg-yellow-300 transition">
+                List Your Project
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- For Entrepreneurs -->
+          <div class="space-y-8">
+            <div class="text-center lg:text-left">
+              <h3 class="text-3xl font-bold text-yellow-400 mb-4">For Entrepreneurs</h3>
+              <p class="text-gray-300 text-lg">Skip development, launch immediately</p>
+            </div>
+
+            <div class="space-y-6">
+              <div class="flex gap-4">
+                <div class="flex-shrink-0 w-12 h-12 bg-yellow-400/20 rounded-full flex items-center justify-center">
+                  <span class="text-yellow-400 font-bold">1</span>
+                </div>
+                <div>
+                  <h4 class="text-xl font-semibold text-white mb-2">Browse Platforms</h4>
+                  <p class="text-gray-300">Explore complete business solutions with market validation</p>
+                </div>
+              </div>
+
+              <div class="flex gap-4">
+                <div class="flex-shrink-0 w-12 h-12 bg-yellow-400/20 rounded-full flex items-center justify-center">
+                  <span class="text-yellow-400 font-bold">2</span>
+                </div>
+                <div>
+                  <h4 class="text-xl font-semibold text-white mb-2">Review Everything</h4>
+                  <p class="text-gray-300">Code, market research, customer lists, and investor packages included</p>
+                </div>
+              </div>
+
+              <div class="flex gap-4">
+                <div class="flex-shrink-0 w-12 h-12 bg-yellow-400/20 rounded-full flex items-center justify-center">
+                  <span class="text-yellow-400 font-bold">3</span>
+                </div>
+                <div>
+                  <h4 class="text-xl font-semibold text-white mb-2">Launch & Scale</h4>
+                  <p class="text-gray-300">Deploy immediately with proven business model and customer base</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-4">
+              <a href="/browse" class="inline-flex items-center gap-2 bg-transparent border-2 border-yellow-400 text-yellow-400 px-6 py-3 rounded-lg font-semibold hover:bg-yellow-400 hover:text-black transition">
+                Browse Platforms
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Value Proposition Section -->
+    <section class="py-24 bg-black">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-20">
+          <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white">Why Choose TechFlunky</h2>
+          <p class="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            Skip 18 months of development. Get proven, market-validated platforms ready for immediate launch.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div class="group text-center hover:transform hover:scale-105 transition-all duration-300">
+            <div class="w-20 h-20 bg-gradient-to-br from-yellow-400/20 to-yellow-400/10 border border-yellow-400/30 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:border-yellow-400/60 transition-all duration-300">
+              <svg class="w-10 h-10 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold mb-3 text-white group-hover:text-yellow-400 transition-colors">Market Validated</h3>
+            <p class="text-gray-300 leading-relaxed">Every platform includes comprehensive market research and proven demand validation</p>
+          </div>
+
+          <div class="group text-center hover:transform hover:scale-105 transition-all duration-300">
+            <div class="w-20 h-20 bg-gradient-to-br from-yellow-400/20 to-yellow-400/10 border border-yellow-400/30 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:border-yellow-400/60 transition-all duration-300">
+              <svg class="w-10 h-10 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/>
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold mb-3 text-white group-hover:text-yellow-400 transition-colors">Production Ready</h3>
+            <p class="text-gray-300 leading-relaxed">Complete platforms with modern infrastructure, not prototypes or concepts</p>
+          </div>
+
+          <div class="group text-center hover:transform hover:scale-105 transition-all duration-300">
+            <div class="w-20 h-20 bg-gradient-to-br from-yellow-400/20 to-yellow-400/10 border border-yellow-400/30 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:border-yellow-400/60 transition-all duration-300">
+              <svg class="w-10 h-10 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold mb-3 text-white group-hover:text-yellow-400 transition-colors">High Margins</h3>
+            <p class="text-gray-300 leading-relaxed">95%+ profit margins with minimal infrastructure costs using modern cloud platforms</p>
+          </div>
+
+          <div class="group text-center hover:transform hover:scale-105 transition-all duration-300">
+            <div class="w-20 h-20 bg-gradient-to-br from-yellow-400/20 to-yellow-400/10 border border-yellow-400/30 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:border-yellow-400/60 transition-all duration-300">
+              <svg class="w-10 h-10 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold mb-3 text-white group-hover:text-yellow-400 transition-colors">Launch Immediately</h3>
+            <p class="text-gray-300 leading-relaxed">Complete packages including customers, documentation, and investor materials</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why I'm Building This -->
+    <section class="py-20 bg-gradient-to-br from-black to-gray-900">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+          <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold mb-4 text-white">The Real Story</h2>
+            <p class="text-xl text-gray-300">Why I built this platform and what you're actually getting</p>
+          </div>
+
+          <div class="bg-gradient-to-br from-gray-900 to-black p-8 rounded-2xl mb-8 border border-yellow-400/20">
+            <div class="prose prose-lg max-w-none">
+              <p class="text-gray-300 mb-6">
+                <strong class="text-yellow-400">Here's what happened:</strong> I built a complete HR compliance platform
+                after researching the market extensively. The opportunity is massive - $800M+ market with
+                companies desperately needing automated solutions.
+              </p>
+              <p class="text-gray-300 mb-6">
+                <strong class="text-yellow-400">The challenge?</strong> I don't have the capital for customer acquisition
+                and scaling. This platform could generate $1-3M ARR, but needs someone with funding and
+                business development expertise to take it live.
+              </p>
+              <p class="text-gray-300 mb-6">
+                <strong class="text-yellow-400">What you get:</strong> Everything. 42-page market analysis, working platform,
+                customer list, investor package, technical documentation. Skip 18 months of development.
+              </p>
+              <p class="text-gray-300">
+                <strong class="text-yellow-400">Fair deal:</strong> $35K covers my development costs and research time.
+                You get a validated platform with $36-45M exit potential at current HR tech multiples.
+              </p>
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-3 gap-8">
+            <div class="text-center">
+              <div class="w-16 h-16 bg-yellow-400/20 border border-yellow-400/40 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold mb-2 text-white">Production Platform</h3>
+              <p class="text-gray-300 text-sm">Working Cloudflare infrastructure with AI automation, not mockups</p>
+            </div>
+
+            <div class="text-center">
+              <div class="w-16 h-16 bg-yellow-400/20 border border-yellow-400/40 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold mb-2 text-white">Complete Package</h3>
+              <p class="text-gray-300 text-sm">Market research, customer list, investor deck, deployment guides</p>
+            </div>
+
+            <div class="text-center">
+              <div class="w-16 h-16 bg-yellow-400/20 border border-yellow-400/40 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold mb-2 text-white">Transparent Pricing</h3>
+              <p class="text-gray-300 text-sm">Fair value for 18+ months of work, not marketplace markup</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 bg-gradient-to-br from-gray-900 via-black to-gray-900">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto text-center">
+          <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white leading-tight">
+            Ready to <span class="text-yellow-400">Launch</span> or <span class="text-yellow-400">List</span>?
+          </h2>
+          <p class="text-xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed">
+            Join the marketplace connecting talented builders with resourceful entrepreneurs
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+            <a href="/browse" class="group bg-yellow-400 text-black px-10 py-4 rounded-xl font-bold text-lg hover:bg-yellow-300 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
+              <span class="flex items-center gap-3">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                </svg>
+                Browse Platforms
+                <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                </svg>
+              </span>
             </a>
-            <a href="/sell" class="bg-indigo-700/30 backdrop-blur-sm border border-indigo-400 text-white px-8 py-4 rounded-xl font-semibold hover:bg-indigo-600/40 transition transform hover:scale-105">
-              Sell Your Idea
+
+            <div class="text-gray-400 font-medium">or</div>
+
+            <a href="/sell" class="group bg-transparent border-2 border-yellow-400 text-yellow-400 px-10 py-4 rounded-xl font-bold text-lg hover:bg-yellow-400 hover:text-black transition-all duration-300 transform hover:scale-105">
+              <span class="flex items-center gap-3">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                </svg>
+                List Your Project
+                <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                </svg>
+              </span>
             </a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Bento Grid Section -->
-    <section class="py-20">
+    <!-- Footer -->
+    <footer class="py-12 bg-black border-t border-yellow-400/20">
       <div class="container mx-auto px-4">
-        <BentoGrid client:load>
-          <!-- Large Featured Idea Box -->
-          <BentoBox size="large" className="lg:col-span-6 lg:row-span-3 bg-gradient-to-br from-indigo-50 to-purple-50" gradient>
-            <div class="h-full flex flex-col">
-              <div class="text-sm font-bold text-purple-600 mb-2">🔥 TRENDING NOW</div>
-              <h3 class="text-2xl font-bold mb-3">AI-Powered HR Compliance Platform</h3>
-              <p class="text-gray-700 mb-4 flex-grow">Multi-state leave administration system with automated compliance tracking. Ready-to-deploy SaaS with $800M market opportunity.</p>
-              <div class="grid grid-cols-2 gap-4 mb-4">
-                <div class="bg-white/70 rounded-lg p-3">
-                  <div class="text-sm text-gray-600">Market Size</div>
-                  <div class="font-bold text-indigo-900">$800M+</div>
-                </div>
-                <div class="bg-white/70 rounded-lg p-3">
-                  <div class="text-sm text-gray-600">Profit Margin</div>
-                  <div class="font-bold text-indigo-900">95%</div>
-                </div>
-              </div>
-              <div class="flex justify-between items-center">
-                <span class="text-3xl font-bold text-indigo-900">$35,000</span>
-                <a href="/listing/ai-hr-leave-administration-platform" class="bg-indigo-900 text-white px-6 py-2 rounded-lg hover:bg-indigo-800 transition">
-                  View Details
-                </a>
-              </div>
-            </div>
-          </BentoBox>
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <div class="flex items-center space-x-3 mb-4 md:mb-0">
+            <img src="/assets/techflunky-logo.png" alt="TechFlunky" class="w-8 h-8">
+            <span class="text-xl font-bold text-white">TechFlunky</span>
+          </div>
 
-          <!-- Stats Boxes -->
-          <BentoBox size="medium" className="lg:col-span-3 lg:row-span-2 bg-gradient-to-br from-blue-50 to-indigo-50" gradient>
-            <AnimatedStat value="127" label="Active Listings" suffix="+" client:visible />
-          </BentoBox>
+          <div class="flex items-center space-x-6 text-gray-400">
+            <a href="/about" class="hover:text-yellow-400 transition">About</a>
+            <a href="/contact" class="hover:text-yellow-400 transition">Contact</a>
+            <a href="/terms" class="hover:text-yellow-400 transition">Terms</a>
+            <a href="/privacy" class="hover:text-yellow-400 transition">Privacy</a>
+          </div>
+        </div>
 
-          <BentoBox size="medium" className="lg:col-span-3 lg:row-span-2 bg-gradient-to-br from-green-50 to-emerald-50" gradient>
-            <AnimatedStat value="2.3" label="Avg Exit Multiple" prefix="" suffix="M" client:visible />
-          </BentoBox>
-
-          <!-- How It Works - Seller -->
-          <BentoBox size="wide" className="lg:col-span-4 lg:row-span-2">
-            <FeatureCard 
-              icon="💡"
-              title="For Idea Creators" 
-              description="Package your concept with market research, business plans, and technical specs. List it and get paid when entrepreneurs buy your validated idea."
-              color="purple"
-              client:load
-            />
-          </BentoBox>
-
-          <!-- How It Works - Buyer -->
-          <BentoBox size="wide" className="lg:col-span-4 lg:row-span-2">
-            <FeatureCard 
-              icon="🚀"
-              title="For Entrepreneurs" 
-              description="Skip the ideation phase. Browse validated business concepts with proven market potential and launch faster with everything you need."
-              color="indigo"
-              client:load
-            />
-          </BentoBox>
-
-          <!-- Success Rate -->
-          <BentoBox size="small" className="lg:col-span-2 lg:row-span-1 bg-gradient-to-br from-orange-50 to-amber-50" gradient>
-            <div class="h-full flex items-center justify-center">
-              <AnimatedStat value="89" label="Success Rate" suffix="%" client:visible />
-            </div>
-          </BentoBox>
-
-          <!-- Quick Stat -->
-          <BentoBox size="small" className="lg:col-span-2 lg:row-span-1 bg-gradient-to-br from-purple-50 to-pink-50" gradient>
-            <div class="h-full flex items-center justify-center">
-              <AnimatedStat value="48" label="Hours to Launch" suffix="h" client:visible />
-            </div>
-          </BentoBox>
-
-          <!-- Categories Grid -->
-          <BentoBox size="tall" className="lg:col-span-3 lg:row-span-3 bg-gradient-to-br from-gray-50 to-slate-50" gradient>
-            <h3 class="text-xl font-bold mb-4">Popular Categories</h3>
-            <div class="space-y-3">
-              <a href="/browse?category=saas" class="block p-3 bg-white rounded-lg hover:shadow-md transition">
-                <div class="flex justify-between items-center">
-                  <span class="font-medium">SaaS Platforms</span>
-                  <span class="text-gray-500">23 ideas</span>
-                </div>
-              </a>
-              <a href="/browse?category=marketplace" class="block p-3 bg-white rounded-lg hover:shadow-md transition">
-                <div class="flex justify-between items-center">
-                  <span class="font-medium">Marketplaces</span>
-                  <span class="text-gray-500">18 ideas</span>
-                </div>
-              </a>
-              <a href="/browse?category=ai-ml" class="block p-3 bg-white rounded-lg hover:shadow-md transition">
-                <div class="flex justify-between items-center">
-                  <span class="font-medium">AI/ML Solutions</span>
-                  <span class="text-gray-500">31 ideas</span>
-                </div>
-              </a>
-              <a href="/browse?category=fintech" class="block p-3 bg-white rounded-lg hover:shadow-md transition">
-                <div class="flex justify-between items-center">
-                  <span class="font-medium">FinTech</span>
-                  <span class="text-gray-500">15 ideas</span>
-                </div>
-              </a>
-              <a href="/browse?category=edtech" class="block p-3 bg-white rounded-lg hover:shadow-md transition">
-                <div class="flex justify-between items-center">
-                  <span class="font-medium">EdTech</span>
-                  <span class="text-gray-500">12 ideas</span>
-                </div>
-              </a>
-            </div>
-          </BentoBox>
-
-          <!-- More Featured Ideas -->
-          <BentoBox size="medium" className="lg:col-span-3 lg:row-span-2">
-            <IdeaPreview 
-              category="BLUEPRINT"
-              title="D2C Sustainable Fashion"
-              description="Eco-friendly clothing platform targeting Gen Z consumers with AI-powered size recommendations"
-              price="$15,000"
-              marketSize="$2.4B"
-              color="green"
-              client:load
-            />
-          </BentoBox>
-
-          <BentoBox size="medium" className="lg:col-span-3 lg:row-span-2">
-            <IdeaPreview 
-              category="CONCEPT"
-              title="EdTech Micro-Learning"
-              description="Bite-sized professional development for remote teams with gamification"
-              price="$5,000"
-              marketSize="$350M"
-              color="blue"
-              client:load
-            />
-          </BentoBox>
-
-          <!-- Trust Indicators -->
-          <BentoBox size="wide" className="lg:col-span-6 lg:row-span-1 bg-gradient-to-r from-indigo-900 to-purple-800 text-white" gradient>
-            <div class="flex items-center justify-between h-full">
-              <div>
-                <h4 class="font-bold text-lg">Secure & Trusted</h4>
-                <p class="text-indigo-100">All transactions protected by escrow</p>
-              </div>
-              <div class="flex gap-4 text-3xl opacity-80">
-                🔒 ✓ 🛡️
-              </div>
-            </div>
-          </BentoBox>
-
-          <!-- CTA Box -->
-          <BentoBox size="wide" className="lg:col-span-6 lg:row-span-1 bg-gradient-to-r from-purple-600 to-indigo-600 text-white" gradient>
-            <div class="flex items-center justify-between h-full">
-              <div>
-                <h4 class="font-bold text-lg">Ready to start your journey?</h4>
-                <p class="text-purple-100">Join thousands of entrepreneurs and idea creators</p>
-              </div>
-              <a href="/signup" class="bg-white text-indigo-900 px-6 py-2 rounded-lg font-semibold hover:bg-gray-100 transition">
-                Get Started
-              </a>
-            </div>
-          </BentoBox>
-        </BentoGrid>
-      </div>
-    </section>
-
-    <!-- Newsletter Section -->
-    <section class="py-20 bg-white">
-      <div class="container mx-auto px-4">
-        <div class="max-w-2xl mx-auto text-center">
-          <h2 class="text-3xl font-bold mb-4">Stay Updated</h2>
-          <p class="text-gray-600 mb-8">Get notified about new business ideas and exclusive opportunities</p>
-          <form class="flex gap-4 max-w-md mx-auto">
-            <input 
-              type="email" 
-              placeholder="Enter your email" 
-              class="flex-grow px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-indigo-500"
-            />
-            <button 
-              type="submit" 
-              class="bg-indigo-900 text-white px-6 py-3 rounded-lg font-semibold hover:bg-indigo-800 transition"
-            >
-              Subscribe
-            </button>
-          </form>
+        <div class="text-center mt-8 pt-8 border-t border-gray-800">
+          <p class="text-gray-400">
+            © 2024 TechFlunky. Connecting builders with entrepreneurs.
+          </p>
         </div>
       </div>
-    </section>
+    </footer>
   </main>
 </Layout>
 
+<script>
+  // Modern intersection observer for scroll animations
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, observerOptions);
+
+  // Observe elements when DOM is loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.scroll-fade').forEach(el => {
+      observer.observe(el);
+    });
+  });
+
+  // Smooth scroll for navigation links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute('href')).scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
+  });
+</script>
+
 <style>
-  /* Custom animations */
-  @keyframes fade-in {
+  /* Modern CSS Variables */
+  :root {
+    --yellow-primary: #fbbf24;
+    --yellow-secondary: #f59e0b;
+    --yellow-glow: rgba(251, 191, 36, 0.2);
+    --black-primary: #000000;
+    --gray-primary: #111827;
+    --gray-secondary: #1f2937;
+  }
+
+  /* Improved Animations */
+  @keyframes slide-up {
     from {
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(30px);
     }
     to {
       opacity: 1;
@@ -238,16 +515,188 @@ import { FeatureCard, IdeaPreview } from '../components/bento/FeatureCard';
     }
   }
 
-  .animate-fade-in {
-    animation: fade-in 0.8s ease-out forwards;
+  @keyframes fade-in-scale {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
 
+  @keyframes glow-pulse {
+    0%, 100% {
+      box-shadow: 0 0 20px var(--yellow-glow);
+    }
+    50% {
+      box-shadow: 0 0 40px rgba(251, 191, 36, 0.4), 0 0 60px var(--yellow-glow);
+    }
+  }
+
+  @keyframes float-gentle {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    33% {
+      transform: translateY(-8px) rotate(1deg);
+    }
+    66% {
+      transform: translateY(-4px) rotate(-1deg);
+    }
+  }
+
+  @keyframes typing-cursor {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+
+  /* Animation Classes */
   .animate-slide-up {
-    animation: fade-in 0.5s ease-out forwards;
+    animation: slide-up 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    opacity: 0;
   }
 
-  /* Ensure bento items have proper stacking */
-  .grid > * {
-    min-height: 0;
+  .animate-fade-in {
+    animation: fade-in-scale 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    opacity: 0;
+  }
+
+  .animate-glow {
+    animation: glow-pulse 3s ease-in-out infinite;
+  }
+
+  .animate-float {
+    animation: float-gentle 8s ease-in-out infinite;
+  }
+
+  /* Modern Glass Effects */
+  .glass-morphism {
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .glass-dark {
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(12px);
+  }
+
+  /* Typography Enhancements */
+  .text-shadow-glow {
+    text-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
+  }
+
+  /* Gradient Text */
+  .gradient-text {
+    background: linear-gradient(135deg, var(--yellow-primary), var(--yellow-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Modern Button Effects */
+  .btn-modern {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .btn-modern::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+  }
+
+  .btn-modern:hover::before {
+    left: 100%;
+  }
+
+  /* Card Hover Effects */
+  .card-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card-hover:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(251, 191, 36, 0.1);
+  }
+
+  /* Scroll Animations */
+  .scroll-fade {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .scroll-fade.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Modern Grid Layout */
+  .modern-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  /* Responsive Typography */
+  .text-responsive {
+    font-size: clamp(2rem, 5vw, 4rem);
+    line-height: 1.1;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--gray-primary);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--yellow-primary);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--yellow-secondary);
+  }
+
+  /* Mobile Optimizations */
+  @media (max-width: 768px) {
+    .animate-slide-up {
+      animation-duration: 0.6s;
+    }
+
+    .card-hover:hover {
+      transform: translateY(-4px) scale(1.01);
+    }
+  }
+
+  /* Performance Optimizations */
+  .gpu-accelerated {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  /* Accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 </style>

@@ -27,10 +27,11 @@ export async function createSellerAccount(seller: {
   email: string;
   name: string;
   businessType: 'individual' | 'company';
+  country?: string;
 }) {
   const account = await stripe.accounts.create({
     type: PLATFORM_CONFIG.accountType,
-    country: 'US',
+    country: seller.country === 'United States' ? 'US' : 'US', // Default to US for now
     email: seller.email,
     capabilities: {
       card_payments: { requested: true },
@@ -40,7 +41,7 @@ export async function createSellerAccount(seller: {
     business_profile: {
       mcc: '5734', // Computer Software Stores
       name: seller.name,
-      product_description: 'Business ideas and consulting services',
+      product_description: 'Complete software platforms and business solutions',
     },
     settings: {
       payouts: {

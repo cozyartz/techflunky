@@ -1,0 +1,834 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { BentoGrid, BentoBox } from '../components/bento/BentoGridMotion';
+---
+
+<Layout title="Sell Your Platform - TechFlunky">
+  <main class="min-h-screen bg-black">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm border-b border-yellow-400/20">
+      <div class="container mx-auto px-4 py-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-3">
+            <img src="/assets/techflunky-logo.png" alt="TechFlunky" class="w-10 h-10">
+            <span class="text-xl font-bold text-white">TechFlunky</span>
+          </div>
+          <div class="hidden md:flex items-center space-x-8">
+            <a href="/" class="text-gray-300 hover:text-yellow-400 transition font-medium">Home</a>
+            <a href="/browse" class="text-gray-300 hover:text-yellow-400 transition font-medium">Browse</a>
+            <a href="/sell" class="text-yellow-400 font-medium">Sell</a>
+            <a href="/about" class="text-gray-300 hover:text-yellow-400 transition font-medium">About</a>
+            <a href="/contact" class="bg-yellow-400 text-black px-4 py-2 rounded-lg font-semibold hover:bg-yellow-300 transition">Contact</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white overflow-hidden flex items-center">
+      <!-- Subtle grid pattern -->
+      <div class="absolute inset-0 opacity-5">
+        <div class="h-full w-full bg-grid-pattern"></div>
+      </div>
+
+      <div class="container mx-auto px-4 relative z-10 pt-24">
+        <div class="max-w-4xl mx-auto text-center">
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-black leading-tight mb-8 animate-slide-up">
+            <span class="block text-white">Turn Your</span>
+            <span class="block text-yellow-400">Code Into Capital</span>
+          </h1>
+          <p class="text-xl md:text-2xl text-gray-300 mb-8 animate-slide-up" style="animation-delay: 0.1s">
+            List your complete platforms and get compensated for months of development work
+          </p>
+          <a href="/seller/onboarding" class="bg-yellow-400 text-black px-8 py-4 rounded-xl font-bold text-lg hover:bg-yellow-300 transition-all duration-300 transform hover:scale-105 animate-slide-up" style="animation-delay: 0.2s">
+            List Your Platform
+          </a>
+        </div>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <svg class="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+        </svg>
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="py-24 bg-gradient-to-br from-black to-gray-900">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white">How It Works</h2>
+          <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+            Simple, transparent process to list your complete platforms and get fair compensation
+          </p>
+        </div>
+
+        <BentoGrid client:load>
+          <!-- Step 1 -->
+          <BentoBox
+            size="medium"
+            className="lg:col-span-4 lg:row-span-2 bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm border-yellow-400/20"
+          >
+            <div class="h-full flex flex-col text-center text-white p-4">
+              <div class="text-4xl mb-4">💻</div>
+              <h3 class="text-xl font-bold mb-3 text-yellow-400">1. Submit Your Platform</h3>
+              <p class="text-gray-300 flex-grow">Upload your complete codebase, documentation, and any market research you've done. We review everything for quality and completeness.</p>
+            </div>
+          </BentoBox>
+
+          <!-- Step 2 -->
+          <BentoBox
+            size="medium"
+            className="lg:col-span-4 lg:row-span-2 bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm border-yellow-400/20"
+          >
+            <div class="h-full flex flex-col text-center text-white p-4">
+              <div class="text-4xl mb-4">📋</div>
+              <h3 class="text-xl font-bold mb-3 text-yellow-400">2. Professional Packaging</h3>
+              <p class="text-gray-300 flex-grow">We help create comprehensive documentation including market research, technical specs, and deployment guides to make your platform market-ready.</p>
+            </div>
+          </BentoBox>
+
+          <!-- Step 3 -->
+          <BentoBox
+            size="medium"
+            className="lg:col-span-4 lg:row-span-2 bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm border-yellow-400/20"
+          >
+            <div class="h-full flex flex-col text-center text-white p-4">
+              <div class="text-4xl mb-4">💰</div>
+              <h3 class="text-xl font-bold mb-3 text-yellow-400">3. Get Compensated</h3>
+              <p class="text-gray-300 flex-grow">List your platform and receive fair payment when entrepreneurs purchase your complete business foundation. No ongoing commitments required.</p>
+            </div>
+          </BentoBox>
+
+          <!-- What We're Looking For -->
+          <BentoBox
+            size="large"
+            className="lg:col-span-8 lg:row-span-3 bg-gradient-to-br from-yellow-400/10 to-yellow-400/5 backdrop-blur-sm border-yellow-400/20"
+            gradient={true}
+          >
+            <div class="h-full flex flex-col text-white p-6">
+              <h3 class="text-2xl md:text-3xl font-bold mb-6 text-yellow-400">What We're Looking For</h3>
+              <div class="grid md:grid-cols-2 gap-6 flex-grow">
+                <div class="space-y-4">
+                  <div class="flex items-start gap-3">
+                    <svg class="w-6 h-6 text-yellow-400 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                    <div>
+                      <h4 class="font-semibold text-yellow-400 mb-1">Complete Platforms</h4>
+                      <p class="text-gray-300 text-sm">Production-ready codebases, not just ideas or prototypes</p>
+                    </div>
+                  </div>
+
+                  <div class="flex items-start gap-3">
+                    <svg class="w-6 h-6 text-yellow-400 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                    <div>
+                      <h4 class="font-semibold text-yellow-400 mb-1">Modern Tech Stack</h4>
+                      <p class="text-gray-300 text-sm">React, Next.js, Cloudflare, modern databases and infrastructure</p>
+                    </div>
+                  </div>
+
+                  <div class="flex items-start gap-3">
+                    <svg class="w-6 h-6 text-yellow-400 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                    <div>
+                      <h4 class="font-semibold text-yellow-400 mb-1">Market Research</h4>
+                      <p class="text-gray-300 text-sm">Evidence of market demand and competitive analysis</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="space-y-4">
+                  <div class="flex items-start gap-3">
+                    <svg class="w-6 h-6 text-yellow-400 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                    <div>
+                      <h4 class="font-semibold text-yellow-400 mb-1">Clear Documentation</h4>
+                      <p class="text-gray-300 text-sm">Deployment guides, API documentation, and architecture overview</p>
+                    </div>
+                  </div>
+
+                  <div class="flex items-start gap-3">
+                    <svg class="w-6 h-6 text-yellow-400 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                    <div>
+                      <h4 class="font-semibold text-yellow-400 mb-1">Business Potential</h4>
+                      <p class="text-gray-300 text-sm">Scalable business models with clear revenue opportunities</p>
+                    </div>
+                  </div>
+
+                  <div class="flex items-start gap-3">
+                    <svg class="w-6 h-6 text-yellow-400 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                    <div>
+                      <h4 class="font-semibold text-yellow-400 mb-1">Clean Code</h4>
+                      <p class="text-gray-300 text-sm">Well-structured, maintainable code with proper version control</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </BentoBox>
+
+          <!-- Pricing Structure -->
+          <BentoBox
+            size="medium"
+            className="lg:col-span-4 lg:row-span-3 bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm border-yellow-400/20"
+          >
+            <div class="h-full flex flex-col text-white p-4">
+              <h3 class="text-xl font-bold mb-4 text-yellow-400">Typical Platform Values</h3>
+              <div class="space-y-4 flex-grow">
+                <div class="bg-black/50 rounded-lg p-4 border border-yellow-400/10">
+                  <div class="text-2xl font-bold text-yellow-400">$15K - $25K</div>
+                  <div class="text-sm text-gray-300">SaaS Platforms</div>
+                  <div class="text-xs text-gray-400 mt-1">Multi-tenant, modern stack</div>
+                </div>
+                <div class="bg-black/50 rounded-lg p-4 border border-yellow-400/10">
+                  <div class="text-2xl font-bold text-yellow-400">$25K - $40K</div>
+                  <div class="text-sm text-gray-300">AI-Powered Systems</div>
+                  <div class="text-xs text-gray-400 mt-1">With automation & intelligence</div>
+                </div>
+                <div class="bg-black/50 rounded-lg p-4 border border-yellow-400/10">
+                  <div class="text-2xl font-bold text-yellow-400">$40K+</div>
+                  <div class="text-sm text-gray-300">Enterprise Solutions</div>
+                  <div class="text-xs text-gray-400 mt-1">Complex workflows & compliance</div>
+                </div>
+              </div>
+              <p class="text-xs text-gray-400 mt-4">Pricing based on development time, complexity, and market potential</p>
+            </div>
+          </BentoBox>
+        </BentoGrid>
+      </div>
+    </section>
+
+    <!-- Technical Infrastructure & Platform Support -->
+    <section class="py-24 bg-gradient-to-br from-gray-900 via-black to-gray-900">
+      <div class="container mx-auto px-4">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-16">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white">Multi-Platform Technical Support</h2>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+              We accept platforms built on any modern stack and provide secure containerization for all deployment types
+            </p>
+          </div>
+
+          <div class="grid lg:grid-cols-2 gap-12 mb-16">
+            <!-- Supported Platforms -->
+            <div class="card-glass p-8">
+              <h3 class="text-2xl font-bold text-brand-yellow-400 mb-6">Supported Technology Stacks</h3>
+              <div class="space-y-6">
+                <div>
+                  <h4 class="text-lg font-semibold text-white mb-3">Frontend Frameworks</h4>
+                  <div class="grid grid-cols-2 gap-3 text-sm">
+                    <div class="bg-black/30 rounded-lg p-3 border border-brand-yellow-400/10">
+                      <div class="font-semibold text-brand-yellow-400">React/Next.js</div>
+                      <div class="text-gray-400">SSR, SSG, Client-side</div>
+                    </div>
+                    <div class="bg-black/30 rounded-lg p-3 border border-brand-yellow-400/10">
+                      <div class="font-semibold text-brand-yellow-400">Vue/Nuxt.js</div>
+                      <div class="text-gray-400">Full-stack applications</div>
+                    </div>
+                    <div class="bg-black/30 rounded-lg p-3 border border-brand-yellow-400/10">
+                      <div class="font-semibold text-brand-yellow-400">Angular</div>
+                      <div class="text-gray-400">Enterprise applications</div>
+                    </div>
+                    <div class="bg-black/30 rounded-lg p-3 border border-brand-yellow-400/10">
+                      <div class="font-semibold text-brand-yellow-400">Astro/SvelteKit</div>
+                      <div class="text-gray-400">Modern meta-frameworks</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <h4 class="text-lg font-semibold text-white mb-3">Backend Systems</h4>
+                  <div class="grid grid-cols-2 gap-3 text-sm">
+                    <div class="bg-black/30 rounded-lg p-3 border border-brand-yellow-400/10">
+                      <div class="font-semibold text-brand-yellow-400">Node.js</div>
+                      <div class="text-gray-400">Express, Fastify, NestJS</div>
+                    </div>
+                    <div class="bg-black/30 rounded-lg p-3 border border-brand-yellow-400/10">
+                      <div class="font-semibold text-brand-yellow-400">Python</div>
+                      <div class="text-gray-400">Django, FastAPI, Flask</div>
+                    </div>
+                    <div class="bg-black/30 rounded-lg p-3 border border-brand-yellow-400/10">
+                      <div class="font-semibold text-brand-yellow-400">Go/Rust</div>
+                      <div class="text-gray-400">High-performance systems</div>
+                    </div>
+                    <div class="bg-black/30 rounded-lg p-3 border border-brand-yellow-400/10">
+                      <div class="font-semibold text-brand-yellow-400">PHP</div>
+                      <div class="text-gray-400">Laravel, Symfony</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <h4 class="text-lg font-semibold text-white mb-3">Database Systems</h4>
+                  <div class="grid grid-cols-2 gap-3 text-sm">
+                    <div class="bg-black/30 rounded-lg p-3 border border-brand-yellow-400/10">
+                      <div class="font-semibold text-brand-yellow-400">SQL Databases</div>
+                      <div class="text-gray-400">PostgreSQL, MySQL, SQLite</div>
+                    </div>
+                    <div class="bg-black/30 rounded-lg p-3 border border-brand-yellow-400/10">
+                      <div class="font-semibold text-brand-yellow-400">NoSQL</div>
+                      <div class="text-gray-400">MongoDB, Redis, DynamoDB</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Deployment Platforms -->
+            <div class="card-glass p-8">
+              <h3 class="text-2xl font-bold text-brand-yellow-400 mb-6">Deployment Platform Support</h3>
+              <div class="space-y-6">
+                <div>
+                  <h4 class="text-lg font-semibold text-white mb-3">Cloud Providers</h4>
+                  <div class="space-y-3">
+                    <div class="bg-black/30 rounded-lg p-4 border border-brand-yellow-400/10">
+                      <div class="font-semibold text-brand-yellow-400 mb-1">Cloudflare</div>
+                      <div class="text-sm text-gray-300">Pages, Workers, D1, R2, KV</div>
+                      <div class="text-xs text-gray-400 mt-1">Edge computing, global CDN</div>
+                    </div>
+                    <div class="bg-black/30 rounded-lg p-4 border border-brand-yellow-400/10">
+                      <div class="font-semibold text-brand-yellow-400 mb-1">AWS</div>
+                      <div class="text-sm text-gray-300">EC2, ECS, Lambda, RDS, S3</div>
+                      <div class="text-xs text-gray-400 mt-1">Full enterprise infrastructure</div>
+                    </div>
+                    <div class="bg-black/30 rounded-lg p-4 border border-brand-yellow-400/10">
+                      <div class="font-semibold text-brand-yellow-400 mb-1">Google Cloud / Azure</div>
+                      <div class="text-sm text-gray-300">Compute, Storage, Databases</div>
+                      <div class="text-xs text-gray-400 mt-1">Enterprise-grade platforms</div>
+                    </div>
+                    <div class="bg-black/30 rounded-lg p-4 border border-brand-yellow-400/10">
+                      <div class="font-semibold text-brand-yellow-400 mb-1">Vercel / Netlify</div>
+                      <div class="text-sm text-gray-300">Static sites, serverless functions</div>
+                      <div class="text-xs text-gray-400 mt-1">JAMstack applications</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <h4 class="text-lg font-semibold text-white mb-3">Container Support</h4>
+                  <div class="bg-black/30 rounded-lg p-4 border border-brand-yellow-400/10">
+                    <div class="font-semibold text-brand-yellow-400 mb-2">Docker & Kubernetes</div>
+                    <div class="text-sm text-gray-300 mb-2">Complete containerization for any platform</div>
+                    <ul class="text-xs text-gray-400 space-y-1">
+                      <li>• Multi-stage Docker builds for optimization</li>
+                      <li>• Kubernetes manifests for orchestration</li>
+                      <li>• CI/CD pipeline configurations</li>
+                      <li>• Environment variable management</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Code Security & Escrow System -->
+    <section class="py-24 bg-black">
+      <div class="container mx-auto px-4">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-16">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white">Code Security & IP Protection</h2>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+              Enterprise-grade security measures to protect your intellectual property throughout the entire process
+            </p>
+          </div>
+
+          <div class="grid lg:grid-cols-3 gap-8 mb-16">
+            <!-- Secure Code Escrow -->
+            <div class="card-glass p-8">
+              <div class="w-16 h-16 bg-brand-yellow-400/20 rounded-2xl flex items-center justify-center mb-6">
+                <svg class="w-8 h-8 text-brand-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-white mb-4">Secure Code Escrow</h3>
+              <div class="space-y-3 text-gray-300 text-sm">
+                <p>Your code is stored in encrypted, isolated repositories with restricted access.</p>
+                <ul class="space-y-2">
+                  <li class="flex items-start gap-2">
+                    <span class="text-brand-yellow-400 mt-1">•</span>
+                    <span>AES-256-GCM encryption at rest</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-brand-yellow-400 mt-1">•</span>
+                    <span>TLS 1.3 encryption in transit</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-brand-yellow-400 mt-1">•</span>
+                    <span>Multi-factor authentication required</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-brand-yellow-400 mt-1">•</span>
+                    <span>Zero-knowledge architecture</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Access Control -->
+            <div class="card-glass p-8">
+              <div class="w-16 h-16 bg-brand-yellow-400/20 rounded-2xl flex items-center justify-center mb-6">
+                <svg class="w-8 h-8 text-brand-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.031 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-white mb-4">Granular Access Control</h3>
+              <div class="space-y-3 text-gray-300 text-sm">
+                <p>Precise control over who can access what, when, and for how long.</p>
+                <ul class="space-y-2">
+                  <li class="flex items-start gap-2">
+                    <span class="text-brand-yellow-400 mt-1">•</span>
+                    <span>Role-based access permissions</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-brand-yellow-400 mt-1">•</span>
+                    <span>Time-limited preview access</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-brand-yellow-400 mt-1">•</span>
+                    <span>Audit trails for all access</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-brand-yellow-400 mt-1">•</span>
+                    <span>Automatic access revocation</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Legal Protection -->
+            <div class="card-glass p-8">
+              <div class="w-16 h-16 bg-brand-yellow-400/20 rounded-2xl flex items-center justify-center mb-6">
+                <svg class="w-8 h-8 text-brand-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-white mb-4">Legal IP Protection</h3>
+              <div class="space-y-3 text-gray-300 text-sm">
+                <p>Comprehensive legal framework protecting your intellectual property rights.</p>
+                <ul class="space-y-2">
+                  <li class="flex items-start gap-2">
+                    <span class="text-brand-yellow-400 mt-1">•</span>
+                    <span>NDA-protected code reviews</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-brand-yellow-400 mt-1">•</span>
+                    <span>Copyright assignment agreements</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-brand-yellow-400 mt-1">•</span>
+                    <span>Trade secret protection</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-brand-yellow-400 mt-1">•</span>
+                    <span>Breach penalties & enforcement</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Technical Security Implementation -->
+          <div class="card-glass p-8 mb-16">
+            <h3 class="text-2xl font-bold text-white mb-6">Technical Security Implementation</h3>
+            <div class="grid md:grid-cols-2 gap-8">
+              <div>
+                <h4 class="text-lg font-semibold text-brand-yellow-400 mb-4">Containerized Isolation</h4>
+                <div class="space-y-3 text-gray-300 text-sm">
+                  <p>Each platform is containerized in isolated environments with no cross-contamination:</p>
+                  <div class="bg-black/30 rounded-lg p-4 border border-brand-yellow-400/10">
+                    <pre class="text-xs text-gray-400 whitespace-pre-wrap"><code># Example Docker isolation
+FROM node:18-alpine AS secure-base
+RUN addgroup -g 1001 -S appgroup
+RUN adduser -S appuser -u 1001 -G appgroup
+
+# Encrypted storage mount
+VOLUME ["/encrypted/code"]
+
+# Network isolation
+NETWORK=isolated-platform-network
+
+# Resource limits
+MEMORY=2g CPU=1.0</code></pre>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <h4 class="text-lg font-semibold text-brand-yellow-400 mb-4">Encrypted Storage</h4>
+                <div class="space-y-3 text-gray-300 text-sm">
+                  <p>All code repositories are encrypted with industry-standard encryption:</p>
+                  <div class="bg-black/30 rounded-lg p-4 border border-brand-yellow-400/10">
+                    <ul class="space-y-2 text-xs text-gray-400">
+                      <li><strong>At Rest:</strong> AES-256-GCM with rotating keys</li>
+                      <li><strong>In Transit:</strong> TLS 1.3 with perfect forward secrecy</li>
+                      <li><strong>Access Keys:</strong> Hardware Security Module (HSM) protected</li>
+                      <li><strong>Backup:</strong> Triple-encrypted offsite backups</li>
+                      <li><strong>Audit:</strong> Immutable access logs with blockchain verification</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Buyer Access Process -->
+          <div class="card-glass p-8">
+            <h3 class="text-2xl font-bold text-white mb-6">Secure Buyer Preview Process</h3>
+            <div class="grid md:grid-cols-4 gap-6">
+              <div class="text-center">
+                <div class="w-12 h-12 bg-brand-yellow-400/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <span class="text-brand-yellow-400 font-bold">1</span>
+                </div>
+                <h4 class="font-semibold text-white mb-2">Qualification</h4>
+                <p class="text-xs text-gray-300">Buyer provides business background and funding verification</p>
+              </div>
+              <div class="text-center">
+                <div class="w-12 h-12 bg-brand-yellow-400/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <span class="text-brand-yellow-400 font-bold">2</span>
+                </div>
+                <h4 class="font-semibold text-white mb-2">NDA Signing</h4>
+                <p class="text-xs text-gray-300">Legal agreements signed before any code access</p>
+              </div>
+              <div class="text-center">
+                <div class="w-12 h-12 bg-brand-yellow-400/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <span class="text-brand-yellow-400 font-bold">3</span>
+                </div>
+                <h4 class="font-semibold text-white mb-2">Limited Access</h4>
+                <p class="text-xs text-gray-300">Time-limited, view-only access to specific code sections</p>
+              </div>
+              <div class="text-center">
+                <div class="w-12 h-12 bg-brand-yellow-400/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <span class="text-brand-yellow-400 font-bold">4</span>
+                </div>
+                <h4 class="font-semibold text-white mb-2">Purchase & Transfer</h4>
+                <p class="text-xs text-gray-300">Upon payment, full secure transfer with documentation</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Platform Containerization & Deployment -->
+    <section class="py-24 bg-gradient-to-br from-black to-gray-900">
+      <div class="container mx-auto px-4">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-16">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white">Containerization & Deployment Architecture</h2>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+              Every platform is containerized for seamless deployment across any infrastructure
+            </p>
+          </div>
+
+          <div class="grid lg:grid-cols-2 gap-12 mb-16">
+            <!-- Container Strategy -->
+            <div class="card-glass p-8">
+              <h3 class="text-2xl font-bold text-brand-yellow-400 mb-6">Universal Container Strategy</h3>
+              <div class="space-y-6">
+                <div>
+                  <h4 class="text-lg font-semibold text-white mb-3">Multi-Stage Builds</h4>
+                  <div class="bg-black/30 rounded-lg p-4 border border-brand-yellow-400/10 text-xs">
+                    <pre class="text-gray-400 whitespace-pre-wrap"><code># Build stage
+FROM node:18-alpine AS builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --only=production
+
+# Production stage
+FROM node:18-alpine AS production
+RUN addgroup -g 1001 -S nodejs
+RUN adduser -S nextjs -u 1001
+WORKDIR /app
+COPY --from=builder --chown=nextjs:nodejs /app ./
+USER nextjs
+EXPOSE 3000
+CMD ["npm", "start"]</code></pre>
+                  </div>
+                </div>
+
+                <div>
+                  <h4 class="text-lg font-semibold text-white mb-3">Security Hardening</h4>
+                  <ul class="space-y-2 text-sm text-gray-300">
+                    <li class="flex items-start gap-2">
+                      <span class="text-brand-yellow-400 mt-1">•</span>
+                      <span>Non-root user execution</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="text-brand-yellow-400 mt-1">•</span>
+                      <span>Minimal base images (Alpine Linux)</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="text-brand-yellow-400 mt-1">•</span>
+                      <span>No unnecessary packages or dependencies</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="text-brand-yellow-400 mt-1">•</span>
+                      <span>Vulnerability scanning with Trivy</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Orchestration -->
+            <div class="card-glass p-8">
+              <h3 class="text-2xl font-bold text-brand-yellow-400 mb-6">Kubernetes Orchestration</h3>
+              <div class="space-y-6">
+                <div>
+                  <h4 class="text-lg font-semibold text-white mb-3">Production Manifests</h4>
+                  <div class="bg-black/30 rounded-lg p-4 border border-brand-yellow-400/10 text-xs">
+                    <pre class="text-gray-400 whitespace-pre-wrap"><code>apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: platform-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: platform
+  template:
+    spec:
+      containers:
+      - name: app
+        image: platform:latest
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"</code></pre>
+                  </div>
+                </div>
+
+                <div>
+                  <h4 class="text-lg font-semibold text-white mb-3">Auto-scaling & Monitoring</h4>
+                  <ul class="space-y-2 text-sm text-gray-300">
+                    <li class="flex items-start gap-2">
+                      <span class="text-brand-yellow-400 mt-1">•</span>
+                      <span>Horizontal Pod Autoscaler (HPA)</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="text-brand-yellow-400 mt-1">•</span>
+                      <span>Prometheus metrics collection</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="text-brand-yellow-400 mt-1">•</span>
+                      <span>Health checks and readiness probes</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="text-brand-yellow-400 mt-1">•</span>
+                      <span>Graceful shutdown handling</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Deployment Options -->
+          <div class="grid md:grid-cols-3 gap-8">
+            <div class="card-glass p-6">
+              <h3 class="text-lg font-bold text-brand-yellow-400 mb-4">Cloud Native</h3>
+              <ul class="space-y-2 text-sm text-gray-300">
+                <li>• Kubernetes clusters (EKS, GKE, AKS)</li>
+                <li>• Docker Swarm orchestration</li>
+                <li>• Serverless containers (Fargate, Cloud Run)</li>
+                <li>• Edge deployment (Cloudflare Workers)</li>
+              </ul>
+            </div>
+
+            <div class="card-glass p-6">
+              <h3 class="text-lg font-bold text-brand-yellow-400 mb-4">Traditional Hosting</h3>
+              <ul class="space-y-2 text-sm text-gray-300">
+                <li>• VPS with Docker Compose</li>
+                <li>• Dedicated servers</li>
+                <li>• Shared hosting (where applicable)</li>
+                <li>• Hybrid cloud deployments</li>
+              </ul>
+            </div>
+
+            <div class="card-glass p-6">
+              <h3 class="text-lg font-bold text-brand-yellow-400 mb-4">Platform-as-a-Service</h3>
+              <ul class="space-y-2 text-sm text-gray-300">
+                <li>• Heroku buildpacks</li>
+                <li>• Railway, Render deployment</li>
+                <li>• Vercel, Netlify optimization</li>
+                <li>• DigitalOcean App Platform</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Requirements & Next Steps -->
+    <section class="py-24 bg-gradient-to-br from-gray-900 via-black to-gray-900">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+          <div class="text-center mb-16">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white">Ready to Get Started?</h2>
+            <p class="text-xl text-gray-300">
+              If you have a complete platform that matches our criteria, let's discuss the details
+            </p>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-8 mb-12">
+            <div class="bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-3xl p-8 border border-yellow-400/20">
+              <h3 class="text-2xl font-bold text-white mb-6">Before You Apply</h3>
+              <ul class="space-y-4 text-gray-300">
+                <li class="flex items-start gap-3">
+                  <span class="text-yellow-400 mt-1">•</span>
+                  <span>Ensure your platform is production-ready and well-documented</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="text-yellow-400 mt-1">•</span>
+                  <span>Gather any market research, user feedback, or competitive analysis</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="text-yellow-400 mt-1">•</span>
+                  <span>Prepare to explain the business opportunity and target market</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="text-yellow-400 mt-1">•</span>
+                  <span>Be realistic about pricing based on development time and complexity</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-3xl p-8 border border-yellow-400/20">
+              <h3 class="text-2xl font-bold text-white mb-6">What Happens Next</h3>
+              <ul class="space-y-4 text-gray-300">
+                <li class="flex items-start gap-3">
+                  <span class="text-yellow-400 mt-1">1.</span>
+                  <span>Submit your platform details through our onboarding process</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="text-yellow-400 mt-1">2.</span>
+                  <span>We'll review your code, documentation, and market potential</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="text-yellow-400 mt-1">3.</span>
+                  <span>If approved, we'll help create professional listing materials</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="text-yellow-400 mt-1">4.</span>
+                  <span>Your platform goes live and you get paid when it sells</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="text-center">
+            <a href="/seller/onboarding" class="bg-yellow-400 text-black px-10 py-4 rounded-xl font-bold text-lg hover:bg-yellow-300 transition-all duration-300 transform hover:scale-105 mr-6">
+              Start Application
+            </a>
+            <a href="/contact" class="bg-transparent border-2 border-yellow-400 text-yellow-400 px-10 py-4 rounded-xl font-bold text-lg hover:bg-yellow-400 hover:text-black transition-all duration-300 transform hover:scale-105">
+              Ask Questions
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-black border-t border-yellow-400/20">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <div class="flex items-center space-x-3 mb-4 md:mb-0">
+            <img src="/assets/techflunky-logo.png" alt="TechFlunky" class="w-8 h-8">
+            <span class="text-xl font-bold text-white">TechFlunky</span>
+          </div>
+
+          <div class="flex items-center space-x-6 text-gray-400">
+            <a href="/about" class="hover:text-yellow-400 transition">About</a>
+            <a href="/contact" class="hover:text-yellow-400 transition">Contact</a>
+            <a href="/terms" class="hover:text-yellow-400 transition">Terms</a>
+            <a href="/privacy" class="hover:text-yellow-400 transition">Privacy</a>
+          </div>
+        </div>
+
+        <div class="text-center mt-8 pt-8 border-t border-gray-800">
+          <p class="text-gray-400">
+            © 2024 TechFlunky. Connecting builders with entrepreneurs.
+          </p>
+        </div>
+      </div>
+    </footer>
+  </main>
+</Layout>
+
+<style>
+  /* Import styles from index page for consistency */
+  :root {
+    --yellow-primary: #fbbf24;
+    --yellow-secondary: #f59e0b;
+    --yellow-glow: rgba(251, 191, 36, 0.2);
+    --black-primary: #000000;
+    --gray-primary: #111827;
+    --gray-secondary: #1f2937;
+  }
+
+  .bg-grid-pattern {
+    background-image: url("data:image/svg+xml,%3csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3e%3cg fill='none' stroke='%23fff' stroke-width='1'%3e%3cpath d='M0 0h60v60H0z'/%3e%3c/g%3e%3c/svg%3e");
+    background-size: 60px 60px;
+  }
+
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    opacity: 0;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--gray-primary);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--yellow-primary);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--yellow-secondary);
+  }
+
+  /* Accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+</style>
