@@ -1,0 +1,35 @@
+name = "techflunky"
+compatibility_date = "2024-01-01"
+
+# D1 Database binding
+[[d1_databases]]
+binding = "DB"
+database_name = "techflunky-db"
+database_id = "YOUR_D1_DATABASE_ID"
+
+# R2 Storage binding
+[[r2_buckets]]
+binding = "BUCKET"
+bucket_name = "techflunky-assets"
+
+# Environment variables (add to .dev.vars for local development)
+# STRIPE_SECRET_KEY = "sk_test_..."
+# CLAUDE_API_KEY = "sk-ant-..."
+# JWT_SECRET = "your-jwt-secret"
+
+# KV namespace for sessions/cache
+[[kv_namespaces]]
+binding = "CACHE"
+id = "YOUR_KV_NAMESPACE_ID"
+
+# Analytics Engine
+[[analytics_engine_datasets]]
+binding = "ANALYTICS"
+
+# Email routing (for notifications)
+[triggers]
+crons = ["0 */6 * * *"] # Run maintenance tasks every 6 hours
+
+# Tail Workers for debugging
+[tail]
+consumers = []
