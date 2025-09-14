@@ -288,7 +288,13 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+TechFlunky uses a dual licensing model:
+
+- **Platform**: Commercial license (see [LICENSE](LICENSE))
+- **Examples & Tools**: MIT License (see [LICENSE-OSS](LICENSE-OSS))
+- **Your Packages**: You choose the license
+
+See [LICENSE-STRUCTURE.md](LICENSE-STRUCTURE.md) for details.
 
 ## 🏢 About Autimind, Inc.
 
