@@ -1,0 +1,328 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Privacy Policy - TechFlunky">
+  <main class="min-h-screen bg-black text-white">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm border-b border-yellow-400/20">
+      <div class="container mx-auto px-4 py-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-3">
+            <img src="/assets/techflunky-logo.png" alt="TechFlunky" class="w-10 h-10">
+            <span class="text-xl font-bold text-white">TechFlunky</span>
+          </div>
+          <div class="hidden md:flex items-center space-x-8">
+            <a href="/" class="text-gray-300 hover:text-yellow-400 transition font-medium">Home</a>
+            <a href="/browse" class="text-gray-300 hover:text-yellow-400 transition font-medium">Browse</a>
+            <a href="/invest" class="text-gray-300 hover:text-yellow-400 transition font-medium">Invest</a>
+            <a href="/sell" class="text-gray-300 hover:text-yellow-400 transition font-medium">Sell</a>
+            <a href="/pricing" class="text-gray-300 hover:text-yellow-400 transition font-medium">Pricing</a>
+            <a href="/about" class="text-gray-300 hover:text-yellow-400 transition font-medium">About</a>
+            <a href="/contact" class="bg-yellow-400 text-black px-4 py-2 rounded-lg font-semibold hover:bg-yellow-300 transition">Contact</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Content -->
+    <div class="pt-24 pb-12">
+      <div class="container mx-auto px-4 max-w-4xl">
+        <h1 class="text-4xl font-bold mb-8 text-yellow-400">Privacy Policy</h1>
+        <p class="text-gray-300 mb-8 text-lg">
+          <strong>Last Updated:</strong> {new Date().toLocaleDateString()}
+        </p>
+
+        <div class="prose prose-invert prose-yellow max-w-none">
+          <!-- Introduction -->
+          <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-yellow-400">1. Introduction</h2>
+            <p class="text-gray-300 mb-4">
+              TechFlunky ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website and use our marketplace platform for business idea transactions.
+            </p>
+            <p class="text-gray-300">
+              By accessing or using TechFlunky, you agree to the collection and use of information in accordance with this Privacy Policy. If you do not agree with our policies and practices, please do not use our services.
+            </p>
+          </section>
+
+          <!-- Information We Collect -->
+          <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-yellow-400">2. Information We Collect</h2>
+
+            <h3 class="text-xl font-semibold mb-3 text-white">2.1 Personal Information</h3>
+            <p class="text-gray-300 mb-4">We may collect the following personal information:</p>
+            <ul class="list-disc list-inside text-gray-300 mb-6 space-y-2">
+              <li>Name, email address, and contact information</li>
+              <li>Professional information and business credentials</li>
+              <li>Payment information and billing details</li>
+              <li>Identity verification documents (for compliance purposes)</li>
+              <li>Investment preferences and portfolio information</li>
+              <li>Business listings and transaction history</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold mb-3 text-white">2.2 Technical Information</h3>
+            <ul class="list-disc list-inside text-gray-300 mb-6 space-y-2">
+              <li>IP address and geolocation data</li>
+              <li>Device information and browser type</li>
+              <li>Usage patterns and platform interactions</li>
+              <li>API usage statistics and performance metrics</li>
+              <li>Cookies and similar tracking technologies</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold mb-3 text-white">2.3 Business Information</h3>
+            <ul class="list-disc list-inside text-gray-300 mb-6 space-y-2">
+              <li>Repository metadata and code structure analysis</li>
+              <li>Business model descriptions and valuations</li>
+              <li>Market analysis and competitive intelligence</li>
+              <li>Due diligence documentation</li>
+              <li>Investment syndicate participation data</li>
+            </ul>
+          </section>
+
+          <!-- How We Use Information -->
+          <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-yellow-400">3. How We Use Your Information</h2>
+
+            <h3 class="text-xl font-semibold mb-3 text-white">3.1 Platform Operations</h3>
+            <ul class="list-disc list-inside text-gray-300 mb-6 space-y-2">
+              <li>Facilitate business idea transactions and marketplace operations</li>
+              <li>Process payments and calculate platform fees (8% success fee)</li>
+              <li>Provide AI-powered validation and matching services</li>
+              <li>Manage investor syndicate formation and collaboration</li>
+              <li>Deliver premium services and white-label solutions</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold mb-3 text-white">3.2 Legal and Compliance</h3>
+            <ul class="list-disc list-inside text-gray-300 mb-6 space-y-2">
+              <li>Verify user identity and prevent fraud</li>
+              <li>Comply with anti-money laundering (AML) regulations</li>
+              <li>Maintain transaction records for audit purposes</li>
+              <li>Respond to legal requests and court orders</li>
+              <li>Enforce our Terms of Service and platform policies</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold mb-3 text-white">3.3 Service Improvement</h3>
+            <ul class="list-disc list-inside text-gray-300 mb-6 space-y-2">
+              <li>Analyze usage patterns to improve platform functionality</li>
+              <li>Train AI models for better business validation</li>
+              <li>Develop new features and service offerings</li>
+              <li>Generate anonymized market intelligence reports</li>
+              <li>Optimize API performance and reliability</li>
+            </ul>
+          </section>
+
+          <!-- Information Sharing -->
+          <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-yellow-400">4. Information Sharing and Disclosure</h2>
+
+            <h3 class="text-xl font-semibold mb-3 text-white">4.1 Business Transactions</h3>
+            <p class="text-gray-300 mb-4">
+              We share necessary information to facilitate marketplace transactions, including buyer and seller contact details, business validation results, and transaction history (excluding proprietary code or trade secrets).
+            </p>
+
+            <h3 class="text-xl font-semibold mb-3 text-white">4.2 Service Providers</h3>
+            <p class="text-gray-300 mb-4">We may share information with trusted third parties:</p>
+            <ul class="list-disc list-inside text-gray-300 mb-6 space-y-2">
+              <li>Cloudflare (infrastructure and AI services)</li>
+              <li>Stripe (payment processing)</li>
+              <li>Identity verification providers</li>
+              <li>Email and communication services</li>
+              <li>Analytics and monitoring tools</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold mb-3 text-white">4.3 Legal Requirements</h3>
+            <p class="text-gray-300 mb-4">
+              We may disclose information when required by law, including responses to subpoenas, court orders, regulatory requests, or to protect our rights and the safety of our users.
+            </p>
+
+            <h3 class="text-xl font-semibold mb-3 text-white">4.4 Aggregated Data</h3>
+            <p class="text-gray-300 mb-4">
+              We may share anonymized, aggregated data for market research, industry reports, and platform analytics without identifying individual users.
+            </p>
+          </section>
+
+          <!-- Data Security -->
+          <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-yellow-400">5. Data Security</h2>
+            <p class="text-gray-300 mb-4">
+              We implement industry-standard security measures to protect your information:
+            </p>
+            <ul class="list-disc list-inside text-gray-300 mb-6 space-y-2">
+              <li>AES-256-GCM encryption for sensitive data at rest</li>
+              <li>TLS 1.3 encryption for data in transit</li>
+              <li>Multi-tenant data isolation for business accounts</li>
+              <li>Regular security audits and penetration testing</li>
+              <li>Access controls and employee security training</li>
+              <li>Automated monitoring and incident response</li>
+            </ul>
+            <div class="bg-yellow-400/10 border border-yellow-400/30 rounded-lg p-4 mb-6">
+              <p class="text-yellow-200">
+                <strong>Trade Secret Protection:</strong> We never access or expose your proprietary source code. Our AI validation system analyzes only repository metadata and public information.
+              </p>
+            </div>
+          </section>
+
+          <!-- Your Rights -->
+          <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-yellow-400">6. Your Privacy Rights</h2>
+
+            <h3 class="text-xl font-semibold mb-3 text-white">6.1 Access and Control</h3>
+            <ul class="list-disc list-inside text-gray-300 mb-6 space-y-2">
+              <li>Access and download your personal data</li>
+              <li>Correct inaccurate or incomplete information</li>
+              <li>Delete your account and associated data</li>
+              <li>Restrict processing of your information</li>
+              <li>Object to automated decision-making</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold mb-3 text-white">6.2 Regional Rights</h3>
+            <p class="text-gray-300 mb-4">
+              If you are located in the EU (GDPR), California (CCPA), or other jurisdictions with specific privacy laws, you may have additional rights including data portability and the right to know what personal information we sell or disclose.
+            </p>
+
+            <h3 class="text-xl font-semibold mb-3 text-white">6.3 Exercising Your Rights</h3>
+            <p class="text-gray-300 mb-4">
+              To exercise your privacy rights, contact us at <a href="mailto:privacy@techflunky.io" class="text-yellow-400 hover:text-yellow-300">privacy@techflunky.io</a> or use the privacy controls in your account settings.
+            </p>
+          </section>
+
+          <!-- Cookies and Tracking -->
+          <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-yellow-400">7. Cookies and Tracking Technologies</h2>
+            <p class="text-gray-300 mb-4">
+              We use cookies and similar technologies to enhance your experience:
+            </p>
+
+            <h3 class="text-xl font-semibold mb-3 text-white">7.1 Essential Cookies</h3>
+            <ul class="list-disc list-inside text-gray-300 mb-6 space-y-2">
+              <li>Authentication and security tokens</li>
+              <li>Session management and user preferences</li>
+              <li>API access control and rate limiting</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold mb-3 text-white">7.2 Analytics Cookies</h3>
+            <ul class="list-disc list-inside text-gray-300 mb-6 space-y-2">
+              <li>Usage analytics and performance monitoring</li>
+              <li>A/B testing and feature optimization</li>
+              <li>Error tracking and debugging information</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold mb-3 text-white">7.3 Cookie Management</h3>
+            <p class="text-gray-300 mb-4">
+              You can manage cookie preferences through your browser settings or our cookie consent banner. Note that disabling essential cookies may affect platform functionality.
+            </p>
+          </section>
+
+          <!-- Data Retention -->
+          <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-yellow-400">8. Data Retention</h2>
+            <p class="text-gray-300 mb-4">
+              We retain information for the following periods:
+            </p>
+            <ul class="list-disc list-inside text-gray-300 mb-6 space-y-2">
+              <li><strong>Account Information:</strong> Until account deletion plus 30 days</li>
+              <li><strong>Transaction Records:</strong> 7 years (for tax and legal compliance)</li>
+              <li><strong>Identity Verification:</strong> 5 years (for AML compliance)</li>
+              <li><strong>API Usage Logs:</strong> 2 years (for security and debugging)</li>
+              <li><strong>Marketing Communications:</strong> Until unsubscribe plus 30 days</li>
+            </ul>
+          </section>
+
+          <!-- Third-Party Links -->
+          <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-yellow-400">9. Third-Party Links and Services</h2>
+            <p class="text-gray-300 mb-4">
+              Our platform may contain links to third-party websites, including GitHub repositories, external documentation, and partner services. We are not responsible for the privacy practices of these third parties.
+            </p>
+            <p class="text-gray-300 mb-4">
+              When using our white-label solutions, client organizations are responsible for their own privacy policies and data handling practices.
+            </p>
+          </section>
+
+          <!-- International Transfers -->
+          <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-yellow-400">10. International Data Transfers</h2>
+            <p class="text-gray-300 mb-4">
+              TechFlunky operates globally using Cloudflare's edge network. Your information may be processed in the United States, European Union, or other countries where our service providers operate.
+            </p>
+            <p class="text-gray-300 mb-4">
+              We ensure appropriate safeguards are in place for international transfers, including Standard Contractual Clauses and adequacy decisions where applicable.
+            </p>
+          </section>
+
+          <!-- Children's Privacy -->
+          <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-yellow-400">11. Children's Privacy</h2>
+            <p class="text-gray-300 mb-4">
+              TechFlunky is not intended for individuals under 18 years of age. We do not knowingly collect personal information from children. If you become aware that a child has provided us with personal information, please contact us immediately.
+            </p>
+          </section>
+
+          <!-- Changes to Privacy Policy -->
+          <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-yellow-400">12. Changes to This Privacy Policy</h2>
+            <p class="text-gray-300 mb-4">
+              We may update this Privacy Policy periodically. We will notify you of any material changes by:
+            </p>
+            <ul class="list-disc list-inside text-gray-300 mb-6 space-y-2">
+              <li>Posting the updated policy on our website</li>
+              <li>Sending email notifications to registered users</li>
+              <li>Displaying prominent notices on the platform</li>
+            </ul>
+            <p class="text-gray-300 mb-4">
+              Your continued use of TechFlunky after policy changes constitutes acceptance of the updated terms.
+            </p>
+          </section>
+
+          <!-- Contact Information -->
+          <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-yellow-400">13. Contact Us</h2>
+            <p class="text-gray-300 mb-4">
+              If you have questions about this Privacy Policy or our data practices, please contact us:
+            </p>
+            <div class="bg-gray-900 rounded-lg p-6 border border-gray-800">
+              <p class="text-white mb-2"><strong>TechFlunky Privacy Team</strong></p>
+              <p class="text-gray-300 mb-2">Email: <a href="mailto:privacy@techflunky.io" class="text-yellow-400 hover:text-yellow-300">privacy@techflunky.io</a></p>
+              <p class="text-gray-300 mb-2">Address: [Company Address]</p>
+              <p class="text-gray-300">Response Time: Within 30 days of receipt</p>
+            </div>
+          </section>
+
+          <!-- Legal Basis -->
+          <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-yellow-400">14. Legal Basis for Processing (GDPR)</h2>
+            <p class="text-gray-300 mb-4">
+              For EU users, we process personal data based on:
+            </p>
+            <ul class="list-disc list-inside text-gray-300 mb-6 space-y-2">
+              <li><strong>Contract Performance:</strong> To provide marketplace services and process transactions</li>
+              <li><strong>Legitimate Interest:</strong> For fraud prevention, security, and service improvement</li>
+              <li><strong>Legal Obligation:</strong> For compliance with financial and identity verification laws</li>
+              <li><strong>Consent:</strong> For marketing communications and optional features</li>
+            </ul>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-gray-800 py-8">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <div class="flex items-center space-x-3 mb-4 md:mb-0">
+            <img src="/assets/techflunky-logo.png" alt="TechFlunky" class="w-8 h-8">
+            <span class="text-lg font-bold text-white">TechFlunky</span>
+          </div>
+          <div class="flex space-x-6 text-sm">
+            <a href="/privacy" class="text-yellow-400 font-medium">Privacy Policy</a>
+            <a href="/terms" class="text-gray-400 hover:text-yellow-400 transition">Terms of Service</a>
+            <a href="/contact" class="text-gray-400 hover:text-yellow-400 transition">Contact</a>
+          </div>
+        </div>
+        <div class="mt-4 pt-4 border-t border-gray-800 text-center text-gray-400 text-sm">
+          <p>&copy; {new Date().getFullYear()} TechFlunky. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </main>
+</Layout>

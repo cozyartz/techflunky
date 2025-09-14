@@ -1,0 +1,504 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Pricing - TechFlunky">
+  <main class="min-h-screen bg-black text-white">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm border-b border-yellow-400/20">
+      <div class="container mx-auto px-4 py-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-3">
+            <img src="/assets/techflunky-logo.png" alt="TechFlunky" class="w-10 h-10">
+            <span class="text-xl font-bold text-white">TechFlunky</span>
+          </div>
+          <div class="hidden md:flex items-center space-x-8">
+            <a href="/" class="text-gray-300 hover:text-yellow-400 transition font-medium">Home</a>
+            <a href="/browse" class="text-gray-300 hover:text-yellow-400 transition font-medium">Browse</a>
+            <a href="/invest" class="text-gray-300 hover:text-yellow-400 transition font-medium">Invest</a>
+            <a href="/sell" class="text-gray-300 hover:text-yellow-400 transition font-medium">Sell</a>
+            <a href="/pricing" class="text-yellow-400 font-medium">Pricing</a>
+            <a href="/about" class="text-gray-300 hover:text-yellow-400 transition font-medium">About</a>
+            <a href="/contact" class="bg-yellow-400 text-black px-4 py-2 rounded-lg font-semibold hover:bg-yellow-300 transition">Contact</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-b from-black via-gray-900 to-black py-20">
+      <div class="container mx-auto px-4 text-center">
+        <h1 class="text-5xl font-bold mb-6 text-yellow-400">
+          Simple, Transparent Pricing
+        </h1>
+        <p class="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
+          Start free, scale as you grow. The most competitive rates in the marketplace industry.
+        </p>
+        <div class="bg-yellow-400 text-black px-6 py-3 rounded-lg inline-block font-semibold">
+          ✨ 8% Success Fee - Beat Industry Standard by 60%
+        </div>
+      </div>
+    </section>
+
+    <!-- Marketplace Fees -->
+    <section class="py-16">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12 text-yellow-400">
+          Marketplace Fees
+        </h2>
+        <div class="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+          <div class="bg-gray-900 p-8 rounded-lg border border-gray-800">
+            <h3 class="text-xl font-bold mb-4 text-green-400">Listing Fee</h3>
+            <div class="text-4xl font-bold mb-2">FREE</div>
+            <p class="text-gray-400 mb-6">List unlimited business ideas at no cost</p>
+            <ul class="space-y-2 text-sm">
+              <li class="flex items-center">
+                <span class="text-green-400 mr-2">✓</span>
+                Unlimited listings
+              </li>
+              <li class="flex items-center">
+                <span class="text-green-400 mr-2">✓</span>
+                Basic AI validation
+              </li>
+              <li class="flex items-center">
+                <span class="text-green-400 mr-2">✓</span>
+                Direct buyer messaging
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-gradient-to-b from-yellow-500/20 to-yellow-600/10 p-8 rounded-lg border-2 border-yellow-400 relative">
+            <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-yellow-400 text-black px-4 py-1 rounded-full text-sm font-bold">
+              MOST POPULAR
+            </div>
+            <h3 class="text-xl font-bold mb-4 text-yellow-400">Success Fee</h3>
+            <div class="text-4xl font-bold mb-2">8%</div>
+            <p class="text-gray-400 mb-6">Only pay when you sell</p>
+            <ul class="space-y-2 text-sm">
+              <li class="flex items-center">
+                <span class="text-yellow-400 mr-2">✓</span>
+                Beat competitors by 60%
+              </li>
+              <li class="flex items-center">
+                <span class="text-yellow-400 mr-2">✓</span>
+                Secure escrow included
+              </li>
+              <li class="flex items-center">
+                <span class="text-yellow-400 mr-2">✓</span>
+                Full fraud protection
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-gray-900 p-8 rounded-lg border border-gray-800">
+            <h3 class="text-xl font-bold mb-4 text-blue-400">Premium Boost</h3>
+            <div class="text-4xl font-bold mb-2">$29</div>
+            <p class="text-gray-400 mb-6">per month, optional</p>
+            <ul class="space-y-2 text-sm">
+              <li class="flex items-center">
+                <span class="text-blue-400 mr-2">✓</span>
+                Featured placement
+              </li>
+              <li class="flex items-center">
+                <span class="text-blue-400 mr-2">✓</span>
+                Advanced analytics
+              </li>
+              <li class="flex items-center">
+                <span class="text-blue-400 mr-2">✓</span>
+                Priority AI matching
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- API Access Tiers -->
+    <section class="py-16 bg-gray-900/50">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12 text-yellow-400">
+          API Access Tiers
+        </h2>
+        <div class="grid md:grid-cols-4 gap-6 max-w-7xl mx-auto">
+          <!-- Free Tier -->
+          <div class="bg-gray-900 p-6 rounded-lg border border-gray-800">
+            <h3 class="text-lg font-bold mb-2 text-green-400">Free</h3>
+            <div class="text-3xl font-bold mb-4">$0</div>
+            <ul class="space-y-2 text-sm mb-6">
+              <li class="flex items-center">
+                <span class="text-green-400 mr-2">✓</span>
+                10K API calls/month
+              </li>
+              <li class="flex items-center">
+                <span class="text-green-400 mr-2">✓</span>
+                100 AI analyses/month
+              </li>
+              <li class="flex items-center">
+                <span class="text-green-400 mr-2">✓</span>
+                Basic support
+              </li>
+            </ul>
+            <button class="w-full bg-green-500 hover:bg-green-600 text-black font-bold py-2 px-4 rounded">
+              Get Started Free
+            </button>
+          </div>
+
+          <!-- Starter Tier -->
+          <div class="bg-gray-900 p-6 rounded-lg border border-gray-800">
+            <h3 class="text-lg font-bold mb-2 text-blue-400">Starter</h3>
+            <div class="text-3xl font-bold mb-4">$19</div>
+            <ul class="space-y-2 text-sm mb-6">
+              <li class="flex items-center">
+                <span class="text-blue-400 mr-2">✓</span>
+                100K API calls/month
+              </li>
+              <li class="flex items-center">
+                <span class="text-blue-400 mr-2">✓</span>
+                1K AI analyses/month
+              </li>
+              <li class="flex items-center">
+                <span class="text-blue-400 mr-2">✓</span>
+                Email support
+              </li>
+            </ul>
+            <button class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+              Choose Starter
+            </button>
+          </div>
+
+          <!-- Pro Tier -->
+          <div class="bg-gradient-to-b from-yellow-500/20 to-yellow-600/10 p-6 rounded-lg border-2 border-yellow-400 relative">
+            <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-yellow-400 text-black px-3 py-1 rounded-full text-xs font-bold">
+              POPULAR
+            </div>
+            <h3 class="text-lg font-bold mb-2 text-yellow-400">Professional</h3>
+            <div class="text-3xl font-bold mb-4">$79</div>
+            <ul class="space-y-2 text-sm mb-6">
+              <li class="flex items-center">
+                <span class="text-yellow-400 mr-2">✓</span>
+                500K API calls/month
+              </li>
+              <li class="flex items-center">
+                <span class="text-yellow-400 mr-2">✓</span>
+                10K AI analyses/month
+              </li>
+              <li class="flex items-center">
+                <span class="text-yellow-400 mr-2">✓</span>
+                Priority support
+              </li>
+              <li class="flex items-center">
+                <span class="text-yellow-400 mr-2">✓</span>
+                Market intelligence
+              </li>
+            </ul>
+            <button class="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-4 rounded">
+              Choose Pro
+            </button>
+          </div>
+
+          <!-- Enterprise Tier -->
+          <div class="bg-gray-900 p-6 rounded-lg border border-purple-500">
+            <h3 class="text-lg font-bold mb-2 text-purple-400">Enterprise</h3>
+            <div class="text-3xl font-bold mb-4">$199</div>
+            <ul class="space-y-2 text-sm mb-6">
+              <li class="flex items-center">
+                <span class="text-purple-400 mr-2">✓</span>
+                2M API calls/month
+              </li>
+              <li class="flex items-center">
+                <span class="text-purple-400 mr-2">✓</span>
+                Unlimited AI analyses
+              </li>
+              <li class="flex items-center">
+                <span class="text-purple-400 mr-2">✓</span>
+                Dedicated support
+              </li>
+              <li class="flex items-center">
+                <span class="text-purple-400 mr-2">✓</span>
+                Basic white-label
+              </li>
+            </ul>
+            <button class="w-full bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded">
+              Choose Enterprise
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Premium Services -->
+    <section class="py-16">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12 text-yellow-400">
+          Premium Services
+        </h2>
+
+        <!-- White-Label Portals -->
+        <div class="mb-16">
+          <h3 class="text-2xl font-bold mb-8 text-center text-white">White-Label Portals</h3>
+          <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <div class="bg-gray-900 p-6 rounded-lg border border-gray-800">
+              <h4 class="text-lg font-bold mb-2 text-blue-400">Basic</h4>
+              <div class="text-3xl font-bold mb-4">$499</div>
+              <p class="text-sm text-gray-400 mb-4">per month</p>
+              <ul class="space-y-2 text-sm mb-6">
+                <li class="flex items-center">
+                  <span class="text-blue-400 mr-2">✓</span>
+                  Custom branding
+                </li>
+                <li class="flex items-center">
+                  <span class="text-blue-400 mr-2">✓</span>
+                  Custom domain
+                </li>
+                <li class="flex items-center">
+                  <span class="text-blue-400 mr-2">✓</span>
+                  Basic analytics
+                </li>
+                <li class="flex items-center">
+                  <span class="text-blue-400 mr-2">✓</span>
+                  100 users included
+                </li>
+              </ul>
+            </div>
+
+            <div class="bg-gradient-to-b from-yellow-500/20 to-yellow-600/10 p-6 rounded-lg border-2 border-yellow-400 relative">
+              <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-yellow-400 text-black px-3 py-1 rounded-full text-xs font-bold">
+                RECOMMENDED
+              </div>
+              <h4 class="text-lg font-bold mb-2 text-yellow-400">Premium</h4>
+              <div class="text-3xl font-bold mb-4">$799</div>
+              <p class="text-sm text-gray-400 mb-4">per month</p>
+              <ul class="space-y-2 text-sm mb-6">
+                <li class="flex items-center">
+                  <span class="text-yellow-400 mr-2">✓</span>
+                  Everything in Basic
+                </li>
+                <li class="flex items-center">
+                  <span class="text-yellow-400 mr-2">✓</span>
+                  Advanced analytics
+                </li>
+                <li class="flex items-center">
+                  <span class="text-yellow-400 mr-2">✓</span>
+                  Priority support
+                </li>
+                <li class="flex items-center">
+                  <span class="text-yellow-400 mr-2">✓</span>
+                  500 users included
+                </li>
+                <li class="flex items-center">
+                  <span class="text-yellow-400 mr-2">✓</span>
+                  Custom features
+                </li>
+              </ul>
+            </div>
+
+            <div class="bg-gray-900 p-6 rounded-lg border border-purple-500">
+              <h4 class="text-lg font-bold mb-2 text-purple-400">Enterprise</h4>
+              <div class="text-3xl font-bold mb-4">$999</div>
+              <p class="text-sm text-gray-400 mb-4">per month</p>
+              <ul class="space-y-2 text-sm mb-6">
+                <li class="flex items-center">
+                  <span class="text-purple-400 mr-2">✓</span>
+                  Everything in Premium
+                </li>
+                <li class="flex items-center">
+                  <span class="text-purple-400 mr-2">✓</span>
+                  Unlimited users
+                </li>
+                <li class="flex items-center">
+                  <span class="text-purple-400 mr-2">✓</span>
+                  Dedicated infrastructure
+                </li>
+                <li class="flex items-center">
+                  <span class="text-purple-400 mr-2">✓</span>
+                  SLA guarantees
+                </li>
+                <li class="flex items-center">
+                  <span class="text-purple-400 mr-2">✓</span>
+                  Full customization
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Professional Services -->
+        <div class="mb-16">
+          <h3 class="text-2xl font-bold mb-8 text-center text-white">Professional Services</h3>
+          <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 text-center">
+              <div class="text-4xl mb-4">🎯</div>
+              <h4 class="text-lg font-bold mb-2 text-green-400">Priority Support</h4>
+              <div class="text-2xl font-bold mb-2">$99</div>
+              <p class="text-sm text-gray-400 mb-4">per month</p>
+              <ul class="text-sm space-y-1">
+                <li>24-hour response SLA</li>
+                <li>Priority queue</li>
+                <li>Technical guidance</li>
+              </ul>
+            </div>
+
+            <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 text-center">
+              <div class="text-4xl mb-4">📊</div>
+              <h4 class="text-lg font-bold mb-2 text-blue-400">AI Market Report</h4>
+              <div class="text-2xl font-bold mb-2">$99</div>
+              <p class="text-sm text-gray-400 mb-4">per report</p>
+              <ul class="text-sm space-y-1">
+                <li>3-5 day delivery</li>
+                <li>Custom analysis</li>
+                <li>Actionable insights</li>
+              </ul>
+            </div>
+
+            <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 text-center">
+              <div class="text-4xl mb-4">🔍</div>
+              <h4 class="text-lg font-bold mb-2 text-yellow-400">Due Diligence</h4>
+              <div class="text-2xl font-bold mb-2">$499</div>
+              <p class="text-sm text-gray-400 mb-4">per deal</p>
+              <ul class="text-sm space-y-1">
+                <li>5-7 day delivery</li>
+                <li>Technical validation</li>
+                <li>Investment rec</li>
+              </ul>
+            </div>
+
+            <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 text-center">
+              <div class="text-4xl mb-4">🔧</div>
+              <h4 class="text-lg font-bold mb-2 text-purple-400">Custom Integration</h4>
+              <div class="text-2xl font-bold mb-2">$2,499</div>
+              <p class="text-sm text-gray-400 mb-4">setup + $299/month</p>
+              <ul class="text-sm space-y-1">
+                <li>Custom development</li>
+                <li>API integration</li>
+                <li>Ongoing support</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Comparison Table -->
+    <section class="py-16 bg-gray-900/50">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12 text-yellow-400">
+          How We Compare
+        </h2>
+        <div class="overflow-x-auto">
+          <table class="w-full max-w-4xl mx-auto bg-gray-900 rounded-lg border border-gray-800">
+            <thead>
+              <tr class="border-b border-gray-800">
+                <th class="text-left p-4 text-white">Platform</th>
+                <th class="text-left p-4 text-white">Success Fee</th>
+                <th class="text-left p-4 text-white">Listing Fee</th>
+                <th class="text-left p-4 text-white">Syndicate Setup</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-gray-800 bg-yellow-400/10">
+                <td class="p-4 font-bold text-yellow-400">TechFlunky</td>
+                <td class="p-4 text-green-400 font-bold">8%</td>
+                <td class="p-4 text-green-400 font-bold">FREE</td>
+                <td class="p-4 text-green-400 font-bold">$299</td>
+              </tr>
+              <tr class="border-b border-gray-800">
+                <td class="p-4 text-gray-400">AngelList</td>
+                <td class="p-4 text-red-400">5-15%</td>
+                <td class="p-4 text-red-400">Varies</td>
+                <td class="p-4 text-red-400">$8,000</td>
+              </tr>
+              <tr class="border-b border-gray-800">
+                <td class="p-4 text-gray-400">Other Platforms</td>
+                <td class="p-4 text-red-400">10-20%</td>
+                <td class="p-4 text-red-400">$100-$500</td>
+                <td class="p-4 text-red-400">$1,000+</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gradient-to-r from-yellow-400 to-yellow-600">
+      <div class="container mx-auto px-4 text-center">
+        <h2 class="text-4xl font-bold mb-6 text-black">
+          Ready to Save 60% on Fees?
+        </h2>
+        <p class="text-xl text-black mb-8 max-w-2xl mx-auto">
+          Join thousands of entrepreneurs who chose the most cost-effective marketplace platform.
+        </p>
+        <div class="space-x-4">
+          <a href="/signup" class="bg-black hover:bg-gray-800 text-yellow-400 font-bold py-3 px-8 rounded-lg inline-block transition-colors">
+            Start Free Today
+          </a>
+          <a href="/contact" class="border-2 border-black hover:bg-black hover:text-yellow-400 text-black font-bold py-3 px-8 rounded-lg inline-block transition-colors">
+            Talk to Sales
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12 text-yellow-400">
+          Frequently Asked Questions
+        </h2>
+        <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div class="bg-gray-900 p-6 rounded-lg">
+            <h3 class="text-lg font-bold mb-3 text-yellow-400">How does the 8% success fee work?</h3>
+            <p class="text-gray-300">You only pay when you successfully sell your business idea. No upfront costs, no hidden fees. We succeed when you succeed.</p>
+          </div>
+          <div class="bg-gray-900 p-6 rounded-lg">
+            <h3 class="text-lg font-bold mb-3 text-yellow-400">What's included in the free API tier?</h3>
+            <p class="text-gray-300">10,000 API calls and 100 AI analyses per month, plus access to our basic endpoints and community support.</p>
+          </div>
+          <div class="bg-gray-900 p-6 rounded-lg">
+            <h3 class="text-lg font-bold mb-3 text-yellow-400">Can I cancel my subscription anytime?</h3>
+            <p class="text-gray-300">Yes, all subscriptions can be cancelled anytime with no penalties. We offer prorated refunds for annual plans.</p>
+          </div>
+          <div class="bg-gray-900 p-6 rounded-lg">
+            <h3 class="text-lg font-bold mb-3 text-yellow-400">Do you offer custom enterprise solutions?</h3>
+            <p class="text-gray-300">Absolutely! Our enterprise team can create custom solutions, pricing, and SLAs to meet your specific needs.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-black border-t border-yellow-400/20">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <div class="flex items-center space-x-3 mb-4 md:mb-0">
+            <img src="/assets/techflunky-logo.png" alt="TechFlunky" class="w-8 h-8">
+            <span class="text-xl font-bold text-white">TechFlunky</span>
+          </div>
+          <div class="flex items-center space-x-6 text-gray-400">
+            <a href="/about" class="hover:text-yellow-400 transition">About</a>
+            <a href="/contact" class="hover:text-yellow-400 transition">Contact</a>
+            <a href="/terms" class="hover:text-yellow-400 transition">Terms</a>
+            <a href="/privacy" class="hover:text-yellow-400 transition">Privacy</a>
+          </div>
+        </div>
+        <div class="text-center mt-8 pt-8 border-t border-gray-800">
+          <p class="text-gray-400">
+            © 2024 TechFlunky. Connecting builders with entrepreneurs.
+          </p>
+        </div>
+      </div>
+    </footer>
+  </main>
+</Layout>
+
+<style>
+  /* Custom animations for pricing cards */
+  .pricing-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .pricing-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(255, 212, 0, 0.1);
+  }
+</style>

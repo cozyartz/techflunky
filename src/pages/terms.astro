@@ -1,0 +1,447 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Terms of Service - TechFlunky">
+  <main class="min-h-screen bg-black text-white">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm border-b border-yellow-400/20">
+      <div class="container mx-auto px-4 py-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-3">
+            <img src="/assets/techflunky-logo.png" alt="TechFlunky" class="w-10 h-10">
+            <span class="text-xl font-bold text-white">TechFlunky</span>
+          </div>
+          <div class="hidden md:flex items-center space-x-8">
+            <a href="/" class="text-gray-300 hover:text-yellow-400 transition font-medium">Home</a>
+            <a href="/browse" class="text-gray-300 hover:text-yellow-400 transition font-medium">Browse</a>
+            <a href="/invest" class="text-gray-300 hover:text-yellow-400 transition font-medium">Invest</a>
+            <a href="/sell" class="text-gray-300 hover:text-yellow-400 transition font-medium">Sell</a>
+            <a href="/pricing" class="text-gray-300 hover:text-yellow-400 transition font-medium">Pricing</a>
+            <a href="/about" class="text-gray-300 hover:text-yellow-400 transition font-medium">About</a>
+            <a href="/contact" class="bg-yellow-400 text-black px-4 py-2 rounded-lg font-semibold hover:bg-yellow-300 transition">Contact</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Content -->
+    <div class="pt-24 pb-12">
+      <div class="container mx-auto px-4 max-w-4xl">
+        <h1 class="text-4xl font-bold mb-8 text-yellow-400">Terms of Service</h1>
+        <p class="text-gray-300 mb-8 text-lg">
+          <strong>Last Updated:</strong> {new Date().toLocaleDateString()}
+        </p>
+
+        <div class="prose prose-invert prose-yellow max-w-none">
+          <!-- Agreement to Terms -->
+          <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-yellow-400">1. Agreement to Terms</h2>
+            <p class="text-gray-300 mb-4">
+              These Terms of Service ("Terms") constitute a legally binding agreement between you and TechFlunky ("Company," "we," "our," or "us") regarding your use of our marketplace platform for business idea transactions.
+            </p>
+            <p class="text-gray-300 mb-4">
+              By accessing or using TechFlunky, you agree to be bound by these Terms and our Privacy Policy. If you do not agree to these Terms, please do not use our services.
+            </p>
+            <div class="bg-yellow-400/10 border border-yellow-400/30 rounded-lg p-4 mb-6">
+              <p class="text-yellow-200">
+                <strong>Important:</strong> These Terms include provisions for dispute resolution through arbitration and limitations on liability. Please read carefully.
+              </p>
+            </div>
+          </section>
+
+          <!-- Description of Service -->
+          <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-yellow-400">2. Description of Service</h2>
+            <p class="text-gray-300 mb-4">
+              TechFlunky operates a digital marketplace platform that connects entrepreneurs, developers, and investors for the purpose of buying, selling, and investing in business ideas and technology platforms.
+            </p>
+
+            <h3 class="text-xl font-semibold mb-3 text-white">2.1 Core Services</h3>
+            <ul class="list-disc list-inside text-gray-300 mb-6 space-y-2">
+              <li>Business idea marketplace with AI-powered validation</li>
+              <li>Secure transaction processing with 8% success fee</li>
+              <li>Investor syndicate formation and management</li>
+              <li>API access for developers and third-party integrations</li>
+              <li>Premium services including white-label solutions</li>
+              <li>Professional services for due diligence and market analysis</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold mb-3 text-white">2.2 AI Validation Technology</h3>
+            <p class="text-gray-300 mb-4">
+              Our AI system analyzes repository metadata, business models, and market data to provide validation scores and recommendations. We do not access proprietary source code or trade secrets.
+            </p>
+          </section>
+
+          <!-- User Accounts and Eligibility -->
+          <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-yellow-400">3. User Accounts and Eligibility</h2>
+
+            <h3 class="text-xl font-semibold mb-3 text-white">3.1 Account Creation</h3>
+            <ul class="list-disc list-inside text-gray-300 mb-6 space-y-2">
+              <li>You must be at least 18 years old to create an account</li>
+              <li>You must provide accurate and complete information</li>
+              <li>You are responsible for maintaining account security</li>
+              <li>One person or entity may maintain only one account</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold mb-3 text-white">3.2 Identity Verification</h3>
+            <p class="text-gray-300 mb-4">
+              We may require identity verification for certain activities, including:
+            </p>
+            <ul class="list-disc list-inside text-gray-300 mb-6 space-y-2">
+              <li>High-value transactions exceeding $10,000</li>
+              <li>Investor account activation and syndicate participation</li>
+              <li>API access above free tier limits</li>
+              <li>White-label service subscriptions</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold mb-3 text-white">3.3 Prohibited Users</h3>
+            <p class="text-gray-300 mb-4">
+              The following individuals and entities are prohibited from using TechFlunky:
+            </p>
+            <ul class="list-disc list-inside text-gray-300 mb-6 space-y-2">
+              <li>Persons on government sanctions lists</li>
+              <li>Individuals or entities in embargoed countries</li>
+              <li>Those engaged in money laundering or terrorist financing</li>
+              <li>Previously banned users attempting to circumvent restrictions</li>
+            </ul>
+          </section>
+
+          <!-- Marketplace Rules -->
+          <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-yellow-400">4. Marketplace Rules</h2>
+
+            <h3 class="text-xl font-semibold mb-3 text-white">4.1 Seller Obligations</h3>
+            <ul class="list-disc list-inside text-gray-300 mb-6 space-y-2">
+              <li>Provide accurate descriptions of business ideas and technology</li>
+              <li>Disclose material risks, dependencies, and limitations</li>
+              <li>Maintain confidentiality of proprietary information</li>
+              <li>Respond promptly to buyer inquiries and due diligence requests</li>
+              <li>Transfer ownership and provide agreed-upon documentation</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold mb-3 text-white">4.2 Buyer Obligations</h3>
+            <ul class="list-disc list-inside text-gray-300 mb-6 space-y-2">
+              <li>Conduct reasonable due diligence before purchasing</li>
+              <li>Honor payment commitments and transaction terms</li>
+              <li>Respect intellectual property and confidentiality agreements</li>
+              <li>Use acquired assets in accordance with transfer agreements</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold mb-3 text-white">4.3 Prohibited Listings</h3>
+            <p class="text-gray-300 mb-4">The following items are prohibited on our platform:</p>
+            <ul class="list-disc list-inside text-gray-300 mb-6 space-y-2">
+              <li>Illegal businesses or activities violating applicable laws</li>
+              <li>Incomplete or non-functional technology with misleading claims</li>
+              <li>Businesses involving regulated securities without proper registration</li>
+              <li>Ponzi schemes, multi-level marketing, or fraudulent opportunities</li>
+              <li>Adult content, gambling, or controlled substances</li>
+              <li>Stolen intellectual property or copyright-infringing materials</li>
+            </ul>
+          </section>
+
+          <!-- Fees and Payments -->
+          <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-yellow-400">5. Fees and Payments</h2>
+
+            <h3 class="text-xl font-semibold mb-3 text-white">5.1 Success Fee Structure</h3>
+            <div class="bg-gray-900 rounded-lg p-6 border border-gray-800 mb-6">
+              <p class="text-white mb-2"><strong>Marketplace Success Fee: 8%</strong></p>
+              <p class="text-gray-300 mb-2">Applied only to completed transactions</p>
+              <p class="text-gray-300 mb-2">Automatically deducted from gross sale price</p>
+              <p class="text-gray-300">No upfront listing fees or monthly charges</p>
+            </div>
+
+            <h3 class="text-xl font-semibold mb-3 text-white">5.2 Premium Service Fees</h3>
+            <ul class="list-disc list-inside text-gray-300 mb-6 space-y-2">
+              <li><strong>API Access:</strong> $0-$199/month based on usage tier</li>
+              <li><strong>Premium Listing Boost:</strong> $29/month (optional)</li>
+              <li><strong>White-Label Portals:</strong> $499-$999/month</li>
+              <li><strong>Professional Services:</strong> $99-$2,499 per project</li>
+              <li><strong>Priority Support:</strong> $99/month</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold mb-3 text-white">5.3 Payment Processing</h3>
+            <p class="text-gray-300 mb-4">
+              All payments are processed through Stripe Connect. By using our platform, you agree to Stripe's terms of service. We may withhold payments pending investigation of suspected fraud or policy violations.
+            </p>
+
+            <h3 class="text-xl font-semibold mb-3 text-white">5.4 Refund Policy</h3>
+            <ul class="list-disc list-inside text-gray-300 mb-6 space-y-2">
+              <li>Success fees are non-refundable after transaction completion</li>
+              <li>Subscription services may be refunded within 7 days</li>
+              <li>Professional services are refundable if not delivered as promised</li>
+              <li>Disputed transactions are handled through our mediation process</li>
+            </ul>
+          </section>
+
+          <!-- Intellectual Property -->
+          <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-yellow-400">6. Intellectual Property</h2>
+
+            <h3 class="text-xl font-semibold mb-3 text-white">6.1 Platform Rights</h3>
+            <p class="text-gray-300 mb-4">
+              TechFlunky and its original content, features, and functionality are owned by the Company and protected by international copyright, trademark, and other intellectual property laws.
+            </p>
+
+            <h3 class="text-xl font-semibold mb-3 text-white">6.2 User Content License</h3>
+            <p class="text-gray-300 mb-4">
+              By posting content on TechFlunky, you grant us a non-exclusive, worldwide, royalty-free license to use, display, and distribute your content for platform operations, subject to these limitations:
+            </p>
+            <ul class="list-disc list-inside text-gray-300 mb-6 space-y-2">
+              <li>We will not access or distribute proprietary source code</li>
+              <li>Business listings may be indexed for search and discovery</li>
+              <li>Anonymized data may be used for market analysis</li>
+              <li>You retain all ownership rights to your intellectual property</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold mb-3 text-white">6.3 DMCA Compliance</h3>
+            <p class="text-gray-300 mb-4">
+              We respect intellectual property rights and respond to valid DMCA takedown notices. To report copyright infringement, contact us at <a href="mailto:dmca@techflunky.io" class="text-yellow-400 hover:text-yellow-300">dmca@techflunky.io</a>.
+            </p>
+          </section>
+
+          <!-- Privacy and Data Protection -->
+          <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-yellow-400">7. Privacy and Data Protection</h2>
+            <p class="text-gray-300 mb-4">
+              Your privacy is important to us. Our collection, use, and sharing of personal information is governed by our Privacy Policy, which is incorporated into these Terms by reference.
+            </p>
+
+            <h3 class="text-xl font-semibold mb-3 text-white">7.1 Data Security Commitments</h3>
+            <ul class="list-disc list-inside text-gray-300 mb-6 space-y-2">
+              <li>AES-256 encryption for sensitive data</li>
+              <li>Multi-tenant isolation for business accounts</li>
+              <li>Regular security audits and compliance monitoring</li>
+              <li>Incident response procedures for data breaches</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold mb-3 text-white">7.2 Trade Secret Protection</h3>
+            <p class="text-gray-300 mb-4">
+              We implement technical and procedural safeguards to protect your proprietary information, including encrypted storage, access controls, and employee confidentiality agreements.
+            </p>
+          </section>
+
+          <!-- Prohibited Conduct -->
+          <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-yellow-400">8. Prohibited Conduct</h2>
+            <p class="text-gray-300 mb-4">You agree not to:</p>
+            <ul class="list-disc list-inside text-gray-300 mb-6 space-y-2">
+              <li>Violate any applicable laws or regulations</li>
+              <li>Infringe on intellectual property rights of others</li>
+              <li>Post false, misleading, or deceptive content</li>
+              <li>Attempt to manipulate AI validation scores</li>
+              <li>Circumvent security measures or access controls</li>
+              <li>Use automated systems to scrape or harvest data</li>
+              <li>Engage in money laundering or terrorist financing</li>
+              <li>Create multiple accounts to evade restrictions</li>
+              <li>Interfere with platform operations or other users</li>
+              <li>Reverse engineer or attempt to extract source code</li>
+            </ul>
+          </section>
+
+          <!-- Termination -->
+          <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-yellow-400">9. Account Termination</h2>
+
+            <h3 class="text-xl font-semibold mb-3 text-white">9.1 Termination by User</h3>
+            <p class="text-gray-300 mb-4">
+              You may terminate your account at any time by contacting us or using account deletion tools in your settings. Termination does not affect completed transactions or ongoing obligations.
+            </p>
+
+            <h3 class="text-xl font-semibold mb-3 text-white">9.2 Termination by Company</h3>
+            <p class="text-gray-300 mb-4">
+              We may suspend or terminate accounts for:
+            </p>
+            <ul class="list-disc list-inside text-gray-300 mb-6 space-y-2">
+              <li>Violation of these Terms or our policies</li>
+              <li>Suspected fraud or illegal activity</li>
+              <li>Failure to pay fees or chargebacks</li>
+              <li>Prolonged inactivity (over 2 years)</li>
+              <li>Government orders or legal requirements</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold mb-3 text-white">9.3 Effect of Termination</h3>
+            <p class="text-gray-300 mb-4">
+              Upon termination, your access to the platform ceases, but these Terms continue to apply to past transactions and activities.
+            </p>
+          </section>
+
+          <!-- Disclaimers and Warranties -->
+          <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-yellow-400">10. Disclaimers and Warranties</h2>
+
+            <h3 class="text-xl font-semibold mb-3 text-white">10.1 Platform Disclaimers</h3>
+            <div class="bg-red-900/20 border border-red-500/30 rounded-lg p-4 mb-6">
+              <p class="text-red-200 mb-2">
+                <strong>IMPORTANT DISCLAIMER:</strong>
+              </p>
+              <p class="text-red-200">
+                TECHFLUNKY IS PROVIDED "AS IS" WITHOUT WARRANTIES OF ANY KIND. WE DO NOT GUARANTEE THE ACCURACY OF AI VALIDATIONS, SUCCESS OF BUSINESS IDEAS, OR INVESTMENT RETURNS.
+              </p>
+            </div>
+
+            <h3 class="text-xl font-semibold mb-3 text-white">10.2 Investment Risks</h3>
+            <ul class="list-disc list-inside text-gray-300 mb-6 space-y-2">
+              <li>All investments carry risk of loss</li>
+              <li>Past performance does not predict future results</li>
+              <li>Business ideas may fail despite validation</li>
+              <li>Market conditions may change unexpectedly</li>
+              <li>Regulatory changes may affect business viability</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold mb-3 text-white">10.3 AI Validation Limitations</h3>
+            <p class="text-gray-300 mb-4">
+              Our AI validation system provides analysis based on available data but cannot guarantee business success. Users should conduct independent due diligence and seek professional advice.
+            </p>
+          </section>
+
+          <!-- Limitation of Liability -->
+          <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-yellow-400">11. Limitation of Liability</h2>
+            <div class="bg-red-900/20 border border-red-500/30 rounded-lg p-4 mb-6">
+              <p class="text-red-200 mb-2">
+                <strong>LIABILITY LIMITATIONS:</strong>
+              </p>
+              <p class="text-red-200 mb-2">
+                TO THE MAXIMUM EXTENT PERMITTED BY LAW, TECHFLUNKY'S TOTAL LIABILITY SHALL NOT EXCEED THE FEES PAID BY YOU IN THE 12 MONTHS PRECEDING THE CLAIM.
+              </p>
+              <p class="text-red-200">
+                WE ARE NOT LIABLE FOR INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING LOST PROFITS OR BUSINESS OPPORTUNITIES.
+              </p>
+            </div>
+
+            <h3 class="text-xl font-semibold mb-3 text-white">11.1 Specific Exclusions</h3>
+            <p class="text-gray-300 mb-4">We are not liable for:</p>
+            <ul class="list-disc list-inside text-gray-300 mb-6 space-y-2">
+              <li>Investment losses or failed business ventures</li>
+              <li>Third-party actions or breaches of contract</li>
+              <li>Data loss due to user error or system failures</li>
+              <li>Business interruption or lost revenue</li>
+              <li>Regulatory changes affecting user businesses</li>
+            </ul>
+          </section>
+
+          <!-- Indemnification -->
+          <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-yellow-400">12. Indemnification</h2>
+            <p class="text-gray-300 mb-4">
+              You agree to indemnify and hold harmless TechFlunky, its officers, directors, employees, and agents from any claims, damages, or expenses arising from:
+            </p>
+            <ul class="list-disc list-inside text-gray-300 mb-6 space-y-2">
+              <li>Your violation of these Terms or applicable laws</li>
+              <li>Your content or business listings on the platform</li>
+              <li>Your transactions with other users</li>
+              <li>Infringement of third-party intellectual property rights</li>
+              <li>Misuse of platform features or API access</li>
+            </ul>
+          </section>
+
+          <!-- Dispute Resolution -->
+          <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-yellow-400">13. Dispute Resolution</h2>
+
+            <h3 class="text-xl font-semibold mb-3 text-white">13.1 Internal Resolution</h3>
+            <p class="text-gray-300 mb-4">
+              We encourage users to resolve disputes through our internal mediation process before pursuing external remedies. Contact our support team to initiate dispute resolution.
+            </p>
+
+            <h3 class="text-xl font-semibold mb-3 text-white">13.2 Binding Arbitration</h3>
+            <div class="bg-yellow-400/10 border border-yellow-400/30 rounded-lg p-4 mb-6">
+              <p class="text-yellow-200 mb-2">
+                <strong>ARBITRATION AGREEMENT:</strong>
+              </p>
+              <p class="text-yellow-200">
+                Disputes not resolved internally shall be settled through binding arbitration under the American Arbitration Association rules. You waive the right to jury trial and class action participation.
+              </p>
+            </div>
+
+            <h3 class="text-xl font-semibold mb-3 text-white">13.3 Exceptions</h3>
+            <p class="text-gray-300 mb-4">
+              The following disputes are excluded from arbitration:
+            </p>
+            <ul class="list-disc list-inside text-gray-300 mb-6 space-y-2">
+              <li>Intellectual property infringement claims</li>
+              <li>Small claims court matters under jurisdictional limits</li>
+              <li>Injunctive relief for Terms violations</li>
+              <li>Government enforcement actions</li>
+            </ul>
+          </section>
+
+          <!-- Governing Law -->
+          <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-yellow-400">14. Governing Law</h2>
+            <p class="text-gray-300 mb-4">
+              These Terms are governed by and construed in accordance with the laws of [Jurisdiction], without regard to conflict of law principles.
+            </p>
+            <p class="text-gray-300 mb-4">
+              For international users, local laws may also apply, particularly regarding consumer protection, data privacy, and financial regulations.
+            </p>
+          </section>
+
+          <!-- Changes to Terms -->
+          <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-yellow-400">15. Changes to Terms</h2>
+            <p class="text-gray-300 mb-4">
+              We may modify these Terms periodically. Material changes will be communicated through:
+            </p>
+            <ul class="list-disc list-inside text-gray-300 mb-6 space-y-2">
+              <li>Email notifications to registered users</li>
+              <li>Prominent platform notices</li>
+              <li>Updated Terms posted on our website</li>
+            </ul>
+            <p class="text-gray-300 mb-4">
+              Continued use after changes constitutes acceptance. If you disagree with modifications, you may terminate your account.
+            </p>
+          </section>
+
+          <!-- Contact Information -->
+          <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-yellow-400">16. Contact Information</h2>
+            <p class="text-gray-300 mb-4">
+              For questions about these Terms, please contact us:
+            </p>
+            <div class="bg-gray-900 rounded-lg p-6 border border-gray-800">
+              <p class="text-white mb-2"><strong>TechFlunky Legal Team</strong></p>
+              <p class="text-gray-300 mb-2">Email: <a href="mailto:legal@techflunky.io" class="text-yellow-400 hover:text-yellow-300">legal@techflunky.io</a></p>
+              <p class="text-gray-300 mb-2">Address: [Company Address]</p>
+              <p class="text-gray-300">Business Hours: Monday-Friday, 9 AM - 5 PM EST</p>
+            </div>
+          </section>
+
+          <!-- Severability -->
+          <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-yellow-400">17. Severability and Entire Agreement</h2>
+            <p class="text-gray-300 mb-4">
+              If any provision of these Terms is found unenforceable, the remaining provisions shall remain in full force and effect.
+            </p>
+            <p class="text-gray-300 mb-4">
+              These Terms, together with our Privacy Policy and any additional agreements, constitute the entire agreement between you and TechFlunky regarding your use of our services.
+            </p>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-gray-800 py-8">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <div class="flex items-center space-x-3 mb-4 md:mb-0">
+            <img src="/assets/techflunky-logo.png" alt="TechFlunky" class="w-8 h-8">
+            <span class="text-lg font-bold text-white">TechFlunky</span>
+          </div>
+          <div class="flex space-x-6 text-sm">
+            <a href="/privacy" class="text-gray-400 hover:text-yellow-400 transition">Privacy Policy</a>
+            <a href="/terms" class="text-yellow-400 font-medium">Terms of Service</a>
+            <a href="/contact" class="text-gray-400 hover:text-yellow-400 transition">Contact</a>
+          </div>
+        </div>
+        <div class="mt-4 pt-4 border-t border-gray-800 text-center text-gray-400 text-sm">
+          <p>&copy; {new Date().getFullYear()} TechFlunky. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </main>
+</Layout>

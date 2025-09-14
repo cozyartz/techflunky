@@ -1,0 +1,294 @@
+---
+// Cookie Consent Component for TechFlunky
+---
+
+<div id="cookie-consent" class="fixed bottom-0 left-0 right-0 z-50 bg-black/95 backdrop-blur-sm border-t border-yellow-400/20 p-4 transform translate-y-full transition-transform duration-300" data-show="false">
+  <div class="container mx-auto max-w-6xl">
+    <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div class="flex-1">
+        <h3 class="text-white font-semibold mb-2">Cookie Preferences</h3>
+        <p class="text-gray-300 text-sm leading-relaxed">
+          We use cookies to enhance your browsing experience, provide personalized content, analyze site traffic, and improve our marketplace services.
+          By clicking "Accept All", you consent to our use of cookies. You can manage your preferences or learn more in our
+          <a href="/privacy" class="text-yellow-400 hover:text-yellow-300 underline">Privacy Policy</a>.
+        </p>
+      </div>
+      <div class="flex flex-wrap gap-3 items-center">
+        <button
+          id="manage-cookies"
+          class="px-4 py-2 bg-transparent border border-gray-600 text-gray-300 rounded-lg hover:border-yellow-400 hover:text-yellow-400 transition-colors text-sm font-medium"
+        >
+          Manage Preferences
+        </button>
+        <button
+          id="accept-necessary"
+          class="px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors text-sm font-medium"
+        >
+          Accept Necessary
+        </button>
+        <button
+          id="accept-all"
+          class="px-6 py-2 bg-yellow-400 text-black rounded-lg hover:bg-yellow-300 transition-colors text-sm font-semibold"
+        >
+          Accept All
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Cookie Preferences Modal -->
+<div id="cookie-preferences-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm">
+  <div class="flex items-center justify-center min-h-screen p-4">
+    <div class="bg-black border border-yellow-400/20 rounded-lg max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+      <div class="p-6">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-xl font-bold text-white">Cookie Preferences</h2>
+          <button id="close-preferences" class="text-gray-400 hover:text-white transition-colors">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+
+        <div class="space-y-6">
+          <!-- Essential Cookies -->
+          <div class="border-b border-gray-800 pb-4">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="font-semibold text-white">Essential Cookies</h3>
+              <div class="flex items-center">
+                <span class="text-sm text-gray-400 mr-2">Always Active</span>
+                <div class="w-10 h-6 bg-yellow-400 rounded-full relative">
+                  <div class="w-4 h-4 bg-black rounded-full absolute right-1 top-1"></div>
+                </div>
+              </div>
+            </div>
+            <p class="text-sm text-gray-300">
+              These cookies are necessary for the website to function and cannot be disabled. They include authentication, security, and basic functionality cookies.
+            </p>
+          </div>
+
+          <!-- Analytics Cookies -->
+          <div class="border-b border-gray-800 pb-4">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="font-semibold text-white">Analytics Cookies</h3>
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" id="analytics-toggle" class="sr-only peer">
+                <div class="w-10 h-6 bg-gray-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-1 after:left-1 after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-yellow-400"></div>
+              </label>
+            </div>
+            <p class="text-sm text-gray-300">
+              Help us improve our marketplace by allowing us to analyze how visitors interact with our site. This includes page views, click tracking, and performance metrics.
+            </p>
+          </div>
+
+          <!-- Marketing Cookies -->
+          <div class="border-b border-gray-800 pb-4">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="font-semibold text-white">Marketing Cookies</h3>
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" id="marketing-toggle" class="sr-only peer">
+                <div class="w-10 h-6 bg-gray-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-1 after:left-1 after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-yellow-400"></div>
+              </label>
+            </div>
+            <p class="text-sm text-gray-300">
+              Enable personalized advertising and track the effectiveness of our marketing campaigns. These cookies help us show you relevant content and measure ad performance.
+            </p>
+          </div>
+
+          <!-- Functionality Cookies -->
+          <div class="pb-4">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="font-semibold text-white">Functionality Cookies</h3>
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" id="functionality-toggle" class="sr-only peer">
+                <div class="w-10 h-6 bg-gray-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-1 after:left-1 after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-yellow-400"></div>
+              </label>
+            </div>
+            <p class="text-sm text-gray-300">
+              Remember your preferences and settings to provide a more personalized experience, such as language preferences, saved searches, and user interface customizations.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex gap-3 mt-6 pt-4 border-t border-gray-800">
+          <button id="save-preferences" class="flex-1 bg-yellow-400 text-black py-2 px-4 rounded-lg hover:bg-yellow-300 transition-colors font-semibold">
+            Save Preferences
+          </button>
+          <button id="accept-all-modal" class="flex-1 bg-gray-800 text-white py-2 px-4 rounded-lg hover:bg-gray-700 transition-colors font-medium">
+            Accept All
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Cookie Consent Management System
+  class CookieConsent {
+    constructor() {
+      this.consentKey = 'techflunky_cookie_consent';
+      this.init();
+    }
+
+    init() {
+      // Check if consent has already been given
+      if (!this.hasConsent()) {
+        this.showBanner();
+      }
+
+      // Event listeners
+      this.attachEventListeners();
+    }
+
+    hasConsent() {
+      return localStorage.getItem(this.consentKey) !== null;
+    }
+
+    showBanner() {
+      const banner = document.getElementById('cookie-consent');
+      if (banner) {
+        banner.dataset.show = 'true';
+        banner.style.transform = 'translateY(0)';
+      }
+    }
+
+    hideBanner() {
+      const banner = document.getElementById('cookie-consent');
+      if (banner) {
+        banner.dataset.show = 'false';
+        banner.style.transform = 'translateY(100%)';
+      }
+    }
+
+    saveConsent(preferences) {
+      localStorage.setItem(this.consentKey, JSON.stringify({
+        timestamp: Date.now(),
+        preferences: preferences
+      }));
+      this.hideBanner();
+      this.applyCookieSettings(preferences);
+    }
+
+    applyCookieSettings(preferences) {
+      // Apply analytics cookies
+      if (preferences.analytics) {
+        // Initialize analytics (Google Analytics, etc.)
+        console.log('Analytics cookies enabled');
+        this.loadAnalytics();
+      }
+
+      // Apply marketing cookies
+      if (preferences.marketing) {
+        // Initialize marketing pixels, ad tracking, etc.
+        console.log('Marketing cookies enabled');
+        this.loadMarketing();
+      }
+
+      // Apply functionality cookies
+      if (preferences.functionality) {
+        // Enable enhanced functionality
+        console.log('Functionality cookies enabled');
+        this.loadFunctionality();
+      }
+    }
+
+    loadAnalytics() {
+      // Placeholder for analytics initialization
+      // Example: Google Analytics, Mixpanel, etc.
+      if (typeof gtag !== 'undefined') {
+        gtag('consent', 'update', {
+          'analytics_storage': 'granted'
+        });
+      }
+    }
+
+    loadMarketing() {
+      // Placeholder for marketing tools initialization
+      // Example: Facebook Pixel, Google Ads, etc.
+      if (typeof gtag !== 'undefined') {
+        gtag('consent', 'update', {
+          'ad_storage': 'granted'
+        });
+      }
+    }
+
+    loadFunctionality() {
+      // Placeholder for functionality enhancements
+      // Example: User preferences, saved searches, etc.
+      console.log('Enhanced functionality loaded');
+    }
+
+    attachEventListeners() {
+      // Accept all cookies
+      document.getElementById('accept-all')?.addEventListener('click', () => {
+        this.saveConsent({
+          necessary: true,
+          analytics: true,
+          marketing: true,
+          functionality: true
+        });
+      });
+
+      // Accept only necessary cookies
+      document.getElementById('accept-necessary')?.addEventListener('click', () => {
+        this.saveConsent({
+          necessary: true,
+          analytics: false,
+          marketing: false,
+          functionality: false
+        });
+      });
+
+      // Show preferences modal
+      document.getElementById('manage-cookies')?.addEventListener('click', () => {
+        document.getElementById('cookie-preferences-modal').classList.remove('hidden');
+      });
+
+      // Close preferences modal
+      document.getElementById('close-preferences')?.addEventListener('click', () => {
+        document.getElementById('cookie-preferences-modal').classList.add('hidden');
+      });
+
+      // Save custom preferences
+      document.getElementById('save-preferences')?.addEventListener('click', () => {
+        const analytics = document.getElementById('analytics-toggle').checked;
+        const marketing = document.getElementById('marketing-toggle').checked;
+        const functionality = document.getElementById('functionality-toggle').checked;
+
+        this.saveConsent({
+          necessary: true,
+          analytics: analytics,
+          marketing: marketing,
+          functionality: functionality
+        });
+
+        document.getElementById('cookie-preferences-modal').classList.add('hidden');
+      });
+
+      // Accept all from modal
+      document.getElementById('accept-all-modal')?.addEventListener('click', () => {
+        this.saveConsent({
+          necessary: true,
+          analytics: true,
+          marketing: true,
+          functionality: true
+        });
+        document.getElementById('cookie-preferences-modal').classList.add('hidden');
+      });
+
+      // Close modal when clicking outside
+      document.getElementById('cookie-preferences-modal')?.addEventListener('click', (e) => {
+        if (e.target.id === 'cookie-preferences-modal') {
+          document.getElementById('cookie-preferences-modal').classList.add('hidden');
+        }
+      });
+    }
+  }
+
+  // Initialize cookie consent when DOM is loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    new CookieConsent();
+  });
+</script>

@@ -1,0 +1,532 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { BentoGrid, BentoBox } from '../components/bento/BentoGridMotion';
+import { IdeaPreview } from '../components/bento/FeatureCard';
+---
+
+<Layout title="Browse Business Platforms - TechFlunky">
+  <main class="min-h-screen bg-black">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm border-b border-yellow-400/20">
+      <div class="container mx-auto px-4 py-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-3">
+            <img src="/assets/techflunky-logo.png" alt="TechFlunky" class="w-10 h-10">
+            <span class="text-xl font-bold text-white">TechFlunky</span>
+          </div>
+          <div class="hidden md:flex items-center space-x-8">
+            <a href="/" class="text-gray-300 hover:text-yellow-400 transition font-medium">Home</a>
+            <a href="/browse" class="text-yellow-400 font-medium">Browse</a>
+            <a href="/invest" class="text-gray-300 hover:text-yellow-400 transition font-medium">Invest</a>
+            <a href="/sell" class="text-gray-300 hover:text-yellow-400 transition font-medium">Sell</a>
+            <a href="/pricing" class="text-gray-300 hover:text-yellow-400 transition font-medium">Pricing</a>
+            <a href="/about" class="text-gray-300 hover:text-yellow-400 transition font-medium">About</a>
+            <a href="/contact" class="bg-yellow-400 text-black px-4 py-2 rounded-lg font-semibold hover:bg-yellow-300 transition">Contact</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Header -->
+    <section class="relative min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white overflow-hidden flex items-center">
+      <!-- Subtle grid pattern -->
+      <div class="absolute inset-0 opacity-5">
+        <div class="h-full w-full bg-grid-pattern"></div>
+      </div>
+
+      <div class="container mx-auto px-4 relative z-10 pt-24">
+        <div class="max-w-4xl mx-auto text-center">
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-black leading-tight mb-6 animate-slide-up">
+            <span class="block text-white">Browse Complete</span>
+            <span class="block text-yellow-400">Business Platforms</span>
+          </h1>
+          <p class="text-xl md:text-2xl text-gray-300 mb-8 animate-slide-up" style="animation-delay: 0.1s">
+            Production-ready codebases with full documentation — built by developers, validated by the market.
+          </p>
+
+          <!-- Search and Filter Bar -->
+          <div class="bg-black/50 backdrop-blur-sm rounded-xl p-6 mt-8 border border-yellow-400/20 animate-slide-up" style="animation-delay: 0.2s">
+            <div class="flex flex-col md:flex-row gap-4">
+              <input
+                type="text"
+                placeholder="Search platforms..."
+                class="flex-grow px-4 py-3 rounded-lg bg-gray-900/50 backdrop-blur-sm border border-yellow-400/30 text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400/60 focus:bg-gray-900/70"
+              />
+              <select class="px-4 py-3 rounded-lg bg-gray-900/50 backdrop-blur-sm border border-yellow-400/30 text-white focus:outline-none focus:border-yellow-400/60">
+                <option value="">All Categories</option>
+                <option value="hr-compliance">HR Compliance (1)</option>
+                <option value="legal-saas">Legal SaaS</option>
+                <option value="ai-tools">AI Tools</option>
+                <option value="coming-soon" disabled>More Categories Coming...</option>
+              </select>
+              <select class="px-4 py-3 rounded-lg bg-gray-900/50 backdrop-blur-sm border border-yellow-400/30 text-white focus:outline-none focus:border-yellow-400/60">
+                <option value="">Price Range</option>
+                <option value="0-15000">Under $15K</option>
+                <option value="15000-35000">$15K - $35K</option>
+                <option value="35000+">$35K+</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <svg class="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+        </svg>
+      </div>
+    </section>
+
+    <!-- Platforms Grid -->
+    <section class="py-24 bg-gradient-to-br from-black to-gray-900">
+      <div class="container mx-auto px-4">
+        <BentoGrid client:load>
+          <!-- Featured Platform -->
+          <BentoBox
+            size="large"
+            className="lg:col-span-6 lg:row-span-3 bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm border-yellow-400/20 hover:border-yellow-400/40"
+            gradient={true}
+            data-platform="hr-compliance"
+            data-category="hr-compliance"
+            data-price="35000"
+          >
+            <div class="h-full flex flex-col text-white">
+              <div class="flex items-center gap-3 mb-4">
+                <span class="bg-yellow-400/20 text-yellow-400 px-3 py-1 rounded-full text-sm font-semibold">🔥 FEATURED</span>
+                <span class="text-green-400 font-semibold">Available Now</span>
+              </div>
+
+              <h3 class="text-2xl md:text-3xl font-bold text-white mb-3">AI-Powered HR Compliance Platform</h3>
+              <p class="text-gray-300 mb-4 flex-grow">Complete multi-state leave administration system with automated compliance tracking. Built on modern Cloudflare infrastructure with AI automation.</p>
+
+              <div class="grid grid-cols-2 gap-3 mb-4">
+                <div class="bg-black/50 rounded-lg p-3 border border-yellow-400/10">
+                  <div class="text-sm text-yellow-400 font-medium">Market Size</div>
+                  <div class="text-lg font-bold text-white">$800M+</div>
+                </div>
+                <div class="bg-black/50 rounded-lg p-3 border border-yellow-400/10">
+                  <div class="text-sm text-yellow-400 font-medium">Profit Margin</div>
+                  <div class="text-lg font-bold text-white">95%</div>
+                </div>
+              </div>
+
+              <div class="flex justify-between items-center mt-auto">
+                <div>
+                  <div class="text-sm text-gray-400">Complete Package</div>
+                  <span class="text-3xl font-bold text-yellow-400">$35,000</span>
+                </div>
+                <a href="/listing/ai-hr-leave-administration-platform" class="bg-yellow-400 text-black px-6 py-3 rounded-lg font-semibold hover:bg-yellow-300 transition">
+                  View Details
+                </a>
+              </div>
+            </div>
+          </BentoBox>
+
+          <!-- Coming Soon Projects -->
+          <BentoBox
+            size="medium"
+            className="lg:col-span-3 lg:row-span-2 bg-gray-900/30 backdrop-blur-sm border-2 border-dashed border-yellow-400/20 hover:border-yellow-400/40"
+            data-platform="lms"
+            data-category="ai-tools"
+            data-price="25000"
+          >
+            <div class="h-full flex flex-col items-center justify-center text-center p-4">
+              <div class="text-3xl mb-3">🎓</div>
+              <h3 class="text-lg font-bold text-white mb-2">Learning Management System</h3>
+              <p class="text-sm text-gray-300 mb-3 flex-grow">Complete LMS with AI tutoring, progress tracking, and multi-tenant architecture. Built with Next.js.</p>
+              <span class="text-sm text-yellow-400 font-semibold">Documentation in Progress</span>
+            </div>
+          </BentoBox>
+
+          <BentoBox
+            size="medium"
+            className="lg:col-span-3 lg:row-span-2 bg-gray-900/30 backdrop-blur-sm border-2 border-dashed border-yellow-400/20 hover:border-yellow-400/40"
+            data-platform="marketplace"
+            data-category="legal-saas"
+            data-price="30000"
+          >
+            <div class="h-full flex flex-col items-center justify-center text-center p-4">
+              <div class="text-3xl mb-3">🛒</div>
+              <h3 class="text-lg font-bold text-white mb-2">Multi-Vendor Marketplace</h3>
+              <p class="text-sm text-gray-300 mb-3 flex-grow">Complete e-commerce platform with vendor management, Stripe integration, and order fulfillment.</p>
+              <span class="text-sm text-yellow-400 font-semibold">Being Packaged</span>
+            </div>
+          </BentoBox>
+
+          <BentoBox
+            size="medium"
+            className="lg:col-span-3 lg:row-span-2 bg-gray-900/30 backdrop-blur-sm border-2 border-dashed border-yellow-400/20 hover:border-yellow-400/40"
+            data-platform="ai-images"
+            data-category="ai-tools"
+            data-price="20000"
+          >
+            <div class="h-full flex flex-col items-center justify-center text-center p-4">
+              <div class="text-3xl mb-3">🤖</div>
+              <h3 class="text-lg font-bold text-white mb-2">AI Image Generation</h3>
+              <p class="text-sm text-gray-300 mb-3 flex-grow">Lifestyle image generation platform with Cloudflare AI. Automated content creation at scale.</p>
+              <span class="text-sm text-yellow-400 font-semibold">Documentation Needed</span>
+            </div>
+          </BentoBox>
+
+          <BentoBox
+            size="medium"
+            className="lg:col-span-3 lg:row-span-2 bg-gray-900/30 backdrop-blur-sm border-2 border-dashed border-yellow-400/20 hover:border-yellow-400/40"
+            data-platform="crm"
+            data-category="legal-saas"
+            data-price="18000"
+          >
+            <div class="h-full flex flex-col items-center justify-center text-center p-4">
+              <div class="text-3xl mb-3">📊</div>
+              <h3 class="text-lg font-bold text-white mb-2">CRM Platform</h3>
+              <p class="text-sm text-gray-300 mb-3 flex-grow">Customer relationship management with pipeline tracking, email automation, and reporting.</p>
+              <span class="text-sm text-yellow-400 font-semibold">Code Review in Progress</span>
+            </div>
+          </BentoBox>
+
+          <BentoBox
+            size="wide"
+            className="lg:col-span-6 lg:row-span-2 bg-gradient-to-br from-yellow-400/10 to-yellow-400/5 backdrop-blur-sm border-yellow-400/20"
+            gradient={true}
+            data-platform="custom"
+            data-category=""
+            data-price="0"
+          >
+            <div class="h-full flex flex-col items-center justify-center text-center p-6">
+              <div class="text-4xl mb-4">📋</div>
+              <h3 class="text-xl font-bold text-white mb-3">30+ Complete Projects in Development</h3>
+              <p class="text-gray-300 mb-4 flex-grow">Each platform represents 12-18 months of development work. I'm systematically documenting and packaging them for entrepreneurs who want to skip the development phase.</p>
+              <p class="text-sm text-yellow-400 font-medium">Building this marketplace one validated project at a time →</p>
+            </div>
+          </BentoBox>
+
+          <BentoBox
+            size="small"
+            className="lg:col-span-2 lg:row-span-1 bg-gradient-to-br from-gray-900/50 to-black/50 border-yellow-400/20"
+            gradient={true}
+          >
+            <div class="text-center h-full flex flex-col justify-center">
+              <h4 class="font-bold text-lg mb-2 text-white">Real Projects</h4>
+              <p class="text-sm text-gray-300">1 listed, 30+ being documented</p>
+            </div>
+          </BentoBox>
+
+          <!-- Load More Section -->
+          <BentoBox
+            size="wide"
+            className="lg:col-span-6 lg:row-span-1 bg-gradient-to-r from-yellow-400/20 to-yellow-400/10 border-yellow-400/30"
+            gradient={true}
+          >
+            <div class="flex items-center justify-between h-full">
+              <div>
+                <h4 class="font-bold text-lg text-white">Ready to find your next big opportunity?</h4>
+                <p class="text-gray-300">Get notified when new platforms are available</p>
+              </div>
+              <a href="/signup" class="bg-yellow-400 text-black px-6 py-3 rounded-lg font-semibold hover:bg-yellow-300 transition">
+                Get Notified
+              </a>
+            </div>
+          </BentoBox>
+        </BentoGrid>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 bg-gradient-to-br from-gray-900 via-black to-gray-900">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto text-center">
+          <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white leading-tight">
+            Ready to Launch Your Next <span class="text-yellow-400">Business</span>?
+          </h2>
+          <p class="text-xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed">
+            Skip 18+ months of development and launch with a proven, market-validated platform
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+            <a href="/listing/ai-hr-leave-administration-platform" class="group bg-yellow-400 text-black px-10 py-4 rounded-xl font-bold text-lg hover:bg-yellow-300 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
+              <span class="flex items-center gap-3">
+                View Featured Platform
+                <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                </svg>
+              </span>
+            </a>
+
+            <div class="text-gray-400 font-medium">or</div>
+
+            <a href="/signup" class="group bg-transparent border-2 border-yellow-400 text-yellow-400 px-10 py-4 rounded-xl font-bold text-lg hover:bg-yellow-400 hover:text-black transition-all duration-300 transform hover:scale-105">
+              <span class="flex items-center gap-3">
+                Get Notified
+                <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5-5-5h5v-12"/>
+                </svg>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-black border-t border-yellow-400/20">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <div class="flex items-center space-x-3 mb-4 md:mb-0">
+            <img src="/assets/techflunky-logo.png" alt="TechFlunky" class="w-8 h-8">
+            <span class="text-xl font-bold text-white">TechFlunky</span>
+          </div>
+
+          <div class="flex items-center space-x-6 text-gray-400">
+            <a href="/about" class="hover:text-yellow-400 transition">About</a>
+            <a href="/contact" class="hover:text-yellow-400 transition">Contact</a>
+            <a href="/terms" class="hover:text-yellow-400 transition">Terms</a>
+            <a href="/privacy" class="hover:text-yellow-400 transition">Privacy</a>
+          </div>
+        </div>
+
+        <div class="text-center mt-8 pt-8 border-t border-gray-800">
+          <p class="text-gray-400">
+            © 2024 TechFlunky. Connecting builders with entrepreneurs.
+          </p>
+        </div>
+      </div>
+    </footer>
+  </main>
+</Layout>
+
+<script>
+  // Modern intersection observer for scroll animations
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, observerOptions);
+
+  // Observe elements when DOM is loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.scroll-fade').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Initialize search and filter functionality
+    initializeBrowseFunctionality();
+  });
+
+  // Browse page search and filter functionality
+  function initializeBrowseFunctionality() {
+    const searchInput = document.querySelector('input[placeholder="Search platforms..."]');
+    const categorySelect = document.querySelector('select').nextElementSibling ? document.querySelector('select') : null;
+    const priceSelect = document.querySelectorAll('select')[1];
+    const platformCards = document.querySelectorAll('[data-platform]');
+
+    // Search functionality
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        filterPlatforms(searchTerm, getSelectedCategory(), getSelectedPriceRange());
+      });
+    }
+
+    // Category filter
+    if (categorySelect) {
+      categorySelect.addEventListener('change', () => {
+        const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+        filterPlatforms(searchTerm, getSelectedCategory(), getSelectedPriceRange());
+      });
+    }
+
+    // Price filter
+    if (priceSelect) {
+      priceSelect.addEventListener('change', () => {
+        const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+        filterPlatforms(searchTerm, getSelectedCategory(), getSelectedPriceRange());
+      });
+    }
+
+    function getSelectedCategory() {
+      return categorySelect ? categorySelect.value : '';
+    }
+
+    function getSelectedPriceRange() {
+      return priceSelect ? priceSelect.value : '';
+    }
+
+    function filterPlatforms(searchTerm, category, priceRange) {
+      const platformCards = document.querySelectorAll('[data-platform], .bento-box');
+      let visibleCount = 0;
+
+      platformCards.forEach(card => {
+        const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
+        const description = card.querySelector('p')?.textContent.toLowerCase() || '';
+        const cardCategory = card.dataset.category || '';
+        const cardPrice = parseInt(card.dataset.price) || 0;
+
+        const matchesSearch = !searchTerm || title.includes(searchTerm) || description.includes(searchTerm);
+        const matchesCategory = !category || cardCategory === category;
+        const matchesPrice = checkPriceRange(cardPrice, priceRange);
+
+        if (matchesSearch && matchesCategory && matchesPrice) {
+          card.style.display = '';
+          card.style.opacity = '1';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+          card.style.opacity = '0.3';
+        }
+      });
+
+      // Update results count
+      updateResultsCount(visibleCount);
+    }
+
+    function checkPriceRange(price, range) {
+      if (!range) return true;
+
+      switch(range) {
+        case '0-15000':
+          return price < 15000;
+        case '15000-35000':
+          return price >= 15000 && price <= 35000;
+        case '35000+':
+          return price > 35000;
+        default:
+          return true;
+      }
+    }
+
+    function updateResultsCount(count) {
+      let resultsElement = document.querySelector('.results-count');
+      if (!resultsElement) {
+        resultsElement = document.createElement('div');
+        resultsElement.className = 'results-count text-gray-300 text-sm mt-2';
+        const searchBar = document.querySelector('.bg-black\\/50.backdrop-blur-sm.rounded-xl');
+        if (searchBar) {
+          searchBar.appendChild(resultsElement);
+        }
+      }
+      resultsElement.textContent = `${count} platform${count !== 1 ? 's' : ''} found`;
+    }
+  }
+
+  // Smooth scroll for navigation links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const href = (e.target as HTMLAnchorElement).getAttribute('href');
+      if (href) {
+        document.querySelector(href)?.scrollIntoView({
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+</script>
+
+<style>
+  /* Import styles from index page for consistency */
+  :root {
+    --yellow-primary: #fbbf24;
+    --yellow-secondary: #f59e0b;
+    --yellow-glow: rgba(251, 191, 36, 0.2);
+    --black-primary: #000000;
+    --gray-primary: #111827;
+    --gray-secondary: #1f2937;
+  }
+
+  .bg-grid-pattern {
+    background-image: url("data:image/svg+xml,%3csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3e%3cg fill='none' stroke='%23fff' stroke-width='1'%3e%3cpath d='M0 0h60v60H0z'/%3e%3c/g%3e%3c/svg%3e");
+    background-size: 60px 60px;
+  }
+
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-in-scale {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes glow-pulse {
+    0%, 100% {
+      box-shadow: 0 0 20px var(--yellow-glow);
+    }
+    50% {
+      box-shadow: 0 0 40px rgba(251, 191, 36, 0.4), 0 0 60px var(--yellow-glow);
+    }
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    opacity: 0;
+  }
+
+  .animate-fade-in {
+    animation: fade-in-scale 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    opacity: 0;
+  }
+
+  .animate-glow {
+    animation: glow-pulse 3s ease-in-out infinite;
+  }
+
+  /* Card Hover Effects */
+  .card-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card-hover:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(251, 191, 36, 0.1);
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--gray-primary);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--yellow-primary);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--yellow-secondary);
+  }
+
+  /* Accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+</style>
