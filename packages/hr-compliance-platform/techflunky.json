@@ -1,0 +1,147 @@
+{
+  "id": "pkg_hr_compliance_001",
+  "name": "AI-Powered Multi-State HR Leave Administration Platform",
+  "slug": "ai-hr-compliance-platform",
+  "version": "1.0.0",
+  "description": "Complete HR compliance solution for multi-state operations with AI-powered leave administration, automated compliance checking, and real-time reporting. Built on Cloudflare's infrastructure for 95%+ profit margins.",
+  "price": 35000,
+  "tier": "launch_ready",
+  "cloudflare": {
+    "workers": [
+      {
+        "name": "hr-api-gateway",
+        "codePath": "./workers/api-gateway.js",
+        "routes": ["api.${domain}/*", "${domain}/api/*"],
+        "environment": {
+          "PLATFORM_NAME": "HR Compliance Pro",
+          "JWT_SECRET": "${JWT_SECRET}",
+          "CLAUDE_API_KEY": "${CLAUDE_API_KEY}"
+        }
+      },
+      {
+        "name": "leave-processor",
+        "codePath": "./workers/leave-processor.js",
+        "cron": "0 */6 * * *",
+        "environment": {
+          "NOTIFICATION_EMAIL": "${ADMIN_EMAIL}"
+        }
+      },
+      {
+        "name": "compliance-checker",
+        "codePath": "./workers/compliance-checker.js",
+        "routes": ["${domain}/compliance/*"],
+        "environment": {
+          "AI_MODEL": "claude-3-sonnet"
+        }
+      }
+    ],
+    "d1_databases": [
+      {
+        "name": "hr-compliance-db",
+        "schemaPath": "./database/schema.sql",
+        "seedDataPath": "./database/seed.sql"
+      }
+    ],
+    "r2_buckets": [
+      {
+        "name": "hr-documents",
+        "corsEnabled": true,
+        "corsRules": [
+          {
+            "allowedOrigins": ["https://${domain}"],
+            "allowedMethods": ["GET", "PUT", "POST", "DELETE"],
+            "allowedHeaders": ["*"],
+            "exposeHeaders": ["ETag"],
+            "maxAgeSeconds": 3600
+          }
+        ]
+      }
+    ],
+    "pages": {
+      "name": "hr-dashboard",
+      "buildCommand": "npm run build",
+      "buildOutputDirectory": "dist",
+      "environmentVariables": {
+        "VITE_API_URL": "https://api.${domain}"
+      }
+    },
+    "dns_records": [
+      {
+        "type": "A",
+        "name": "@",
+        "content": "192.0.2.1",
+        "proxied": true
+      },
+      {
+        "type": "CNAME",
+        "name": "api",
+        "content": "${domain}",
+        "proxied": true
+      },
+      {
+        "type": "TXT",
+        "name": "@",
+        "content": "v=spf1 include:_spf.mx.cloudflare.net ~all"
+      }
+    ],
+    "kv_namespaces": [
+      {
+        "name": "hr-cache",
+        "title": "HR Platform Cache"
+      }
+    ]
+  },
+  "businessAssets": {
+    "marketResearch": "./assets/hr-compliance-market-research.pdf",
+    "businessPlan": "./assets/hr-compliance-business-plan.pdf",
+    "financialModel": "./assets/financial-projections.xlsx",
+    "pitchDeck": "./assets/investor-pitch-deck.pptx",
+    "customerList": "./assets/target-customers.csv",
+    "additionalDocs": [
+      {
+        "name": "Competitive Analysis",
+        "type": "pdf",
+        "url": "./assets/competitive-analysis.pdf"
+      },
+      {
+        "name": "Go-to-Market Strategy",
+        "type": "pdf",
+        "url": "./assets/gtm-strategy.pdf"
+      },
+      {
+        "name": "Technical Architecture",
+        "type": "pdf",
+        "url": "./assets/technical-architecture.pdf"
+      }
+    ]
+  },
+  "postDeploymentScripts": [
+    {
+      "name": "Send Welcome Email",
+      "type": "email",
+      "config": {
+        "template": "welcome",
+        "subject": "Your HR Compliance Platform is Ready!"
+      }
+    },
+    {
+      "name": "Initialize Admin Account",
+      "type": "function",
+      "config": {
+        "function": "createAdminUser",
+        "params": {
+          "email": "${ADMIN_EMAIL}",
+          "role": "super_admin"
+        }
+      }
+    },
+    {
+      "name": "Webhook Notification",
+      "type": "webhook",
+      "config": {
+        "url": "https://techflunky.com/api/deployment-complete",
+        "method": "POST"
+      }
+    }
+  ]
+}

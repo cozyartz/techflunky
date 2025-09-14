@@ -1,0 +1,367 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { stripe } from '../../lib/stripe-config';
+
+// This would normally come from your database
+const listing = {
+  id: 'hr-compliance-platform-001',
+  title: 'AI-Powered Multi-State HR Leave Administration Platform',
+  slug: 'ai-hr-leave-administration-platform',
+  price: 3500000, // $35,000 in cents
+  packageTier: 'launch_ready',
+  category: 'HR Tech',
+  industry: 'Human Resources',
+  seller: {
+    name: 'AstroPraxis',
+    verified: true,
+    rating: 5.0,
+  },
+  aiScore: 92,
+  marketSize: '$800M+',
+  projectedARR: '$1-3M',
+  timeToMarket: '3-6 months',
+};
+---
+
+<Layout title={`${listing.title} - TechFlunky`}>
+  <main class="min-h-screen bg-gray-50">
+    <!-- Breadcrumb -->
+    <div class="bg-white border-b">
+      <div class="container mx-auto px-4 py-3">
+        <nav class="text-sm">
+          <a href="/" class="text-gray-500 hover:text-gray-700">Home</a>
+          <span class="mx-2 text-gray-400">/</span>
+          <a href="/browse" class="text-gray-500 hover:text-gray-700">Browse</a>
+          <span class="mx-2 text-gray-400">/</span>
+          <span class="text-gray-900">HR Tech</span>
+        </nav>
+      </div>
+    </div>
+
+    <div class="container mx-auto px-4 py-8">
+      <div class="grid lg:grid-cols-3 gap-8">
+        <!-- Main Content -->
+        <div class="lg:col-span-2 space-y-8">
+          <!-- Title Section -->
+          <div class="bg-white rounded-lg shadow p-8">
+            <div class="flex items-start justify-between mb-4">
+              <div>
+                <div class="flex items-center gap-3 mb-2">
+                  <span class="bg-purple-100 text-purple-800 text-sm font-semibold px-3 py-1 rounded-full">
+                    LAUNCH READY
+                  </span>
+                  <span class="bg-green-100 text-green-800 text-sm font-semibold px-3 py-1 rounded-full">
+                    AI SCORE: {listing.aiScore}/100
+                  </span>
+                </div>
+                <h1 class="text-3xl font-bold text-gray-900 mb-4">{listing.title}</h1>
+              </div>
+            </div>
+
+            <!-- Key Metrics -->
+            <div class="grid grid-cols-3 gap-4 mb-6">
+              <div class="text-center p-4 bg-gray-50 rounded-lg">
+                <div class="text-2xl font-bold text-indigo-900">{listing.marketSize}</div>
+                <div class="text-sm text-gray-600">Market Size</div>
+              </div>
+              <div class="text-center p-4 bg-gray-50 rounded-lg">
+                <div class="text-2xl font-bold text-indigo-900">{listing.projectedARR}</div>
+                <div class="text-sm text-gray-600">Year 3 ARR</div>
+              </div>
+              <div class="text-center p-4 bg-gray-50 rounded-lg">
+                <div class="text-2xl font-bold text-indigo-900">{listing.timeToMarket}</div>
+                <div class="text-sm text-gray-600">Time to Launch</div>
+              </div>
+            </div>
+
+            <!-- Executive Summary -->
+            <div class="prose max-w-none">
+              <h2 class="text-xl font-semibold mb-3">Executive Summary</h2>
+              <p class="text-gray-700 mb-4">
+                The U.S. absence management market is experiencing explosive growth, projected to reach $810M by 2034 
+                with a 9.6% CAGR. This AI-powered platform addresses the critical pain point of multi-state HR compliance, 
+                where companies currently spend $25,000+/year on external help plus 28 hours/week of internal time.
+              </p>
+              <p class="text-gray-700">
+                Built on Cloudflare's infrastructure for 95%+ profit margins, this platform automates leave administration 
+                across all 50 states, reducing compliance errors that typically cost companies $1.2M annually in penalties.
+              </p>
+            </div>
+          </div>
+
+          <!-- What's Included -->
+          <div class="bg-white rounded-lg shadow p-8">
+            <h2 class="text-2xl font-bold mb-6">What's Included in This Package</h2>
+            
+            <div class="space-y-6">
+              <div>
+                <h3 class="font-semibold text-lg mb-2 flex items-center">
+                  <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                  </svg>
+                  Market Research & Validation
+                </h3>
+                <ul class="space-y-2 text-gray-700 ml-7">
+                  <li>• 42-page market analysis with data from 15+ authoritative sources</li>
+                  <li>• Competitive landscape analysis of 8 existing solutions</li>
+                  <li>• TAM/SAM/SOM calculations with growth projections</li>
+                  <li>• Regulatory compliance requirements for all 50 states</li>
+                </ul>
+              </div>
+
+              <div>
+                <h3 class="font-semibold text-lg mb-2 flex items-center">
+                  <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                  </svg>
+                  Technical Architecture
+                </h3>
+                <ul class="space-y-2 text-gray-700 ml-7">
+                  <li>• Complete Cloudflare stack architecture (Workers, D1, R2, AI)</li>
+                  <li>• Database schema with multi-tenant support</li>
+                  <li>• API documentation and integration guides</li>
+                  <li>• AI automation workflows for compliance checking</li>
+                  <li>• Estimated infrastructure costs: $2-8 per client/month</li>
+                </ul>
+              </div>
+
+              <div>
+                <h3 class="font-semibold text-lg mb-2 flex items-center">
+                  <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                  </svg>
+                  Business Model & Financials
+                </h3>
+                <ul class="space-y-2 text-gray-700 ml-7">
+                  <li>• SaaS pricing model: $400-5,000/month based on company size</li>
+                  <li>• Financial projections spreadsheet (5-year model)</li>
+                  <li>• Unit economics breakdown showing 95%+ gross margins</li>
+                  <li>• Customer acquisition cost (CAC) and LTV calculations</li>
+                </ul>
+              </div>
+
+              <div>
+                <h3 class="font-semibold text-lg mb-2 flex items-center">
+                  <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                  </svg>
+                  Go-to-Market Strategy
+                </h3>
+                <ul class="space-y-2 text-gray-700 ml-7">
+                  <li>• Pilot customer identified: Encore (17-state healthcare group)</li>
+                  <li>• List of 50+ target customers with contact information</li>
+                  <li>• Sales deck and demo script</li>
+                  <li>• Content marketing plan with SEO keywords</li>
+                </ul>
+              </div>
+
+              <div>
+                <h3 class="font-semibold text-lg mb-2 flex items-center">
+                  <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                  </svg>
+                  Investor Package
+                </h3>
+                <ul class="space-y-2 text-gray-700 ml-7">
+                  <li>• Pitch deck (15 slides) with speaker notes</li>
+                  <li>• List of 25 HR tech investors with warm intro strategies</li>
+                  <li>• Executive summary and one-pager</li>
+                  <li>• Due diligence preparation checklist</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Why This Opportunity -->
+          <div class="bg-white rounded-lg shadow p-8">
+            <h2 class="text-2xl font-bold mb-6">Why This Opportunity</h2>
+            
+            <div class="space-y-4">
+              <div class="flex gap-4">
+                <div class="text-indigo-600 mt-1">
+                  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.293l-3-3a1 1 0 00-1.414-1.414L10.586 9.5H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="font-semibold mb-1">Perfect Market Timing</h3>
+                  <p class="text-gray-700">89% increase in multi-state employment arrangements since 2020, 
+                  creating urgent need for automated compliance solutions.</p>
+                </div>
+              </div>
+
+              <div class="flex gap-4">
+                <div class="text-indigo-600 mt-1">
+                  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.293l-3-3a1 1 0 00-1.414-1.414L10.586 9.5H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="font-semibold mb-1">Proven Pain Point</h3>
+                  <p class="text-gray-700">Companies currently spend $25k+/year on compliance help plus 
+                  28 hours/week of internal time - this platform eliminates both.</p>
+                </div>
+              </div>
+
+              <div class="flex gap-4">
+                <div class="text-indigo-600 mt-1">
+                  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.293l-3-3a1 1 0 00-1.414-1.414L10.586 9.5H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="font-semibold mb-1">Exceptional Unit Economics</h3>
+                  <p class="text-gray-700">95%+ gross margins with infrastructure costs of only $2-8 per 
+                  client while charging $400-5,000/month.</p>
+                </div>
+              </div>
+
+              <div class="flex gap-4">
+                <div class="text-indigo-600 mt-1">
+                  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.293l-3-3a1 1 0 00-1.414-1.414L10.586 9.5H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="font-semibold mb-1">Exit Opportunity</h3>
+                  <p class="text-gray-700">HR tech companies selling for 15-19x EBITDA multiples. 
+                  At $3M ARR with 80% margins = potential $36-45M exit.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="lg:col-span-1">
+          <!-- Purchase Card -->
+          <div class="bg-white rounded-lg shadow p-6 sticky top-4">
+            <div class="mb-6">
+              <div class="text-3xl font-bold text-indigo-900 mb-1">
+                ${(listing.price / 100).toLocaleString()}
+              </div>
+              <p class="text-sm text-gray-600">One-time purchase</p>
+            </div>
+
+            <button 
+              id="purchase-button"
+              class="w-full bg-indigo-900 text-white py-3 px-6 rounded-lg font-semibold hover:bg-indigo-800 transition mb-4"
+            >
+              Purchase This Business
+            </button>
+
+            <div class="space-y-3 mb-6">
+              <div class="flex items-center text-sm text-gray-600">
+                <svg class="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                Secure payment via Stripe
+              </div>
+              <div class="flex items-center text-sm text-gray-600">
+                <svg class="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                3-day review period
+              </div>
+              <div class="flex items-center text-sm text-gray-600">
+                <svg class="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                All materials delivered instantly
+              </div>
+            </div>
+
+            <!-- Seller Info -->
+            <div class="border-t pt-6">
+              <h3 class="font-semibold mb-3">About the Seller</h3>
+              <div class="flex items-center mb-3">
+                <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mr-3">
+                  <span class="text-indigo-900 font-bold">AP</span>
+                </div>
+                <div>
+                  <div class="font-semibold">{listing.seller.name}</div>
+                  <div class="flex items-center text-sm">
+                    <span class="text-yellow-500">★★★★★</span>
+                    <span class="text-gray-600 ml-1">{listing.seller.rating}</span>
+                    {listing.seller.verified && (
+                      <span class="ml-2 text-green-600 flex items-center">
+                        <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                          <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                        </svg>
+                        Verified
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </div>
+              <p class="text-sm text-gray-600">
+                Serial entrepreneurs with expertise in AI automation and HR compliance. 
+                Successfully built and sold 3 SaaS companies.
+              </p>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="border-t pt-6 mt-6">
+              <h3 class="font-semibold mb-3">Quick Stats</h3>
+              <div class="space-y-2 text-sm">
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Category</span>
+                  <span class="font-medium">{listing.category}</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Industry</span>
+                  <span class="font-medium">{listing.industry}</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Package Tier</span>
+                  <span class="font-medium capitalize">{listing.packageTier.replace('_', ' ')}</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">AI Validation</span>
+                  <span class="font-medium text-green-600">{listing.aiScore}/100</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Handle purchase button click
+    document.getElementById('purchase-button')?.addEventListener('click', async () => {
+      const button = document.getElementById('purchase-button') as HTMLButtonElement;
+      button.disabled = true;
+      button.textContent = 'Processing...';
+      
+      try {
+        // Create checkout session
+        const response = await fetch('/api/checkout/create-session', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            listingId: 'hr-compliance-platform-001',
+            listingPrice: 3500000, // $35,000 in cents
+            listingTitle: 'AI-Powered Multi-State HR Leave Administration Platform',
+            sellerId: 'acct_autimind_stripe_id' // This would be your actual Stripe Connect account ID
+          })
+        });
+        
+        const { url, error } = await response.json();
+        
+        if (url) {
+          // Redirect to Stripe Checkout
+          window.location.href = url;
+        } else {
+          throw new Error(error || 'Failed to create checkout session');
+        }
+      } catch (error) {
+        console.error('Checkout error:', error);
+        alert('Failed to start checkout. Please try again.');
+        button.disabled = false;
+        button.textContent = 'Purchase This Business';
+      }
+    });
+  </script>
+</Layout>

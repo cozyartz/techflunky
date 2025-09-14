@@ -1,0 +1,194 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Become a Seller - TechFlunky">
+  <main class="min-h-screen bg-gray-50 py-12">
+    <div class="container mx-auto px-4 max-w-4xl">
+      <h1 class="text-4xl font-bold text-center mb-8">Sell Your Business Ideas on TechFlunky</h1>
+      
+      <!-- How It Works -->
+      <div class="bg-white rounded-lg shadow p-8 mb-8">
+        <h2 class="text-2xl font-bold mb-6">How Selling Works</h2>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <h3 class="font-semibold text-lg mb-4">Our Commission Structure</h3>
+            <ul class="space-y-3 text-gray-700">
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-green-500 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+                <span><strong>15% platform fee</strong> on successful sales</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-green-500 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+                <span><strong>No listing fees</strong> - only pay when you sell</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-green-500 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+                <span><strong>Fast payouts</strong> after 3-day review period</span>
+              </li>
+            </ul>
+          </div>
+          
+          <div>
+            <h3 class="font-semibold text-lg mb-4">Payment Security</h3>
+            <ul class="space-y-3 text-gray-700">
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-blue-500 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+                <span>Payments processed by <strong>Stripe Connect</strong></span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-blue-500 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+                <span>Funds held securely during review period</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-blue-500 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+                <span>Direct deposit to your bank account</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Onboarding Form -->
+      <div class="bg-white rounded-lg shadow p-8">
+        <h2 class="text-2xl font-bold mb-2">Create Your Seller Account</h2>
+        <p class="text-gray-600 mb-6">Connect with Stripe to start receiving payments</p>
+        
+        <form id="seller-onboarding-form" class="space-y-6">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <label for="firstName" class="block text-sm font-medium text-gray-700 mb-1">
+                First Name
+              </label>
+              <input 
+                type="text" 
+                id="firstName" 
+                name="firstName" 
+                required 
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+              />
+            </div>
+            
+            <div>
+              <label for="lastName" class="block text-sm font-medium text-gray-700 mb-1">
+                Last Name
+              </label>
+              <input 
+                type="text" 
+                id="lastName" 
+                name="lastName" 
+                required 
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+              />
+            </div>
+          </div>
+          
+          <div>
+            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
+              Email Address
+            </label>
+            <input 
+              type="email" 
+              id="email" 
+              name="email" 
+              required 
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+            />
+          </div>
+          
+          <div>
+            <label for="businessType" class="block text-sm font-medium text-gray-700 mb-1">
+              Business Type
+            </label>
+            <select 
+              id="businessType" 
+              name="businessType" 
+              required
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+            >
+              <option value="">Select business type</option>
+              <option value="individual">Individual / Sole Proprietor</option>
+              <option value="company">Company / Corporation</option>
+            </select>
+          </div>
+          
+          <div>
+            <label for="businessName" class="block text-sm font-medium text-gray-700 mb-1">
+              Business Name <span class="text-gray-500">(if applicable)</span>
+            </label>
+            <input 
+              type="text" 
+              id="businessName" 
+              name="businessName" 
+              placeholder="e.g., Autimind, Inc."
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+            />
+          </div>
+
+          <div class="bg-gray-50 rounded-lg p-4">
+            <h3 class="font-semibold mb-2">What happens next?</h3>
+            <ol class="space-y-2 text-sm text-gray-700">
+              <li>1. We'll create your Stripe Connected Account</li>
+              <li>2. You'll be redirected to Stripe to complete verification</li>
+              <li>3. Once verified, you can start listing business ideas</li>
+              <li>4. Get paid directly to your bank account when ideas sell</li>
+            </ol>
+          </div>
+
+          <button 
+            type="submit"
+            class="w-full bg-indigo-900 text-white py-3 px-6 rounded-lg font-semibold hover:bg-indigo-800 transition"
+          >
+            Continue with Stripe
+          </button>
+          
+          <p class="text-xs text-center text-gray-500">
+            By creating a seller account, you agree to our Terms of Service and Privacy Policy.<br />
+            TechFlunky is operated by Autimind, Inc. Platform fees apply to all transactions.
+          </p>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById('seller-onboarding-form')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const formData = new FormData(e.target as HTMLFormElement);
+      const data = Object.fromEntries(formData);
+      
+      try {
+        // Create Stripe Connected Account
+        const response = await fetch('/api/seller/create-account', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        
+        const result = await response.json();
+        
+        if (result.accountLinkUrl) {
+          // Redirect to Stripe onboarding
+          window.location.href = result.accountLinkUrl;
+        }
+      } catch (error) {
+        console.error('Onboarding error:', error);
+        alert('Failed to create seller account. Please try again.');
+      }
+    });
+  </script>
+</Layout>

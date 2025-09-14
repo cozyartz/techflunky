@@ -1,0 +1,329 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Deployment Dashboard - TechFlunky">
+  <main class="min-h-screen bg-gray-50">
+    <div class="container mx-auto px-4 py-8">
+      <h1 class="text-3xl font-bold mb-8">Deploy Your Business</h1>
+      
+      <div class="grid lg:grid-cols-3 gap-8">
+        <!-- Deployment Form -->
+        <div class="lg:col-span-2">
+          <div class="bg-white rounded-lg shadow p-8">
+            <h2 class="text-2xl font-semibold mb-6">Business Deployment Configuration</h2>
+            
+            <form id="deployment-form" class="space-y-6">
+              <!-- Package Selection -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                  Select Your Purchased Package
+                </label>
+                <select 
+                  id="packageId" 
+                  name="packageId" 
+                  required
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                >
+                  <option value="">Choose a package...</option>
+                  <option value="hr-compliance-platform-001">AI HR Compliance Platform</option>
+                </select>
+              </div>
+              
+              <!-- Cloudflare API Token -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                  Cloudflare API Token
+                </label>
+                <input 
+                  type="password" 
+                  id="apiToken" 
+                  name="apiToken" 
+                  required
+                  placeholder="Your Cloudflare API token"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                />
+                <p class="text-sm text-gray-500 mt-1">
+                  Need help? <a href="#" class="text-indigo-600 hover:text-indigo-800">How to get your API token</a>
+                </p>
+              </div>
+              
+              <!-- Domain Configuration -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                  Domain Configuration
+                </label>
+                <div class="space-y-3">
+                  <label class="flex items-center">
+                    <input 
+                      type="radio" 
+                      name="domainType" 
+                      value="subdomain" 
+                      checked
+                      class="mr-2"
+                    />
+                    <span>Use TechFlunky subdomain (free)</span>
+                  </label>
+                  <label class="flex items-center">
+                    <input 
+                      type="radio" 
+                      name="domainType" 
+                      value="custom"
+                      class="mr-2"
+                    />
+                    <span>Use my custom domain</span>
+                  </label>
+                </div>
+                
+                <div id="custom-domain-input" class="mt-3 hidden">
+                  <input 
+                    type="text" 
+                    id="customDomain" 
+                    name="customDomain" 
+                    placeholder="yourdomain.com"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                  />
+                </div>
+              </div>
+              
+              <!-- Terms -->
+              <div class="bg-blue-50 rounded-lg p-4">
+                <label class="flex items-start">
+                  <input 
+                    type="checkbox" 
+                    id="terms" 
+                    name="terms" 
+                    required
+                    class="mt-1 mr-3"
+                  />
+                  <span class="text-sm text-gray-700">
+                    I understand that this will deploy resources to my Cloudflare account. 
+                    I am responsible for any Cloudflare usage charges. The business package 
+                    code and assets will be deployed under the license terms of my purchase.
+                  </span>
+                </label>
+              </div>
+              
+              <button 
+                type="submit"
+                class="w-full bg-indigo-900 text-white py-3 px-6 rounded-lg font-semibold hover:bg-indigo-800 transition"
+              >
+                Deploy Business
+              </button>
+            </form>
+          </div>
+        </div>
+        
+        <!-- Info Panel -->
+        <div class="lg:col-span-1">
+          <div class="bg-white rounded-lg shadow p-6 mb-6">
+            <h3 class="font-semibold text-lg mb-4">What Happens During Deployment?</h3>
+            <ol class="space-y-3 text-sm text-gray-700">
+              <li class="flex gap-3">
+                <span class="text-indigo-600 font-semibold">1.</span>
+                <span>Create Workers for your business logic</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-indigo-600 font-semibold">2.</span>
+                <span>Set up D1 databases with schemas</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-indigo-600 font-semibold">3.</span>
+                <span>Configure R2 storage buckets</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-indigo-600 font-semibold">4.</span>
+                <span>Set up custom domain or subdomain</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-indigo-600 font-semibold">5.</span>
+                <span>Configure DNS and SSL certificates</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-indigo-600 font-semibold">6.</span>
+                <span>Deploy and test your business</span>
+              </li>
+            </ol>
+          </div>
+          
+          <div class="bg-yellow-50 rounded-lg p-6">
+            <h3 class="font-semibold mb-2">⚡ Cloudflare Requirements</h3>
+            <ul class="space-y-2 text-sm text-gray-700">
+              <li>• Active Cloudflare account</li>
+              <li>• API token with Workers edit permissions</li>
+              <li>• Workers Paid plan ($5/month minimum)</li>
+              <li>• D1 and R2 access (included)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Deployment Status -->
+      <div id="deployment-status" class="hidden mt-8">
+        <div class="bg-white rounded-lg shadow p-8">
+          <h2 class="text-2xl font-semibold mb-6">Deployment Progress</h2>
+          
+          <div class="space-y-4">
+            <div class="bg-gray-200 rounded-full h-4 overflow-hidden">
+              <div id="progress-bar" class="bg-indigo-600 h-full transition-all duration-500" style="width: 0%"></div>
+            </div>
+            
+            <div id="status-message" class="text-lg font-medium text-gray-700">
+              Initializing deployment...
+            </div>
+            
+            <div id="deployment-logs" class="mt-6 bg-gray-50 rounded-lg p-4 h-64 overflow-y-auto font-mono text-sm">
+              <!-- Logs will appear here -->
+            </div>
+            
+            <div id="deployment-complete" class="hidden">
+              <div class="bg-green-50 rounded-lg p-6 text-center">
+                <h3 class="text-xl font-semibold text-green-800 mb-4">
+                  🎉 Deployment Complete!
+                </h3>
+                <p class="text-gray-700 mb-4">
+                  Your business is now live and ready to use.
+                </p>
+                <div class="space-y-2">
+                  <a id="dashboard-link" href="#" class="block text-indigo-600 hover:text-indigo-800 font-medium">
+                    → Visit your dashboard
+                  </a>
+                  <a id="api-link" href="#" class="block text-indigo-600 hover:text-indigo-800 font-medium">
+                    → View API endpoint
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Handle domain type selection
+    document.querySelectorAll('input[name="domainType"]').forEach(radio => {
+      radio.addEventListener('change', (e) => {
+        const customDomainInput = document.getElementById('custom-domain-input');
+        if (e.target.value === 'custom') {
+          customDomainInput?.classList.remove('hidden');
+        } else {
+          customDomainInput?.classList.add('hidden');
+        }
+      });
+    });
+    
+    // Handle form submission
+    document.getElementById('deployment-form')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const formData = new FormData(e.target as HTMLFormElement);
+      const domainType = formData.get('domainType');
+      
+      const deploymentData = {
+        packageId: formData.get('packageId'),
+        buyerApiToken: formData.get('apiToken'),
+        useSubdomain: domainType === 'subdomain',
+        customDomain: domainType === 'custom' ? formData.get('customDomain') : null
+      };
+      
+      // Show deployment status
+      document.getElementById('deployment-status')?.classList.remove('hidden');
+      document.getElementById('deployment-form')?.classList.add('opacity-50', 'pointer-events-none');
+      
+      // Start deployment
+      try {
+        const response = await fetch('/api/deploy', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(deploymentData)
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+          // Poll for deployment status
+          await pollDeploymentStatus(result.deployment.deploymentId);
+          
+          // Show completion
+          showDeploymentComplete(result.deployment);
+        } else {
+          throw new Error(result.error || 'Deployment failed');
+        }
+      } catch (error) {
+        console.error('Deployment error:', error);
+        alert(`Deployment failed: ${error.message}`);
+        
+        // Reset form
+        document.getElementById('deployment-status')?.classList.add('hidden');
+        document.getElementById('deployment-form')?.classList.remove('opacity-50', 'pointer-events-none');
+      }
+    });
+    
+    // Poll deployment status
+    async function pollDeploymentStatus(deploymentId: string) {
+      const progressBar = document.getElementById('progress-bar');
+      const statusMessage = document.getElementById('status-message');
+      const logsContainer = document.getElementById('deployment-logs');
+      
+      let lastLogCount = 0;
+      
+      const pollInterval = setInterval(async () => {
+        try {
+          const response = await fetch(`/api/deploy?deploymentId=${deploymentId}`);
+          const status = await response.json();
+          
+          // Update progress
+          if (progressBar) {
+            progressBar.style.width = `${status.progress}%`;
+          }
+          
+          // Update status message
+          if (statusMessage) {
+            statusMessage.textContent = status.currentStep;
+          }
+          
+          // Add new logs
+          if (logsContainer && status.logs.length > lastLogCount) {
+            const newLogs = status.logs.slice(lastLogCount);
+            newLogs.forEach(log => {
+              const logEntry = document.createElement('div');
+              logEntry.className = `mb-1 ${log.level === 'error' ? 'text-red-600' : 'text-gray-600'}`;
+              logEntry.textContent = `[${new Date(log.timestamp).toLocaleTimeString()}] ${log.message}`;
+              logsContainer.appendChild(logEntry);
+            });
+            lastLogCount = status.logs.length;
+            logsContainer.scrollTop = logsContainer.scrollHeight;
+          }
+          
+          // Check if complete
+          if (status.status === 'completed' || status.status === 'failed') {
+            clearInterval(pollInterval);
+          }
+        } catch (error) {
+          console.error('Failed to poll status:', error);
+          clearInterval(pollInterval);
+        }
+      }, 2000);
+    }
+    
+    // Show deployment complete
+    function showDeploymentComplete(deployment: any) {
+      const completeSection = document.getElementById('deployment-complete');
+      const dashboardLink = document.getElementById('dashboard-link') as HTMLAnchorElement;
+      const apiLink = document.getElementById('api-link') as HTMLAnchorElement;
+      
+      if (completeSection) {
+        completeSection.classList.remove('hidden');
+      }
+      
+      if (dashboardLink) {
+        dashboardLink.href = deployment.dashboardUrl;
+      }
+      
+      if (apiLink) {
+        apiLink.href = deployment.apiEndpoint;
+      }
+    }
+  </script>
+</Layout>

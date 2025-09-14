@@ -1,0 +1,22 @@
+{
+  "name": "techflunky-cli",
+  "version": "1.0.0",
+  "description": "TechFlunky Business Package Manager CLI",
+  "main": "index.js",
+  "type": "module",
+  "bin": {
+    "techflunky": "./index.js"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "commander": "^11.0.0",
+    "chalk": "^5.3.0",
+    "inquirer": "^9.2.0",
+    "ora": "^7.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0"
+  }
+}
