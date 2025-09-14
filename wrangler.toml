@@ -1,35 +1,47 @@
 name = "techflunky"
 compatibility_date = "2024-01-01"
+main = "src/workers/cron.ts"
 
 # D1 Database binding
 [[d1_databases]]
 binding = "DB"
 database_name = "techflunky-db"
-database_id = "YOUR_D1_DATABASE_ID"
+database_id = "330b8406-f05f-4e5b-966a-a58fcd2ba3d1"
 
 # R2 Storage binding
 [[r2_buckets]]
 binding = "BUCKET"
 bucket_name = "techflunky-assets"
 
-# Environment variables (add to .dev.vars for local development)
-# STRIPE_SECRET_KEY = "sk_test_..."
-# CLAUDE_API_KEY = "sk-ant-..."
-# JWT_SECRET = "your-jwt-secret"
-
-# KV namespace for sessions/cache
+# KV namespace for caching
 [[kv_namespaces]]
 binding = "CACHE"
-id = "YOUR_KV_NAMESPACE_ID"
+id = "31831cdf293546b992aefcfc0edb139f"
+preview_id = "31831cdf293546b992aefcfc0edb139f"
 
-# Analytics Engine
+# Environment variables (add to .dev.vars for local development)
+[vars]
+ENVIRONMENT = "production"
+SITE_URL = "https://techflunky.com"
+
+# Cron triggers for automated tasks
+[triggers]
+crons = [
+  "*/15 * * * *",  # Every 15 minutes - AI analysis queue
+  "0 * * * *",     # Every hour - cleanup tasks
+  "0 9 * * *",     # Daily at 9 AM UTC - analytics
+  "0 0 * * 1",     # Weekly on Mondays - affiliate payouts
+  "0 0 1 * *"      # Monthly on 1st - reports
+]
+
+# Analytics Engine for tracking
 [[analytics_engine_datasets]]
 binding = "ANALYTICS"
 
-# Email routing (for notifications)
-[triggers]
-crons = ["0 */6 * * *"] # Run maintenance tasks every 6 hours
+# Workers routes for API
+[[routes]]
+pattern = "api.techflunky.com/*"
+zone_name = "techflunky.com"
 
-# Tail Workers for debugging
-[tail]
-consumers = []
+# Compatibility flags
+compatibility_flags = ["nodejs_compat"]
