@@ -14,8 +14,8 @@ export const GET: APIRoute = async ({ url, locals, redirect }) => {
     const redirectUri = `${url.origin}/api/auth/github`;
     const stateParam = Math.random().toString(36).substring(7);
 
-    // For GitHub Apps, we redirect to installation URL
-    const githubUrl = `https://github.com/apps/${locals.runtime.env.GITHUB_APP_SLUG}/installations/new?state=${stateParam}`;
+    // For GitHub Apps, we redirect to installation URL using App ID
+    const githubUrl = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&state=${stateParam}`;
 
     return redirect(githubUrl);
   }
