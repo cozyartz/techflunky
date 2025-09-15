@@ -11,26 +11,25 @@ export default defineConfig({
       mode: 'local',
       type: 'pages',
       bindings: {
-        // D1 database binding
+        // D1 database binding (configured in wrangler.toml)
         DB: {
-          type: 'd1',
-          // This will be replaced with actual D1 database ID
-          id: 'YOUR_D1_DATABASE_ID'
+          type: 'd1'
         },
-        // R2 bucket binding for file storage
+        // R2 bucket binding for file storage (configured in wrangler.toml)
         BUCKET: {
-          type: 'r2',
-          // This will be replaced with actual R2 bucket name
-          bucketName: 'techflunky-assets'
+          type: 'r2'
         },
-        // Environment variables
-        STRIPE_SECRET_KEY: {
-          type: 'var',
-          value: 'YOUR_STRIPE_SECRET_KEY'
+        // KV namespace for caching (configured in wrangler.toml)
+        CACHE: {
+          type: 'kv'
         },
-        CLAUDE_API_KEY: {
-          type: 'var',
-          value: 'YOUR_CLAUDE_API_KEY'
+        // Analytics Engine (configured in wrangler.toml)
+        ANALYTICS: {
+          type: 'analytics'
+        },
+        // Cloudflare AI binding (configured in wrangler.toml)
+        AI: {
+          type: 'ai'
         }
       }
     }
@@ -41,7 +40,12 @@ export default defineConfig({
   ],
   vite: {
     ssr: {
-      external: ['node:buffer', 'node:crypto', 'node:stream']
+      external: ['node:buffer', 'node:crypto', 'node:stream', '@cloudflare/ai']
+    },
+    build: {
+      rollupOptions: {
+        external: ['@cloudflare/ai']
+      }
     }
   }
 });

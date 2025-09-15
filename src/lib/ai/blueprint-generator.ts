@@ -1,5 +1,3 @@
-import { Ai } from '@cloudflare/ai';
-
 export interface BusinessBlueprint {
   id: string;
   title: string;
@@ -36,10 +34,10 @@ export interface BlueprintGenerationRequest {
 }
 
 export class CloudflareAIBlueprintGenerator {
-  private ai: Ai;
+  private ai: any;
 
   constructor(env: { AI: any }) {
-    this.ai = new Ai(env.AI);
+    this.ai = env.AI;
   }
 
   async generateBusinessBlueprint(request: BlueprintGenerationRequest): Promise<BusinessBlueprint> {

@@ -1,11 +1,26 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Navigation from '../components/Navigation.astro';
-import Footer from '../components/Footer.astro';
 ---
 
 <Layout title="Pricing - TechFlunky">
-  <Navigation />
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm border-b border-yellow-400/20">
+    <div class="container mx-auto px-4 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <img src="/assets/techflunky-logo.png" alt="TechFlunky" class="w-10 h-10">
+          <span class="text-xl font-bold text-white">TechFlunky</span>
+        </div>
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="/browse" class="text-gray-300 hover:text-yellow-400 transition font-medium">Browse</a>
+          <a href="/invest" class="text-gray-300 hover:text-yellow-400 transition font-medium">Invest</a>
+          <a href="/sell" class="text-gray-300 hover:text-yellow-400 transition font-medium">Sell</a>
+          <a href="/about" class="text-gray-300 hover:text-yellow-400 transition font-medium">About</a>
+          <a href="/contact" class="bg-yellow-400 text-black px-4 py-2 rounded-lg font-semibold hover:bg-yellow-300 transition">Contact</a>
+        </div>
+      </div>
+    </div>
+  </nav>
 
   <main class="pt-20 pb-16">
     <!-- Hero Section -->
@@ -659,5 +674,21 @@ import Footer from '../components/Footer.astro';
     </section>
   </main>
 
-  <Footer />
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="text-center">
+        <div class="flex items-center justify-center space-x-3 mb-4">
+          <img src="/assets/techflunky-logo.png" alt="TechFlunky" class="w-8 h-8">
+          <span class="text-xl font-bold">TechFlunky</span>
+        </div>
+        <p class="text-gray-400 mb-4">Marketplace for Validated Business Ideas</p>
+        <div class="flex justify-center space-x-6">
+          <a href="/privacy" class="text-gray-400 hover:text-yellow-400 transition">Privacy</a>
+          <a href="/terms" class="text-gray-400 hover:text-yellow-400 transition">Terms</a>
+          <a href="/contact" class="text-gray-400 hover:text-yellow-400 transition">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 </Layout>
