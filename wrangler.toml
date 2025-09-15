@@ -22,7 +22,7 @@ SITE_URL = "https://techflunky.com"
 [[d1_databases]]
 binding = "DB"
 database_name = "techflunky-db"
-database_id = "local"
+database_id = "techflunky-db"
 
 # For development with wrangler pages dev:
 # wrangler pages dev dist --d1 DB=techflunky-db --r2 BUCKET=techflunky-assets --kv CACHE --ai AI=@cf/meta/llama-3.1-70b-instruct
