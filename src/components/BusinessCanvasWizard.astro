@@ -1,0 +1,713 @@
+---
+export interface Props {
+  templateId?: string;
+  mode?: 'create' | 'edit';
+  existingData?: Record<string, any>;
+}
+
+const { templateId = 'saas-platform', mode = 'create', existingData = {} } = Astro.props;
+---
+
+<div id="business-canvas-wizard" class="max-w-6xl mx-auto">
+  <!-- Header -->
+  <div class="mb-8">
+    <div class="flex items-center justify-between mb-4">
+      <div>
+        <h2 class="text-3xl font-bold text-gray-900">Business Canvas Wizard</h2>
+        <p class="text-gray-600 mt-2">Transform your idea into a comprehensive business blueprint</p>
+      </div>
+      <div class="flex items-center space-x-4">
+        <!-- Template Selector -->
+        <select id="template-selector" class="border border-gray-300 rounded-md px-3 py-2">
+          <option value="saas-platform">SaaS Platform</option>
+          <option value="marketplace-platform">Marketplace Platform</option>
+          <option value="ai-platform">AI-Powered Platform</option>
+        </select>
+
+        <!-- Save/Load Options -->
+        <button id="save-draft" class="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600">
+          Save Draft
+        </button>
+      </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="bg-gray-200 rounded-full h-2 mb-4">
+      <div id="progress-bar" class="bg-blue-600 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+    </div>
+
+    <!-- Canvas Info -->
+    <div id="canvas-info" class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+      <div class="flex items-start">
+        <svg class="w-5 h-5 text-blue-600 mt-0.5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+        </svg>
+        <div>
+          <h4 id="template-title" class="font-medium text-blue-900">SaaS Platform Canvas</h4>
+          <p id="template-description" class="text-sm text-blue-700 mt-1">
+            Comprehensive template for Software-as-a-Service business models
+          </p>
+          <div class="flex items-center mt-2 text-xs text-blue-600">
+            <span id="estimated-time">⏱️ ~45 minutes</span>
+            <span class="mx-2">•</span>
+            <span id="difficulty-level">📈 Intermediate</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Canvas Sections -->
+  <form id="canvas-form" class="space-y-8">
+    <div id="canvas-sections">
+      <!-- Sections will be dynamically generated -->
+    </div>
+
+    <!-- AI Assistant Panel -->
+    <div class="bg-gradient-to-r from-purple-50 to-blue-50 border border-purple-200 rounded-lg p-6">
+      <h3 class="text-lg font-semibold text-gray-900 mb-4">
+        🤖 AI Business Assistant
+      </h3>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+        <button type="button" class="ai-action-btn" data-action="improve">
+          <div class="text-purple-600 text-lg mb-2">✨</div>
+          <div class="font-medium">Improve Content</div>
+          <div class="text-sm text-gray-600">AI enhances your existing content</div>
+        </button>
+
+        <button type="button" class="ai-action-btn" data-action="generate">
+          <div class="text-blue-600 text-lg mb-2">🚀</div>
+          <div class="font-medium">Generate Ideas</div>
+          <div class="text-sm text-gray-600">AI suggests content for empty sections</div>
+        </button>
+
+        <button type="button" class="ai-action-btn" data-action="analyze">
+          <div class="text-green-600 text-lg mb-2">📊</div>
+          <div class="font-medium">Analyze Canvas</div>
+          <div class="text-sm text-gray-600">Get AI feedback and scoring</div>
+        </button>
+      </div>
+
+      <div id="ai-feedback" class="hidden bg-white rounded-lg p-4 border">
+        <h4 class="font-medium text-gray-900 mb-2">AI Analysis</h4>
+        <div id="ai-feedback-content"></div>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="flex items-center justify-between pt-6 border-t">
+      <div class="flex items-center space-x-4">
+        <button type="button" id="preview-canvas" class="bg-gray-500 text-white px-6 py-2 rounded-md hover:bg-gray-600">
+          Preview Canvas
+        </button>
+        <span id="completeness-indicator" class="text-sm text-gray-600">
+          Completeness: <span class="font-medium">0%</span>
+        </span>
+      </div>
+
+      <div class="flex items-center space-x-4">
+        <button type="button" id="save-and-continue" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700">
+          Save & Continue
+        </button>
+        <button type="button" id="generate-blueprint" class="bg-green-600 text-white px-8 py-2 rounded-md hover:bg-green-700 font-medium">
+          Generate Business Blueprint ($49)
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <!-- Canvas Preview Modal -->
+  <div id="canvas-preview-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
+    <div class="flex items-center justify-center min-h-screen p-4">
+      <div class="bg-white rounded-lg max-w-4xl w-full max-h-90vh overflow-y-auto">
+        <div class="p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-xl font-semibold">Canvas Preview</h3>
+            <button id="close-preview" class="text-gray-500 hover:text-gray-700">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </button>
+          </div>
+          <div id="canvas-preview-content"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .canvas-section {
+    @apply bg-white border border-gray-200 rounded-lg p-6;
+  }
+
+  .section-header {
+    @apply flex items-start justify-between mb-4;
+  }
+
+  .section-title {
+    @apply text-lg font-semibold text-gray-900;
+  }
+
+  .section-description {
+    @apply text-sm text-gray-600 mt-1;
+  }
+
+  .section-status {
+    @apply flex items-center text-xs;
+  }
+
+  .status-incomplete {
+    @apply text-red-600;
+  }
+
+  .status-complete {
+    @apply text-green-600;
+  }
+
+  .section-prompts {
+    @apply bg-gray-50 rounded-lg p-4 mb-4;
+  }
+
+  .prompt-list {
+    @apply space-y-2;
+  }
+
+  .prompt-item {
+    @apply flex items-start text-sm text-gray-700;
+  }
+
+  .section-examples {
+    @apply mt-3 pt-3 border-t border-gray-200;
+  }
+
+  .example-list {
+    @apply space-y-1;
+  }
+
+  .example-item {
+    @apply text-xs text-gray-600 italic;
+  }
+
+  .section-input {
+    @apply w-full min-h-32 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-vertical;
+  }
+
+  .section-footer {
+    @apply flex items-center justify-between mt-4 pt-4 border-t border-gray-100;
+  }
+
+  .character-count {
+    @apply text-xs text-gray-500;
+  }
+
+  .ai-action-btn {
+    @apply bg-white border border-gray-200 rounded-lg p-4 text-center hover:border-purple-300 hover:bg-purple-25 transition-colors cursor-pointer;
+  }
+
+  .ai-action-btn:hover {
+    @apply transform scale-105;
+  }
+
+  .ai-suggestion {
+    @apply bg-purple-50 border border-purple-200 rounded-lg p-3 mb-3;
+  }
+
+  .ai-suggestion-header {
+    @apply flex items-center justify-between mb-2;
+  }
+
+  .ai-suggestion-content {
+    @apply text-sm text-gray-700;
+  }
+
+  .use-suggestion-btn {
+    @apply text-xs bg-purple-600 text-white px-2 py-1 rounded hover:bg-purple-700;
+  }
+</style>
+
+<script>
+  import { BusinessCanvasTemplates } from '../lib/business-canvas/canvas-templates';
+
+  class BusinessCanvasWizard {
+    constructor() {
+      this.templates = new BusinessCanvasTemplates();
+      this.currentTemplate = null;
+      this.canvasData = {};
+      this.currentTemplateId = 'saas-platform';
+      this.isDirty = false;
+      this.init();
+    }
+
+    async init() {
+      await this.loadTemplate(this.currentTemplateId);
+      this.bindEvents();
+      this.loadExistingData();
+      this.updateProgress();
+    }
+
+    async loadTemplate(templateId) {
+      this.currentTemplate = this.templates.getTemplate(templateId);
+      if (!this.currentTemplate) {
+        console.error('Template not found:', templateId);
+        return;
+      }
+
+      this.currentTemplateId = templateId;
+      this.updateTemplateInfo();
+      this.renderSections();
+    }
+
+    updateTemplateInfo() {
+      document.getElementById('template-title').textContent = this.currentTemplate.name;
+      document.getElementById('template-description').textContent = this.currentTemplate.description;
+      document.getElementById('estimated-time').textContent = `⏱️ ~${this.currentTemplate.estimatedTimeMinutes} minutes`;
+      document.getElementById('difficulty-level').textContent = `📈 ${this.currentTemplate.difficulty.charAt(0).toUpperCase() + this.currentTemplate.difficulty.slice(1)}`;
+    }
+
+    renderSections() {
+      const container = document.getElementById('canvas-sections');
+      container.innerHTML = '';
+
+      this.currentTemplate.sections.forEach((section, index) => {
+        const sectionElement = this.createSectionElement(section, index);
+        container.appendChild(sectionElement);
+      });
+    }
+
+    createSectionElement(section, index) {
+      const div = document.createElement('div');
+      div.className = 'canvas-section';
+      div.innerHTML = `
+        <div class="section-header">
+          <div>
+            <h3 class="section-title">${section.title}</h3>
+            <p class="section-description">${section.description}</p>
+          </div>
+          <div class="section-status">
+            <span class="status-indicator status-incomplete" id="status-${section.id}">
+              <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              Incomplete
+            </span>
+          </div>
+        </div>
+
+        <div class="section-prompts">
+          <h4 class="text-sm font-medium text-gray-900 mb-2">Consider these questions:</h4>
+          <div class="prompt-list">
+            ${section.prompts.map(prompt => `
+              <div class="prompt-item">
+                <span class="text-blue-500 mr-2">•</span>
+                <span>${prompt}</span>
+              </div>
+            `).join('')}
+          </div>
+
+          ${section.examples.length > 0 ? `
+            <div class="section-examples">
+              <h5 class="text-xs font-medium text-gray-700 mb-1">Examples:</h5>
+              <div class="example-list">
+                ${section.examples.map(example => `
+                  <div class="example-item">"${example}"</div>
+                `).join('')}
+              </div>
+            </div>
+          ` : ''}
+        </div>
+
+        <textarea
+          id="input-${section.id}"
+          class="section-input"
+          placeholder="Describe your ${section.title.toLowerCase()}..."
+          data-section="${section.id}"
+        ></textarea>
+
+        <div class="section-footer">
+          <div class="character-count">
+            <span id="count-${section.id}">0</span> characters
+            ${section.validation.minLength ? `(minimum: ${section.validation.minLength})` : ''}
+          </div>
+          <button type="button" class="ai-assist-btn text-sm bg-purple-100 text-purple-700 px-3 py-1 rounded hover:bg-purple-200" data-section="${section.id}">
+            ✨ AI Assist
+          </button>
+        </div>
+      `;
+
+      return div;
+    }
+
+    bindEvents() {
+      // Template selector
+      document.getElementById('template-selector').addEventListener('change', (e) => {
+        if (this.isDirty) {
+          if (confirm('You have unsaved changes. Are you sure you want to switch templates?')) {
+            this.loadTemplate(e.target.value);
+            this.isDirty = false;
+          } else {
+            e.target.value = this.currentTemplateId;
+          }
+        } else {
+          this.loadTemplate(e.target.value);
+        }
+      });
+
+      // Form inputs
+      document.addEventListener('input', (e) => {
+        if (e.target.matches('.section-input')) {
+          const sectionId = e.target.dataset.section;
+          this.canvasData[sectionId] = e.target.value;
+          this.updateCharacterCount(sectionId, e.target.value.length);
+          this.updateSectionStatus(sectionId);
+          this.updateProgress();
+          this.isDirty = true;
+        }
+      });
+
+      // AI actions
+      document.addEventListener('click', (e) => {
+        if (e.target.matches('.ai-action-btn') || e.target.closest('.ai-action-btn')) {
+          const btn = e.target.closest('.ai-action-btn');
+          const action = btn.dataset.action;
+          this.handleAIAction(action);
+        }
+
+        if (e.target.matches('.ai-assist-btn')) {
+          const sectionId = e.target.dataset.section;
+          this.handleSectionAIAssist(sectionId);
+        }
+      });
+
+      // Save and preview
+      document.getElementById('save-draft').addEventListener('click', () => this.saveDraft());
+      document.getElementById('save-and-continue').addEventListener('click', () => this.saveAndContinue());
+      document.getElementById('preview-canvas').addEventListener('click', () => this.previewCanvas());
+      document.getElementById('generate-blueprint').addEventListener('click', () => this.generateBlueprint());
+
+      // Modal
+      document.getElementById('close-preview').addEventListener('click', () => {
+        document.getElementById('canvas-preview-modal').classList.add('hidden');
+      });
+
+      // Auto-save
+      setInterval(() => {
+        if (this.isDirty) {
+          this.saveDraft(true); // Silent save
+        }
+      }, 30000); // Every 30 seconds
+    }
+
+    updateCharacterCount(sectionId, count) {
+      const countElement = document.getElementById(`count-${sectionId}`);
+      if (countElement) {
+        countElement.textContent = count;
+      }
+    }
+
+    updateSectionStatus(sectionId) {
+      const section = this.currentTemplate.sections.find(s => s.id === sectionId);
+      const content = this.canvasData[sectionId] || '';
+      const statusElement = document.getElementById(`status-${sectionId}`);
+
+      if (!statusElement) return;
+
+      const isComplete = content.length >= (section.validation.minLength || 50);
+
+      if (isComplete) {
+        statusElement.className = 'status-indicator status-complete';
+        statusElement.innerHTML = `
+          <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+          </svg>
+          Complete
+        `;
+      } else {
+        statusElement.className = 'status-indicator status-incomplete';
+        statusElement.innerHTML = `
+          <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+          </svg>
+          Incomplete
+        `;
+      }
+    }
+
+    updateProgress() {
+      const completedSections = this.currentTemplate.sections.filter(section => {
+        const content = this.canvasData[section.id] || '';
+        return content.length >= (section.validation.minLength || 50);
+      }).length;
+
+      const progress = (completedSections / this.currentTemplate.sections.length) * 100;
+
+      document.getElementById('progress-bar').style.width = `${progress}%`;
+      document.querySelector('#completeness-indicator .font-medium').textContent = `${Math.round(progress)}%`;
+    }
+
+    async handleAIAction(action) {
+      const aiPanel = document.getElementById('ai-feedback');
+      const aiContent = document.getElementById('ai-feedback-content');
+
+      aiPanel.classList.remove('hidden');
+      aiContent.innerHTML = '<div class="text-center py-4"><div class="animate-spin inline-block w-6 h-6 border-2 border-blue-600 border-t-transparent rounded-full"></div><div class="mt-2 text-sm text-gray-600">AI is analyzing your canvas...</div></div>';
+
+      try {
+        const response = await fetch('/api/ai/canvas-assist', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            action,
+            templateId: this.currentTemplateId,
+            canvasData: this.canvasData
+          })
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          this.renderAIFeedback(result.data, action);
+        } else {
+          throw new Error(result.error);
+        }
+      } catch (error) {
+        console.error('AI action error:', error);
+        aiContent.innerHTML = `<div class="text-red-600 text-sm">AI assistance is temporarily unavailable. Please try again later.</div>`;
+      }
+    }
+
+    async handleSectionAIAssist(sectionId) {
+      try {
+        const response = await fetch('/api/ai/section-assist', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            sectionId,
+            templateId: this.currentTemplateId,
+            canvasData: this.canvasData,
+            existingContent: this.canvasData[sectionId] || ''
+          })
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          this.showSectionSuggestion(sectionId, result.data.suggestion);
+        }
+      } catch (error) {
+        console.error('Section AI assist error:', error);
+      }
+    }
+
+    renderAIFeedback(data, action) {
+      const aiContent = document.getElementById('ai-feedback-content');
+
+      if (action === 'analyze') {
+        aiContent.innerHTML = `
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <div class="text-lg font-medium">Canvas Score: ${data.score}/100</div>
+              <div class="text-sm text-gray-600">Completeness: ${data.completeness}%</div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              ${data.strengths.length > 0 ? `
+                <div>
+                  <h4 class="font-medium text-green-700 mb-2">Strengths</h4>
+                  <ul class="text-sm space-y-1">
+                    ${data.strengths.map(strength => `<li class="text-green-600">• ${strength}</li>`).join('')}
+                  </ul>
+                </div>
+              ` : ''}
+
+              ${data.improvements.length > 0 ? `
+                <div>
+                  <h4 class="font-medium text-orange-700 mb-2">Areas for Improvement</h4>
+                  <ul class="text-sm space-y-1">
+                    ${data.improvements.map(improvement => `<li class="text-orange-600">• ${improvement}</li>`).join('')}
+                  </ul>
+                </div>
+              ` : ''}
+            </div>
+
+            ${data.feedback.length > 0 ? `
+              <div>
+                <h4 class="font-medium text-gray-900 mb-2">Detailed Feedback</h4>
+                <ul class="text-sm space-y-1">
+                  ${data.feedback.map(feedback => `<li class="text-gray-600">• ${feedback}</li>`).join('')}
+                </ul>
+              </div>
+            ` : ''}
+          </div>
+        `;
+      }
+    }
+
+    showSectionSuggestion(sectionId, suggestion) {
+      const inputElement = document.getElementById(`input-${sectionId}`);
+      const existingContainer = document.querySelector(`#ai-suggestion-${sectionId}`);
+
+      // Remove existing suggestion
+      if (existingContainer) {
+        existingContainer.remove();
+      }
+
+      // Create suggestion element
+      const suggestionDiv = document.createElement('div');
+      suggestionDiv.id = `ai-suggestion-${sectionId}`;
+      suggestionDiv.className = 'ai-suggestion';
+      suggestionDiv.innerHTML = `
+        <div class="ai-suggestion-header">
+          <span class="text-sm font-medium text-purple-700">AI Suggestion</span>
+          <div class="flex space-x-2">
+            <button class="use-suggestion-btn" onclick="this.closest('.canvas-section').querySelector('.section-input').value = '${suggestion.replace(/'/g, "\\'")}'; this.closest('.ai-suggestion').remove();">
+              Use This
+            </button>
+            <button class="text-xs text-gray-500 hover:text-gray-700" onclick="this.closest('.ai-suggestion').remove();">
+              Dismiss
+            </button>
+          </div>
+        </div>
+        <div class="ai-suggestion-content">${suggestion}</div>
+      `;
+
+      inputElement.parentNode.insertBefore(suggestionDiv, inputElement);
+    }
+
+    saveDraft(silent = false) {
+      const draftData = {
+        templateId: this.currentTemplateId,
+        canvasData: this.canvasData,
+        timestamp: new Date().toISOString()
+      };
+
+      localStorage.setItem('techflunky_canvas_draft', JSON.stringify(draftData));
+      this.isDirty = false;
+
+      if (!silent) {
+        // Show save confirmation
+        const btn = document.getElementById('save-draft');
+        const originalText = btn.textContent;
+        btn.textContent = 'Saved ✓';
+        btn.className = 'bg-green-500 text-white px-4 py-2 rounded-md';
+
+        setTimeout(() => {
+          btn.textContent = originalText;
+          btn.className = 'bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600';
+        }, 2000);
+      }
+    }
+
+    loadExistingData() {
+      // Load from localStorage
+      const savedDraft = localStorage.getItem('techflunky_canvas_draft');
+      if (savedDraft) {
+        try {
+          const draftData = JSON.parse(savedDraft);
+          if (draftData.templateId === this.currentTemplateId) {
+            this.canvasData = draftData.canvasData || {};
+
+            // Populate form fields
+            Object.entries(this.canvasData).forEach(([sectionId, content]) => {
+              const inputElement = document.getElementById(`input-${sectionId}`);
+              if (inputElement) {
+                inputElement.value = content;
+                this.updateCharacterCount(sectionId, content.length);
+                this.updateSectionStatus(sectionId);
+              }
+            });
+
+            this.updateProgress();
+          }
+        } catch (error) {
+          console.error('Error loading draft:', error);
+        }
+      }
+    }
+
+    previewCanvas() {
+      const modal = document.getElementById('canvas-preview-modal');
+      const content = document.getElementById('canvas-preview-content');
+
+      // Generate preview HTML
+      let previewHTML = `<div class="space-y-6">`;
+
+      this.currentTemplate.sections.forEach(section => {
+        const sectionContent = this.canvasData[section.id] || 'Not completed yet...';
+        previewHTML += `
+          <div class="border-b border-gray-200 pb-4">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">${section.title}</h3>
+            <div class="text-gray-700 whitespace-pre-wrap">${sectionContent}</div>
+          </div>
+        `;
+      });
+
+      previewHTML += `</div>`;
+      content.innerHTML = previewHTML;
+      modal.classList.remove('hidden');
+    }
+
+    async saveAndContinue() {
+      this.saveDraft();
+
+      // Evaluate canvas
+      const evaluation = this.templates.evaluateCanvas({
+        templateId: this.currentTemplateId,
+        ...this.canvasData
+      });
+
+      if (evaluation.completeness < 70) {
+        alert(`Your canvas is ${evaluation.completeness}% complete. Please complete more sections before continuing.`);
+        return;
+      }
+
+      // Redirect to blueprint generation
+      const canvasId = this.saveCanvasToServer();
+      window.location.href = `/blueprint-wizard?canvas=${canvasId}`;
+    }
+
+    async generateBlueprint() {
+      // Save canvas first
+      this.saveDraft();
+
+      // Navigate to blueprint generation with pre-populated data
+      const queryParams = new URLSearchParams({
+        template: this.currentTemplateId,
+        canvas: JSON.stringify(this.canvasData)
+      });
+
+      window.location.href = `/blueprint-wizard?${queryParams.toString()}`;
+    }
+
+    async saveCanvasToServer() {
+      try {
+        const response = await fetch('/api/canvas/save', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            templateId: this.currentTemplateId,
+            canvasData: this.canvasData
+          })
+        });
+
+        const result = await response.json();
+        return result.canvasId;
+      } catch (error) {
+        console.error('Error saving canvas:', error);
+        return null;
+      }
+    }
+  }
+
+  // Initialize when DOM is ready
+  document.addEventListener('DOMContentLoaded', () => {
+    new BusinessCanvasWizard();
+  });
+</script>

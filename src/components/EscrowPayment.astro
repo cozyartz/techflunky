@@ -1,0 +1,408 @@
+---
+export interface Props {
+  platformId: string;
+  platformTitle: string;
+  platformPrice: number;
+  sellerId: string;
+  buyerId: string;
+  certification?: {
+    level: string;
+    badge: string;
+    trustScore: number;
+  };
+}
+
+const { platformId, platformTitle, platformPrice, sellerId, buyerId, certification } = Astro.props;
+
+const platformFee = Math.round(platformPrice * 0.08);
+const sellerAmount = platformPrice - platformFee;
+---
+
+<div class="escrow-payment-container bg-white rounded-lg shadow-lg p-6">
+  <!-- Payment Summary -->
+  <div class="payment-summary mb-6">
+    <h3 class="text-xl font-semibold text-gray-900 mb-4">Secure Escrow Payment</h3>
+
+    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+      <div class="flex items-start">
+        <svg class="w-5 h-5 text-blue-600 mt-0.5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+        </svg>
+        <div>
+          <h4 class="font-medium text-blue-900">Escrow Protection</h4>
+          <p class="text-sm text-blue-700 mt-1">
+            Your payment is held securely until the platform is successfully deployed and you confirm satisfaction.
+            Funds are only released to the seller after all conditions are met.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Platform Details -->
+    <div class="platform-details border rounded-lg p-4 mb-4">
+      <div class="flex items-start justify-between">
+        <div class="flex-1">
+          <h4 class="font-medium text-gray-900">{platformTitle}</h4>
+          <p class="text-sm text-gray-600">Platform ID: {platformId}</p>
+          {certification && (
+            <div class="mt-2">
+              <span class={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
+                certification.level === 'elite' ? 'bg-yellow-100 text-yellow-800' :
+                certification.level === 'premium' ? 'bg-purple-100 text-purple-800' :
+                certification.level === 'verified' ? 'bg-blue-100 text-blue-800' :
+                'bg-gray-100 text-gray-800'
+              }`}>
+                {certification.badge} {certification.level.toUpperCase()}
+              </span>
+              <span class="text-xs text-gray-500 ml-2">Trust Score: {certification.trustScore}%</span>
+            </div>
+          )}
+        </div>
+        <div class="text-right">
+          <div class="text-2xl font-bold text-gray-900">${(platformPrice / 100).toLocaleString()}</div>
+          <div class="text-sm text-gray-500">One-time purchase</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Price Breakdown -->
+    <div class="price-breakdown bg-gray-50 rounded-lg p-4 mb-6">
+      <h5 class="font-medium text-gray-900 mb-3">Payment Breakdown</h5>
+      <div class="space-y-2 text-sm">
+        <div class="flex justify-between">
+          <span class="text-gray-600">Platform Price</span>
+          <span class="text-gray-900">${(platformPrice / 100).toLocaleString()}</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-gray-600">Platform Fee (8%)</span>
+          <span class="text-gray-900">-${(platformFee / 100).toLocaleString()}</span>
+        </div>
+        <div class="flex justify-between font-medium pt-2 border-t">
+          <span class="text-gray-900">Seller Receives</span>
+          <span class="text-gray-900">${(sellerAmount / 100).toLocaleString()}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Escrow Timeline -->
+    <div class="escrow-timeline mb-6">
+      <h5 class="font-medium text-gray-900 mb-3">Escrow Process</h5>
+      <div class="space-y-3">
+        <div class="flex items-center">
+          <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-white text-xs font-bold mr-3">1</div>
+          <span class="text-sm text-gray-700">Payment held in secure escrow</span>
+        </div>
+        <div class="flex items-center">
+          <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-white text-xs font-bold mr-3">2</div>
+          <span class="text-sm text-gray-700">Platform code and documentation transferred</span>
+        </div>
+        <div class="flex items-center">
+          <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-white text-xs font-bold mr-3">3</div>
+          <span class="text-sm text-gray-700">Deployment assistance and setup (5-10 days)</span>
+        </div>
+        <div class="flex items-center">
+          <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-white text-xs font-bold mr-3">4</div>
+          <span class="text-sm text-gray-700">Buyer confirmation and funds released to seller</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Payment Form -->
+  <form id="escrow-payment-form" class="space-y-4">
+    <div class="payment-element-container">
+      <div id="payment-element" class="mb-4">
+        <!-- Stripe Elements will be mounted here -->
+      </div>
+    </div>
+
+    <!-- Terms and Conditions -->
+    <div class="terms-conditions bg-gray-50 rounded-lg p-4 mb-4">
+      <label class="flex items-start">
+        <input type="checkbox" id="agree-terms" required class="mt-1 mr-3">
+        <span class="text-sm text-gray-700">
+          I agree to the <a href="/terms" class="text-blue-600 hover:underline">Terms of Service</a> and
+          <a href="/escrow-terms" class="text-blue-600 hover:underline">Escrow Agreement</a>.
+          I understand that funds will be held in escrow until platform deployment is confirmed.
+        </span>
+      </label>
+    </div>
+
+    <!-- Payment Button -->
+    <button
+      type="submit"
+      id="submit-payment"
+      class="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+      disabled
+    >
+      <span id="button-text">
+        <svg class="inline w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
+        </svg>
+        Secure Payment - ${(platformPrice / 100).toLocaleString()}
+      </span>
+      <span id="loading-text" class="hidden">
+        <svg class="animate-spin inline w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        Processing...
+      </span>
+    </button>
+
+    <!-- Payment Status -->
+    <div id="payment-message" class="hidden mt-4 p-4 rounded-lg"></div>
+  </form>
+
+  <!-- Guarantees -->
+  <div class="guarantees mt-6 pt-6 border-t">
+    <h5 class="font-medium text-gray-900 mb-3">Your Protection</h5>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+      <div class="flex items-start">
+        <svg class="w-4 h-4 text-green-500 mt-0.5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+        </svg>
+        <span class="text-gray-700">30-day money-back guarantee</span>
+      </div>
+      <div class="flex items-start">
+        <svg class="w-4 h-4 text-green-500 mt-0.5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+        </svg>
+        <span class="text-gray-700">Secure code escrow protection</span>
+      </div>
+      <div class="flex items-start">
+        <svg class="w-4 h-4 text-green-500 mt-0.5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+        </svg>
+        <span class="text-gray-700">24/7 deployment support</span>
+      </div>
+      <div class="flex items-start">
+        <svg class="w-4 h-4 text-green-500 mt-0.5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+        </svg>
+        <span class="text-gray-700">Dispute resolution process</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { loadStripe } from '@stripe/stripe-js';
+
+  class EscrowPaymentHandler {
+    constructor() {
+      this.stripe = null;
+      this.elements = null;
+      this.paymentElement = null;
+      this.escrowTransactionId = null;
+      this.init();
+    }
+
+    async init() {
+      // Load Stripe
+      this.stripe = await loadStripe(window.STRIPE_PUBLISHABLE_KEY);
+
+      // Initialize payment form
+      await this.setupPaymentForm();
+
+      // Bind events
+      this.bindEvents();
+    }
+
+    async setupPaymentForm() {
+      try {
+        // Create escrow transaction
+        const escrowResponse = await fetch('/api/payments/escrow/create', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            platformId: this.getPlatformId(),
+            buyerId: this.getBuyerId(),
+            sellerId: this.getSellerId(),
+            amount: this.getPlatformPrice(),
+            currency: 'usd',
+            description: `Purchase of ${this.getPlatformTitle()}`,
+            metadata: {
+              source: 'marketplace_purchase'
+            }
+          })
+        });
+
+        const escrowData = await escrowResponse.json();
+
+        if (!escrowData.success) {
+          throw new Error(escrowData.error || 'Failed to create escrow transaction');
+        }
+
+        this.escrowTransactionId = escrowData.data.escrowTransactionId;
+
+        // Create Stripe Elements
+        this.elements = this.stripe.elements({
+          clientSecret: escrowData.data.clientSecret,
+          appearance: {
+            theme: 'stripe',
+            variables: {
+              colorPrimary: '#2563eb',
+              colorBackground: '#ffffff',
+              colorText: '#1f2937',
+              colorDanger: '#dc2626',
+              fontFamily: 'system-ui, sans-serif',
+              spacingUnit: '4px',
+              borderRadius: '8px'
+            }
+          }
+        });
+
+        // Create payment element
+        this.paymentElement = this.elements.create('payment');
+        this.paymentElement.mount('#payment-element');
+
+        // Listen for changes
+        this.paymentElement.on('change', (event) => {
+          this.updatePaymentButton(event.complete);
+        });
+
+      } catch (error) {
+        console.error('Payment setup error:', error);
+        this.showPaymentMessage('Failed to initialize payment. Please try again.', 'error');
+      }
+    }
+
+    bindEvents() {
+      // Form submission
+      document.getElementById('escrow-payment-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        this.handlePayment();
+      });
+
+      // Terms checkbox
+      document.getElementById('agree-terms').addEventListener('change', (e) => {
+        this.updatePaymentButton(e.target.checked && this.paymentElement);
+      });
+    }
+
+    async handlePayment() {
+      if (!this.stripe || !this.elements) {
+        this.showPaymentMessage('Payment system not ready. Please refresh and try again.', 'error');
+        return;
+      }
+
+      this.setPaymentLoading(true);
+
+      try {
+        // Confirm payment
+        const { error, paymentIntent } = await this.stripe.confirmPayment({
+          elements: this.elements,
+          confirmParams: {
+            return_url: `${window.location.origin}/purchase/success?escrow=${this.escrowTransactionId}`,
+            payment_method_data: {
+              billing_details: {
+                email: this.getBuyerEmail()
+              }
+            }
+          },
+          redirect: 'if_required'
+        });
+
+        if (error) {
+          throw error;
+        }
+
+        if (paymentIntent.status === 'succeeded') {
+          // Payment successful, redirect to success page
+          window.location.href = `/purchase/success?escrow=${this.escrowTransactionId}&payment=${paymentIntent.id}`;
+        } else {
+          throw new Error(`Payment status: ${paymentIntent.status}`);
+        }
+
+      } catch (error) {
+        console.error('Payment error:', error);
+        this.showPaymentMessage(
+          error.message || 'Payment failed. Please check your payment details and try again.',
+          'error'
+        );
+        this.setPaymentLoading(false);
+      }
+    }
+
+    updatePaymentButton(isReady) {
+      const submitButton = document.getElementById('submit-payment');
+      const termsChecked = document.getElementById('agree-terms').checked;
+
+      submitButton.disabled = !(isReady && termsChecked);
+    }
+
+    setPaymentLoading(loading) {
+      const submitButton = document.getElementById('submit-payment');
+      const buttonText = document.getElementById('button-text');
+      const loadingText = document.getElementById('loading-text');
+
+      submitButton.disabled = loading;
+
+      if (loading) {
+        buttonText.classList.add('hidden');
+        loadingText.classList.remove('hidden');
+      } else {
+        buttonText.classList.remove('hidden');
+        loadingText.classList.add('hidden');
+      }
+    }
+
+    showPaymentMessage(message, type) {
+      const messageElement = document.getElementById('payment-message');
+      messageElement.textContent = message;
+      messageElement.className = `mt-4 p-4 rounded-lg ${
+        type === 'error' ? 'bg-red-50 text-red-800 border border-red-200' : 'bg-green-50 text-green-800 border border-green-200'
+      }`;
+      messageElement.classList.remove('hidden');
+
+      // Auto-hide success messages
+      if (type === 'success') {
+        setTimeout(() => {
+          messageElement.classList.add('hidden');
+        }, 5000);
+      }
+    }
+
+    // Helper methods to get data from the page
+    getPlatformId() {
+      return document.querySelector('[data-platform-id]')?.dataset.platformId || '';
+    }
+
+    getBuyerId() {
+      return document.querySelector('[data-buyer-id]')?.dataset.buyerId || '';
+    }
+
+    getSellerId() {
+      return document.querySelector('[data-seller-id]')?.dataset.sellerId || '';
+    }
+
+    getPlatformPrice() {
+      return parseInt(document.querySelector('[data-platform-price]')?.dataset.platformPrice || '0');
+    }
+
+    getPlatformTitle() {
+      return document.querySelector('[data-platform-title]')?.dataset.platformTitle || '';
+    }
+
+    getBuyerEmail() {
+      return document.querySelector('[data-buyer-email]')?.dataset.buyerEmail || '';
+    }
+  }
+
+  // Initialize payment handler when DOM is ready
+  document.addEventListener('DOMContentLoaded', () => {
+    new EscrowPaymentHandler();
+  });
+</script>
+
+<!-- Hidden data attributes for JavaScript -->
+<div style="display: none;">
+  <div data-platform-id={platformId}></div>
+  <div data-buyer-id={buyerId}></div>
+  <div data-seller-id={sellerId}></div>
+  <div data-platform-price={platformPrice}></div>
+  <div data-platform-title={platformTitle}></div>
+</div>

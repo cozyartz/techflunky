@@ -1,0 +1,715 @@
+---
+// Business Blueprint Generation Wizard Component
+---
+
+<div id="blueprint-wizard" class="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg">
+  <div class="mb-8">
+    <h2 class="text-3xl font-bold text-gray-900 mb-2">Business Blueprint Generator</h2>
+    <p class="text-gray-600">Transform your business idea into a comprehensive, investor-ready blueprint using AI</p>
+  </div>
+
+  <!-- Progress Indicator -->
+  <div class="mb-8">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center">
+        <div class="step-indicator active" data-step="1">
+          <span class="step-number">1</span>
+          <span class="step-label">Basic Info</span>
+        </div>
+        <div class="step-connector"></div>
+        <div class="step-indicator" data-step="2">
+          <span class="step-number">2</span>
+          <span class="step-label">Market Details</span>
+        </div>
+        <div class="step-connector"></div>
+        <div class="step-indicator" data-step="3">
+          <span class="step-number">3</span>
+          <span class="step-label">Service Tier</span>
+        </div>
+        <div class="step-connector"></div>
+        <div class="step-indicator" data-step="4">
+          <span class="step-number">4</span>
+          <span class="step-label">Review & Generate</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <form id="blueprint-form" class="space-y-6">
+    <!-- Step 1: Basic Information -->
+    <div class="step-content active" data-step="1">
+      <h3 class="text-xl font-semibold mb-4">Tell us about your business idea</h3>
+
+      <div class="space-y-4">
+        <div>
+          <label for="idea-description" class="block text-sm font-medium text-gray-700 mb-2">
+            Describe your business idea *
+          </label>
+          <textarea
+            id="idea-description"
+            name="ideaDescription"
+            rows="4"
+            required
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            placeholder="Example: A platform that connects local restaurants with food delivery drivers, featuring real-time order tracking and AI-powered route optimization for faster deliveries."
+          ></textarea>
+          <p class="text-sm text-gray-500 mt-1">Be specific about what problem you're solving and how</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label for="industry" class="block text-sm font-medium text-gray-700 mb-2">
+              Industry *
+            </label>
+            <select
+              id="industry"
+              name="industry"
+              required
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            >
+              <option value="">Select an industry</option>
+              <option value="healthcare">Healthcare</option>
+              <option value="fintech">Financial Technology</option>
+              <option value="ecommerce">E-commerce & Retail</option>
+              <option value="education">Education & Training</option>
+              <option value="real-estate">Real Estate</option>
+              <option value="food-beverage">Food & Beverage</option>
+              <option value="logistics">Logistics & Transportation</option>
+              <option value="professional-services">Professional Services</option>
+              <option value="entertainment">Entertainment & Media</option>
+              <option value="technology">Technology & Software</option>
+              <option value="manufacturing">Manufacturing</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="business-model" class="block text-sm font-medium text-gray-700 mb-2">
+              Business Model *
+            </label>
+            <select
+              id="business-model"
+              name="businessModel"
+              required
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            >
+              <option value="">Select a model</option>
+              <option value="saas">SaaS (Software as a Service)</option>
+              <option value="marketplace">Two-sided Marketplace</option>
+              <option value="ecommerce">E-commerce Store</option>
+              <option value="subscription">Subscription Service</option>
+              <option value="freemium">Freemium Model</option>
+              <option value="transaction">Transaction-based</option>
+              <option value="advertising">Advertising Revenue</option>
+              <option value="one-time">One-time Purchase</option>
+              <option value="hybrid">Hybrid Model</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2: Market Details -->
+    <div class="step-content" data-step="2">
+      <h3 class="text-xl font-semibold mb-4">Market and Customer Information</h3>
+
+      <div class="space-y-4">
+        <div>
+          <label for="target-market" class="block text-sm font-medium text-gray-700 mb-2">
+            Target Market *
+          </label>
+          <textarea
+            id="target-market"
+            name="targetMarket"
+            rows="3"
+            required
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            placeholder="Example: Small to medium restaurants (10-100 employees) in urban areas that want to improve delivery efficiency and customer satisfaction."
+          ></textarea>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label for="budget-range" class="block text-sm font-medium text-gray-700 mb-2">
+              Development Budget Range
+            </label>
+            <select
+              id="budget-range"
+              name="budgetRange"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            >
+              <option value="">Select budget range</option>
+              <option value="under-25k">Under $25,000</option>
+              <option value="25k-50k">$25,000 - $50,000</option>
+              <option value="50k-100k">$50,000 - $100,000</option>
+              <option value="100k-250k">$100,000 - $250,000</option>
+              <option value="250k-500k">$250,000 - $500,000</option>
+              <option value="over-500k">Over $500,000</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="timeline" class="block text-sm font-medium text-gray-700 mb-2">
+              Desired Launch Timeline
+            </label>
+            <select
+              id="timeline"
+              name="timeline"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            >
+              <option value="">Select timeline</option>
+              <option value="1-3-months">1-3 months</option>
+              <option value="3-6-months">3-6 months</option>
+              <option value="6-12-months">6-12 months</option>
+              <option value="over-12-months">Over 12 months</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label for="tech-preference" class="block text-sm font-medium text-gray-700 mb-2">
+            Technology Preferences (Optional)
+          </label>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+            <label class="flex items-center">
+              <input type="checkbox" name="techPreference" value="nextjs" class="mr-2">
+              <span class="text-sm">Next.js</span>
+            </label>
+            <label class="flex items-center">
+              <input type="checkbox" name="techPreference" value="react" class="mr-2">
+              <span class="text-sm">React</span>
+            </label>
+            <label class="flex items-center">
+              <input type="checkbox" name="techPreference" value="vue" class="mr-2">
+              <span class="text-sm">Vue/Nuxt</span>
+            </label>
+            <label class="flex items-center">
+              <input type="checkbox" name="techPreference" value="laravel" class="mr-2">
+              <span class="text-sm">Laravel</span>
+            </label>
+            <label class="flex items-center">
+              <input type="checkbox" name="techPreference" value="django" class="mr-2">
+              <span class="text-sm">Django</span>
+            </label>
+            <label class="flex items-center">
+              <input type="checkbox" name="techPreference" value="nodejs" class="mr-2">
+              <span class="text-sm">Node.js</span>
+            </label>
+            <label class="flex items-center">
+              <input type="checkbox" name="techPreference" value="python" class="mr-2">
+              <span class="text-sm">Python</span>
+            </label>
+            <label class="flex items-center">
+              <input type="checkbox" name="techPreference" value="no-preference" class="mr-2">
+              <span class="text-sm">No Preference</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3: Service Tier Selection -->
+    <div class="step-content" data-step="3">
+      <h3 class="text-xl font-semibold mb-4">Choose Your Blueprint Service Level</h3>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Basic Tier -->
+        <div class="tier-card border border-gray-200 rounded-lg p-6 hover:border-yellow-500 cursor-pointer" data-tier="basic">
+          <div class="tier-header mb-4">
+            <h4 class="text-lg font-semibold text-gray-900">Basic Blueprint</h4>
+            <div class="price">
+              <span class="text-3xl font-bold text-gray-900">$19</span>
+              <span class="text-gray-500">/blueprint</span>
+            </div>
+          </div>
+
+          <ul class="tier-features space-y-2 mb-6">
+            <li class="flex items-center">
+              <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-sm">AI-generated business plan</span>
+            </li>
+            <li class="flex items-center">
+              <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-sm">Core business model canvas</span>
+            </li>
+            <li class="flex items-center">
+              <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-sm">Basic financial projections</span>
+            </li>
+            <li class="flex items-center">
+              <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-sm">Tech stack recommendations</span>
+            </li>
+            <li class="flex items-center">
+              <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-sm">12-month roadmap</span>
+            </li>
+          </ul>
+
+          <div class="best-for bg-gray-50 p-3 rounded">
+            <p class="text-sm text-gray-600"><strong>Best for:</strong> First-time entrepreneurs validating ideas</p>
+          </div>
+        </div>
+
+        <!-- Premium Tier -->
+        <div class="tier-card border-2 border-yellow-500 rounded-lg p-6 hover:border-yellow-600 cursor-pointer relative" data-tier="premium">
+          <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
+            <span class="bg-yellow-500 text-white px-3 py-1 rounded-full text-xs font-medium">POPULAR</span>
+          </div>
+
+          <div class="tier-header mb-4">
+            <h4 class="text-lg font-semibold text-gray-900">Premium Blueprint</h4>
+            <div class="price">
+              <span class="text-3xl font-bold text-gray-900">$49</span>
+              <span class="text-gray-500">/blueprint</span>
+            </div>
+          </div>
+
+          <ul class="tier-features space-y-2 mb-6">
+            <li class="flex items-center">
+              <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-sm">Everything in Basic</span>
+            </li>
+            <li class="flex items-center">
+              <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-sm">Detailed competitive analysis</span>
+            </li>
+            <li class="flex items-center">
+              <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-sm">Marketing strategy & channels</span>
+            </li>
+            <li class="flex items-center">
+              <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-sm">Risk analysis & mitigation</span>
+            </li>
+            <li class="flex items-center">
+              <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-sm">Legal & compliance guidance</span>
+            </li>
+            <li class="flex items-center">
+              <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-sm">Funding strategy recommendations</span>
+            </li>
+          </ul>
+
+          <div class="best-for bg-yellow-50 p-3 rounded">
+            <p class="text-sm text-gray-600"><strong>Best for:</strong> Serious entrepreneurs seeking investment</p>
+          </div>
+        </div>
+
+        <!-- Enterprise Tier -->
+        <div class="tier-card border border-gray-200 rounded-lg p-6 hover:border-yellow-500 cursor-pointer" data-tier="enterprise">
+          <div class="tier-header mb-4">
+            <h4 class="text-lg font-semibold text-gray-900">Enterprise Blueprint</h4>
+            <div class="price">
+              <span class="text-3xl font-bold text-gray-900">$299</span>
+              <span class="text-gray-500">/blueprint</span>
+            </div>
+          </div>
+
+          <ul class="tier-features space-y-2 mb-6">
+            <li class="flex items-center">
+              <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-sm">Everything in Premium</span>
+            </li>
+            <li class="flex items-center">
+              <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-sm">Expert human review</span>
+            </li>
+            <li class="flex items-center">
+              <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-sm">Comprehensive market research</span>
+            </li>
+            <li class="flex items-center">
+              <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12-586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-sm">Investor-ready presentation</span>
+            </li>
+            <li class="flex items-center">
+              <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-sm">1-hour strategy consultation</span>
+            </li>
+            <li class="flex items-center">
+              <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-sm">90-day success tracking</span>
+            </li>
+          </ul>
+
+          <div class="best-for bg-gray-50 p-3 rounded">
+            <p class="text-sm text-gray-600"><strong>Best for:</strong> Large-scale ventures & institutional backing</p>
+          </div>
+        </div>
+      </div>
+
+      <input type="hidden" id="selected-tier" name="tier" value="">
+    </div>
+
+    <!-- Step 4: Review & Generate -->
+    <div class="step-content" data-step="4">
+      <h3 class="text-xl font-semibold mb-4">Review & Generate Your Blueprint</h3>
+
+      <div class="bg-gray-50 p-6 rounded-lg mb-6">
+        <h4 class="font-medium mb-3">Blueprint Summary</h4>
+        <div id="review-summary" class="space-y-2 text-sm text-gray-600">
+          <!-- Summary will be populated by JavaScript -->
+        </div>
+      </div>
+
+      <div class="bg-yellow-50 border border-yellow-200 p-4 rounded-lg mb-6">
+        <div class="flex items-start">
+          <svg class="w-5 h-5 text-yellow-600 mt-0.5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+          </svg>
+          <div>
+            <h5 class="font-medium text-yellow-800">What You'll Receive</h5>
+            <ul class="text-sm text-yellow-700 mt-1 space-y-1">
+              <li>• Complete business blueprint document (15-30 pages)</li>
+              <li>• Financial model with 5-year projections</li>
+              <li>• Market analysis and competitive positioning</li>
+              <li>• Technical architecture recommendations</li>
+              <li>• Go-to-market strategy and timeline</li>
+              <li>• Risk assessment and mitigation strategies</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <div id="generation-status" class="hidden mb-4">
+          <div class="inline-flex items-center text-blue-600">
+            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            Generating your business blueprint...
+          </div>
+          <p class="text-sm text-gray-500">This may take 30-60 seconds</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="flex justify-between mt-8">
+      <button
+        type="button"
+        id="prev-btn"
+        class="px-6 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+        disabled
+      >
+        Previous
+      </button>
+
+      <button
+        type="button"
+        id="next-btn"
+        class="px-6 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        Next
+      </button>
+
+      <button
+        type="submit"
+        id="generate-btn"
+        class="hidden px-8 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        Generate Blueprint
+      </button>
+    </div>
+  </form>
+</div>
+
+<style>
+  .step-indicator {
+    @apply flex flex-col items-center;
+  }
+
+  .step-number {
+    @apply w-8 h-8 rounded-full border-2 border-gray-300 flex items-center justify-center text-sm font-medium text-gray-500 bg-white;
+  }
+
+  .step-label {
+    @apply mt-2 text-xs text-gray-500;
+  }
+
+  .step-indicator.active .step-number {
+    @apply border-yellow-500 bg-yellow-500 text-white;
+  }
+
+  .step-indicator.active .step-label {
+    @apply text-yellow-600 font-medium;
+  }
+
+  .step-indicator.completed .step-number {
+    @apply border-green-500 bg-green-500 text-white;
+  }
+
+  .step-indicator.completed .step-label {
+    @apply text-green-600;
+  }
+
+  .step-connector {
+    @apply flex-1 h-px bg-gray-300 mx-4;
+  }
+
+  .step-content {
+    @apply hidden;
+  }
+
+  .step-content.active {
+    @apply block;
+  }
+
+  .tier-card {
+    @apply transition-all duration-200;
+  }
+
+  .tier-card.selected {
+    @apply border-yellow-500 bg-yellow-50;
+  }
+
+  .tier-card.selected .tier-header h4 {
+    @apply text-yellow-800;
+  }
+</style>
+
+<script>
+  class BlueprintWizard {
+    constructor() {
+      this.currentStep = 1;
+      this.totalSteps = 4;
+      this.selectedTier = '';
+      this.init();
+    }
+
+    init() {
+      this.bindEvents();
+      this.updateUI();
+    }
+
+    bindEvents() {
+      // Navigation buttons
+      document.getElementById('prev-btn').addEventListener('click', () => this.previousStep());
+      document.getElementById('next-btn').addEventListener('click', () => this.nextStep());
+      document.getElementById('generate-btn').addEventListener('click', (e) => this.generateBlueprint(e));
+
+      // Tier selection
+      document.querySelectorAll('.tier-card').forEach(card => {
+        card.addEventListener('click', () => this.selectTier(card));
+      });
+
+      // Form validation
+      document.getElementById('blueprint-form').addEventListener('input', () => this.validateCurrentStep());
+    }
+
+    previousStep() {
+      if (this.currentStep > 1) {
+        this.currentStep--;
+        this.updateUI();
+      }
+    }
+
+    nextStep() {
+      if (this.validateCurrentStep() && this.currentStep < this.totalSteps) {
+        this.currentStep++;
+        this.updateUI();
+
+        if (this.currentStep === 4) {
+          this.updateReviewSummary();
+        }
+      }
+    }
+
+    selectTier(card) {
+      // Remove selection from all cards
+      document.querySelectorAll('.tier-card').forEach(c => c.classList.remove('selected'));
+
+      // Select clicked card
+      card.classList.add('selected');
+      this.selectedTier = card.dataset.tier;
+      document.getElementById('selected-tier').value = this.selectedTier;
+
+      this.validateCurrentStep();
+    }
+
+    validateCurrentStep() {
+      const currentStepElement = document.querySelector(`[data-step="${this.currentStep}"].step-content`);
+      let isValid = true;
+
+      switch (this.currentStep) {
+        case 1:
+          const ideaDescription = document.getElementById('idea-description').value.trim();
+          const industry = document.getElementById('industry').value;
+          const businessModel = document.getElementById('business-model').value;
+          isValid = ideaDescription.length >= 50 && industry && businessModel;
+          break;
+
+        case 2:
+          const targetMarket = document.getElementById('target-market').value.trim();
+          isValid = targetMarket.length >= 30;
+          break;
+
+        case 3:
+          isValid = this.selectedTier !== '';
+          break;
+
+        case 4:
+          isValid = true;
+          break;
+      }
+
+      // Update next button state
+      const nextBtn = document.getElementById('next-btn');
+      const generateBtn = document.getElementById('generate-btn');
+
+      if (this.currentStep === this.totalSteps) {
+        nextBtn.style.display = 'none';
+        generateBtn.style.display = 'inline-block';
+        generateBtn.disabled = !isValid;
+      } else {
+        nextBtn.style.display = 'inline-block';
+        generateBtn.style.display = 'none';
+        nextBtn.disabled = !isValid;
+      }
+
+      return isValid;
+    }
+
+    updateUI() {
+      // Update step indicators
+      document.querySelectorAll('.step-indicator').forEach((indicator, index) => {
+        const stepNum = index + 1;
+        indicator.classList.remove('active', 'completed');
+
+        if (stepNum === this.currentStep) {
+          indicator.classList.add('active');
+        } else if (stepNum < this.currentStep) {
+          indicator.classList.add('completed');
+        }
+      });
+
+      // Update step content
+      document.querySelectorAll('.step-content').forEach(content => {
+        content.classList.remove('active');
+      });
+      document.querySelector(`[data-step="${this.currentStep}"].step-content`).classList.add('active');
+
+      // Update previous button
+      document.getElementById('prev-btn').disabled = this.currentStep === 1;
+
+      // Validate current step
+      this.validateCurrentStep();
+    }
+
+    updateReviewSummary() {
+      const formData = new FormData(document.getElementById('blueprint-form'));
+      const summary = document.getElementById('review-summary');
+
+      const techPreferences = Array.from(document.querySelectorAll('input[name="techPreference"]:checked'))
+        .map(input => input.value)
+        .join(', ') || 'No preference specified';
+
+      summary.innerHTML = `
+        <div><strong>Business Idea:</strong> ${formData.get('ideaDescription').substring(0, 150)}...</div>
+        <div><strong>Industry:</strong> ${formData.get('industry')}</div>
+        <div><strong>Business Model:</strong> ${formData.get('businessModel')}</div>
+        <div><strong>Target Market:</strong> ${formData.get('targetMarket').substring(0, 100)}...</div>
+        <div><strong>Budget Range:</strong> ${formData.get('budgetRange') || 'Not specified'}</div>
+        <div><strong>Timeline:</strong> ${formData.get('timeline') || 'Not specified'}</div>
+        <div><strong>Tech Preferences:</strong> ${techPreferences}</div>
+        <div><strong>Service Tier:</strong> ${this.selectedTier.charAt(0).toUpperCase() + this.selectedTier.slice(1)}</div>
+      `;
+    }
+
+    async generateBlueprint(e) {
+      e.preventDefault();
+
+      const formData = new FormData(document.getElementById('blueprint-form'));
+      const generateBtn = document.getElementById('generate-btn');
+      const statusDiv = document.getElementById('generation-status');
+
+      // Show loading state
+      generateBtn.disabled = true;
+      statusDiv.classList.remove('hidden');
+
+      try {
+        // Collect tech preferences
+        const techPreferences = Array.from(document.querySelectorAll('input[name="techPreference"]:checked'))
+          .map(input => input.value);
+
+        const requestData = {
+          ideaDescription: formData.get('ideaDescription'),
+          industry: formData.get('industry'),
+          targetMarket: formData.get('targetMarket'),
+          businessModel: formData.get('businessModel'),
+          techPreference: techPreferences.join(', '),
+          budgetRange: formData.get('budgetRange'),
+          timeline: formData.get('timeline'),
+          tier: formData.get('tier')
+        };
+
+        const response = await fetch('/api/blueprint/generate', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(requestData)
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to generate blueprint');
+        }
+
+        const result = await response.json();
+
+        // Redirect to blueprint view
+        window.location.href = `/blueprint/${result.id}`;
+
+      } catch (error) {
+        console.error('Error generating blueprint:', error);
+        alert('Failed to generate blueprint. Please try again.');
+
+        // Reset UI
+        generateBtn.disabled = false;
+        statusDiv.classList.add('hidden');
+      }
+    }
+  }
+
+  // Initialize wizard when DOM is loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    new BlueprintWizard();
+  });
+</script>

@@ -1,0 +1,509 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import CertificationBadge from '../components/CertificationBadge.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Marketplace Certification - TechFlunky">
+  <Navigation />
+
+  <main class="pt-20 pb-16">
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-gray-900 to-black text-white py-16">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto text-center">
+          <h1 class="text-4xl md:text-5xl font-bold mb-6">
+            <span class="text-yellow-400">Marketplace Certification</span><br>
+            Build Trust, Drive Sales
+          </h1>
+          <p class="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
+            Get your business blueprint certified by AI and expert reviewers to increase buyer confidence,
+            command premium pricing, and accelerate sales on the TechFlunky marketplace.
+          </p>
+
+          <div class="flex flex-wrap justify-center gap-4 mb-8">
+            <CertificationBadge level="basic" size="large" />
+            <CertificationBadge level="verified" size="large" />
+            <CertificationBadge level="premium" size="large" />
+            <CertificationBadge level="elite" size="large" />
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+            <div class="text-center">
+              <div class="bg-yellow-500 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold mb-2">AI + Expert Validation</h3>
+              <p class="text-gray-300 text-sm">Advanced AI analysis combined with human expert review for maximum credibility</p>
+            </div>
+
+            <div class="text-center">
+              <div class="bg-yellow-500 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold mb-2">Increased Sales</h3>
+              <p class="text-gray-300 text-sm">Certified blueprints sell 3x faster and command 40% higher prices on average</p>
+            </div>
+
+            <div class="text-center">
+              <div class="bg-yellow-500 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold mb-2">Performance Guarantees</h3>
+              <p class="text-gray-300 text-sm">Each certification level includes specific guarantees and success tracking</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certification Impact Stats -->
+    <section class="py-12 bg-gray-50">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div>
+            <div class="text-3xl font-bold text-gray-900">3.2x</div>
+            <div class="text-gray-600">Faster Sales</div>
+            <div class="text-xs text-gray-500 mt-1">vs non-certified</div>
+          </div>
+          <div>
+            <div class="text-3xl font-bold text-gray-900">+40%</div>
+            <div class="text-gray-600">Higher Prices</div>
+            <div class="text-xs text-gray-500 mt-1">premium pricing</div>
+          </div>
+          <div>
+            <div class="text-3xl font-bold text-gray-900">94%</div>
+            <div class="text-gray-600">Buyer Satisfaction</div>
+            <div class="text-xs text-gray-500 mt-1">certified blueprints</div>
+          </div>
+          <div>
+            <div class="text-3xl font-bold text-gray-900">127</div>
+            <div class="text-gray-600">Certified Blueprints</div>
+            <div class="text-xs text-gray-500 mt-1">and growing</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certification Levels -->
+    <section class="py-16">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Certification Levels</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Choose the certification level that matches your business goals and target market
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Basic Certification -->
+          <div class="bg-white p-6 rounded-lg border border-gray-200 hover:border-amber-300 transition-colors">
+            <div class="text-center mb-4">
+              <CertificationBadge level="basic" size="large" />
+              <div class="mt-2">
+                <div class="text-2xl font-bold text-gray-900">Free</div>
+                <div class="text-sm text-gray-500">with blueprint purchase</div>
+              </div>
+            </div>
+
+            <ul class="space-y-2 mb-6 text-sm">
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                AI-validated business model
+              </li>
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Technical feasibility confirmed
+              </li>
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                30-day satisfaction guarantee
+              </li>
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Basic technical support
+              </li>
+            </ul>
+
+            <div class="text-xs text-gray-500 mb-4">
+              <strong>Best for:</strong> First-time entrepreneurs and simple business models
+            </div>
+
+            <button class="w-full bg-amber-500 text-white py-2 rounded-md hover:bg-amber-600 transition-colors" onclick="requestCertification('basic')">
+              Get Basic Certification
+            </button>
+          </div>
+
+          <!-- Verified Certification -->
+          <div class="bg-white p-6 rounded-lg border border-gray-200 hover:border-blue-300 transition-colors">
+            <div class="text-center mb-4">
+              <CertificationBadge level="verified" size="large" />
+              <div class="mt-2">
+                <div class="text-2xl font-bold text-gray-900">$99</div>
+                <div class="text-sm text-gray-500">one-time fee</div>
+              </div>
+            </div>
+
+            <ul class="space-y-2 mb-6 text-sm">
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Everything in Basic
+              </li>
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Market opportunity validated
+              </li>
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Revenue model verified
+              </li>
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                60-day satisfaction guarantee
+              </li>
+            </ul>
+
+            <div class="text-xs text-gray-500 mb-4">
+              <strong>Best for:</strong> Established entrepreneurs seeking marketplace credibility
+            </div>
+
+            <button class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition-colors" onclick="requestCertification('verified')">
+              Get Verified Certification
+            </button>
+          </div>
+
+          <!-- Premium Certification -->
+          <div class="bg-white p-6 rounded-lg border-2 border-purple-300 hover:border-purple-400 transition-colors relative">
+            <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
+              <span class="bg-purple-500 text-white px-3 py-1 rounded-full text-xs font-medium">POPULAR</span>
+            </div>
+
+            <div class="text-center mb-4">
+              <CertificationBadge level="premium" size="large" />
+              <div class="mt-2">
+                <div class="text-2xl font-bold text-gray-900">$299</div>
+                <div class="text-sm text-gray-500">includes expert review</div>
+              </div>
+            </div>
+
+            <ul class="space-y-2 mb-6 text-sm">
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Everything in Verified
+              </li>
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Expert human review
+              </li>
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Investment readiness confirmed
+              </li>
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                90-day satisfaction guarantee
+              </li>
+            </ul>
+
+            <div class="text-xs text-gray-500 mb-4">
+              <strong>Best for:</strong> Serious ventures seeking investment and premium pricing
+            </div>
+
+            <button class="w-full bg-purple-500 text-white py-2 rounded-md hover:bg-purple-600 transition-colors" onclick="requestCertification('premium')">
+              Get Premium Certification
+            </button>
+          </div>
+
+          <!-- Elite Certification -->
+          <div class="bg-white p-6 rounded-lg border border-gray-200 hover:border-yellow-400 transition-colors">
+            <div class="text-center mb-4">
+              <CertificationBadge level="elite" size="large" />
+              <div class="mt-2">
+                <div class="text-2xl font-bold text-gray-900">$599</div>
+                <div class="text-sm text-gray-500">elite panel review</div>
+              </div>
+            </div>
+
+            <ul class="space-y-2 mb-6 text-sm">
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Everything in Premium
+              </li>
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Elite expert panel review
+              </li>
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Investor introduction support
+              </li>
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                180-day success guarantee
+              </li>
+            </ul>
+
+            <div class="text-xs text-gray-500 mb-4">
+              <strong>Best for:</strong> High-growth ventures and institutional backing
+            </div>
+
+            <button class="w-full bg-gradient-to-r from-yellow-400 to-yellow-600 text-white py-2 rounded-md hover:from-yellow-500 hover:to-yellow-700 transition-all" onclick="requestCertification('elite')">
+              Get Elite Certification
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certification Process -->
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">How Certification Works</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Our rigorous certification process combines AI analysis with expert human review to ensure quality and credibility
+          </p>
+        </div>
+
+        <div class="max-w-4xl mx-auto">
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <!-- Step 1 -->
+            <div class="text-center">
+              <div class="bg-blue-500 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-white font-bold">
+                1
+              </div>
+              <h3 class="font-semibold mb-2">AI Analysis</h3>
+              <p class="text-sm text-gray-600">Advanced AI evaluates technical feasibility, market viability, and business model strength</p>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="text-center">
+              <div class="bg-blue-500 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-white font-bold">
+                2
+              </div>
+              <h3 class="font-semibold mb-2">Expert Review</h3>
+              <p class="text-sm text-gray-600">Business experts review premium and elite submissions for accuracy and completeness</p>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="text-center">
+              <div class="bg-blue-500 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-white font-bold">
+                3
+              </div>
+              <h3 class="font-semibold mb-2">Certification</h3>
+              <p class="text-sm text-gray-600">Approved blueprints receive certification badges and trust scores for marketplace display</p>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="text-center">
+              <div class="bg-blue-500 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-white font-bold">
+                4
+              </div>
+              <h3 class="font-semibold mb-2">Success Tracking</h3>
+              <p class="text-sm text-gray-600">Ongoing monitoring and support to ensure certified blueprints meet performance guarantees</p>
+            </div>
+          </div>
+
+          <div class="mt-12 bg-white p-6 rounded-lg shadow-sm">
+            <h3 class="font-semibold mb-4">Certification Timeline</h3>
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="text-sm">AI Analysis (Basic/Verified)</span>
+                <span class="text-sm font-medium text-blue-600">5-15 minutes</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-sm">Expert Review (Premium)</span>
+                <span class="text-sm font-medium text-blue-600">24-48 hours</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-sm">Elite Panel Review (Elite)</span>
+                <span class="text-sm font-medium text-blue-600">3-5 business days</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Success Stories -->
+    <section class="py-16">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Certification Success Stories</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            See how certification helped entrepreneurs achieve their business goals
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Success Story 1 -->
+          <div class="bg-white p-6 rounded-lg shadow-sm">
+            <div class="flex items-center mb-4">
+              <CertificationBadge level="premium" size="small" />
+              <div class="ml-3">
+                <div class="font-semibold">HealthTech Platform</div>
+                <div class="text-sm text-gray-600">$2.3M Series A</div>
+              </div>
+            </div>
+            <blockquote class="text-gray-700 mb-4">
+              "Premium certification gave investors confidence in our business model. The expert review caught issues we missed and helped us secure funding 3 months faster."
+            </blockquote>
+            <div class="text-sm text-gray-500">
+              <span class="font-medium">Result:</span> 300% faster sales, $2.3M funding
+            </div>
+          </div>
+
+          <!-- Success Story 2 -->
+          <div class="bg-white p-6 rounded-lg shadow-sm">
+            <div class="flex items-center mb-4">
+              <CertificationBadge level="elite" size="small" />
+              <div class="ml-3">
+                <div class="font-semibold">FinTech SaaS</div>
+                <div class="text-sm text-gray-600">Elite Certification</div>
+              </div>
+            </div>
+            <blockquote class="text-gray-700 mb-4">
+              "Elite certification positioned us as a premium solution. We command 50% higher prices and have a 6-month waitlist of enterprise customers."
+            </blockquote>
+            <div class="text-sm text-gray-500">
+              <span class="font-medium">Result:</span> +50% pricing, premium positioning
+            </div>
+          </div>
+
+          <!-- Success Story 3 -->
+          <div class="bg-white p-6 rounded-lg shadow-sm">
+            <div class="flex items-center mb-4">
+              <CertificationBadge level="verified" size="small" />
+              <div class="ml-3">
+                <div class="font-semibold">E-commerce Tool</div>
+                <div class="text-sm text-gray-600">Verified Blueprint</div>
+              </div>
+            </div>
+            <blockquote class="text-gray-700 mb-4">
+              "Verified certification helped us stand out in a crowded marketplace. Buyers trust the badge and we've had zero refund requests since certification."
+            </blockquote>
+            <div class="text-sm text-gray-500">
+              <span class="font-medium">Result:</span> 95% buyer satisfaction, zero refunds
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Certification FAQ</h2>
+        </div>
+
+        <div class="max-w-3xl mx-auto space-y-6">
+          <details class="bg-white p-6 rounded-lg shadow-sm">
+            <summary class="font-semibold text-gray-900 cursor-pointer">What happens if my blueprint doesn't qualify for the requested certification level?</summary>
+            <div class="mt-4 text-gray-600">
+              You'll receive the highest level your blueprint qualifies for at no additional cost. We provide detailed feedback on how to improve your blueprint to reach the desired certification level, and you can resubmit for free within 90 days.
+            </div>
+          </details>
+
+          <details class="bg-white p-6 rounded-lg shadow-sm">
+            <summary class="font-semibold text-gray-900 cursor-pointer">How long does certification last?</summary>
+            <div class="mt-4 text-gray-600">
+              Basic and Verified certifications are valid for 2 years. Premium certifications are valid for 3 years. Elite certifications are valid for 5 years. You can renew at a 50% discount before expiration.
+            </div>
+          </details>
+
+          <details class="bg-white p-6 rounded-lg shadow-sm">
+            <summary class="font-semibold text-gray-900 cursor-pointer">Can I upgrade my certification level later?</summary>
+            <div class="mt-4 text-gray-600">
+              Yes! You can upgrade your certification at any time. You'll only pay the difference between your current level and the desired level. Upgraded certifications retain the longer expiration period.
+            </div>
+          </details>
+
+          <details class="bg-white p-6 rounded-lg shadow-sm">
+            <summary class="font-semibold text-gray-900 cursor-pointer">What guarantees come with certification?</summary>
+            <div class="mt-4 text-gray-600">
+              Each certification level includes satisfaction guarantees, performance tracking, and specific service level commitments. Elite certifications include success milestone tracking and investor introduction support if performance targets aren't met.
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  function requestCertification(level) {
+    // Check if user has a blueprint to certify
+    const hasBlueprint = localStorage.getItem('blueprintId') || sessionStorage.getItem('blueprintId');
+
+    if (!hasBlueprint) {
+      // Redirect to blueprint wizard first
+      window.location.href = '/blueprint-wizard?certification=' + level;
+      return;
+    }
+
+    // Track certification request
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'certification_request', {
+        certification_level: level,
+        event_category: 'conversion'
+      });
+    }
+
+    // Redirect to certification flow
+    window.location.href = `/blueprint/certify?level=${level}&blueprintId=${hasBlueprint}`;
+  }
+
+  // Add certification badge hover effects
+  document.querySelectorAll('.certification-badge-container').forEach(badge => {
+    badge.addEventListener('mouseenter', () => {
+      badge.style.transform = 'scale(1.05)';
+      badge.style.transition = 'transform 0.2s ease';
+    });
+
+    badge.addEventListener('mouseleave', () => {
+      badge.style.transform = 'scale(1)';
+    });
+  });
+</script>

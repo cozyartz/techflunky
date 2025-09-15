@@ -1,417 +1,570 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
 ---
 
 <Layout title="Pricing - TechFlunky">
-  <main class="min-h-screen bg-black text-white">
-    <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm border-b border-yellow-400/20">
-      <div class="container mx-auto px-4 py-4">
-        <div class="flex items-center justify-between">
-          <div class="flex items-center space-x-3">
-            <img src="/assets/techflunky-logo.png" alt="TechFlunky" class="w-10 h-10">
-            <span class="text-xl font-bold text-white">TechFlunky</span>
+  <Navigation />
+
+  <main class="pt-20 pb-16">
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-gray-900 to-black text-white py-16">
+      <div class="container mx-auto px-6 text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">
+          Transparent Pricing for <span class="text-yellow-400">Every Stage</span>
+        </h1>
+        <p class="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
+          From free business canvas creation to premium certification services.
+          Pay only for what you use, when you need it.
+        </p>
+        <div class="bg-yellow-400 text-black px-6 py-3 rounded-lg inline-block font-semibold">
+          ✨ Start Free • Scale with Success • Industry-Leading Rates
+        </div>
+      </div>
+    </section>
+
+    <!-- Business Creation Services -->
+    <section class="py-16">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Business Creation Services</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Professional tools and AI assistance to transform your ideas into investor-ready business blueprints
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <!-- Business Canvas (Free) -->
+          <div class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
+            <div class="text-center mb-4">
+              <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900">Business Canvas</h3>
+              <div class="text-2xl font-bold text-green-600 mb-1">FREE</div>
+            </div>
+            <ul class="space-y-2 text-sm text-gray-600 mb-6">
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Guided canvas wizard
+              </li>
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                3 professional templates
+              </li>
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Progress tracking
+              </li>
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Auto-save drafts
+              </li>
+            </ul>
+            <button class="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700 transition-colors">
+              Start Canvas
+            </button>
           </div>
-          <div class="hidden md:flex items-center space-x-8">
-            <a href="/" class="text-gray-300 hover:text-yellow-400 transition font-medium">Home</a>
-            <a href="/browse" class="text-gray-300 hover:text-yellow-400 transition font-medium">Browse</a>
-            <a href="/invest" class="text-gray-300 hover:text-yellow-400 transition font-medium">Invest</a>
-            <a href="/sell" class="text-gray-300 hover:text-yellow-400 transition font-medium">Sell</a>
-            <a href="/pricing" class="text-yellow-400 font-medium">Pricing</a>
-            <a href="/about" class="text-gray-300 hover:text-yellow-400 transition font-medium">About</a>
-            <a href="/contact" class="bg-yellow-400 text-black px-4 py-2 rounded-lg font-semibold hover:bg-yellow-300 transition">Contact</a>
+
+          <!-- AI Section Assist -->
+          <div class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
+            <div class="text-center mb-4">
+              <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900">AI Section Assist</h3>
+              <div class="text-2xl font-bold text-blue-600 mb-1">$9</div>
+              <div class="text-sm text-gray-500">per section</div>
+            </div>
+            <ul class="space-y-2 text-sm text-gray-600 mb-6">
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-blue-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                AI content suggestions
+              </li>
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-blue-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Contextual improvements
+              </li>
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-blue-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Industry-specific insights
+              </li>
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-blue-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Multiple suggestions
+              </li>
+            </ul>
+            <button class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-colors">
+              Try AI Assist
+            </button>
+          </div>
+
+          <!-- Canvas Analysis -->
+          <div class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
+            <div class="text-center mb-4">
+              <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900">Canvas Analysis</h3>
+              <div class="text-2xl font-bold text-purple-600 mb-1">$19</div>
+              <div class="text-sm text-gray-500">comprehensive report</div>
+            </div>
+            <ul class="space-y-2 text-sm text-gray-600 mb-6">
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-purple-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                AI scoring (0-100)
+              </li>
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-purple-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Strengths & weaknesses
+              </li>
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-purple-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Improvement recommendations
+              </li>
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-purple-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Market readiness assessment
+              </li>
+            </ul>
+            <button class="w-full bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700 transition-colors">
+              Get Analysis
+            </button>
+          </div>
+
+          <!-- Blueprint Generation -->
+          <div class="bg-white border-2 border-yellow-400 rounded-lg p-6 hover:shadow-lg transition-shadow relative">
+            <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
+              <span class="bg-yellow-400 text-black px-3 py-1 rounded-full text-xs font-medium">POPULAR</span>
+            </div>
+            <div class="text-center mb-4">
+              <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900">Blueprint Generation</h3>
+              <div class="text-2xl font-bold text-yellow-600 mb-1">$49</div>
+              <div class="text-sm text-gray-500">full business plan</div>
+            </div>
+            <ul class="space-y-2 text-sm text-gray-600 mb-6">
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-yellow-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                15-30 page business plan
+              </li>
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-yellow-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Financial projections
+              </li>
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-yellow-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Market analysis
+              </li>
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-yellow-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Tech recommendations
+              </li>
+            </ul>
+            <button class="w-full bg-yellow-600 text-white py-2 rounded-md hover:bg-yellow-700 transition-colors">
+              Generate Blueprint
+            </button>
           </div>
         </div>
       </div>
-    </nav>
+    </section>
 
-    <!-- Hero Section -->
-    <section class="bg-gradient-to-b from-black via-gray-900 to-black py-20">
-      <div class="container mx-auto px-4 text-center">
-        <h1 class="text-5xl font-bold mb-6 text-yellow-400">
-          Simple, Transparent Pricing
-        </h1>
-        <p class="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-          Start free, scale as you grow. The most competitive rates in the marketplace industry.
-        </p>
-        <div class="bg-yellow-400 text-black px-6 py-3 rounded-lg inline-block font-semibold">
-          ✨ 8% Success Fee - Beat Industry Standard by 60%
+    <!-- Certification Services -->
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Certification & Validation</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Professional certification services to build marketplace credibility and command premium pricing
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Basic Certification -->
+          <div class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
+            <div class="text-center mb-4">
+              <div class="text-2xl mb-2">🥉</div>
+              <h3 class="text-lg font-semibold text-gray-900">Basic Certification</h3>
+              <div class="text-2xl font-bold text-gray-600 mb-1">FREE</div>
+              <div class="text-sm text-gray-500">with blueprint</div>
+            </div>
+            <ul class="space-y-2 text-sm text-gray-600 mb-6">
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                AI validation
+              </li>
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Technical feasibility
+              </li>
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                30-day guarantee
+              </li>
+            </ul>
+          </div>
+
+          <!-- Verified Certification -->
+          <div class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
+            <div class="text-center mb-4">
+              <div class="text-2xl mb-2">🥈</div>
+              <h3 class="text-lg font-semibold text-gray-900">Verified Certification</h3>
+              <div class="text-2xl font-bold text-blue-600 mb-1">$99</div>
+              <div class="text-sm text-gray-500">one-time fee</div>
+            </div>
+            <ul class="space-y-2 text-sm text-gray-600 mb-6">
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-blue-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Market validation
+              </li>
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-blue-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Revenue model verified
+              </li>
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-blue-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                60-day guarantee
+              </li>
+            </ul>
+          </div>
+
+          <!-- Premium Certification -->
+          <div class="bg-white border-2 border-purple-400 rounded-lg p-6 hover:shadow-lg transition-shadow relative">
+            <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
+              <span class="bg-purple-500 text-white px-3 py-1 rounded-full text-xs font-medium">RECOMMENDED</span>
+            </div>
+            <div class="text-center mb-4">
+              <div class="text-2xl mb-2">🥇</div>
+              <h3 class="text-lg font-semibold text-gray-900">Premium Certification</h3>
+              <div class="text-2xl font-bold text-purple-600 mb-1">$299</div>
+              <div class="text-sm text-gray-500">expert review</div>
+            </div>
+            <ul class="space-y-2 text-sm text-gray-600 mb-6">
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-purple-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Human expert review
+              </li>
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-purple-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Investment readiness
+              </li>
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-purple-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                90-day guarantee
+              </li>
+            </ul>
+          </div>
+
+          <!-- Elite Certification -->
+          <div class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
+            <div class="text-center mb-4">
+              <div class="text-2xl mb-2">💎</div>
+              <h3 class="text-lg font-semibold text-gray-900">Elite Certification</h3>
+              <div class="text-2xl font-bold text-gray-900 mb-1">$599</div>
+              <div class="text-sm text-gray-500">elite panel</div>
+            </div>
+            <ul class="space-y-2 text-sm text-gray-600 mb-6">
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-gray-700 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Elite expert panel
+              </li>
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-gray-700 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Investor introductions
+              </li>
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-gray-700 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                180-day guarantee
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Marketplace Fees -->
     <section class="py-16">
-      <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-12 text-yellow-400">
-          Marketplace Fees
-        </h2>
-        <div class="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-          <div class="bg-gray-900 p-8 rounded-lg border border-gray-800">
-            <h3 class="text-xl font-bold mb-4 text-green-400">Listing Fee</h3>
-            <div class="text-4xl font-bold mb-2">FREE</div>
-            <p class="text-gray-400 mb-6">List unlimited business ideas at no cost</p>
-            <ul class="space-y-2 text-sm">
-              <li class="flex items-center">
-                <span class="text-green-400 mr-2">✓</span>
-                Unlimited listings
-              </li>
-              <li class="flex items-center">
-                <span class="text-green-400 mr-2">✓</span>
-                Basic AI validation
-              </li>
-              <li class="flex items-center">
-                <span class="text-green-400 mr-2">✓</span>
-                Direct buyer messaging
-              </li>
-            </ul>
-          </div>
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Marketplace Success Fees</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Industry-leading low fees. Only pay when you successfully sell your platform.
+          </p>
+        </div>
 
-          <div class="bg-gradient-to-b from-yellow-500/20 to-yellow-600/10 p-8 rounded-lg border-2 border-yellow-400 relative">
-            <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-yellow-400 text-black px-4 py-1 rounded-full text-sm font-bold">
-              MOST POPULAR
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          <!-- Listing Fee -->
+          <div class="bg-white border border-gray-200 rounded-lg p-6 text-center hover:shadow-lg transition-shadow">
+            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+              </svg>
             </div>
-            <h3 class="text-xl font-bold mb-4 text-yellow-400">Success Fee</h3>
-            <div class="text-4xl font-bold mb-2">8%</div>
-            <p class="text-gray-400 mb-6">Only pay when you sell</p>
-            <ul class="space-y-2 text-sm">
-              <li class="flex items-center">
-                <span class="text-yellow-400 mr-2">✓</span>
-                Beat competitors by 60%
-              </li>
-              <li class="flex items-center">
-                <span class="text-yellow-400 mr-2">✓</span>
-                Secure escrow included
-              </li>
-              <li class="flex items-center">
-                <span class="text-yellow-400 mr-2">✓</span>
-                Full fraud protection
-              </li>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Listing Fee</h3>
+            <div class="text-3xl font-bold text-green-600 mb-2">FREE</div>
+            <p class="text-gray-600 mb-4">List unlimited platforms at no cost</p>
+            <ul class="text-sm text-gray-600 space-y-1">
+              <li>• Unlimited listings</li>
+              <li>• Basic AI validation</li>
+              <li>• Direct buyer messaging</li>
+              <li>• Community support</li>
             </ul>
           </div>
 
-          <div class="bg-gray-900 p-8 rounded-lg border border-gray-800">
-            <h3 class="text-xl font-bold mb-4 text-blue-400">Premium Boost</h3>
-            <div class="text-4xl font-bold mb-2">$29</div>
-            <p class="text-gray-400 mb-6">per month, optional</p>
-            <ul class="space-y-2 text-sm">
-              <li class="flex items-center">
-                <span class="text-blue-400 mr-2">✓</span>
-                Featured placement
-              </li>
-              <li class="flex items-center">
-                <span class="text-blue-400 mr-2">✓</span>
-                Advanced analytics
-              </li>
-              <li class="flex items-center">
-                <span class="text-blue-400 mr-2">✓</span>
-                Priority AI matching
-              </li>
+          <!-- Success Fee -->
+          <div class="bg-white border-2 border-yellow-400 rounded-lg p-6 text-center hover:shadow-lg transition-shadow relative">
+            <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
+              <span class="bg-yellow-400 text-black px-3 py-1 rounded-full text-xs font-medium">INDUSTRY LEADING</span>
+            </div>
+            <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Success Fee</h3>
+            <div class="text-3xl font-bold text-yellow-600 mb-2">8%</div>
+            <p class="text-gray-600 mb-4">Only pay when you sell (vs 15-20% industry standard)</p>
+            <ul class="text-sm text-gray-600 space-y-1">
+              <li>• 60% below competitors</li>
+              <li>• Secure escrow included</li>
+              <li>• Full fraud protection</li>
+              <li>• Payment processing included</li>
+            </ul>
+          </div>
+
+          <!-- Premium Boost -->
+          <div class="bg-white border border-gray-200 rounded-lg p-6 text-center hover:shadow-lg transition-shadow">
+            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Premium Boost</h3>
+            <div class="text-3xl font-bold text-blue-600 mb-2">$49</div>
+            <p class="text-gray-600 mb-4">per month (optional)</p>
+            <ul class="text-sm text-gray-600 space-y-1">
+              <li>• Featured placement</li>
+              <li>• Advanced analytics</li>
+              <li>• Priority AI matching</li>
+              <li>• Dedicated support</li>
             </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- API Access Tiers -->
-    <section class="py-16 bg-gray-900/50">
-      <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-12 text-yellow-400">
-          API Access Tiers
-        </h2>
-        <div class="grid md:grid-cols-4 gap-6 max-w-7xl mx-auto">
-          <!-- Free Tier -->
-          <div class="bg-gray-900 p-6 rounded-lg border border-gray-800">
-            <h3 class="text-lg font-bold mb-2 text-green-400">Free</h3>
-            <div class="text-3xl font-bold mb-4">$0</div>
-            <ul class="space-y-2 text-sm mb-6">
-              <li class="flex items-center">
-                <span class="text-green-400 mr-2">✓</span>
-                10K API calls/month
-              </li>
-              <li class="flex items-center">
-                <span class="text-green-400 mr-2">✓</span>
-                100 AI analyses/month
-              </li>
-              <li class="flex items-center">
-                <span class="text-green-400 mr-2">✓</span>
-                Basic support
-              </li>
+    <!-- Professional Services -->
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Professional Services</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Expert assistance for complex requirements and custom solutions
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Expert Review -->
+          <div class="bg-white border border-gray-200 rounded-lg p-6 text-center hover:shadow-lg transition-shadow">
+            <div class="text-3xl mb-4">👨‍💼</div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Expert Review</h3>
+            <div class="text-2xl font-bold text-gray-900 mb-2">$99</div>
+            <p class="text-sm text-gray-500 mb-4">human consultant review</p>
+            <ul class="text-sm text-gray-600 space-y-1 mb-4">
+              <li>• 24-48 hour delivery</li>
+              <li>• Detailed feedback</li>
+              <li>• Improvement plan</li>
+              <li>• 1-hour consultation</li>
             </ul>
-            <button class="w-full bg-green-500 hover:bg-green-600 text-black font-bold py-2 px-4 rounded">
-              Get Started Free
+            <button class="w-full bg-gray-600 text-white py-2 rounded-md hover:bg-gray-700 transition-colors">
+              Book Review
             </button>
           </div>
 
-          <!-- Starter Tier -->
-          <div class="bg-gray-900 p-6 rounded-lg border border-gray-800">
-            <h3 class="text-lg font-bold mb-2 text-blue-400">Starter</h3>
-            <div class="text-3xl font-bold mb-4">$19</div>
-            <ul class="space-y-2 text-sm mb-6">
-              <li class="flex items-center">
-                <span class="text-blue-400 mr-2">✓</span>
-                100K API calls/month
-              </li>
-              <li class="flex items-center">
-                <span class="text-blue-400 mr-2">✓</span>
-                1K AI analyses/month
-              </li>
-              <li class="flex items-center">
-                <span class="text-blue-400 mr-2">✓</span>
-                Email support
-              </li>
+          <!-- Market Research -->
+          <div class="bg-white border border-gray-200 rounded-lg p-6 text-center hover:shadow-lg transition-shadow">
+            <div class="text-3xl mb-4">📊</div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Market Research</h3>
+            <div class="text-2xl font-bold text-gray-900 mb-2">$199</div>
+            <p class="text-sm text-gray-500 mb-4">comprehensive analysis</p>
+            <ul class="text-sm text-gray-600 space-y-1 mb-4">
+              <li>• 5-7 day delivery</li>
+              <li>• Competitive landscape</li>
+              <li>• TAM/SAM analysis</li>
+              <li>• Investment potential</li>
             </ul>
-            <button class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-              Choose Starter
+            <button class="w-full bg-gray-600 text-white py-2 rounded-md hover:bg-gray-700 transition-colors">
+              Order Research
             </button>
           </div>
 
-          <!-- Pro Tier -->
-          <div class="bg-gradient-to-b from-yellow-500/20 to-yellow-600/10 p-6 rounded-lg border-2 border-yellow-400 relative">
-            <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-yellow-400 text-black px-3 py-1 rounded-full text-xs font-bold">
-              POPULAR
-            </div>
-            <h3 class="text-lg font-bold mb-2 text-yellow-400">Professional</h3>
-            <div class="text-3xl font-bold mb-4">$79</div>
-            <ul class="space-y-2 text-sm mb-6">
-              <li class="flex items-center">
-                <span class="text-yellow-400 mr-2">✓</span>
-                500K API calls/month
-              </li>
-              <li class="flex items-center">
-                <span class="text-yellow-400 mr-2">✓</span>
-                10K AI analyses/month
-              </li>
-              <li class="flex items-center">
-                <span class="text-yellow-400 mr-2">✓</span>
-                Priority support
-              </li>
-              <li class="flex items-center">
-                <span class="text-yellow-400 mr-2">✓</span>
-                Market intelligence
-              </li>
+          <!-- Due Diligence -->
+          <div class="bg-white border border-gray-200 rounded-lg p-6 text-center hover:shadow-lg transition-shadow">
+            <div class="text-3xl mb-4">🔍</div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Due Diligence</h3>
+            <div class="text-2xl font-bold text-gray-900 mb-2">$499</div>
+            <p class="text-sm text-gray-500 mb-4">investor-grade</p>
+            <ul class="text-sm text-gray-600 space-y-1 mb-4">
+              <li>• Technical validation</li>
+              <li>• Financial audit</li>
+              <li>• Risk assessment</li>
+              <li>• Investment recommendation</li>
             </ul>
-            <button class="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-4 rounded">
-              Choose Pro
+            <button class="w-full bg-gray-600 text-white py-2 rounded-md hover:bg-gray-700 transition-colors">
+              Request DD
             </button>
           </div>
 
-          <!-- Enterprise Tier -->
-          <div class="bg-gray-900 p-6 rounded-lg border border-purple-500">
-            <h3 class="text-lg font-bold mb-2 text-purple-400">Enterprise</h3>
-            <div class="text-3xl font-bold mb-4">$199</div>
-            <ul class="space-y-2 text-sm mb-6">
-              <li class="flex items-center">
-                <span class="text-purple-400 mr-2">✓</span>
-                2M API calls/month
-              </li>
-              <li class="flex items-center">
-                <span class="text-purple-400 mr-2">✓</span>
-                Unlimited AI analyses
-              </li>
-              <li class="flex items-center">
-                <span class="text-purple-400 mr-2">✓</span>
-                Dedicated support
-              </li>
-              <li class="flex items-center">
-                <span class="text-purple-400 mr-2">✓</span>
-                Basic white-label
-              </li>
+          <!-- Custom Development -->
+          <div class="bg-white border border-gray-200 rounded-lg p-6 text-center hover:shadow-lg transition-shadow">
+            <div class="text-3xl mb-4">⚙️</div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Custom Solutions</h3>
+            <div class="text-2xl font-bold text-gray-900 mb-2">Custom</div>
+            <p class="text-sm text-gray-500 mb-4">enterprise pricing</p>
+            <ul class="text-sm text-gray-600 space-y-1 mb-4">
+              <li>• White-label solutions</li>
+              <li>• API integrations</li>
+              <li>• Custom workflows</li>
+              <li>• Dedicated support</li>
             </ul>
-            <button class="w-full bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded">
-              Choose Enterprise
+            <button class="w-full bg-gray-600 text-white py-2 rounded-md hover:bg-gray-700 transition-colors">
+              Contact Sales
             </button>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Premium Services -->
+    <!-- Pricing Comparison -->
     <section class="py-16">
-      <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-12 text-yellow-400">
-          Premium Services
-        </h2>
-
-        <!-- White-Label Portals -->
-        <div class="mb-16">
-          <h3 class="text-2xl font-bold mb-8 text-center text-white">White-Label Portals</h3>
-          <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <div class="bg-gray-900 p-6 rounded-lg border border-gray-800">
-              <h4 class="text-lg font-bold mb-2 text-blue-400">Basic</h4>
-              <div class="text-3xl font-bold mb-4">$499</div>
-              <p class="text-sm text-gray-400 mb-4">per month</p>
-              <ul class="space-y-2 text-sm mb-6">
-                <li class="flex items-center">
-                  <span class="text-blue-400 mr-2">✓</span>
-                  Custom branding
-                </li>
-                <li class="flex items-center">
-                  <span class="text-blue-400 mr-2">✓</span>
-                  Custom domain
-                </li>
-                <li class="flex items-center">
-                  <span class="text-blue-400 mr-2">✓</span>
-                  Basic analytics
-                </li>
-                <li class="flex items-center">
-                  <span class="text-blue-400 mr-2">✓</span>
-                  100 users included
-                </li>
-              </ul>
-            </div>
-
-            <div class="bg-gradient-to-b from-yellow-500/20 to-yellow-600/10 p-6 rounded-lg border-2 border-yellow-400 relative">
-              <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-yellow-400 text-black px-3 py-1 rounded-full text-xs font-bold">
-                RECOMMENDED
-              </div>
-              <h4 class="text-lg font-bold mb-2 text-yellow-400">Premium</h4>
-              <div class="text-3xl font-bold mb-4">$799</div>
-              <p class="text-sm text-gray-400 mb-4">per month</p>
-              <ul class="space-y-2 text-sm mb-6">
-                <li class="flex items-center">
-                  <span class="text-yellow-400 mr-2">✓</span>
-                  Everything in Basic
-                </li>
-                <li class="flex items-center">
-                  <span class="text-yellow-400 mr-2">✓</span>
-                  Advanced analytics
-                </li>
-                <li class="flex items-center">
-                  <span class="text-yellow-400 mr-2">✓</span>
-                  Priority support
-                </li>
-                <li class="flex items-center">
-                  <span class="text-yellow-400 mr-2">✓</span>
-                  500 users included
-                </li>
-                <li class="flex items-center">
-                  <span class="text-yellow-400 mr-2">✓</span>
-                  Custom features
-                </li>
-              </ul>
-            </div>
-
-            <div class="bg-gray-900 p-6 rounded-lg border border-purple-500">
-              <h4 class="text-lg font-bold mb-2 text-purple-400">Enterprise</h4>
-              <div class="text-3xl font-bold mb-4">$999</div>
-              <p class="text-sm text-gray-400 mb-4">per month</p>
-              <ul class="space-y-2 text-sm mb-6">
-                <li class="flex items-center">
-                  <span class="text-purple-400 mr-2">✓</span>
-                  Everything in Premium
-                </li>
-                <li class="flex items-center">
-                  <span class="text-purple-400 mr-2">✓</span>
-                  Unlimited users
-                </li>
-                <li class="flex items-center">
-                  <span class="text-purple-400 mr-2">✓</span>
-                  Dedicated infrastructure
-                </li>
-                <li class="flex items-center">
-                  <span class="text-purple-400 mr-2">✓</span>
-                  SLA guarantees
-                </li>
-                <li class="flex items-center">
-                  <span class="text-purple-400 mr-2">✓</span>
-                  Full customization
-                </li>
-              </ul>
-            </div>
-          </div>
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">How We Compare</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Industry-leading rates with comprehensive features included
+          </p>
         </div>
 
-        <!-- Professional Services -->
-        <div class="mb-16">
-          <h3 class="text-2xl font-bold mb-8 text-center text-white">Professional Services</h3>
-          <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 text-center">
-              <div class="text-4xl mb-4">🎯</div>
-              <h4 class="text-lg font-bold mb-2 text-green-400">Priority Support</h4>
-              <div class="text-2xl font-bold mb-2">$99</div>
-              <p class="text-sm text-gray-400 mb-4">per month</p>
-              <ul class="text-sm space-y-1">
-                <li>24-hour response SLA</li>
-                <li>Priority queue</li>
-                <li>Technical guidance</li>
-              </ul>
-            </div>
-
-            <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 text-center">
-              <div class="text-4xl mb-4">📊</div>
-              <h4 class="text-lg font-bold mb-2 text-blue-400">AI Market Report</h4>
-              <div class="text-2xl font-bold mb-2">$99</div>
-              <p class="text-sm text-gray-400 mb-4">per report</p>
-              <ul class="text-sm space-y-1">
-                <li>3-5 day delivery</li>
-                <li>Custom analysis</li>
-                <li>Actionable insights</li>
-              </ul>
-            </div>
-
-            <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 text-center">
-              <div class="text-4xl mb-4">🔍</div>
-              <h4 class="text-lg font-bold mb-2 text-yellow-400">Due Diligence</h4>
-              <div class="text-2xl font-bold mb-2">$499</div>
-              <p class="text-sm text-gray-400 mb-4">per deal</p>
-              <ul class="text-sm space-y-1">
-                <li>5-7 day delivery</li>
-                <li>Technical validation</li>
-                <li>Investment rec</li>
-              </ul>
-            </div>
-
-            <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 text-center">
-              <div class="text-4xl mb-4">🔧</div>
-              <h4 class="text-lg font-bold mb-2 text-purple-400">Custom Integration</h4>
-              <div class="text-2xl font-bold mb-2">$2,499</div>
-              <p class="text-sm text-gray-400 mb-4">setup + $299/month</p>
-              <ul class="text-sm space-y-1">
-                <li>Custom development</li>
-                <li>API integration</li>
-                <li>Ongoing support</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Comparison Table -->
-    <section class="py-16 bg-gray-900/50">
-      <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-12 text-yellow-400">
-          How We Compare
-        </h2>
         <div class="overflow-x-auto">
-          <table class="w-full max-w-4xl mx-auto bg-gray-900 rounded-lg border border-gray-800">
+          <table class="w-full max-w-5xl mx-auto bg-white rounded-lg border border-gray-200">
             <thead>
-              <tr class="border-b border-gray-800">
-                <th class="text-left p-4 text-white">Platform</th>
-                <th class="text-left p-4 text-white">Success Fee</th>
-                <th class="text-left p-4 text-white">Listing Fee</th>
-                <th class="text-left p-4 text-white">Syndicate Setup</th>
+              <tr class="border-b border-gray-200 bg-gray-50">
+                <th class="text-left p-4 font-semibold text-gray-900">Feature</th>
+                <th class="text-center p-4 font-semibold text-yellow-600">TechFlunky</th>
+                <th class="text-center p-4 font-semibold text-gray-600">Empire Flippers</th>
+                <th class="text-center p-4 font-semibold text-gray-600">Flippa</th>
+                <th class="text-center p-4 font-semibold text-gray-600">Other Platforms</th>
               </tr>
             </thead>
             <tbody>
-              <tr class="border-b border-gray-800 bg-yellow-400/10">
-                <td class="p-4 font-bold text-yellow-400">TechFlunky</td>
-                <td class="p-4 text-green-400 font-bold">8%</td>
-                <td class="p-4 text-green-400 font-bold">FREE</td>
-                <td class="p-4 text-green-400 font-bold">$299</td>
+              <tr class="border-b border-gray-100">
+                <td class="p-4 font-medium text-gray-900">Success Fee</td>
+                <td class="p-4 text-center text-green-600 font-bold">8%</td>
+                <td class="p-4 text-center text-red-600">15%</td>
+                <td class="p-4 text-center text-red-600">10-15%</td>
+                <td class="p-4 text-center text-red-600">15-20%</td>
               </tr>
-              <tr class="border-b border-gray-800">
-                <td class="p-4 text-gray-400">AngelList</td>
-                <td class="p-4 text-red-400">5-15%</td>
-                <td class="p-4 text-red-400">Varies</td>
-                <td class="p-4 text-red-400">$8,000</td>
+              <tr class="border-b border-gray-100">
+                <td class="p-4 font-medium text-gray-900">Listing Fee</td>
+                <td class="p-4 text-center text-green-600 font-bold">FREE</td>
+                <td class="p-4 text-center text-red-600">$297</td>
+                <td class="p-4 text-center text-red-600">$9-$399</td>
+                <td class="p-4 text-center text-red-600">$100-$500</td>
               </tr>
-              <tr class="border-b border-gray-800">
-                <td class="p-4 text-gray-400">Other Platforms</td>
-                <td class="p-4 text-red-400">10-20%</td>
-                <td class="p-4 text-red-400">$100-$500</td>
-                <td class="p-4 text-red-400">$1,000+</td>
+              <tr class="border-b border-gray-100">
+                <td class="p-4 font-medium text-gray-900">AI Business Tools</td>
+                <td class="p-4 text-center text-green-600 font-bold">✓</td>
+                <td class="p-4 text-center text-gray-400">✗</td>
+                <td class="p-4 text-center text-gray-400">✗</td>
+                <td class="p-4 text-center text-gray-400">✗</td>
+              </tr>
+              <tr class="border-b border-gray-100">
+                <td class="p-4 font-medium text-gray-900">Escrow Protection</td>
+                <td class="p-4 text-center text-green-600 font-bold">✓ Included</td>
+                <td class="p-4 text-center text-yellow-600">✓ Extra Fee</td>
+                <td class="p-4 text-center text-yellow-600">✓ Extra Fee</td>
+                <td class="p-4 text-center text-gray-400">Varies</td>
+              </tr>
+              <tr class="border-b border-gray-100">
+                <td class="p-4 font-medium text-gray-900">Certification System</td>
+                <td class="p-4 text-center text-green-600 font-bold">✓</td>
+                <td class="p-4 text-center text-gray-400">✗</td>
+                <td class="p-4 text-center text-gray-400">✗</td>
+                <td class="p-4 text-center text-gray-400">✗</td>
+              </tr>
+              <tr>
+                <td class="p-4 font-medium text-gray-900">Multi-Stack Support</td>
+                <td class="p-4 text-center text-green-600 font-bold">✓ All Stacks</td>
+                <td class="p-4 text-center text-yellow-600">Limited</td>
+                <td class="p-4 text-center text-yellow-600">Limited</td>
+                <td class="p-4 text-center text-gray-400">Varies</td>
               </tr>
             </tbody>
           </table>
@@ -419,20 +572,35 @@ import Layout from '../layouts/Layout.astro';
       </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="py-20 bg-gradient-to-r from-yellow-400 to-yellow-600">
-      <div class="container mx-auto px-4 text-center">
-        <h2 class="text-4xl font-bold mb-6 text-black">
-          Ready to Save 60% on Fees?
+    <!-- Value Proposition -->
+    <section class="py-16 bg-gradient-to-r from-yellow-400 to-yellow-600">
+      <div class="container mx-auto px-6 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-black mb-6">
+          Save 60% on Fees, Get 10x More Value
         </h2>
-        <p class="text-xl text-black mb-8 max-w-2xl mx-auto">
-          Join thousands of entrepreneurs who chose the most cost-effective marketplace platform.
+        <p class="text-xl text-black mb-8 max-w-3xl mx-auto">
+          Complete business creation platform with AI assistance, professional certification,
+          and the lowest marketplace fees in the industry.
         </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-8">
+          <div class="bg-black/10 rounded-lg p-4">
+            <div class="text-2xl font-bold text-black">$150+</div>
+            <div class="text-sm text-black">Average savings per blueprint</div>
+          </div>
+          <div class="bg-black/10 rounded-lg p-4">
+            <div class="text-2xl font-bold text-black">3.2x</div>
+            <div class="text-sm text-black">Faster sales with certification</div>
+          </div>
+          <div class="bg-black/10 rounded-lg p-4">
+            <div class="text-2xl font-bold text-black">40%</div>
+            <div class="text-sm text-black">Higher prices achievable</div>
+          </div>
+        </div>
         <div class="space-x-4">
-          <a href="/signup" class="bg-black hover:bg-gray-800 text-yellow-400 font-bold py-3 px-8 rounded-lg inline-block transition-colors">
-            Start Free Today
+          <a href="/blueprint-wizard" class="bg-black text-yellow-400 font-bold py-3 px-8 rounded-lg inline-block hover:bg-gray-800 transition-colors">
+            Start Building Free
           </a>
-          <a href="/contact" class="border-2 border-black hover:bg-black hover:text-yellow-400 text-black font-bold py-3 px-8 rounded-lg inline-block transition-colors">
+          <a href="/contact" class="border-2 border-black text-black font-bold py-3 px-8 rounded-lg inline-block hover:bg-black hover:text-yellow-400 transition-colors">
             Talk to Sales
           </a>
         </div>
@@ -441,64 +609,55 @@ import Layout from '../layouts/Layout.astro';
 
     <!-- FAQ Section -->
     <section class="py-16">
-      <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-12 text-yellow-400">
-          Frequently Asked Questions
-        </h2>
-        <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          <div class="bg-gray-900 p-6 rounded-lg">
-            <h3 class="text-lg font-bold mb-3 text-yellow-400">How does the 8% success fee work?</h3>
-            <p class="text-gray-300">You only pay when you successfully sell your business idea. No upfront costs, no hidden fees. We succeed when you succeed.</p>
-          </div>
-          <div class="bg-gray-900 p-6 rounded-lg">
-            <h3 class="text-lg font-bold mb-3 text-yellow-400">What's included in the free API tier?</h3>
-            <p class="text-gray-300">10,000 API calls and 100 AI analyses per month, plus access to our basic endpoints and community support.</p>
-          </div>
-          <div class="bg-gray-900 p-6 rounded-lg">
-            <h3 class="text-lg font-bold mb-3 text-yellow-400">Can I cancel my subscription anytime?</h3>
-            <p class="text-gray-300">Yes, all subscriptions can be cancelled anytime with no penalties. We offer prorated refunds for annual plans.</p>
-          </div>
-          <div class="bg-gray-900 p-6 rounded-lg">
-            <h3 class="text-lg font-bold mb-3 text-yellow-400">Do you offer custom enterprise solutions?</h3>
-            <p class="text-gray-300">Absolutely! Our enterprise team can create custom solutions, pricing, and SLAs to meet your specific needs.</p>
-          </div>
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
+        </div>
+
+        <div class="max-w-3xl mx-auto space-y-6">
+          <details class="bg-white border border-gray-200 rounded-lg p-6">
+            <summary class="font-semibold text-gray-900 cursor-pointer">How does the 8% success fee work?</summary>
+            <div class="mt-4 text-gray-600">
+              You only pay the 8% fee when you successfully sell your platform. No upfront costs, no hidden fees.
+              The fee is automatically deducted from the sale proceeds through our secure escrow system.
+            </div>
+          </details>
+
+          <details class="bg-white border border-gray-200 rounded-lg p-6">
+            <summary class="font-semibold text-gray-900 cursor-pointer">What's included in the business canvas for free?</summary>
+            <div class="mt-4 text-gray-600">
+              The free business canvas includes guided wizard, 3 professional templates (SaaS, Marketplace, AI),
+              progress tracking, auto-save, and basic validation. It's everything you need to structure your business idea.
+            </div>
+          </details>
+
+          <details class="bg-white border border-gray-200 rounded-lg p-6">
+            <summary class="font-semibold text-gray-900 cursor-pointer">How does certification affect my platform's value?</summary>
+            <div class="mt-4 text-gray-600">
+              Certified platforms sell 3.2x faster and command 40% higher prices on average. Certification builds buyer trust
+              and reduces risk, making buyers willing to pay premium prices for validated businesses.
+            </div>
+          </details>
+
+          <details class="bg-white border border-gray-200 rounded-lg p-6">
+            <summary class="font-semibold text-gray-900 cursor-pointer">Can I upgrade my blueprint or certification later?</summary>
+            <div class="mt-4 text-gray-600">
+              Yes! You can upgrade your blueprint generation tier or certification level at any time.
+              You'll only pay the difference between your current level and the desired upgrade.
+            </div>
+          </details>
+
+          <details class="bg-white border border-gray-200 rounded-lg p-6">
+            <summary class="font-semibold text-gray-900 cursor-pointer">What happens if my platform doesn't sell?</summary>
+            <div class="mt-4 text-gray-600">
+              You pay nothing! Our success fee is only charged when you successfully sell your platform.
+              Additionally, all our blueprint and certification services come with satisfaction guarantees.
+            </div>
+          </details>
         </div>
       </div>
     </section>
-
-    <!-- Footer -->
-    <footer class="py-12 bg-black border-t border-yellow-400/20">
-      <div class="container mx-auto px-4">
-        <div class="flex flex-col md:flex-row justify-between items-center">
-          <div class="flex items-center space-x-3 mb-4 md:mb-0">
-            <img src="/assets/techflunky-logo.png" alt="TechFlunky" class="w-8 h-8">
-            <span class="text-xl font-bold text-white">TechFlunky</span>
-          </div>
-          <div class="flex items-center space-x-6 text-gray-400">
-            <a href="/about" class="hover:text-yellow-400 transition">About</a>
-            <a href="/contact" class="hover:text-yellow-400 transition">Contact</a>
-            <a href="/terms" class="hover:text-yellow-400 transition">Terms</a>
-            <a href="/privacy" class="hover:text-yellow-400 transition">Privacy</a>
-          </div>
-        </div>
-        <div class="text-center mt-8 pt-8 border-t border-gray-800">
-          <p class="text-gray-400">
-            © 2024 TechFlunky. Connecting builders with entrepreneurs.
-          </p>
-        </div>
-      </div>
-    </footer>
   </main>
+
+  <Footer />
 </Layout>
-
-<style>
-  /* Custom animations for pricing cards */
-  .pricing-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .pricing-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(255, 212, 0, 0.1);
-  }
-</style>
