@@ -1,0 +1,285 @@
+---
+export interface Props {
+  title: string;
+  currentPage?: string;
+}
+
+const { title, currentPage = 'overview' } = Astro.props;
+
+// Mock investor data - in production this would come from auth/API
+const investor = {
+  name: "Alex Thompson",
+  tier: "Accredited Investor",
+  totalInvested: 125000,
+  portfolioValue: 147500,
+  activeInvestments: 8,
+  roi: 18,
+  verificationStatus: "verified",
+  memberSince: "2024-01-15"
+};
+
+const navigationItems = [
+  { id: 'overview', label: 'Overview', icon: 'home', href: '/dashboard/investor' },
+  { id: 'portfolio', label: 'Portfolio', icon: 'briefcase', href: '/dashboard/investor/portfolio' },
+  { id: 'opportunities', label: 'Opportunities', icon: 'target', href: '/dashboard/investor/opportunities' },
+  { id: 'analytics', label: 'Analytics', icon: 'chart', href: '/dashboard/investor/analytics' },
+  { id: 'syndicate', label: 'Syndicates', icon: 'users', href: '/dashboard/investor/syndicate' },
+  { id: 'deal-flow', label: 'Deal Flow', icon: 'flow', href: '/dashboard/investor/deal-flow' },
+  { id: 'tax-center', label: 'Tax Center', icon: 'document', href: '/dashboard/investor/tax-center' },
+  { id: 'settings', label: 'Settings', icon: 'settings', href: '/dashboard/investor/settings' }
+];
+---
+
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title} - TechFlunky Investor Portal</title>
+
+  <!-- Enhanced fonts and Chart.js -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Admin dashboard styles -->
+  <link rel="stylesheet" href="/src/styles/admin-dashboard.css">
+</head>
+
+<body class="bg-black text-white font-sans antialiased overflow-x-hidden">
+  <div class="flex h-screen relative">
+    <!-- Mobile Backdrop -->
+    <div id="mobile-backdrop" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden hidden"></div>
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="fixed lg:relative top-0 left-0 z-50 w-80 h-full bg-gradient-to-b from-gray-900/95 to-black/95 backdrop-blur-xl border-r border-yellow-400/20 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out">
+      <!-- Header -->
+      <div class="flex items-center justify-between p-6 border-b border-yellow-400/20">
+        <div class="flex items-center space-x-3">
+          <img src="/assets/techflunky-logo.png" alt="TechFlunky" class="w-10 h-10">
+          <div>
+            <h1 class="text-xl font-bold text-white">TechFlunky</h1>
+            <p class="text-xs text-yellow-400 font-medium">Investor Portal</p>
+          </div>
+        </div>
+
+        <!-- Mobile close button -->
+        <button id="sidebar-close" class="lg:hidden text-gray-400 hover:text-white transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Investor Quick Stats -->
+      <div class="p-6 border-b border-yellow-400/10">
+        <div class="text-center mb-4">
+          <div class="w-16 h-16 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center mx-auto mb-3">
+            <span class="text-black font-bold text-xl">{investor.name.split(' ').map(n => n[0]).join('')}</span>
+          </div>
+          <h2 class="text-lg font-semibold text-white">{investor.name}</h2>
+          <div class="flex items-center justify-center space-x-2 mt-1">
+            <span class="text-sm text-yellow-400 font-medium">{investor.tier}</span>
+            {investor.verificationStatus === 'verified' && (
+              <div class="w-4 h-4 bg-green-400 rounded-full flex items-center justify-center">
+                <svg class="w-3 h-3 text-black" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div class="bg-gray-800/30 rounded-lg p-3 text-center">
+            <div class="text-lg font-bold text-white">${(investor.portfolioValue / 1000).toFixed(0)}K</div>
+            <div class="text-xs text-gray-400">Portfolio Value</div>
+          </div>
+          <div class="bg-gray-800/30 rounded-lg p-3 text-center">
+            <div class="text-lg font-bold text-green-400">+{investor.roi}%</div>
+            <div class="text-xs text-gray-400">Total ROI</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="p-4 space-y-2 flex-1 overflow-y-auto">
+        {navigationItems.map((item) => (
+          <a
+            href={item.href}
+            class={`nav-item ${currentPage === item.id ? 'active' : ''}`}
+            data-page={item.id}
+          >
+            <div class="nav-icon">
+              {item.icon === 'home' && (
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 21l8-8H8v8z"/>
+                </svg>
+              )}
+              {item.icon === 'briefcase' && (
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2V6z"/>
+                </svg>
+              )}
+              {item.icon === 'target' && (
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                </svg>
+              )}
+              {item.icon === 'chart' && (
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                </svg>
+              )}
+              {item.icon === 'users' && (
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"/>
+                </svg>
+              )}
+              {item.icon === 'flow' && (
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+              )}
+              {item.icon === 'document' && (
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+              )}
+              {item.icon === 'settings' && (
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+              )}
+            </div>
+            <span class="nav-label">{item.label}</span>
+            {currentPage === item.id && (
+              <div class="absolute right-0 top-1/2 transform -translate-y-1/2 w-1 h-6 bg-yellow-400 rounded-l-lg"></div>
+            )}
+          </a>
+        ))}
+      </nav>
+
+      <!-- Quick Actions -->
+      <div class="p-4 border-t border-yellow-400/10">
+        <button class="w-full bg-gradient-to-r from-yellow-400 to-yellow-500 text-black px-4 py-3 rounded-xl font-semibold hover:from-yellow-300 hover:to-yellow-400 transition-all duration-300 transform hover:scale-105 mb-3">
+          <div class="flex items-center justify-center space-x-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+            </svg>
+            <span>New Investment</span>
+          </div>
+        </button>
+
+        <div class="flex space-x-2">
+          <button class="flex-1 bg-gray-800/50 border border-gray-700 text-gray-300 px-3 py-2 rounded-lg text-sm font-medium hover:bg-gray-700/50 transition-colors">
+            Support
+          </button>
+          <button class="flex-1 bg-gray-800/50 border border-gray-700 text-gray-300 px-3 py-2 rounded-lg text-sm font-medium hover:bg-gray-700/50 transition-colors">
+            Logout
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="flex-1 flex flex-col min-h-screen">
+      <!-- Top Bar -->
+      <header class="bg-gradient-to-r from-gray-900/95 to-black/95 backdrop-blur-xl border-b border-yellow-400/20 px-6 py-4">
+        <div class="flex items-center justify-between">
+          <!-- Mobile menu button -->
+          <button id="mobile-menu" class="lg:hidden text-gray-400 hover:text-white transition-colors">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </button>
+
+          <!-- Page Title -->
+          <div class="hidden lg:block">
+            <h1 class="text-2xl font-bold text-white">{title}</h1>
+            <p class="text-sm text-gray-400">Investor Dashboard - {investor.tier}</p>
+          </div>
+
+          <!-- Right Actions -->
+          <div class="flex items-center space-x-4">
+            <!-- Notifications -->
+            <button class="relative p-2 text-gray-400 hover:text-white transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5v-5zM12 2v5m7-3l-3 3m-8-3l3 3m-7 3h5"/>
+              </svg>
+              <span class="absolute top-1 right-1 w-2 h-2 bg-yellow-400 rounded-full"></span>
+            </button>
+
+            <!-- Profile -->
+            <div class="flex items-center space-x-3">
+              <div class="text-right hidden sm:block">
+                <div class="text-sm font-medium text-white">{investor.name}</div>
+                <div class="text-xs text-gray-400">{investor.tier}</div>
+              </div>
+              <div class="w-10 h-10 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center">
+                <span class="text-black font-bold text-sm">{investor.name.split(' ').map(n => n[0]).join('')}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <main class="flex-1 p-6 bg-gradient-to-br from-gray-900/20 to-black/20 overflow-y-auto">
+        <slot />
+      </main>
+    </div>
+  </div>
+
+  <script>
+    // Mobile sidebar toggle
+    const mobileMenu = document.getElementById('mobile-menu');
+    const sidebar = document.getElementById('sidebar');
+    const sidebarClose = document.getElementById('sidebar-close');
+    const mobileBackdrop = document.getElementById('mobile-backdrop');
+
+    function toggleSidebar() {
+      const isHidden = sidebar.classList.contains('-translate-x-full');
+
+      if (isHidden) {
+        sidebar.classList.remove('-translate-x-full');
+        mobileBackdrop.classList.remove('hidden');
+      } else {
+        sidebar.classList.add('-translate-x-full');
+        mobileBackdrop.classList.add('hidden');
+      }
+    }
+
+    mobileMenu?.addEventListener('click', toggleSidebar);
+    sidebarClose?.addEventListener('click', toggleSidebar);
+    mobileBackdrop?.addEventListener('click', toggleSidebar);
+
+    // Navigation active state management
+    document.addEventListener('DOMContentLoaded', () => {
+      const currentPath = window.location.pathname;
+      const navItems = document.querySelectorAll('.nav-item');
+
+      navItems.forEach(item => {
+        if (item.getAttribute('href') === currentPath) {
+          item.classList.add('active');
+        }
+      });
+    });
+
+    // Auto-hide mobile sidebar on resize
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 1024) {
+        sidebar.classList.remove('-translate-x-full');
+        mobileBackdrop.classList.add('hidden');
+      } else {
+        sidebar.classList.add('-translate-x-full');
+        mobileBackdrop.classList.add('hidden');
+      }
+    });
+  </script>
+</body>
+</html>

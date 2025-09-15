@@ -1,0 +1,658 @@
+---
+import InvestorLayout from '../../../components/investor/InvestorLayout.astro';
+---
+
+<InvestorLayout title="Investment Analytics" currentPage="analytics">
+  <!-- Analytics Header -->
+  <div class="bg-gradient-to-br from-blue-900/50 to-black/50 backdrop-blur-sm rounded-2xl border border-blue-400/20 p-6 mb-8">
+    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+      <div>
+        <h2 class="text-2xl font-bold text-white mb-2">Investment Analytics</h2>
+        <p class="text-blue-400">Comprehensive performance analysis and insights</p>
+      </div>
+      <div class="flex items-center space-x-3 mt-4 lg:mt-0">
+        <button class="bg-blue-400 text-black px-4 py-2 rounded-lg font-medium hover:bg-blue-300 transition-colors">
+          Export Report
+        </button>
+        <button class="bg-purple-400/10 border border-purple-400/20 text-purple-400 px-4 py-2 rounded-lg font-medium hover:bg-purple-400/20 transition-colors">
+          Schedule Email
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Key Performance Metrics -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <div class="metric-card bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl border border-green-400/20 p-6">
+      <div class="flex items-center justify-between mb-4">
+        <div class="w-12 h-12 bg-green-400/10 rounded-xl flex items-center justify-center">
+          <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+          </svg>
+        </div>
+        <span class="px-2 py-1 bg-green-400/10 text-green-400 rounded-full text-xs">+12.4%</span>
+      </div>
+      <h3 class="text-sm font-medium text-gray-400 uppercase tracking-wider mb-1">Total ROI</h3>
+      <div class="text-3xl font-bold text-white">18.0%</div>
+      <p class="text-sm text-gray-400">vs 14.2% market avg</p>
+    </div>
+
+    <div class="metric-card bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl border border-blue-400/20 p-6">
+      <div class="flex items-center justify-between mb-4">
+        <div class="w-12 h-12 bg-blue-400/10 rounded-xl flex items-center justify-center">
+          <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+          </svg>
+        </div>
+        <span class="px-2 py-1 bg-blue-400/10 text-blue-400 rounded-full text-xs">1.34</span>
+      </div>
+      <h3 class="text-sm font-medium text-gray-400 uppercase tracking-wider mb-1">Sharpe Ratio</h3>
+      <div class="text-3xl font-bold text-white">1.34</div>
+      <p class="text-sm text-gray-400">Risk-adjusted returns</p>
+    </div>
+
+    <div class="metric-card bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl border border-yellow-400/20 p-6">
+      <div class="flex items-center justify-between mb-4">
+        <div class="w-12 h-12 bg-yellow-400/10 rounded-xl flex items-center justify-center">
+          <svg class="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <span class="px-2 py-1 bg-yellow-400/10 text-yellow-400 rounded-full text-xs">Med</span>
+      </div>
+      <h3 class="text-sm font-medium text-gray-400 uppercase tracking-wider mb-1">Volatility</h3>
+      <div class="text-3xl font-bold text-white">8.2%</div>
+      <p class="text-sm text-gray-400">Portfolio variance</p>
+    </div>
+
+    <div class="metric-card bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl border border-purple-400/20 p-6">
+      <div class="flex items-center justify-between mb-4">
+        <div class="w-12 h-12 bg-purple-400/10 rounded-xl flex items-center justify-center">
+          <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <span class="px-2 py-1 bg-purple-400/10 text-purple-400 rounded-full text-xs">33%</span>
+      </div>
+      <h3 class="text-sm font-medium text-gray-400 uppercase tracking-wider mb-1">Success Rate</h3>
+      <div class="text-3xl font-bold text-white">33%</div>
+      <p class="text-sm text-gray-400">Successful exits</p>
+    </div>
+  </div>
+
+  <!-- Performance Charts Section -->
+  <div class="grid lg:grid-cols-2 gap-8 mb-8">
+    <!-- Portfolio Performance Chart -->
+    <div class="bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl border border-yellow-400/20 p-6">
+      <div class="flex items-center justify-between mb-6">
+        <h3 class="text-lg font-semibold text-white">Portfolio Performance</h3>
+        <select id="performance-period" class="bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm focus:border-yellow-400 transition-colors">
+          <option value="1y">1 Year</option>
+          <option value="2y">2 Years</option>
+          <option value="all">All Time</option>
+        </select>
+      </div>
+      <div id="performance-chart" class="h-80"></div>
+    </div>
+
+    <!-- Risk-Return Analysis -->
+    <div class="bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl border border-purple-400/20 p-6">
+      <div class="flex items-center justify-between mb-6">
+        <h3 class="text-lg font-semibold text-white">Risk-Return Analysis</h3>
+        <button class="text-purple-400 hover:text-purple-300 text-sm font-medium transition-colors">
+          View Details →
+        </button>
+      </div>
+      <div id="risk-return-chart" class="h-80"></div>
+    </div>
+  </div>
+
+  <!-- Detailed Analytics Grid -->
+  <div class="grid lg:grid-cols-3 gap-8 mb-8">
+    <!-- Investment Distribution -->
+    <div class="bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl border border-blue-400/20 p-6">
+      <h3 class="text-lg font-semibold text-white mb-6">Investment Distribution</h3>
+
+      <div class="space-y-4">
+        <div>
+          <div class="flex justify-between items-center mb-2">
+            <span class="text-sm text-gray-400">By Stage</span>
+            <span class="text-xs text-blue-400">8 investments</span>
+          </div>
+
+          <div class="space-y-3">
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span class="text-gray-300">Growth Stage</span>
+                <span class="text-white">42%</span>
+              </div>
+              <div class="w-full bg-gray-700 rounded-full h-2">
+                <div class="bg-gradient-to-r from-blue-400 to-blue-600 h-2 rounded-full" style="width: 42%"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span class="text-gray-300">Series A</span>
+                <span class="text-white">25%</span>
+              </div>
+              <div class="w-full bg-gray-700 rounded-full h-2">
+                <div class="bg-gradient-to-r from-green-400 to-green-600 h-2 rounded-full" style="width: 25%"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span class="text-gray-300">Series B</span>
+                <span class="text-white">20%</span>
+              </div>
+              <div class="w-full bg-gray-700 rounded-full h-2">
+                <div class="bg-gradient-to-r from-purple-400 to-purple-600 h-2 rounded-full" style="width: 20%"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span class="text-gray-300">Seed</span>
+                <span class="text-white">13%</span>
+              </div>
+              <div class="w-full bg-gray-700 rounded-full h-2">
+                <div class="bg-gradient-to-r from-yellow-400 to-yellow-600 h-2 rounded-full" style="width: 13%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-gray-700">
+          <div class="flex justify-between items-center mb-2">
+            <span class="text-sm text-gray-400">By Investment Size</span>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4 text-center">
+            <div class="bg-gray-800/30 rounded-lg p-3">
+              <div class="text-lg font-bold text-white">3</div>
+              <div class="text-xs text-gray-400">$50K+</div>
+            </div>
+            <div class="bg-gray-800/30 rounded-lg p-3">
+              <div class="text-lg font-bold text-white">5</div>
+              <div class="text-xs text-gray-400">$10K-$50K</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Performance Ranking -->
+    <div class="bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl border border-green-400/20 p-6">
+      <h3 class="text-lg font-semibold text-white mb-6">Top Performers</h3>
+
+      <div class="space-y-4">
+        <div class="flex items-center space-x-3 p-3 bg-green-400/10 rounded-lg border border-green-400/20">
+          <div class="w-8 h-8 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg flex items-center justify-center">
+            <span class="text-white font-bold text-sm">AI</span>
+          </div>
+          <div class="flex-1">
+            <div class="text-white font-medium text-sm">AI-Powered CRM</div>
+            <div class="text-xs text-gray-400">Series A • SaaS</div>
+          </div>
+          <div class="text-right">
+            <div class="text-green-400 font-bold">+30.0%</div>
+            <div class="text-xs text-gray-400">ROI</div>
+          </div>
+        </div>
+
+        <div class="flex items-center space-x-3 p-3 bg-green-400/5 rounded-lg border border-green-400/10">
+          <div class="w-8 h-8 bg-gradient-to-br from-purple-400 to-purple-600 rounded-lg flex items-center justify-center">
+            <span class="text-white font-bold text-sm">EC</span>
+          </div>
+          <div class="flex-1">
+            <div class="text-white font-medium text-sm">E-commerce Analytics</div>
+            <div class="text-xs text-gray-400">Growth • E-commerce</div>
+          </div>
+          <div class="text-right">
+            <div class="text-green-400 font-bold">+17.5%</div>
+            <div class="text-xs text-gray-400">ROI</div>
+          </div>
+        </div>
+
+        <div class="flex items-center space-x-3 p-3 bg-yellow-400/5 rounded-lg border border-yellow-400/10">
+          <div class="w-8 h-8 bg-gradient-to-br from-green-400 to-green-600 rounded-lg flex items-center justify-center">
+            <span class="text-white font-bold text-sm">FT</span>
+          </div>
+          <div class="flex-1">
+            <div class="text-white font-medium text-sm">FinTech Gateway</div>
+            <div class="text-xs text-gray-400">Pre-A • FinTech</div>
+          </div>
+          <div class="text-right">
+            <div class="text-yellow-400 font-bold">+6.0%</div>
+            <div class="text-xs text-gray-400">ROI</div>
+          </div>
+        </div>
+
+        <div class="flex items-center space-x-3 p-3 bg-red-400/5 rounded-lg border border-red-400/10">
+          <div class="w-8 h-8 bg-gradient-to-br from-red-400 to-red-600 rounded-lg flex items-center justify-center">
+            <span class="text-white font-bold text-sm">HR</span>
+          </div>
+          <div class="flex-1">
+            <div class="text-white font-medium text-sm">HR Automation</div>
+            <div class="text-xs text-gray-400">Seed • HR Tech</div>
+          </div>
+          <div class="text-right">
+            <div class="text-red-400 font-bold">-12.0%</div>
+            <div class="text-xs text-gray-400">ROI</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-6 pt-4 border-t border-gray-700">
+        <button class="w-full bg-green-400/10 border border-green-400/20 text-green-400 py-2 rounded-lg text-sm font-medium hover:bg-green-400/20 transition-colors">
+          View Full Ranking
+        </button>
+      </div>
+    </div>
+
+    <!-- Market Comparison -->
+    <div class="bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl border border-orange-400/20 p-6">
+      <h3 class="text-lg font-semibold text-white mb-6">Market Comparison</h3>
+
+      <div class="space-y-6">
+        <div>
+          <div class="flex justify-between items-center mb-3">
+            <span class="text-sm text-gray-400">vs Tech Platform Index</span>
+            <span class="text-green-400 font-medium">+3.8%</span>
+          </div>
+          <div class="w-full bg-gray-700 rounded-full h-3">
+            <div class="bg-gradient-to-r from-green-400 to-green-600 h-3 rounded-full" style="width: 72%"></div>
+          </div>
+          <div class="flex justify-between text-xs text-gray-400 mt-1">
+            <span>Your Portfolio: 18.0%</span>
+            <span>Index: 14.2%</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="flex justify-between items-center mb-3">
+            <span class="text-sm text-gray-400">vs Peer Investors</span>
+            <span class="text-green-400 font-medium">Top 25%</span>
+          </div>
+          <div class="w-full bg-gray-700 rounded-full h-3">
+            <div class="bg-gradient-to-r from-blue-400 to-blue-600 h-3 rounded-full" style="width: 82%"></div>
+          </div>
+          <div class="flex justify-between text-xs text-gray-400 mt-1">
+            <span>Your Rank: 12th</span>
+            <span>of 47 peers</span>
+          </div>
+        </div>
+
+        <div class="bg-gray-800/30 rounded-lg p-4">
+          <h4 class="text-sm font-medium text-white mb-3">Benchmark Analysis</h4>
+          <div class="space-y-2 text-sm">
+            <div class="flex justify-between">
+              <span class="text-gray-400">Sharpe Ratio</span>
+              <span class="text-green-400">Above Average</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-400">Risk Level</span>
+              <span class="text-yellow-400">Moderate</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-400">Diversification</span>
+              <span class="text-green-400">Well Balanced</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI Insights and Recommendations -->
+  <div class="bg-gradient-to-br from-purple-900/50 to-black/50 backdrop-blur-sm rounded-2xl border border-purple-400/20 p-6">
+    <div class="flex items-center space-x-3 mb-6">
+      <div class="w-10 h-10 bg-purple-400/20 rounded-xl flex items-center justify-center">
+        <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+        </svg>
+      </div>
+      <h3 class="text-xl font-semibold text-white">AI-Powered Insights</h3>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-8">
+      <!-- Key Insights -->
+      <div>
+        <h4 class="text-lg font-medium text-white mb-4">Key Insights</h4>
+        <div class="space-y-4">
+          <div class="bg-green-400/10 border border-green-400/20 rounded-lg p-4">
+            <div class="flex items-start space-x-3">
+              <div class="w-6 h-6 bg-green-400/20 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <div>
+                <p class="text-sm text-white font-medium">Strong Diversification</p>
+                <p class="text-xs text-gray-400 mt-1">Your portfolio shows excellent sector distribution with balanced risk exposure across 6 different technology verticals.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-yellow-400/10 border border-yellow-400/20 rounded-lg p-4">
+            <div class="flex items-start space-x-3">
+              <div class="w-6 h-6 bg-yellow-400/20 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <div>
+                <p class="text-sm text-white font-medium">Concentration Risk</p>
+                <p class="text-xs text-gray-400 mt-1">42% of your portfolio is concentrated in SaaS platforms. Consider diversifying into emerging sectors like Web3 or IoT.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-blue-400/10 border border-blue-400/20 rounded-lg p-4">
+            <div class="flex items-start space-x-3">
+              <div class="w-6 h-6 bg-blue-400/20 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <div>
+                <p class="text-sm text-white font-medium">Optimal Timing</p>
+                <p class="text-xs text-gray-400 mt-1">Current market conditions favor growth-stage platforms. Your portfolio timing aligns well with market cycles.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recommendations -->
+      <div>
+        <h4 class="text-lg font-medium text-white mb-4">Recommendations</h4>
+        <div class="space-y-4">
+          <div class="bg-gray-800/30 rounded-lg p-4 border border-gray-700">
+            <div class="flex items-start justify-between mb-2">
+              <h5 class="text-sm font-medium text-white">Portfolio Rebalancing</h5>
+              <span class="text-xs text-purple-400 bg-purple-400/10 px-2 py-1 rounded-full">High Priority</span>
+            </div>
+            <p class="text-xs text-gray-400 mb-3">Consider reducing SaaS allocation by 10% and increasing exposure to AI/ML platforms for better risk-adjusted returns.</p>
+            <button class="text-purple-400 hover:text-purple-300 text-xs font-medium transition-colors">
+              View Strategy →
+            </button>
+          </div>
+
+          <div class="bg-gray-800/30 rounded-lg p-4 border border-gray-700">
+            <div class="flex items-start justify-between mb-2">
+              <h5 class="text-sm font-medium text-white">Exit Strategy</h5>
+              <span class="text-xs text-yellow-400 bg-yellow-400/10 px-2 py-1 rounded-full">Medium Priority</span>
+            </div>
+            <p class="text-xs text-gray-400 mb-3">HR Automation Platform showing continued decline. Consider exit strategy to minimize losses and reallocate capital.</p>
+            <button class="text-yellow-400 hover:text-yellow-300 text-xs font-medium transition-colors">
+              Plan Exit →
+            </button>
+          </div>
+
+          <div class="bg-gray-800/30 rounded-lg p-4 border border-gray-700">
+            <div class="flex items-start justify-between mb-2">
+              <h5 class="text-sm font-medium text-white">New Opportunities</h5>
+              <span class="text-xs text-green-400 bg-green-400/10 px-2 py-1 rounded-full">Opportunity</span>
+            </div>
+            <p class="text-xs text-gray-400 mb-3">3 new platforms matching your criteria are available with AI confidence scores above 9.0. Early investment could yield strong returns.</p>
+            <button class="text-green-400 hover:text-green-300 text-xs font-medium transition-colors">
+              Explore Deals →
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</InvestorLayout>
+
+<script>
+  import { createRoot } from 'react-dom/client';
+  import React from 'react';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // Initialize performance chart
+    const performanceChartEl = document.getElementById('performance-chart');
+    if (performanceChartEl) {
+      initializePerformanceChart();
+    }
+
+    // Initialize risk-return chart
+    const riskReturnChartEl = document.getElementById('risk-return-chart');
+    if (riskReturnChartEl) {
+      initializeRiskReturnChart();
+    }
+
+    // Period change handler
+    const periodSelect = document.getElementById('performance-period');
+    periodSelect?.addEventListener('change', (e) => {
+      console.log('Period changed to:', e.target.value);
+      // In production, this would update the chart with new data
+    });
+  });
+
+  function initializePerformanceChart() {
+    const ctx = document.createElement('canvas');
+    document.getElementById('performance-chart').appendChild(ctx);
+
+    // Mock data for performance chart
+    const performanceData = {
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+      datasets: [
+        {
+          label: 'Portfolio Value',
+          data: [110000, 115000, 125000, 130000, 135000, 142000, 147500],
+          borderColor: '#10b981',
+          backgroundColor: 'rgba(16, 185, 129, 0.1)',
+          borderWidth: 3,
+          fill: true,
+          tension: 0.4,
+        },
+        {
+          label: 'Benchmark',
+          data: [110000, 112000, 118000, 122000, 125000, 128000, 131000],
+          borderColor: '#6b7280',
+          backgroundColor: 'rgba(107, 114, 128, 0.1)',
+          borderWidth: 2,
+          fill: false,
+          tension: 0.4,
+        }
+      ]
+    };
+
+    // @ts-ignore - Chart.js will be loaded via CDN
+    new Chart(ctx, {
+      type: 'line',
+      data: performanceData,
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: true,
+            position: 'top',
+            labels: {
+              color: '#d1d5db',
+              font: { size: 12 }
+            }
+          },
+          tooltip: {
+            backgroundColor: 'rgba(0, 0, 0, 0.9)',
+            titleColor: '#fbbf24',
+            bodyColor: '#ffffff',
+            borderColor: '#fbbf24',
+            borderWidth: 1,
+            cornerRadius: 12,
+          }
+        },
+        scales: {
+          x: {
+            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+            ticks: { color: '#9ca3af', font: { size: 12 } }
+          },
+          y: {
+            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+            ticks: {
+              color: '#9ca3af',
+              font: { size: 12 },
+              callback: function(value) {
+                return '$' + (value / 1000).toFixed(0) + 'K';
+              }
+            }
+          }
+        }
+      }
+    });
+  }
+
+  function initializeRiskReturnChart() {
+    const ctx = document.createElement('canvas');
+    document.getElementById('risk-return-chart').appendChild(ctx);
+
+    // Mock data for risk-return scatter plot
+    const riskReturnData = {
+      datasets: [
+        {
+          label: 'Your Investments',
+          data: [
+            { x: 12, y: 30 }, // AI CRM - low risk, high return
+            { x: 15, y: 17.5 }, // E-commerce - medium risk, good return
+            { x: 8, y: 6 }, // FinTech - low risk, modest return
+            { x: 25, y: -12 }, // HR Platform - high risk, negative return
+          ],
+          backgroundColor: '#fbbf24',
+          borderColor: '#fbbf24',
+          pointRadius: 8,
+          pointHoverRadius: 12,
+        },
+        {
+          label: 'Market Average',
+          data: [{ x: 14.2, y: 14.2 }],
+          backgroundColor: '#6b7280',
+          borderColor: '#6b7280',
+          pointRadius: 10,
+          pointHoverRadius: 14,
+          pointStyle: 'triangle',
+        }
+      ]
+    };
+
+    // @ts-ignore - Chart.js will be loaded via CDN
+    new Chart(ctx, {
+      type: 'scatter',
+      data: riskReturnData,
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: true,
+            position: 'top',
+            labels: {
+              color: '#d1d5db',
+              font: { size: 12 }
+            }
+          },
+          tooltip: {
+            backgroundColor: 'rgba(0, 0, 0, 0.9)',
+            titleColor: '#fbbf24',
+            bodyColor: '#ffffff',
+            borderColor: '#fbbf24',
+            borderWidth: 1,
+            cornerRadius: 12,
+            callbacks: {
+              label: function(context) {
+                return `Risk: ${context.parsed.x}%, Return: ${context.parsed.y}%`;
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: 'Risk (Volatility %)',
+              color: '#9ca3af'
+            },
+            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+            ticks: { color: '#9ca3af', font: { size: 12 } }
+          },
+          y: {
+            title: {
+              display: true,
+              text: 'Return (%)',
+              color: '#9ca3af'
+            },
+            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+            ticks: { color: '#9ca3af', font: { size: 12 } }
+          }
+        }
+      }
+    });
+  }
+
+  // Auto-refresh analytics data
+  setInterval(async () => {
+    try {
+      const response = await fetch('/api/investors/analytics');
+      const data = await response.json();
+      console.log('Analytics data refreshed:', data);
+    } catch (error) {
+      console.error('Failed to refresh analytics data:', error);
+    }
+  }, 300000); // Refresh every 5 minutes
+</script>
+
+<style>
+  .metric-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Chart containers */
+  #performance-chart,
+  #risk-return-chart {
+    position: relative;
+  }
+
+  /* Performance indicators */
+  .performance-positive {
+    @apply text-green-400;
+  }
+
+  .performance-negative {
+    @apply text-red-400;
+  }
+
+  .performance-neutral {
+    @apply text-yellow-400;
+  }
+
+  /* Insight cards */
+  .insight-card {
+    transition: all 0.3s ease;
+  }
+
+  .insight-card:hover {
+    transform: translateY(-1px);
+    border-color: rgba(251, 191, 36, 0.4);
+  }
+
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .metric-card {
+      @apply p-4;
+    }
+
+    #performance-chart,
+    #risk-return-chart {
+      height: 250px !important;
+    }
+  }
+
+  /* Loading states */
+  .chart-loading {
+    @apply flex items-center justify-center h-80 text-gray-400;
+  }
+</style>

@@ -1,0 +1,615 @@
+---
+import InvestorLayout from '../../../components/investor/InvestorLayout.astro';
+---
+
+<InvestorLayout title="Investment Opportunities" currentPage="opportunities">
+  <!-- AI-Powered Deal Discovery Header -->
+  <div class="bg-gradient-to-br from-purple-900/50 to-black/50 backdrop-blur-sm rounded-2xl border border-purple-400/20 p-6 mb-8">
+    <div class="flex items-center space-x-4 mb-4">
+      <div class="w-12 h-12 bg-purple-400/20 rounded-xl flex items-center justify-center">
+        <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+        </svg>
+      </div>
+      <div>
+        <h2 class="text-2xl font-bold text-white">AI-Curated Opportunities</h2>
+        <p class="text-purple-400">Personalized deal flow based on your investment profile</p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="text-center">
+        <div class="text-2xl font-bold text-white">23</div>
+        <div class="text-sm text-gray-400">New This Week</div>
+      </div>
+      <div class="text-center">
+        <div class="text-2xl font-bold text-purple-400">94%</div>
+        <div class="text-sm text-gray-400">Avg AI Score</div>
+      </div>
+      <div class="text-center">
+        <div class="text-2xl font-bold text-green-400">$2.3M</div>
+        <div class="text-sm text-gray-400">Avg Platform Value</div>
+      </div>
+      <div class="text-center">
+        <div class="text-2xl font-bold text-yellow-400">72h</div>
+        <div class="text-sm text-gray-400">Avg Response Time</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search and Filters -->
+  <div class="bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl border border-yellow-400/20 p-6 mb-8">
+    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
+      <!-- Search Bar -->
+      <div class="flex-1 lg:max-w-md">
+        <div class="relative">
+          <input
+            type="text"
+            id="search-deals"
+            placeholder="Search platforms, technologies, or industries..."
+            class="w-full pl-10 pr-4 py-3 bg-black/30 border border-yellow-400/20 rounded-xl text-white placeholder-gray-400 focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/20 transition-all duration-300"
+          >
+          <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Filter Controls -->
+      <div class="flex flex-wrap items-center gap-3">
+        <select id="category-filter" class="bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm focus:border-yellow-400 transition-colors">
+          <option value="all">All Categories</option>
+          <option value="saas">SaaS</option>
+          <option value="fintech">FinTech</option>
+          <option value="ecommerce">E-commerce</option>
+          <option value="ai-ml">AI/ML</option>
+          <option value="healthcare">HealthTech</option>
+          <option value="edtech">EdTech</option>
+        </select>
+
+        <select id="stage-filter" class="bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm focus:border-yellow-400 transition-colors">
+          <option value="all">All Stages</option>
+          <option value="mvp">MVP</option>
+          <option value="early">Early Revenue</option>
+          <option value="growth">Growth Stage</option>
+          <option value="scale">Scale Stage</option>
+        </select>
+
+        <select id="investment-size" class="bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm focus:border-yellow-400 transition-colors">
+          <option value="all">Any Size</option>
+          <option value="5k-25k">$5K - $25K</option>
+          <option value="25k-100k">$25K - $100K</option>
+          <option value="100k-500k">$100K - $500K</option>
+          <option value="500k+">$500K+</option>
+        </select>
+
+        <select id="score-filter" class="bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm focus:border-yellow-400 transition-colors">
+          <option value="all">Any Score</option>
+          <option value="9+">9.0+ (Excellent)</option>
+          <option value="8+">8.0+ (Very Good)</option>
+          <option value="7+">7.0+ (Good)</option>
+          <option value="6+">6.0+ (Fair)</option>
+        </select>
+
+        <button id="clear-filters" class="bg-gray-700 text-gray-300 px-4 py-2 rounded-lg text-sm hover:bg-gray-600 transition-colors">
+          Clear
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hot Deals & Recommended For You -->
+  <div class="grid lg:grid-cols-4 gap-8 mb-8">
+    <!-- Hot Deals -->
+    <div class="lg:col-span-3">
+      <div class="flex items-center justify-between mb-6">
+        <h3 class="text-xl font-semibold text-white">🔥 Hot Deals</h3>
+        <button class="text-yellow-400 hover:text-yellow-300 text-sm font-medium transition-colors">
+          View All →
+        </button>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- Hot Deal 1 -->
+        <div class="deal-card bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl border border-yellow-400/20 p-6 hover:border-yellow-400/40 transition-all duration-300 relative">
+          <div class="absolute top-4 right-4">
+            <span class="px-2 py-1 bg-red-400 text-black text-xs font-bold rounded-full">24h Left</span>
+          </div>
+
+          <div class="flex items-start space-x-4 mb-4">
+            <div class="w-16 h-16 bg-gradient-to-br from-orange-400 to-orange-600 rounded-xl flex items-center justify-center">
+              <span class="text-white font-bold text-lg">ML</span>
+            </div>
+            <div class="flex-1">
+              <h4 class="text-lg font-semibold text-white mb-1">ML-Powered Trading Bot</h4>
+              <p class="text-sm text-gray-400 mb-2">FinTech • Series B • 2024</p>
+              <div class="flex items-center space-x-2">
+                <span class="px-2 py-1 bg-green-400/10 text-green-400 text-xs rounded-full">AI Score: 9.4</span>
+                <span class="px-2 py-1 bg-blue-400/10 text-blue-400 text-xs rounded-full">Verified</span>
+              </div>
+            </div>
+          </div>
+
+          <p class="text-sm text-gray-300 mb-4">
+            Revolutionary trading platform using advanced ML algorithms. 300% YoY growth, $12M ARR, serving Fortune 500 clients.
+          </p>
+
+          <div class="grid grid-cols-2 gap-4 mb-4">
+            <div>
+              <div class="text-sm text-gray-400">Min Investment</div>
+              <div class="text-lg font-semibold text-white">$50,000</div>
+            </div>
+            <div>
+              <div class="text-sm text-gray-400">Valuation</div>
+              <div class="text-lg font-semibold text-white">$45M</div>
+            </div>
+            <div>
+              <div class="text-sm text-gray-400">Revenue</div>
+              <div class="text-lg font-semibold text-green-400">$12M ARR</div>
+            </div>
+            <div>
+              <div class="text-sm text-gray-400">Growth</div>
+              <div class="text-lg font-semibold text-green-400">300% YoY</div>
+            </div>
+          </div>
+
+          <div class="flex space-x-3">
+            <button class="flex-1 bg-yellow-400 text-black py-2 px-4 rounded-lg font-medium hover:bg-yellow-300 transition-colors">
+              Invest Now
+            </button>
+            <button class="flex-1 bg-blue-400/10 border border-blue-400/20 text-blue-400 py-2 px-4 rounded-lg font-medium hover:bg-blue-400/20 transition-colors">
+              View Details
+            </button>
+          </div>
+        </div>
+
+        <!-- Hot Deal 2 -->
+        <div class="deal-card bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl border border-yellow-400/20 p-6 hover:border-yellow-400/40 transition-all duration-300 relative">
+          <div class="absolute top-4 right-4">
+            <span class="px-2 py-1 bg-orange-400 text-black text-xs font-bold rounded-full">3 Days Left</span>
+          </div>
+
+          <div class="flex items-start space-x-4 mb-4">
+            <div class="w-16 h-16 bg-gradient-to-br from-green-400 to-green-600 rounded-xl flex items-center justify-center">
+              <span class="text-white font-bold text-lg">AG</span>
+            </div>
+            <div class="flex-1">
+              <h4 class="text-lg font-semibold text-white mb-1">AgriTech Analytics Platform</h4>
+              <p class="text-sm text-gray-400 mb-2">AgriTech • Series A • 2024</p>
+              <div class="flex items-center space-x-2">
+                <span class="px-2 py-1 bg-green-400/10 text-green-400 text-xs rounded-full">AI Score: 9.1</span>
+                <span class="px-2 py-1 bg-purple-400/10 text-purple-400 text-xs rounded-full">ESG Focused</span>
+              </div>
+            </div>
+          </div>
+
+          <p class="text-sm text-gray-300 mb-4">
+            IoT and AI-driven agricultural optimization platform. 180% growth, working with 500+ farms across 12 countries.
+          </p>
+
+          <div class="grid grid-cols-2 gap-4 mb-4">
+            <div>
+              <div class="text-sm text-gray-400">Min Investment</div>
+              <div class="text-lg font-semibold text-white">$25,000</div>
+            </div>
+            <div>
+              <div class="text-sm text-gray-400">Valuation</div>
+              <div class="text-lg font-semibold text-white">$18M</div>
+            </div>
+            <div>
+              <div class="text-sm text-gray-400">Revenue</div>
+              <div class="text-lg font-semibold text-green-400">$4.2M ARR</div>
+            </div>
+            <div>
+              <div class="text-sm text-gray-400">Growth</div>
+              <div class="text-lg font-semibold text-green-400">180% YoY</div>
+            </div>
+          </div>
+
+          <div class="flex space-x-3">
+            <button class="flex-1 bg-yellow-400 text-black py-2 px-4 rounded-lg font-medium hover:bg-yellow-300 transition-colors">
+              Invest Now
+            </button>
+            <button class="flex-1 bg-blue-400/10 border border-blue-400/20 text-blue-400 py-2 px-4 rounded-lg font-medium hover:bg-blue-400/20 transition-colors">
+              View Details
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI Recommendations Sidebar -->
+    <div class="bg-gradient-to-br from-purple-900/50 to-black/50 backdrop-blur-sm rounded-2xl border border-purple-400/20 p-6">
+      <div class="flex items-center space-x-3 mb-6">
+        <div class="w-8 h-8 bg-purple-400/20 rounded-lg flex items-center justify-center">
+          <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-white">AI Recommendations</h3>
+      </div>
+
+      <div class="space-y-4">
+        <!-- Perfect Match -->
+        <div class="bg-purple-400/10 border border-purple-400/20 rounded-lg p-4">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-sm font-medium text-purple-400">Perfect Match</span>
+            <span class="text-xs text-purple-400">98% fit</span>
+          </div>
+          <h4 class="text-white font-medium mb-1">Healthcare AI Platform</h4>
+          <p class="text-xs text-gray-400 mb-3">Matches your HealthTech preferences</p>
+          <button class="w-full bg-purple-400/20 text-purple-400 py-2 rounded-lg text-sm hover:bg-purple-400/30 transition-colors">
+            View Match
+          </button>
+        </div>
+
+        <!-- Trending -->
+        <div class="bg-yellow-400/10 border border-yellow-400/20 rounded-lg p-4">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-sm font-medium text-yellow-400">Trending</span>
+            <span class="text-xs text-yellow-400">🔥 Hot</span>
+          </div>
+          <h4 class="text-white font-medium mb-1">Web3 Gaming Platform</h4>
+          <p class="text-xs text-gray-400 mb-3">Rising popularity in your network</p>
+          <button class="w-full bg-yellow-400/20 text-yellow-400 py-2 rounded-lg text-sm hover:bg-yellow-400/30 transition-colors">
+            Explore
+          </button>
+        </div>
+
+        <!-- Similar Investors -->
+        <div class="bg-blue-400/10 border border-blue-400/20 rounded-lg p-4">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-sm font-medium text-blue-400">Similar Investors</span>
+            <span class="text-xs text-blue-400">3 invested</span>
+          </div>
+          <h4 class="text-white font-medium mb-1">EdTech Learning Platform</h4>
+          <p class="text-xs text-gray-400 mb-3">Popular among similar profiles</p>
+          <button class="w-full bg-blue-400/20 text-blue-400 py-2 rounded-lg text-sm hover:bg-blue-400/30 transition-colors">
+            See Why
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- All Opportunities -->
+  <div class="bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl border border-yellow-400/20 p-6">
+    <div class="flex items-center justify-between mb-6">
+      <h3 class="text-xl font-semibold text-white">All Opportunities</h3>
+      <div class="flex items-center space-x-3">
+        <span class="text-sm text-gray-400">Sort by:</span>
+        <select id="sort-by" class="bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm focus:border-yellow-400 transition-colors">
+          <option value="score">AI Score</option>
+          <option value="recent">Most Recent</option>
+          <option value="valuation">Valuation</option>
+          <option value="growth">Growth Rate</option>
+          <option value="investment">Min Investment</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="opportunities-grid" class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+      <!-- Opportunity 1 -->
+      <div class="opportunity-card bg-gray-800/30 rounded-xl border border-gray-700 p-6 hover:border-yellow-400/40 transition-all duration-300">
+        <div class="flex items-start justify-between mb-4">
+          <div class="flex items-center space-x-3">
+            <div class="w-12 h-12 bg-gradient-to-br from-cyan-400 to-cyan-600 rounded-lg flex items-center justify-center">
+              <span class="text-white font-bold">CY</span>
+            </div>
+            <div>
+              <h4 class="text-white font-medium">Cybersecurity Platform</h4>
+              <p class="text-sm text-gray-400">Security • Growth Stage</p>
+            </div>
+          </div>
+          <span class="px-2 py-1 bg-green-400/10 text-green-400 text-xs rounded-full">8.7</span>
+        </div>
+
+        <p class="text-sm text-gray-300 mb-4">
+          Enterprise-grade cybersecurity platform with AI threat detection. Protecting 2000+ companies globally.
+        </p>
+
+        <div class="grid grid-cols-2 gap-3 mb-4 text-sm">
+          <div>
+            <span class="text-gray-400">Min:</span>
+            <span class="text-white ml-1">$30K</span>
+          </div>
+          <div>
+            <span class="text-gray-400">Growth:</span>
+            <span class="text-green-400 ml-1">220%</span>
+          </div>
+          <div>
+            <span class="text-gray-400">Revenue:</span>
+            <span class="text-white ml-1">$8.5M</span>
+          </div>
+          <div>
+            <span class="text-gray-400">Stage:</span>
+            <span class="text-blue-400 ml-1">Series B</span>
+          </div>
+        </div>
+
+        <div class="flex space-x-2">
+          <button class="flex-1 bg-yellow-400/10 border border-yellow-400/20 text-yellow-400 py-2 px-3 rounded-lg text-sm hover:bg-yellow-400/20 transition-colors">
+            Details
+          </button>
+          <button class="flex-1 bg-green-400/10 border border-green-400/20 text-green-400 py-2 px-3 rounded-lg text-sm hover:bg-green-400/20 transition-colors">
+            Invest
+          </button>
+        </div>
+      </div>
+
+      <!-- Opportunity 2 -->
+      <div class="opportunity-card bg-gray-800/30 rounded-xl border border-gray-700 p-6 hover:border-yellow-400/40 transition-all duration-300">
+        <div class="flex items-start justify-between mb-4">
+          <div class="flex items-center space-x-3">
+            <div class="w-12 h-12 bg-gradient-to-br from-pink-400 to-pink-600 rounded-lg flex items-center justify-center">
+              <span class="text-white font-bold">FI</span>
+            </div>
+            <div>
+              <h4 class="text-white font-medium">Fitness AI Coach</h4>
+              <p class="text-sm text-gray-400">HealthTech • Early Revenue</p>
+            </div>
+          </div>
+          <span class="px-2 py-1 bg-green-400/10 text-green-400 text-xs rounded-full">8.9</span>
+        </div>
+
+        <p class="text-sm text-gray-300 mb-4">
+          Personalized AI fitness coaching platform with 500K+ active users. B2B2C model with gym partnerships.
+        </p>
+
+        <div class="grid grid-cols-2 gap-3 mb-4 text-sm">
+          <div>
+            <span class="text-gray-400">Min:</span>
+            <span class="text-white ml-1">$15K</span>
+          </div>
+          <div>
+            <span class="text-gray-400">Growth:</span>
+            <span class="text-green-400 ml-1">190%</span>
+          </div>
+          <div>
+            <span class="text-gray-400">Users:</span>
+            <span class="text-white ml-1">500K</span>
+          </div>
+          <div>
+            <span class="text-gray-400">Stage:</span>
+            <span class="text-blue-400 ml-1">Series A</span>
+          </div>
+        </div>
+
+        <div class="flex space-x-2">
+          <button class="flex-1 bg-yellow-400/10 border border-yellow-400/20 text-yellow-400 py-2 px-3 rounded-lg text-sm hover:bg-yellow-400/20 transition-colors">
+            Details
+          </button>
+          <button class="flex-1 bg-green-400/10 border border-green-400/20 text-green-400 py-2 px-3 rounded-lg text-sm hover:bg-green-400/20 transition-colors">
+            Invest
+          </button>
+        </div>
+      </div>
+
+      <!-- Opportunity 3 -->
+      <div class="opportunity-card bg-gray-800/30 rounded-xl border border-gray-700 p-6 hover:border-yellow-400/40 transition-all duration-300">
+        <div class="flex items-start justify-between mb-4">
+          <div class="flex items-center space-x-3">
+            <div class="w-12 h-12 bg-gradient-to-br from-indigo-400 to-indigo-600 rounded-lg flex items-center justify-center">
+              <span class="text-white font-bold">LG</span>
+            </div>
+            <div>
+              <h4 class="text-white font-medium">Logistics AI Platform</h4>
+              <p class="text-sm text-gray-400">Logistics • Scale Stage</p>
+            </div>
+          </div>
+          <span class="px-2 py-1 bg-green-400/10 text-green-400 text-xs rounded-full">9.2</span>
+        </div>
+
+        <p class="text-sm text-gray-300 mb-4">
+          AI-powered supply chain optimization serving Fortune 100 companies. $50M ARR with 95% retention rate.
+        </p>
+
+        <div class="grid grid-cols-2 gap-3 mb-4 text-sm">
+          <div>
+            <span class="text-gray-400">Min:</span>
+            <span class="text-white ml-1">$100K</span>
+          </div>
+          <div>
+            <span class="text-gray-400">Growth:</span>
+            <span class="text-green-400 ml-1">150%</span>
+          </div>
+          <div>
+            <span class="text-gray-400">Revenue:</span>
+            <span class="text-white ml-1">$50M</span>
+          </div>
+          <div>
+            <span class="text-gray-400">Stage:</span>
+            <span class="text-blue-400 ml-1">Series C</span>
+          </div>
+        </div>
+
+        <div class="flex space-x-2">
+          <button class="flex-1 bg-yellow-400/10 border border-yellow-400/20 text-yellow-400 py-2 px-3 rounded-lg text-sm hover:bg-yellow-400/20 transition-colors">
+            Details
+          </button>
+          <button class="flex-1 bg-green-400/10 border border-green-400/20 text-green-400 py-2 px-3 rounded-lg text-sm hover:bg-green-400/20 transition-colors">
+            Invest
+          </button>
+        </div>
+      </div>
+
+      <!-- Additional opportunities would be loaded here -->
+    </div>
+
+    <!-- Load More -->
+    <div class="mt-8 text-center">
+      <button id="load-more" class="bg-yellow-400/10 border border-yellow-400/20 text-yellow-400 px-6 py-3 rounded-lg font-medium hover:bg-yellow-400/20 transition-colors">
+        Load More Opportunities
+      </button>
+    </div>
+  </div>
+</InvestorLayout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Search functionality
+    const searchInput = document.getElementById('search-deals');
+    const categoryFilter = document.getElementById('category-filter');
+    const stageFilter = document.getElementById('stage-filter');
+    const investmentSizeFilter = document.getElementById('investment-size');
+    const scoreFilter = document.getElementById('score-filter');
+    const clearFilters = document.getElementById('clear-filters');
+    const sortBy = document.getElementById('sort-by');
+    const loadMore = document.getElementById('load-more');
+
+    function applyFilters() {
+      const searchTerm = searchInput?.value.toLowerCase() || '';
+      const category = categoryFilter?.value || 'all';
+      const stage = stageFilter?.value || 'all';
+      const investmentSize = investmentSizeFilter?.value || 'all';
+      const score = scoreFilter?.value || 'all';
+      const sort = sortBy?.value || 'score';
+
+      console.log('Applying filters:', {
+        searchTerm,
+        category,
+        stage,
+        investmentSize,
+        score,
+        sort
+      });
+
+      // In production, this would filter and re-render the opportunities
+      // For now, we'll just log the filter values
+    }
+
+    // Event listeners for filters
+    searchInput?.addEventListener('input', debounce(applyFilters, 300));
+    categoryFilter?.addEventListener('change', applyFilters);
+    stageFilter?.addEventListener('change', applyFilters);
+    investmentSizeFilter?.addEventListener('change', applyFilters);
+    scoreFilter?.addEventListener('change', applyFilters);
+    sortBy?.addEventListener('change', applyFilters);
+
+    clearFilters?.addEventListener('click', () => {
+      if (searchInput) searchInput.value = '';
+      if (categoryFilter) categoryFilter.value = 'all';
+      if (stageFilter) stageFilter.value = 'all';
+      if (investmentSizeFilter) investmentSizeFilter.value = 'all';
+      if (scoreFilter) scoreFilter.value = 'all';
+      if (sortBy) sortBy.value = 'score';
+      applyFilters();
+    });
+
+    // Load more functionality
+    loadMore?.addEventListener('click', () => {
+      // In production, this would load more opportunities from the API
+      console.log('Loading more opportunities...');
+
+      // Simulate loading
+      loadMore.textContent = 'Loading...';
+      loadMore.disabled = true;
+
+      setTimeout(() => {
+        loadMore.textContent = 'Load More Opportunities';
+        loadMore.disabled = false;
+      }, 1000);
+    });
+
+    // Deal card interactions
+    document.querySelectorAll('.deal-card, .opportunity-card').forEach(card => {
+      card.addEventListener('click', (e) => {
+        // Don't trigger if clicking on buttons
+        if (e.target.tagName === 'BUTTON') return;
+
+        // In production, this would open the deal details modal
+        console.log('Opening deal details for:', card.querySelector('h4')?.textContent);
+      });
+    });
+
+    // Debounce function for search
+    function debounce(func, wait) {
+      let timeout;
+      return function executedFunction(...args) {
+        const later = () => {
+          clearTimeout(timeout);
+          func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+      };
+    }
+  });
+
+  // Auto-refresh opportunities
+  setInterval(async () => {
+    try {
+      const response = await fetch('/api/investors/opportunities');
+      const data = await response.json();
+      console.log('Opportunities refreshed:', data);
+    } catch (error) {
+      console.error('Failed to refresh opportunities:', error);
+    }
+  }, 300000); // Refresh every 5 minutes
+</script>
+
+<style>
+  .deal-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  .opportunity-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  }
+
+  .deal-card,
+  .opportunity-card {
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Loading state */
+  #load-more:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  /* Filter animations */
+  .filter-slide-in {
+    animation: slideIn 0.3s ease;
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .deal-card,
+    .opportunity-card {
+      @apply p-4;
+    }
+
+    .grid {
+      @apply gap-4;
+    }
+  }
+
+  /* Custom scrollbar for opportunities */
+  #opportunities-grid::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  #opportunities-grid::-webkit-scrollbar-track {
+    background: #374151;
+  }
+
+  #opportunities-grid::-webkit-scrollbar-thumb {
+    background: #fbbf24;
+    border-radius: 4px;
+  }
+</style>

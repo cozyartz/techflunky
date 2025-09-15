@@ -1,0 +1,560 @@
+---
+import InvestorLayout from '../../../components/investor/InvestorLayout.astro';
+---
+
+<InvestorLayout title="Investment Overview" currentPage="overview">
+  <!-- Portfolio Overview Stats -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6 mb-8">
+    <div id="portfolio-value-card"></div>
+    <div id="active-investments-card"></div>
+    <div id="deal-flow-card"></div>
+    <div id="performance-card"></div>
+    <div id="syndicate-card"></div>
+    <div id="tax-card"></div>
+  </div>
+
+  <!-- Main Portfolio Chart -->
+  <div class="mb-8">
+    <div id="portfolio-chart"></div>
+  </div>
+
+  <!-- Dashboard Grid -->
+  <div class="grid lg:grid-cols-3 gap-8 mb-8">
+    <!-- Recent Investments -->
+    <div class="lg:col-span-2 bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl border border-yellow-400/20 p-6">
+      <div class="flex items-center justify-between mb-6">
+        <h3 class="text-lg font-semibold text-white">Recent Investments</h3>
+        <a href="/dashboard/investor/portfolio" class="text-yellow-400 hover:text-yellow-300 text-sm font-medium transition-colors">
+          View All →
+        </a>
+      </div>
+
+      <div class="space-y-4">
+        <!-- Investment Items -->
+        <div class="investment-item bg-gray-800/30 rounded-lg p-4 border border-gray-700 hover:border-yellow-400/40 transition-all duration-300">
+          <div class="flex items-start justify-between">
+            <div class="flex-1">
+              <div class="flex items-center space-x-3 mb-2">
+                <div class="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg flex items-center justify-center">
+                  <span class="text-white font-bold text-sm">AI</span>
+                </div>
+                <div>
+                  <h4 class="text-white font-medium">AI-Powered CRM Platform</h4>
+                  <p class="text-sm text-gray-400">SaaS • Series A</p>
+                </div>
+              </div>
+              <div class="flex items-center space-x-4 text-sm">
+                <span class="text-gray-400">Invested: <span class="text-white">$25,000</span></span>
+                <span class="text-gray-400">Current: <span class="text-green-400">$32,500</span></span>
+                <span class="px-2 py-1 bg-green-400/10 text-green-400 rounded-full text-xs">+30% ROI</span>
+              </div>
+            </div>
+            <div class="text-right">
+              <div class="text-sm text-gray-400">2 days ago</div>
+              <div class="w-2 h-2 bg-green-400 rounded-full mt-1 ml-auto"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="investment-item bg-gray-800/30 rounded-lg p-4 border border-gray-700 hover:border-yellow-400/40 transition-all duration-300">
+          <div class="flex items-start justify-between">
+            <div class="flex-1">
+              <div class="flex items-center space-x-3 mb-2">
+                <div class="w-10 h-10 bg-gradient-to-br from-purple-400 to-purple-600 rounded-lg flex items-center justify-center">
+                  <span class="text-white font-bold text-sm">EC</span>
+                </div>
+                <div>
+                  <h4 class="text-white font-medium">E-commerce Analytics Suite</h4>
+                  <p class="text-sm text-gray-400">E-commerce • Growth Stage</p>
+                </div>
+              </div>
+              <div class="flex items-center space-x-4 text-sm">
+                <span class="text-gray-400">Invested: <span class="text-white">$50,000</span></span>
+                <span class="text-gray-400">Current: <span class="text-green-400">$58,750</span></span>
+                <span class="px-2 py-1 bg-green-400/10 text-green-400 rounded-full text-xs">+17.5% ROI</span>
+              </div>
+            </div>
+            <div class="text-right">
+              <div class="text-sm text-gray-400">1 week ago</div>
+              <div class="w-2 h-2 bg-green-400 rounded-full mt-1 ml-auto"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="investment-item bg-gray-800/30 rounded-lg p-4 border border-gray-700 hover:border-yellow-400/40 transition-all duration-300">
+          <div class="flex items-start justify-between">
+            <div class="flex-1">
+              <div class="flex items-center space-x-3 mb-2">
+                <div class="w-10 h-10 bg-gradient-to-br from-green-400 to-green-600 rounded-lg flex items-center justify-center">
+                  <span class="text-white font-bold text-sm">FT</span>
+                </div>
+                <div>
+                  <h4 class="text-white font-medium">FinTech Payment Gateway</h4>
+                  <p class="text-sm text-gray-400">FinTech • Pre-Series A</p>
+                </div>
+              </div>
+              <div class="flex items-center space-x-4 text-sm">
+                <span class="text-gray-400">Invested: <span class="text-white">$15,000</span></span>
+                <span class="text-gray-400">Current: <span class="text-yellow-400">$15,900</span></span>
+                <span class="px-2 py-1 bg-yellow-400/10 text-yellow-400 rounded-full text-xs">+6% ROI</span>
+              </div>
+            </div>
+            <div class="text-right">
+              <div class="text-sm text-gray-400">2 weeks ago</div>
+              <div class="w-2 h-2 bg-yellow-400 rounded-full mt-1 ml-auto"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="investment-item bg-gray-800/30 rounded-lg p-4 border border-gray-700 hover:border-yellow-400/40 transition-all duration-300">
+          <div class="flex items-start justify-between">
+            <div class="flex-1">
+              <div class="flex items-center space-x-3 mb-2">
+                <div class="w-10 h-10 bg-gradient-to-br from-red-400 to-red-600 rounded-lg flex items-center justify-center">
+                  <span class="text-white font-bold text-sm">HR</span>
+                </div>
+                <div>
+                  <h4 class="text-white font-medium">HR Automation Platform</h4>
+                  <p class="text-sm text-gray-400">HR Tech • Seed Stage</p>
+                </div>
+              </div>
+              <div class="flex items-center space-x-4 text-sm">
+                <span class="text-gray-400">Invested: <span class="text-white">$20,000</span></span>
+                <span class="text-gray-400">Current: <span class="text-red-400">$17,600</span></span>
+                <span class="px-2 py-1 bg-red-400/10 text-red-400 rounded-full text-xs">-12% ROI</span>
+              </div>
+            </div>
+            <div class="text-right">
+              <div class="text-sm text-gray-400">3 weeks ago</div>
+              <div class="w-2 h-2 bg-red-400 rounded-full mt-1 ml-auto"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI Insights & Recommendations -->
+    <div class="bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl border border-purple-400/20 p-6">
+      <div class="flex items-center space-x-3 mb-6">
+        <div class="w-10 h-10 bg-purple-400/20 rounded-xl flex items-center justify-center">
+          <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-white">AI Insights</h3>
+      </div>
+
+      <div class="space-y-4">
+        <!-- Portfolio Health Score -->
+        <div class="bg-purple-400/10 border border-purple-400/20 rounded-lg p-4">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-sm font-medium text-white">Portfolio Health</span>
+            <span class="text-lg font-bold text-purple-400">8.2/10</span>
+          </div>
+          <div class="w-full bg-gray-700 rounded-full h-2">
+            <div class="bg-gradient-to-r from-purple-400 to-purple-600 h-2 rounded-full" style="width: 82%"></div>
+          </div>
+          <p class="text-xs text-gray-400 mt-2">Strong diversification with consistent growth</p>
+        </div>
+
+        <!-- Recommendations */
+        <div>
+          <h4 class="text-sm font-medium text-white mb-3">AI Recommendations</h4>
+          <div class="space-y-3">
+            <div class="flex items-start space-x-3">
+              <div class="w-6 h-6 bg-green-400/20 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <div>
+                <p class="text-sm text-white">Consider increasing FinTech allocation</p>
+                <p class="text-xs text-gray-400">Sector showing 23% growth trend</p>
+              </div>
+            </div>
+
+            <div class="flex items-start space-x-3">
+              <div class="w-6 h-6 bg-yellow-400/20 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <div>
+                <p class="text-sm text-white">Review HR Tech position</p>
+                <p class="text-xs text-gray-400">Underperforming vs sector average</p>
+              </div>
+            </div>
+
+            <div class="flex items-start space-x-3">
+              <div class="w-6 h-6 bg-blue-400/20 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <div>
+                <p class="text-sm text-white">New AI platform opportunity</p>
+                <p class="text-xs text-gray-400">94% AI confidence score</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Market Intelligence */
+        <div>
+          <h4 class="text-sm font-medium text-white mb-3">Market Intelligence</h4>
+          <div class="bg-gray-800/30 rounded-lg p-3">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs text-gray-400">Tech Platform Market</span>
+              <span class="text-xs text-green-400">+18.3%</span>
+            </div>
+            <div class="text-sm text-white mb-1">Bullish sentiment detected</div>
+            <p class="text-xs text-gray-400">Based on 1,247 data points from 45 sources</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Actions & Recent Activity -->
+  <div class="grid lg:grid-cols-2 gap-8">
+    <!-- Quick Actions -->
+    <div class="bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl border border-yellow-400/20 p-6">
+      <h3 class="text-lg font-semibold text-white mb-6">Quick Actions</h3>
+
+      <div class="grid grid-cols-2 gap-4">
+        <button class="action-button bg-green-400/10 border border-green-400/20 hover:border-green-400/40 text-green-400 p-4 rounded-xl transition-all duration-300 hover:bg-green-400/20">
+          <div class="flex flex-col items-center space-y-2">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+            </svg>
+            <span class="text-sm font-medium">New Investment</span>
+          </div>
+        </button>
+
+        <button class="action-button bg-blue-400/10 border border-blue-400/20 hover:border-blue-400/40 text-blue-400 p-4 rounded-xl transition-all duration-300 hover:bg-blue-400/20">
+          <div class="flex flex-col items-center space-y-2">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+            </svg>
+            <span class="text-sm font-medium">View Analytics</span>
+          </div>
+        </button>
+
+        <button class="action-button bg-purple-400/10 border border-purple-400/20 hover:border-purple-400/40 text-purple-400 p-4 rounded-xl transition-all duration-300 hover:bg-purple-400/20">
+          <div class="flex flex-col items-center space-y-2">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"/>
+            </svg>
+            <span class="text-sm font-medium">Join Syndicate</span>
+          </div>
+        </button>
+
+        <button class="action-button bg-yellow-400/10 border border-yellow-400/20 hover:border-yellow-400/40 text-yellow-400 p-4 rounded-xl transition-all duration-300 hover:bg-yellow-400/20">
+          <div class="flex flex-col items-center space-y-2">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+            <span class="text-sm font-medium">Tax Documents</span>
+          </div>
+        </button>
+      </div>
+
+      <!-- Featured Deal -->
+      <div class="mt-6 pt-6 border-t border-gray-700">
+        <div class="flex items-center justify-between mb-3">
+          <h4 class="text-sm font-medium text-white">Featured Opportunity</h4>
+          <span class="px-2 py-1 bg-purple-400/10 text-purple-400 text-xs rounded-full">Hot Deal</span>
+        </div>
+        <div class="bg-gray-800/50 rounded-lg p-4">
+          <div class="flex items-center space-x-3 mb-3">
+            <div class="w-10 h-10 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg flex items-center justify-center">
+              <span class="text-white font-bold text-sm">ML</span>
+            </div>
+            <div>
+              <h5 class="text-white font-medium">ML-Powered Trading Bot</h5>
+              <p class="text-sm text-gray-400">FinTech • Series B</p>
+            </div>
+          </div>
+          <div class="flex items-center justify-between">
+            <div class="text-sm">
+              <span class="text-gray-400">Min: </span>
+              <span class="text-white">$50K</span>
+            </div>
+            <div class="text-sm">
+              <span class="text-gray-400">AI Score: </span>
+              <span class="text-green-400 font-medium">9.4/10</span>
+            </div>
+          </div>
+          <button class="w-full mt-3 bg-yellow-400 text-black py-2 px-4 rounded-lg text-sm font-medium hover:bg-yellow-300 transition-colors">
+            View Details
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Activity Feed -->
+    <div class="bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl border border-yellow-400/20 p-6">
+      <div class="flex items-center justify-between mb-6">
+        <h3 class="text-lg font-semibold text-white">Recent Activity</h3>
+        <button class="text-yellow-400 hover:text-yellow-300 text-sm font-medium transition-colors">
+          Mark All Read
+        </button>
+      </div>
+
+      <div class="space-y-4">
+        <div class="activity-item flex items-start space-x-3 p-3 rounded-lg hover:bg-gray-800/30 transition-colors">
+          <div class="w-8 h-8 bg-green-400/20 rounded-full flex items-center justify-center flex-shrink-0">
+            <svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+          </div>
+          <div class="flex-1">
+            <p class="text-sm text-white">Investment in <span class="font-medium">AI-Powered CRM</span> has increased by 30%</p>
+            <p class="text-xs text-gray-400">2 hours ago</p>
+          </div>
+        </div>
+
+        <div class="activity-item flex items-start space-x-3 p-3 rounded-lg hover:bg-gray-800/30 transition-colors">
+          <div class="w-8 h-8 bg-blue-400/20 rounded-full flex items-center justify-center flex-shrink-0">
+            <svg class="w-4 h-4 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z"/>
+              <path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z"/>
+            </svg>
+          </div>
+          <div class="flex-1">
+            <p class="text-sm text-white">New message from <span class="font-medium">TechVentures Syndicate</span></p>
+            <p class="text-xs text-gray-400">5 hours ago</p>
+          </div>
+        </div>
+
+        <div class="activity-item flex items-start space-x-3 p-3 rounded-lg hover:bg-gray-800/30 transition-colors">
+          <div class="w-8 h-8 bg-purple-400/20 rounded-full flex items-center justify-center flex-shrink-0">
+            <svg class="w-4 h-4 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"/>
+            </svg>
+          </div>
+          <div class="flex-1">
+            <p class="text-sm text-white">New deal available: <span class="font-medium">ML Trading Platform</span></p>
+            <p class="text-xs text-gray-400">1 day ago</p>
+          </div>
+        </div>
+
+        <div class="activity-item flex items-start space-x-3 p-3 rounded-lg hover:bg-gray-800/30 transition-colors">
+          <div class="w-8 h-8 bg-yellow-400/20 rounded-full flex items-center justify-center flex-shrink-0">
+            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/>
+            </svg>
+          </div>
+          <div class="flex-1">
+            <p class="text-sm text-white">Quarterly tax documents are ready for download</p>
+            <p class="text-xs text-gray-400">2 days ago</p>
+          </div>
+        </div>
+
+        <div class="activity-item flex items-start space-x-3 p-3 rounded-lg hover:bg-gray-800/30 transition-colors">
+          <div class="w-8 h-8 bg-red-400/20 rounded-full flex items-center justify-center flex-shrink-0">
+            <svg class="w-4 h-4 text-red-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+            </svg>
+          </div>
+          <div class="flex-1">
+            <p class="text-sm text-white"><span class="font-medium">HR Platform</span> investment declined by 5%</p>
+            <p class="text-xs text-gray-400">3 days ago</p>
+          </div>
+        </div>
+      </div>
+
+      <button class="w-full mt-4 text-yellow-400 hover:text-yellow-300 text-sm font-medium transition-colors">
+        View All Activity →
+      </button>
+    </div>
+  </div>
+</InvestorLayout>
+
+<script>
+  import {
+    PortfolioValueCard,
+    ActiveInvestmentsCard,
+    DealFlowCard,
+    PerformanceMetricsCard,
+    SyndicateActivityCard,
+    TaxComplianceCard
+  } from '../../../components/investor/InvestorMetricCard.tsx';
+  import PortfolioChart from '../../../components/investor/PortfolioChart.tsx';
+  import { createRoot } from 'react-dom/client';
+  import React from 'react';
+
+  // Mock data - in production this would come from API
+  const mockPortfolioData = [
+    { date: '2024-01-01', portfolioValue: 110000, invested: 100000, unrealizedGains: 8000, realizedGains: 2000 },
+    { date: '2024-02-01', portfolioValue: 115000, invested: 105000, unrealizedGains: 7500, realizedGains: 2500 },
+    { date: '2024-03-01', portfolioValue: 125000, invested: 110000, unrealizedGains: 12000, realizedGains: 3000 },
+    { date: '2024-04-01', portfolioValue: 130000, invested: 115000, unrealizedGains: 11500, realizedGains: 3500 },
+    { date: '2024-05-01', portfolioValue: 135000, invested: 120000, unrealizedGains: 11000, realizedGains: 4000 },
+    { date: '2024-06-01', portfolioValue: 142000, invested: 125000, unrealizedGains: 13000, realizedGains: 4000 },
+    { date: '2024-07-01', portfolioValue: 147500, invested: 125000, unrealizedGains: 17500, realizedGains: 5000 }
+  ];
+
+  // Initialize React components
+  document.addEventListener('DOMContentLoaded', () => {
+    // Portfolio Value Card
+    const portfolioValueEl = document.getElementById('portfolio-value-card');
+    if (portfolioValueEl) {
+      const root = createRoot(portfolioValueEl);
+      root.render(
+        React.createElement(PortfolioValueCard, {
+          totalValue: 147500,
+          invested: 125000,
+          unrealizedGains: 17500,
+          realizedGains: 5000,
+          trend: 'up',
+          trendPercentage: 12.4
+        })
+      );
+    }
+
+    // Active Investments Card
+    const activeInvestmentsEl = document.getElementById('active-investments-card');
+    if (activeInvestmentsEl) {
+      const root = createRoot(activeInvestmentsEl);
+      root.render(
+        React.createElement(ActiveInvestmentsCard, {
+          totalInvestments: 12,
+          activeInvestments: 8,
+          successfulExits: 4,
+          averageHoldingPeriod: 14,
+          onViewAll: () => window.location.href = '/dashboard/investor/portfolio'
+        })
+      );
+    }
+
+    // Deal Flow Card
+    const dealFlowEl = document.getElementById('deal-flow-card');
+    if (dealFlowEl) {
+      const root = createRoot(dealFlowEl);
+      root.render(
+        React.createElement(DealFlowCard, {
+          newDeals: 23,
+          dealsViewed: 45,
+          dealsInProgress: 3,
+          averageDealScore: 8.6,
+          onBrowseDeals: () => window.location.href = '/dashboard/investor/opportunities'
+        })
+      );
+    }
+
+    // Performance Card
+    const performanceEl = document.getElementById('performance-card');
+    if (performanceEl) {
+      const root = createRoot(performanceEl);
+      root.render(
+        React.createElement(PerformanceMetricsCard, {
+          averageROI: 18.0,
+          bestPerformer: { name: 'AI-Powered CRM Platform', roi: 30.0 },
+          worstPerformer: { name: 'HR Automation Platform', roi: -12.0 },
+          riskScore: 6.2,
+          onViewAnalytics: () => window.location.href = '/dashboard/investor/analytics'
+        })
+      );
+    }
+
+    // Syndicate Card
+    const syndicateEl = document.getElementById('syndicate-card');
+    if (syndicateEl) {
+      const root = createRoot(syndicateEl);
+      root.render(
+        React.createElement(SyndicateActivityCard, {
+          activeSyndicates: 3,
+          totalMembers: 47,
+          leaderboardPosition: 12,
+          currentInvestments: 5,
+          onManageSyndicates: () => window.location.href = '/dashboard/investor/syndicate'
+        })
+      );
+    }
+
+    // Tax Card
+    const taxEl = document.getElementById('tax-card');
+    if (taxEl) {
+      const root = createRoot(taxEl);
+      root.render(
+        React.createElement(TaxComplianceCard, {
+          documentsGenerated: 8,
+          taxLiability: 12500,
+          complianceStatus: 'up-to-date',
+          nextDeadline: 'Q1 2025',
+          onTaxCenter: () => window.location.href = '/dashboard/investor/tax-center'
+        })
+      );
+    }
+
+    // Portfolio Chart
+    const portfolioChartEl = document.getElementById('portfolio-chart');
+    if (portfolioChartEl) {
+      const root = createRoot(portfolioChartEl);
+      root.render(
+        React.createElement(PortfolioChart, {
+          data: mockPortfolioData,
+          period: '6m',
+          onPeriodChange: (period) => {
+            console.log('Period changed to:', period);
+            // In production, fetch new data based on period
+          },
+          totalValue: 147500,
+          totalInvested: 125000,
+          totalGains: 22500
+        })
+      );
+    }
+  });
+
+  // Auto-refresh data
+  setInterval(async () => {
+    try {
+      // Fetch fresh portfolio data
+      const response = await fetch('/api/investors/portfolio?view=overview');
+      const data = await response.json();
+
+      // Update dashboard if needed
+      console.log('Portfolio data refreshed:', data);
+    } catch (error) {
+      console.error('Failed to refresh portfolio data:', error);
+    }
+  }, 300000); // Refresh every 5 minutes
+</script>
+
+<style>
+  /* Enhanced dashboard styles */
+  .metric-card {
+    @apply bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl border p-6 transition-all duration-300 hover:shadow-lg;
+  }
+
+  .investment-item:hover {
+    transform: translateY(-1px);
+  }
+
+  .action-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  }
+
+  .activity-item {
+    border-left: 2px solid transparent;
+    transition: all 0.3s ease;
+  }
+
+  .activity-item:hover {
+    border-left-color: #fbbf24;
+  }
+
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .metric-card {
+      @apply p-4;
+    }
+
+    .action-button {
+      @apply p-3;
+    }
+  }
+</style>
