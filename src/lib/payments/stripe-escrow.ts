@@ -54,8 +54,16 @@ export class StripeEscrowService {
     // Create connected account for seller if not exists
     await this.ensureSellerAccount(sellerId);
 
-    // Calculate platform fee (8% of transaction)
-    const platformFee = Math.round(amount * 0.08);
+    // Import platform fee calculation
+    const { calculatePlatformFee } = await import('../stripe-config.js');
+    
+    // Calculate dynamic platform fee based on seller tier
+    const transactionValue = amount >= 50000 ? 'high' : amount <= 1000 ? 'low' : 'medium';
+    const platformFee = calculatePlatformFee({ 
+      amount, 
+      sellerTier: metadata?.seller_tier || 'standard',
+      transactionValue 
+    });
 
     // Create payment intent with escrow hold
     const paymentIntent = await this.stripe.paymentIntents.create({

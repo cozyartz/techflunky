@@ -1,0 +1,429 @@
+---
+import AdminLayout from '../../../components/admin/AdminLayout.astro';
+---
+
+<AdminLayout title="Platform Management" currentPage="platforms">
+  <!-- Platform Overview Stats -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <div class="bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl border border-yellow-400/20 p-6 hover:border-yellow-400/40 transition-all duration-300">
+      <div class="flex items-center justify-between mb-4">
+        <div class="w-12 h-12 bg-yellow-400/10 rounded-xl flex items-center justify-center">
+          <svg class="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+          </svg>
+        </div>
+        <div class="flex items-center space-x-1 px-2 py-1 rounded-full text-xs font-medium bg-blue-400/10 text-blue-400">
+          <span>+3 new</span>
+        </div>
+      </div>
+      <h3 class="text-sm font-medium text-gray-400 uppercase tracking-wider mb-1">Total Platforms</h3>
+      <div class="text-3xl font-bold text-white">24</div>
+      <p class="text-sm text-gray-400">Across all categories</p>
+    </div>
+
+    <div class="bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl border border-green-400/20 p-6 hover:border-green-400/40 transition-all duration-300">
+      <div class="flex items-center justify-between mb-4">
+        <div class="w-12 h-12 bg-green-400/10 rounded-xl flex items-center justify-center">
+          <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <div class="flex items-center space-x-1 px-2 py-1 rounded-full text-xs font-medium bg-green-400/10 text-green-400">
+          <span>Active</span>
+        </div>
+      </div>
+      <h3 class="text-sm font-medium text-gray-400 uppercase tracking-wider mb-1">Live Platforms</h3>
+      <div class="text-3xl font-bold text-white">18</div>
+      <p class="text-sm text-gray-400">Available for purchase</p>
+    </div>
+
+    <div class="bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl border border-orange-400/20 p-6 hover:border-orange-400/40 transition-all duration-300">
+      <div class="flex items-center justify-between mb-4">
+        <div class="w-12 h-12 bg-orange-400/10 rounded-xl flex items-center justify-center">
+          <svg class="w-6 h-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <div class="flex items-center space-x-1 px-2 py-1 rounded-full text-xs font-medium bg-orange-400/10 text-orange-400">
+          <span>Review</span>
+        </div>
+      </div>
+      <h3 class="text-sm font-medium text-gray-400 uppercase tracking-wider mb-1">Pending Review</h3>
+      <div class="text-3xl font-bold text-white">3</div>
+      <p class="text-sm text-gray-400">Awaiting approval</p>
+    </div>
+
+    <div class="bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl border border-red-400/20 p-6 hover:border-red-400/40 transition-all duration-300">
+      <div class="flex items-center justify-between mb-4">
+        <div class="w-12 h-12 bg-red-400/10 rounded-xl flex items-center justify-center">
+          <svg class="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16c-.77.833.192 2.5 1.732 2.5z"/>
+          </svg>
+        </div>
+        <div class="flex items-center space-x-1 px-2 py-1 rounded-full text-xs font-medium bg-red-400/10 text-red-400">
+          <span>Issues</span>
+        </div>
+      </div>
+      <h3 class="text-sm font-medium text-gray-400 uppercase tracking-wider mb-1">Rejected</h3>
+      <div class="text-3xl font-bold text-white">3</div>
+      <p class="text-sm text-gray-400">Need revision</p>
+    </div>
+  </div>
+
+  <!-- Platform Management Actions -->
+  <div class="grid lg:grid-cols-4 gap-6 mb-8">
+    <!-- Quick Actions -->
+    <div class="lg:col-span-1">
+      <div class="bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl border border-yellow-400/20 p-6">
+        <h3 class="text-lg font-semibold text-white mb-4">Quick Actions</h3>
+        <div class="space-y-3">
+          <button class="w-full bg-yellow-400 text-black py-2 px-4 rounded-lg font-medium hover:bg-yellow-300 transition-colors text-sm">
+            Review Pending (3)
+          </button>
+          <button class="w-full bg-green-400/10 border border-green-400/20 text-green-400 py-2 px-4 rounded-lg font-medium hover:bg-green-400/20 transition-colors text-sm">
+            Bulk Approve
+          </button>
+          <button class="w-full bg-blue-400/10 border border-blue-400/20 text-blue-400 py-2 px-4 rounded-lg font-medium hover:bg-blue-400/20 transition-colors text-sm">
+            Export Data
+          </button>
+          <button class="w-full bg-purple-400/10 border border-purple-400/20 text-purple-400 py-2 px-4 rounded-lg font-medium hover:bg-purple-400/20 transition-colors text-sm">
+            Quality Report
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filters & Search -->
+    <div class="lg:col-span-3">
+      <div class="bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl border border-yellow-400/20 p-6">
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
+          <!-- Search -->
+          <div class="flex-1 lg:max-w-md">
+            <div class="relative">
+              <input
+                type="text"
+                placeholder="Search platforms..."
+                class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 pl-10 text-white placeholder-gray-400 focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 transition-colors"
+              >
+              <svg class="absolute left-3 top-3 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Filters -->
+          <div class="flex space-x-3">
+            <select class="bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 transition-colors">
+              <option value="">All Categories</option>
+              <option value="hr">HR & Compliance</option>
+              <option value="healthcare">Healthcare</option>
+              <option value="fintech">FinTech</option>
+              <option value="ecommerce">E-commerce</option>
+            </select>
+
+            <select class="bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 transition-colors">
+              <option value="">All Status</option>
+              <option value="active">Active</option>
+              <option value="pending">Pending</option>
+              <option value="sold">Sold</option>
+              <option value="rejected">Rejected</option>
+            </select>
+
+            <button class="bg-yellow-400 text-black px-4 py-2 rounded-lg font-medium hover:bg-yellow-300 transition-colors text-sm">
+              Filter
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Platform Listing Table -->
+  <div class="bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl border border-yellow-400/20 p-6">
+    <div class="flex items-center justify-between mb-6">
+      <h3 class="text-lg font-semibold text-white">Platform Listings</h3>
+      <div class="flex items-center space-x-3">
+        <span class="text-sm text-gray-400">Showing 24 of 24</span>
+        <button class="text-yellow-400 hover:text-yellow-300 text-sm font-medium">Export</button>
+      </div>
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="w-full">
+        <thead>
+          <tr class="border-b border-gray-700">
+            <th class="text-left text-xs font-medium text-gray-400 uppercase tracking-wider pb-3">Platform</th>
+            <th class="text-left text-xs font-medium text-gray-400 uppercase tracking-wider pb-3">Category</th>
+            <th class="text-left text-xs font-medium text-gray-400 uppercase tracking-wider pb-3">Price</th>
+            <th class="text-left text-xs font-medium text-gray-400 uppercase tracking-wider pb-3">Status</th>
+            <th class="text-left text-xs font-medium text-gray-400 uppercase tracking-wider pb-3">AI Score</th>
+            <th class="text-left text-xs font-medium text-gray-400 uppercase tracking-wider pb-3">Listed</th>
+            <th class="text-right text-xs font-medium text-gray-400 uppercase tracking-wider pb-3">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="space-y-3">
+          <!-- Pending Review Items -->
+          <tr class="border-b border-gray-800 hover:bg-gray-800/30 transition-colors">
+            <td class="py-4">
+              <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-orange-400/20 rounded-lg flex items-center justify-center">
+                  <svg class="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="text-sm font-medium text-white">AI Legal Document Generator</div>
+                  <div class="text-xs text-gray-400">Automated legal document creation platform</div>
+                </div>
+              </div>
+            </td>
+            <td class="py-4">
+              <span class="px-2 py-1 text-xs font-medium rounded-full bg-purple-400/10 text-purple-400">LegalTech</span>
+            </td>
+            <td class="py-4 text-sm font-semibold text-white">$42,000</td>
+            <td class="py-4">
+              <span class="px-2 py-1 text-xs font-medium rounded-full bg-orange-400/10 text-orange-400">Pending Review</span>
+            </td>
+            <td class="py-4">
+              <div class="flex items-center space-x-2">
+                <span class="text-sm font-medium text-yellow-400">8.7</span>
+                <div class="w-16 bg-gray-700 rounded-full h-1.5">
+                  <div class="bg-yellow-400 h-1.5 rounded-full" style="width: 87%"></div>
+                </div>
+              </div>
+            </td>
+            <td class="py-4 text-sm text-gray-400">2 hours ago</td>
+            <td class="py-4">
+              <div class="flex items-center justify-end space-x-2">
+                <button class="text-green-400 hover:text-green-300 p-1">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  </svg>
+                </button>
+                <button class="text-red-400 hover:text-red-300 p-1">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                  </svg>
+                </button>
+                <button class="text-blue-400 hover:text-blue-300 p-1">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                  </svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Active Platforms -->
+          <tr class="border-b border-gray-800 hover:bg-gray-800/30 transition-colors">
+            <td class="py-4">
+              <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-yellow-400/20 rounded-lg flex items-center justify-center">
+                  <svg class="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="text-sm font-medium text-white">AI HR Compliance Platform</div>
+                  <div class="text-xs text-gray-400">Multi-state leave administration system</div>
+                </div>
+              </div>
+            </td>
+            <td class="py-4">
+              <span class="px-2 py-1 text-xs font-medium rounded-full bg-green-400/10 text-green-400">HR</span>
+            </td>
+            <td class="py-4 text-sm font-semibold text-white">$35,000</td>
+            <td class="py-4">
+              <span class="px-2 py-1 text-xs font-medium rounded-full bg-green-400/10 text-green-400">Active</span>
+            </td>
+            <td class="py-4">
+              <div class="flex items-center space-x-2">
+                <span class="text-sm font-medium text-green-400">9.2</span>
+                <div class="w-16 bg-gray-700 rounded-full h-1.5">
+                  <div class="bg-green-400 h-1.5 rounded-full" style="width: 92%"></div>
+                </div>
+              </div>
+            </td>
+            <td class="py-4 text-sm text-gray-400">3 days ago</td>
+            <td class="py-4">
+              <div class="flex items-center justify-end space-x-2">
+                <button class="text-blue-400 hover:text-blue-300 p-1">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                  </svg>
+                </button>
+                <button class="text-gray-400 hover:text-white p-1">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"/>
+                  </svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <tr class="border-b border-gray-800 hover:bg-gray-800/30 transition-colors">
+            <td class="py-4">
+              <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-blue-400/20 rounded-lg flex items-center justify-center">
+                  <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="text-sm font-medium text-white">Healthcare Analytics Suite</div>
+                  <div class="text-xs text-gray-400">Medical data analysis and reporting platform</div>
+                </div>
+              </div>
+            </td>
+            <td class="py-4">
+              <span class="px-2 py-1 text-xs font-medium rounded-full bg-blue-400/10 text-blue-400">Healthcare</span>
+            </td>
+            <td class="py-4 text-sm font-semibold text-white">$28,500</td>
+            <td class="py-4">
+              <span class="px-2 py-1 text-xs font-medium rounded-full bg-gray-400/10 text-gray-400">Sold</span>
+            </td>
+            <td class="py-4">
+              <div class="flex items-center space-x-2">
+                <span class="text-sm font-medium text-green-400">8.9</span>
+                <div class="w-16 bg-gray-700 rounded-full h-1.5">
+                  <div class="bg-green-400 h-1.5 rounded-full" style="width: 89%"></div>
+                </div>
+              </div>
+            </td>
+            <td class="py-4 text-sm text-gray-400">1 week ago</td>
+            <td class="py-4">
+              <div class="flex items-center justify-end space-x-2">
+                <button class="text-blue-400 hover:text-blue-300 p-1">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                  </svg>
+                </button>
+                <span class="text-green-400 text-xs font-medium">SOLD</span>
+              </div>
+            </td>
+          </tr>
+
+          <!-- More rows would be generated dynamically -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination -->
+    <div class="flex items-center justify-between mt-6 pt-6 border-t border-gray-700">
+      <div class="text-sm text-gray-400">
+        Showing 1 to 10 of 24 results
+      </div>
+      <div class="flex items-center space-x-2">
+        <button class="px-3 py-1 text-sm text-gray-400 hover:text-white border border-gray-700 rounded hover:border-gray-600 transition-colors">
+          Previous
+        </button>
+        <button class="px-3 py-1 text-sm bg-yellow-400 text-black rounded font-medium">
+          1
+        </button>
+        <button class="px-3 py-1 text-sm text-gray-400 hover:text-white border border-gray-700 rounded hover:border-gray-600 transition-colors">
+          2
+        </button>
+        <button class="px-3 py-1 text-sm text-gray-400 hover:text-white border border-gray-700 rounded hover:border-gray-600 transition-colors">
+          3
+        </button>
+        <button class="px-3 py-1 text-sm text-gray-400 hover:text-white border border-gray-700 rounded hover:border-gray-600 transition-colors">
+          Next
+        </button>
+      </div>
+    </div>
+  </div>
+</AdminLayout>
+
+<script>
+  // Platform management functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    // Approval/rejection handlers
+    const approveButtons = document.querySelectorAll('[data-action="approve"]');
+    const rejectButtons = document.querySelectorAll('[data-action="reject"]');
+
+    approveButtons.forEach(button => {
+      button.addEventListener('click', (e) => {
+        const platformId = e.target.closest('tr').dataset.platformId;
+        approvePlatform(platformId);
+      });
+    });
+
+    rejectButtons.forEach(button => {
+      button.addEventListener('click', (e) => {
+        const platformId = e.target.closest('tr').dataset.platformId;
+        rejectPlatform(platformId);
+      });
+    });
+
+    // Search functionality
+    const searchInput = document.querySelector('input[type="text"]');
+    searchInput?.addEventListener('input', debounce((e) => {
+      filterPlatforms(e.target.value);
+    }, 300));
+
+    // Filter functionality
+    const filterSelects = document.querySelectorAll('select');
+    filterSelects.forEach(select => {
+      select.addEventListener('change', () => {
+        applyFilters();
+      });
+    });
+  });
+
+  async function approvePlatform(platformId) {
+    try {
+      const response = await fetch(`/api/admin/platforms/${platformId}/approve`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
+      });
+
+      if (response.ok) {
+        // Update UI to show approved status
+        location.reload();
+      }
+    } catch (error) {
+      console.error('Failed to approve platform:', error);
+    }
+  }
+
+  async function rejectPlatform(platformId) {
+    try {
+      const response = await fetch(`/api/admin/platforms/${platformId}/reject`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
+      });
+
+      if (response.ok) {
+        // Update UI to show rejected status
+        location.reload();
+      }
+    } catch (error) {
+      console.error('Failed to reject platform:', error);
+    }
+  }
+
+  function filterPlatforms(searchTerm) {
+    // Implement client-side filtering or make API call
+    console.log('Filtering platforms:', searchTerm);
+  }
+
+  function applyFilters() {
+    // Collect filter values and apply them
+    console.log('Applying filters');
+  }
+
+  function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  }
+</script>

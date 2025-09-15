@@ -1,0 +1,140 @@
+#!/usr/bin/env node
+
+// Tax setup script for TechFlunky AutiMind account
+import { taxService, DEFAULT_TAX_CONFIG } from './tax-config.js';
+import { runTaxTests } from './tax-tests.js';
+
+async function setupTaxConfiguration() {
+  console.log('🚀 Setting up tax configuration for TechFlunky (AutiMind)...\n');
+
+  try {
+    // 1. Configure platform tax settings
+    console.log('📋 Configuring platform tax settings...');
+    
+    const platformConfig = await taxService.configurePlatformTax({
+      headOfficeLocation: {
+        country: 'US',
+        state: 'MI',
+        city: 'Detroit', // Update with your actual city
+        postalCode: '48201' // Update with your actual postal code
+      },
+      presetTaxCode: 'txcd_10103001', // SaaS - Business use
+      collectTaxOnPlatformFees: true
+    });
+
+    console.log('✅ Platform tax settings configured');
+    console.log('   Status:', platformConfig.settings.status);
+
+    // 2. Add Michigan tax registration (if you're registered)
+    console.log('\n🏛️  Checking Michigan tax registration...');
+    
+    // Note: Only add if you actually have a Michigan sales tax registration
+    // const registration = await taxService.addTaxRegistration({
+    //   country: 'US',
+    //   state: 'MI',
+    //   registrationNumber: 'YOUR_MI_TAX_REGISTRATION_NUMBER',
+    //   taxType: 'sales_tax'
+    // });
+
+    console.log('⚠️  Michigan tax registration not added (SaaS is tax-free)');
+    console.log('   Add registration only if you sell taxable products');
+
+    // 3. Get current tax settings
+    console.log('\n📊 Current tax settings:');
+    const currentSettings = await taxService.getTaxSettings();
+    console.log('   - Default tax code:', currentSettings.defaults?.tax_code);
+    console.log('   - Head office country:', currentSettings.head_office?.address?.country);
+    console.log('   - Head office state:', currentSettings.head_office?.address?.state);
+
+    // 4. List any existing registrations
+    console.log('\n📋 Existing tax registrations:');
+    const registrations = await taxService.listTaxRegistrations();
+    if (registrations.data.length > 0) {
+      registrations.data.forEach(reg => {
+        console.log(`   - ${reg.country}${reg.country_options?.us?.state ? ` (${reg.country_options.us.state})` : ''}: ${reg.status}`);
+      });
+    } else {
+      console.log('   No tax registrations found');
+    }
+
+    console.log('\n✅ Tax configuration setup complete!');
+    
+    // 5. Run validation tests
+    console.log('\n🧪 Running validation tests...');
+    await runTaxTests();
+
+  } catch (error) {
+    console.error('\n❌ Tax configuration setup failed:', error);
+    
+    if (error.message.includes('No such tax_settings')) {
+      console.log('\n💡 Note: Tax settings might need to be enabled in your Stripe dashboard first.');
+      console.log('   Visit: https://dashboard.stripe.com/settings/tax');
+    }
+    
+    throw error;
+  }
+}
+
+async function checkTaxStatus() {
+  console.log('🔍 Checking current tax status...\n');
+
+  try {
+    // Check current settings
+    const settings = await taxService.getTaxSettings();
+    console.log('Current Tax Settings:');
+    console.log('- Status:', settings.status);
+    console.log('- Default tax code:', settings.defaults?.tax_code);
+    console.log('- Head office:', settings.head_office?.address?.country, settings.head_office?.address?.state);
+
+    // Check registrations
+    const registrations = await taxService.listTaxRegistrations();
+    console.log('\nTax Registrations:');
+    if (registrations.data.length > 0) {
+      registrations.data.forEach(reg => {
+        console.log(`- ${reg.country}: ${reg.status}`);
+      });
+    } else {
+      console.log('- No registrations found');
+    }
+
+    // Test Michigan tax rules
+    console.log('\nMichigan Tax Rules Test:');
+    const saasTest = await taxService.validateMichiganTax('saas');
+    const softwareTest = await taxService.validateMichiganTax('downloaded_software');
+    
+    console.log('- SaaS taxable:', saasTest.taxable, `(${saasTest.rate * 100}%)`);
+    console.log('- Downloaded software taxable:', softwareTest.taxable, `(${softwareTest.rate * 100}%)`);
+
+  } catch (error) {
+    console.error('❌ Status check failed:', error);
+  }
+}
+
+// CLI interface
+const command = process.argv[2];
+
+switch (command) {
+  case 'setup':
+    setupTaxConfiguration();
+    break;
+  case 'status':
+    checkTaxStatus();
+    break;
+  case 'test':
+    runTaxTests();
+    break;
+  default:
+    console.log('📝 TechFlunky Tax Configuration Tool');
+    console.log('');
+    console.log('Usage:');
+    console.log('  npm run tax:setup   - Configure tax settings');
+    console.log('  npm run tax:status  - Check current tax status');
+    console.log('  npm run tax:test    - Run tax validation tests');
+    console.log('');
+    console.log('Available commands:');
+    console.log('  node src/lib/tax/setup-tax.js setup');
+    console.log('  node src/lib/tax/setup-tax.js status');
+    console.log('  node src/lib/tax/setup-tax.js test');
+}
+
+export { setupTaxConfiguration, checkTaxStatus };

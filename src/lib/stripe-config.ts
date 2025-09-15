@@ -8,8 +8,12 @@ export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 
 // Platform configuration
 export const PLATFORM_CONFIG = {
-  // Your platform takes 15% commission
-  platformFeePercent: 0.15,
+  // Sliding scale platform commission: 8% - 18%
+  platformFeePercent: {
+    min: 0.08, // 8% for high-value or established sellers
+    max: 0.18, // 18% for new sellers or low-value items
+    standard: 0.15 // 15% default rate
+  },
   
   // Hold payments for 3-7 days for verification
   defaultPayoutDelay: 3, // days
@@ -55,6 +59,43 @@ export async function createSellerAccount(seller: {
   return account;
 }
 
+// Calculate dynamic platform fee based on seller tier and transaction value
+export function calculatePlatformFee({
+  amount,
+  sellerTier = 'standard',
+  transactionValue = 'medium'
+}: {
+  amount: number;
+  sellerTier?: 'new' | 'standard' | 'established' | 'premium';
+  transactionValue?: 'low' | 'medium' | 'high';
+}): number {
+  let feeRate = PLATFORM_CONFIG.platformFeePercent.standard;
+  
+  // Adjust based on seller tier
+  switch (sellerTier) {
+    case 'new':
+      feeRate = PLATFORM_CONFIG.platformFeePercent.max; // 18%
+      break;
+    case 'established':
+      feeRate = PLATFORM_CONFIG.platformFeePercent.min; // 8%
+      break;
+    case 'premium':
+      feeRate = 0.06; // 6% for top-tier sellers
+      break;
+    default:
+      feeRate = PLATFORM_CONFIG.platformFeePercent.standard; // 15%
+  }
+  
+  // Adjust based on transaction value
+  if (transactionValue === 'high' && amount >= 50000) { // $500+
+    feeRate *= 0.9; // 10% discount on fees for high-value transactions
+  } else if (transactionValue === 'low' && amount <= 1000) { // Under $10
+    feeRate = Math.min(feeRate * 1.2, PLATFORM_CONFIG.platformFeePercent.max); // 20% increase, capped at max
+  }
+  
+  return Math.round(amount * feeRate);
+}
+
 // Process a marketplace transaction
 export async function processListingPurchase({
   buyerId,
@@ -62,15 +103,18 @@ export async function processListingPurchase({
   listingId,
   amount, // in cents
   description,
+  sellerTier = 'standard',
 }: {
   buyerId: string;
   sellerId: string;
   listingId: string;
   amount: number;
   description: string;
+  sellerTier?: 'new' | 'standard' | 'established' | 'premium';
 }) {
-  // Calculate platform fee
-  const platformFee = Math.round(amount * PLATFORM_CONFIG.platformFeePercent);
+  // Calculate dynamic platform fee
+  const transactionValue = amount >= 50000 ? 'high' : amount <= 1000 ? 'low' : 'medium';
+  const platformFee = calculatePlatformFee({ amount, sellerTier, transactionValue });
   
   // Create payment intent with destination charge
   const paymentIntent = await stripe.paymentIntents.create({

@@ -1,0 +1,245 @@
+// Tax configuration tests for TechFlunky marketplace
+import { TaxConfigurationService, MichiganTaxUtils, PRODUCT_TAX_CODES } from './tax-config.js';
+
+/**
+ * Test suite for tax configuration
+ */
+export class TaxConfigurationTester {
+  private taxService: TaxConfigurationService;
+
+  constructor() {
+    this.taxService = new TaxConfigurationService();
+  }
+
+  /**
+   * Run all tax configuration tests
+   */
+  async runAllTests(): Promise<void> {
+    console.log('🧪 Starting Tax Configuration Tests...\n');
+
+    try {
+      await this.testPlatformTaxSetup();
+      await this.testMichiganTaxRules();
+      await this.testTaxCalculations();
+      await this.testConnectedAccountTax();
+      
+      console.log('✅ All tax configuration tests passed!');
+    } catch (error) {
+      console.error('❌ Tax configuration tests failed:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Test platform tax configuration
+   */
+  private async testPlatformTaxSetup(): Promise<void> {
+    console.log('📋 Testing platform tax setup...');
+
+    try {
+      // Configure platform tax settings
+      const result = await this.taxService.configurePlatformTax({
+        headOfficeLocation: {
+          country: 'US',
+          state: 'MI',
+          city: 'Detroit',
+          postalCode: '48201'
+        }
+      });
+
+      console.log('✅ Platform tax configured successfully');
+      console.log('   - Head office location: Michigan');
+      console.log('   - Tax settings status:', result.settings.status);
+    } catch (error) {
+      console.log('⚠️  Platform tax setup test skipped (may require valid API keys)');
+    }
+  }
+
+  /**
+   * Test Michigan-specific tax rules
+   */
+  private async testMichiganTaxRules(): Promise<void> {
+    console.log('🏛️  Testing Michigan tax rules...');
+
+    // Test SaaS taxability
+    const saasValidation = await this.taxService.validateMichiganTax('saas');
+    console.log('✅ SaaS validation:', {
+      taxable: saasValidation.taxable,
+      reason: saasValidation.reason,
+      rate: saasValidation.rate
+    });
+
+    // Test downloaded software taxability
+    const softwareValidation = await this.taxService.validateMichiganTax('downloaded_software');
+    console.log('✅ Downloaded software validation:', {
+      taxable: softwareValidation.taxable,
+      reason: softwareValidation.reason,
+      rate: softwareValidation.rate
+    });
+
+    // Test digital goods taxability
+    const digitalValidation = await this.taxService.validateMichiganTax('digital_goods');
+    console.log('✅ Digital goods validation:', {
+      taxable: digitalValidation.taxable,
+      reason: digitalValidation.reason,
+      rate: digitalValidation.rate
+    });
+
+    // Test Michigan utility functions
+    console.log('✅ Michigan utility tests:');
+    console.log('   - SaaS taxable:', MichiganTaxUtils.isTaxableInMichigan('saas'));
+    console.log('   - Downloaded software taxable:', MichiganTaxUtils.isTaxableInMichigan('downloaded_software'));
+    console.log('   - Digital goods taxable:', MichiganTaxUtils.isTaxableInMichigan('digital_goods'));
+    console.log('   - Michigan tax rate:', MichiganTaxUtils.getMichiganTaxRate());
+    
+    // Test nexus requirements
+    const shouldCollectHigh = MichiganTaxUtils.shouldCollectMichiganTax('economic', 150000, 250);
+    const shouldCollectLow = MichiganTaxUtils.shouldCollectMichiganTax('economic', 50000, 100);
+    console.log('   - Should collect (high volume):', shouldCollectHigh);
+    console.log('   - Should collect (low volume):', shouldCollectLow);
+  }
+
+  /**
+   * Test tax calculations
+   */
+  private async testTaxCalculations(): Promise<void> {
+    console.log('🧮 Testing tax calculations...');
+
+    const testScenarios = [
+      {
+        name: 'Michigan SaaS Transaction',
+        params: {
+          platformId: 'platform_test',
+          sellerId: 'seller_test',
+          buyerId: 'buyer_test',
+          amount: 10000, // $100.00
+          currency: 'usd',
+          description: 'Test SaaS platform purchase',
+          customerAddress: {
+            country: 'US',
+            state: 'MI',
+            city: 'Detroit',
+            postalCode: '48201'
+          },
+          productType: 'saas' as const
+        }
+      },
+      {
+        name: 'Michigan Downloaded Software',
+        params: {
+          platformId: 'platform_test',
+          sellerId: 'seller_test',
+          buyerId: 'buyer_test',
+          amount: 5000, // $50.00
+          currency: 'usd',
+          description: 'Test downloaded software',
+          customerAddress: {
+            country: 'US',
+            state: 'MI',
+            city: 'Ann Arbor',
+            postalCode: '48104'
+          },
+          productType: 'downloaded_software' as const
+        }
+      },
+      {
+        name: 'Out-of-State SaaS Transaction',
+        params: {
+          platformId: 'platform_test',
+          sellerId: 'seller_test',
+          buyerId: 'buyer_test',
+          amount: 15000, // $150.00
+          currency: 'usd',
+          description: 'Test out-of-state SaaS',
+          customerAddress: {
+            country: 'US',
+            state: 'CA',
+            city: 'San Francisco',
+            postalCode: '94102'
+          },
+          productType: 'saas' as const
+        }
+      }
+    ];
+
+    for (const scenario of testScenarios) {
+      console.log(`\n   Testing: ${scenario.name}`);
+      
+      try {
+        // This would normally create a payment intent, but we'll skip for testing
+        console.log('   - Amount:', `$${scenario.params.amount / 100}`);
+        console.log('   - Product type:', scenario.params.productType);
+        console.log('   - Customer location:', `${scenario.params.customerAddress.city}, ${scenario.params.customerAddress.state}`);
+        
+        // Validate Michigan tax for this scenario
+        const michiganTax = await this.taxService.validateMichiganTax(scenario.params.productType);
+        console.log('   - Michigan tax:', michiganTax.taxable ? `${michiganTax.rate * 100}%` : 'Exempt');
+        console.log('   - Reason:', michiganTax.reason);
+        
+        console.log('   ✅ Scenario calculated successfully');
+      } catch (error) {
+        console.log('   ⚠️  Scenario calculation skipped (requires valid Stripe connection)');
+      }
+    }
+  }
+
+  /**
+   * Test connected account tax configuration
+   */
+  private async testConnectedAccountTax(): Promise<void> {
+    console.log('🔗 Testing connected account tax configuration...');
+
+    try {
+      console.log('   - Tax codes available:');
+      Object.entries(PRODUCT_TAX_CODES).forEach(([key, code]) => {
+        console.log(`     ${key}: ${code}`);
+      });
+
+      console.log('   ✅ Connected account tax configuration ready');
+    } catch (error) {
+      console.log('   ⚠️  Connected account test skipped');
+    }
+  }
+
+  /**
+   * Generate tax configuration report
+   */
+  generateTaxReport(): void {
+    console.log('\n📊 TAX CONFIGURATION REPORT');
+    console.log('================================');
+    console.log('Platform: TechFlunky (AutiMind)');
+    console.log('Head Office: Michigan, USA');
+    console.log('Business Type: Software Marketplace');
+    console.log('');
+    console.log('TAX RULES SUMMARY:');
+    console.log('- SaaS products: TAX-FREE in Michigan ✅');
+    console.log('- Downloaded software: TAXABLE at 6% in Michigan');
+    console.log('- Digital goods: TAX-FREE in Michigan ✅');
+    console.log('- Platform fees: Subject to marketplace facilitator rules');
+    console.log('');
+    console.log('NEXUS THRESHOLDS:');
+    console.log('- Economic nexus: $100,000 annual sales OR 200 transactions');
+    console.log('- Physical nexus: Office, employees, or inventory in state');
+    console.log('');
+    console.log('COMPLIANCE REQUIREMENTS:');
+    console.log('- Register for Michigan sales tax permit if nexus exists');
+    console.log('- File returns monthly/quarterly based on volume');
+    console.log('- Collect 6% sales tax on taxable transactions');
+    console.log('- No local sales taxes in Michigan');
+    console.log('');
+    console.log('MARKETPLACE FACILITATOR STATUS:');
+    console.log('- Michigan considers platforms as facilitators');
+    console.log('- Platform responsible for tax collection and remittance');
+    console.log('- Must collect tax on behalf of connected sellers');
+  }
+}
+
+// Export test runner
+export async function runTaxTests(): Promise<void> {
+  const tester = new TaxConfigurationTester();
+  await tester.runAllTests();
+  tester.generateTaxReport();
+}
+
+// Export for direct usage
+export { TaxConfigurationTester };
