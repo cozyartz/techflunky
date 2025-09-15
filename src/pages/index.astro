@@ -1,27 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
 ---
 
 <Layout title="TechFlunky - Marketplace for Validated Business Ideas">
   <main class="min-h-screen bg-black">
-    <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm border-b border-yellow-400/20">
-      <div class="container mx-auto px-4 py-4">
-        <div class="flex items-center justify-between">
-          <div class="flex items-center space-x-3">
-            <img src="/assets/techflunky-logo.png" alt="TechFlunky" class="w-10 h-10">
-            <span class="text-xl font-bold text-white">TechFlunky</span>
-          </div>
-          <div class="hidden md:flex items-center space-x-8">
-            <a href="/browse" class="text-gray-300 hover:text-yellow-400 transition font-medium">Browse</a>
-            <a href="/invest" class="text-gray-300 hover:text-yellow-400 transition font-medium">Invest</a>
-            <a href="/sell" class="text-gray-300 hover:text-yellow-400 transition font-medium">Sell</a>
-            <a href="/about" class="text-gray-300 hover:text-yellow-400 transition font-medium">About</a>
-            <a href="/contact" class="bg-yellow-400 text-black px-4 py-2 rounded-lg font-semibold hover:bg-yellow-300 transition">Contact</a>
-          </div>
-        </div>
-      </div>
-    </nav>
+    <Navigation currentPage="home" />
 
     <!-- Hero Section -->
     <section class="relative min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white overflow-hidden flex items-center">

@@ -1,31 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { BentoGrid, BentoBox } from '../components/bento/BentoGridMotion';
-import { IdeaPreview } from '../components/bento/FeatureCard';
+import Navigation from '../components/Navigation.astro';
 ---
 
 <Layout title="Browse Business Platforms - TechFlunky">
   <main class="min-h-screen bg-black">
-    <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm border-b border-yellow-400/20">
-      <div class="container mx-auto px-4 py-4">
-        <div class="flex items-center justify-between">
-          <div class="flex items-center space-x-3">
-            <img src="/assets/techflunky-logo.png" alt="TechFlunky" class="w-10 h-10">
-            <span class="text-xl font-bold text-white">TechFlunky</span>
-          </div>
-          <div class="hidden md:flex items-center space-x-8">
-            <a href="/" class="text-gray-300 hover:text-yellow-400 transition font-medium">Home</a>
-            <a href="/browse" class="text-yellow-400 font-medium">Browse</a>
-            <a href="/invest" class="text-gray-300 hover:text-yellow-400 transition font-medium">Invest</a>
-            <a href="/sell" class="text-gray-300 hover:text-yellow-400 transition font-medium">Sell</a>
-            <a href="/pricing" class="text-gray-300 hover:text-yellow-400 transition font-medium">Pricing</a>
-            <a href="/about" class="text-gray-300 hover:text-yellow-400 transition font-medium">About</a>
-            <a href="/contact" class="bg-yellow-400 text-black px-4 py-2 rounded-lg font-semibold hover:bg-yellow-300 transition">Contact</a>
-          </div>
-        </div>
-      </div>
-    </nav>
+    <Navigation currentPage="browse" />
 
     <!-- Header -->
     <section class="relative min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white overflow-hidden flex items-center">
@@ -48,22 +28,37 @@ import { IdeaPreview } from '../components/bento/FeatureCard';
           <div class="bg-black/50 backdrop-blur-sm rounded-xl p-6 mt-8 border border-yellow-400/20 animate-slide-up" style="animation-delay: 0.2s">
             <div class="flex flex-col md:flex-row gap-4">
               <input
+                id="searchInput"
                 type="text"
                 placeholder="Search platforms..."
                 class="flex-grow px-4 py-3 rounded-lg bg-gray-900/50 backdrop-blur-sm border border-yellow-400/30 text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400/60 focus:bg-gray-900/70"
               />
-              <select class="px-4 py-3 rounded-lg bg-gray-900/50 backdrop-blur-sm border border-yellow-400/30 text-white focus:outline-none focus:border-yellow-400/60">
+              <select id="categoryFilter" class="px-4 py-3 rounded-lg bg-gray-900/50 backdrop-blur-sm border border-yellow-400/30 text-white focus:outline-none focus:border-yellow-400/60">
                 <option value="">All Categories</option>
-                <option value="hr-compliance">HR Compliance (1)</option>
+                <option value="hr-compliance">HR Compliance</option>
                 <option value="legal-saas">Legal SaaS</option>
-                <option value="ai-tools">AI Tools</option>
-                <option value="coming-soon" disabled>More Categories Coming...</option>
+                <option value="fintech">FinTech</option>
+                <option value="healthcare">Healthcare</option>
+                <option value="marketing-tools">Marketing Tools</option>
+                <option value="restaurant-tech">Restaurant Tech</option>
+                <option value="real-estate">Real Estate</option>
+                <option value="fitness-tech">Fitness Tech</option>
+                <option value="education-tech">Education Tech</option>
+                <option value="iot-platform">IoT Platform</option>
               </select>
-              <select class="px-4 py-3 rounded-lg bg-gray-900/50 backdrop-blur-sm border border-yellow-400/30 text-white focus:outline-none focus:border-yellow-400/60">
-                <option value="">Price Range</option>
+              <select id="priceFilter" class="px-4 py-3 rounded-lg bg-gray-900/50 backdrop-blur-sm border border-yellow-400/30 text-white focus:outline-none focus:border-yellow-400/60">
+                <option value="">All Prices</option>
                 <option value="0-15000">Under $15K</option>
                 <option value="15000-35000">$15K - $35K</option>
                 <option value="35000+">$35K+</option>
+              </select>
+              <select id="sortFilter" class="px-4 py-3 rounded-lg bg-gray-900/50 backdrop-blur-sm border border-yellow-400/30 text-white focus:outline-none focus:border-yellow-400/60">
+                <option value="created_at-desc">Newest First</option>
+                <option value="created_at-asc">Oldest First</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="ai_score-desc">Highest AI Score</option>
+                <option value="views_count-desc">Most Popular</option>
               </select>
             </div>
           </div>
@@ -78,156 +73,44 @@ import { IdeaPreview } from '../components/bento/FeatureCard';
       </div>
     </section>
 
-    <!-- Platforms Grid -->
+    <!-- Dynamic Listings Grid -->
     <section class="py-24 bg-gradient-to-br from-black to-gray-900">
       <div class="container mx-auto px-4">
-        <BentoGrid client:load>
-          <!-- Featured Platform -->
-          <BentoBox
-            size="large"
-            className="lg:col-span-6 lg:row-span-3 bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm border-yellow-400/20 hover:border-yellow-400/40"
-            gradient={true}
-            data-platform="hr-compliance"
-            data-category="hr-compliance"
-            data-price="35000"
-          >
-            <div class="h-full flex flex-col text-white">
-              <div class="flex items-center gap-3 mb-4">
-                <span class="bg-yellow-400/20 text-yellow-400 px-3 py-1 rounded-full text-sm font-semibold">🔥 FEATURED</span>
-                <span class="text-green-400 font-semibold">Available Now</span>
-              </div>
-
-              <h3 class="text-2xl md:text-3xl font-bold text-white mb-3">AI-Powered HR Compliance Platform</h3>
-              <p class="text-gray-300 mb-4 flex-grow">Complete multi-state leave administration system with automated compliance tracking. Built on modern Cloudflare infrastructure with AI automation.</p>
-
-              <div class="grid grid-cols-2 gap-3 mb-4">
-                <div class="bg-black/50 rounded-lg p-3 border border-yellow-400/10">
-                  <div class="text-sm text-yellow-400 font-medium">Market Size</div>
-                  <div class="text-lg font-bold text-white">$800M+</div>
+        <div id="listingsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <!-- Loading skeleton -->
+          <div id="loadingSkeleton" class="col-span-full">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {Array.from({length: 8}).map((_, i) => (
+                <div key={i} class="bg-gray-900/50 rounded-xl p-6 border border-gray-700 animate-pulse">
+                  <div class="h-4 bg-gray-700 rounded mb-4"></div>
+                  <div class="h-8 bg-gray-700 rounded mb-3"></div>
+                  <div class="h-3 bg-gray-700 rounded mb-2"></div>
+                  <div class="h-3 bg-gray-700 rounded mb-4"></div>
+                  <div class="flex justify-between items-center">
+                    <div class="h-6 bg-gray-700 rounded w-20"></div>
+                    <div class="h-8 bg-gray-700 rounded w-24"></div>
+                  </div>
                 </div>
-                <div class="bg-black/50 rounded-lg p-3 border border-yellow-400/10">
-                  <div class="text-sm text-yellow-400 font-medium">Profit Margin</div>
-                  <div class="text-lg font-bold text-white">95%</div>
-                </div>
-              </div>
-
-              <div class="flex justify-between items-center mt-auto">
-                <div>
-                  <div class="text-sm text-gray-400">Complete Package</div>
-                  <span class="text-3xl font-bold text-yellow-400">$35,000</span>
-                </div>
-                <a href="/listing/ai-hr-leave-administration-platform" class="bg-yellow-400 text-black px-6 py-3 rounded-lg font-semibold hover:bg-yellow-300 transition">
-                  View Details
-                </a>
-              </div>
+              ))}
             </div>
-          </BentoBox>
+          </div>
 
-          <!-- Coming Soon Projects -->
-          <BentoBox
-            size="medium"
-            className="lg:col-span-3 lg:row-span-2 bg-gray-900/30 backdrop-blur-sm border-2 border-dashed border-yellow-400/20 hover:border-yellow-400/40"
-            data-platform="lms"
-            data-category="ai-tools"
-            data-price="25000"
-          >
-            <div class="h-full flex flex-col items-center justify-center text-center p-4">
-              <div class="text-3xl mb-3">🎓</div>
-              <h3 class="text-lg font-bold text-white mb-2">Learning Management System</h3>
-              <p class="text-sm text-gray-300 mb-3 flex-grow">Complete LMS with AI tutoring, progress tracking, and multi-tenant architecture. Built with Next.js.</p>
-              <span class="text-sm text-yellow-400 font-semibold">Documentation in Progress</span>
-            </div>
-          </BentoBox>
+          <!-- Listings will be populated here -->
+          <div id="listingsGrid" class="col-span-full hidden">
+            <!-- Dynamic content will be inserted here -->
+          </div>
+        </div>
 
-          <BentoBox
-            size="medium"
-            className="lg:col-span-3 lg:row-span-2 bg-gray-900/30 backdrop-blur-sm border-2 border-dashed border-yellow-400/20 hover:border-yellow-400/40"
-            data-platform="marketplace"
-            data-category="legal-saas"
-            data-price="30000"
-          >
-            <div class="h-full flex flex-col items-center justify-center text-center p-4">
-              <div class="text-3xl mb-3">🛒</div>
-              <h3 class="text-lg font-bold text-white mb-2">Multi-Vendor Marketplace</h3>
-              <p class="text-sm text-gray-300 mb-3 flex-grow">Complete e-commerce platform with vendor management, Stripe integration, and order fulfillment.</p>
-              <span class="text-sm text-yellow-400 font-semibold">Being Packaged</span>
-            </div>
-          </BentoBox>
-
-          <BentoBox
-            size="medium"
-            className="lg:col-span-3 lg:row-span-2 bg-gray-900/30 backdrop-blur-sm border-2 border-dashed border-yellow-400/20 hover:border-yellow-400/40"
-            data-platform="ai-images"
-            data-category="ai-tools"
-            data-price="20000"
-          >
-            <div class="h-full flex flex-col items-center justify-center text-center p-4">
-              <div class="text-3xl mb-3">🤖</div>
-              <h3 class="text-lg font-bold text-white mb-2">AI Image Generation</h3>
-              <p class="text-sm text-gray-300 mb-3 flex-grow">Lifestyle image generation platform with Cloudflare AI. Automated content creation at scale.</p>
-              <span class="text-sm text-yellow-400 font-semibold">Documentation Needed</span>
-            </div>
-          </BentoBox>
-
-          <BentoBox
-            size="medium"
-            className="lg:col-span-3 lg:row-span-2 bg-gray-900/30 backdrop-blur-sm border-2 border-dashed border-yellow-400/20 hover:border-yellow-400/40"
-            data-platform="crm"
-            data-category="legal-saas"
-            data-price="18000"
-          >
-            <div class="h-full flex flex-col items-center justify-center text-center p-4">
-              <div class="text-3xl mb-3">📊</div>
-              <h3 class="text-lg font-bold text-white mb-2">CRM Platform</h3>
-              <p class="text-sm text-gray-300 mb-3 flex-grow">Customer relationship management with pipeline tracking, email automation, and reporting.</p>
-              <span class="text-sm text-yellow-400 font-semibold">Code Review in Progress</span>
-            </div>
-          </BentoBox>
-
-          <BentoBox
-            size="wide"
-            className="lg:col-span-6 lg:row-span-2 bg-gradient-to-br from-yellow-400/10 to-yellow-400/5 backdrop-blur-sm border-yellow-400/20"
-            gradient={true}
-            data-platform="custom"
-            data-category=""
-            data-price="0"
-          >
-            <div class="h-full flex flex-col items-center justify-center text-center p-6">
-              <div class="text-4xl mb-4">📋</div>
-              <h3 class="text-xl font-bold text-white mb-3">30+ Complete Projects in Development</h3>
-              <p class="text-gray-300 mb-4 flex-grow">Each platform represents 12-18 months of development work. I'm systematically documenting and packaging them for entrepreneurs who want to skip the development phase.</p>
-              <p class="text-sm text-yellow-400 font-medium">Building this marketplace one validated project at a time →</p>
-            </div>
-          </BentoBox>
-
-          <BentoBox
-            size="small"
-            className="lg:col-span-2 lg:row-span-1 bg-gradient-to-br from-gray-900/50 to-black/50 border-yellow-400/20"
-            gradient={true}
-          >
-            <div class="text-center h-full flex flex-col justify-center">
-              <h4 class="font-bold text-lg mb-2 text-white">Real Projects</h4>
-              <p class="text-sm text-gray-300">1 listed, 30+ being documented</p>
-            </div>
-          </BentoBox>
-
-          <!-- Load More Section -->
-          <BentoBox
-            size="wide"
-            className="lg:col-span-6 lg:row-span-1 bg-gradient-to-r from-yellow-400/20 to-yellow-400/10 border-yellow-400/30"
-            gradient={true}
-          >
-            <div class="flex items-center justify-between h-full">
-              <div>
-                <h4 class="font-bold text-lg text-white">Ready to find your next big opportunity?</h4>
-                <p class="text-gray-300">Get notified when new platforms are available</p>
-              </div>
-              <a href="/signup" class="bg-yellow-400 text-black px-6 py-3 rounded-lg font-semibold hover:bg-yellow-300 transition">
-                Get Notified
-              </a>
-            </div>
-          </BentoBox>
-        </BentoGrid>
+        <!-- Pagination -->
+        <div id="paginationContainer" class="flex justify-center items-center mt-12 space-x-4 hidden">
+          <button id="prevPage" class="px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+            Previous
+          </button>
+          <span id="pageInfo" class="text-gray-300">Page 1 of 1</span>
+          <button id="nextPage" class="px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+            Next
+          </button>
+        </div>
       </div>
     </section>
 
@@ -414,6 +297,254 @@ import { IdeaPreview } from '../components/bento/FeatureCard';
       resultsElement.textContent = `${count} platform${count !== 1 ? 's' : ''} found`;
     }
   }
+
+  // Dynamic listings functionality
+  let currentPage = 1;
+  let currentFilters = {
+    query: '',
+    category: '',
+    sortBy: 'created_at',
+    sortOrder: 'desc'
+  };
+
+  async function loadListings(page = 1, filters = {}) {
+    try {
+      const params = new URLSearchParams({
+        page: page.toString(),
+        limit: '12',
+        ...filters
+      });
+
+      const response = await fetch(`/api/listings/search?${params}`);
+      const data = await response.json();
+
+      if (data.success) {
+        displayListings(data.data.listings);
+        updatePagination(data.data.pagination);
+        return data.data;
+      } else {
+        throw new Error(data.error || 'Failed to load listings');
+      }
+    } catch (error) {
+      console.error('Error loading listings:', error);
+      showError('Failed to load listings. Please try again.');
+      return null;
+    }
+  }
+
+  function displayListings(listings) {
+    const loadingSkeleton = document.getElementById('loadingSkeleton');
+    const listingsGrid = document.getElementById('listingsGrid');
+
+    if (loadingSkeleton) loadingSkeleton.classList.add('hidden');
+    if (listingsGrid) listingsGrid.classList.remove('hidden');
+
+    if (!listingsGrid) return;
+
+    if (listings.length === 0) {
+      listingsGrid.innerHTML = `
+        <div class="col-span-full text-center py-12">
+          <div class="text-gray-400 text-lg mb-4">No platforms found</div>
+          <p class="text-gray-500">Try adjusting your search criteria</p>
+        </div>
+      `;
+      return;
+    }
+
+    listingsGrid.innerHTML = `
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        ${listings.map(listing => createListingCard(listing)).join('')}
+      </div>
+    `;
+  }
+
+  function createListingCard(listing) {
+    const packageTierBadge = {
+      'blueprint': { text: 'Blueprint', color: 'bg-blue-500/20 text-blue-400' },
+      'launch_ready': { text: 'Launch Ready', color: 'bg-green-500/20 text-green-400' },
+      'enterprise': { text: 'Enterprise', color: 'bg-purple-500/20 text-purple-400' }
+    };
+
+    const tier = packageTierBadge[listing.packageTier] || { text: 'Platform', color: 'bg-gray-500/20 text-gray-400' };
+    const price = (listing.price / 100).toLocaleString();
+
+    return `
+      <div class="bg-gray-900/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700 hover:border-yellow-400/40 transition-all duration-300 hover:-translate-y-1">
+        <div class="flex items-center justify-between mb-4">
+          <span class="${tier.color} px-3 py-1 rounded-full text-sm font-semibold">${tier.text}</span>
+          <div class="flex items-center space-x-1">
+            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+            </svg>
+            <span class="text-yellow-400 text-sm font-medium">${listing.aiScore}</span>
+          </div>
+        </div>
+
+        <h3 class="text-lg font-bold text-white mb-2 line-clamp-2">${listing.title}</h3>
+        <p class="text-gray-300 text-sm mb-4 line-clamp-3">${listing.description}</p>
+
+        <div class="space-y-2 mb-4">
+          <div class="flex justify-between text-sm">
+            <span class="text-gray-400">Industry:</span>
+            <span class="text-gray-300">${listing.industry}</span>
+          </div>
+          <div class="flex justify-between text-sm">
+            <span class="text-gray-400">Views:</span>
+            <span class="text-gray-300">${listing.viewsCount.toLocaleString()}</span>
+          </div>
+        </div>
+
+        <div class="flex justify-between items-center mt-auto">
+          <div>
+            <div class="text-sm text-gray-400">Price</div>
+            <span class="text-xl font-bold text-yellow-400">$${price}</span>
+          </div>
+          <a href="/listing/${listing.slug}"
+             class="bg-yellow-400 text-black px-4 py-2 rounded-lg font-semibold hover:bg-yellow-300 transition text-sm">
+            View Details
+          </a>
+        </div>
+
+        ${listing.seller ? `
+          <div class="mt-4 pt-4 border-t border-gray-700">
+            <div class="flex items-center justify-between text-sm">
+              <span class="text-gray-400">Seller:</span>
+              <span class="text-gray-300">${listing.seller.name}</span>
+            </div>
+            ${listing.seller.rating ? `
+              <div class="flex items-center justify-between text-sm mt-1">
+                <span class="text-gray-400">Rating:</span>
+                <span class="text-yellow-400">${listing.seller.rating}/5 (${listing.seller.reviewsCount} reviews)</span>
+              </div>
+            ` : ''}
+          </div>
+        ` : ''}
+      </div>
+    `;
+  }
+
+  function updatePagination(pagination) {
+    const paginationContainer = document.getElementById('paginationContainer');
+    const prevButton = document.getElementById('prevPage');
+    const nextButton = document.getElementById('nextPage');
+    const pageInfo = document.getElementById('pageInfo');
+
+    if (!paginationContainer || !prevButton || !nextButton || !pageInfo) return;
+
+    // Show pagination if more than one page
+    if (pagination.totalPages > 1) {
+      paginationContainer.classList.remove('hidden');
+    } else {
+      paginationContainer.classList.add('hidden');
+      return;
+    }
+
+    // Update page info
+    pageInfo.textContent = `Page ${pagination.page} of ${pagination.totalPages}`;
+
+    // Update button states
+    prevButton.disabled = !pagination.hasPrev;
+    nextButton.disabled = !pagination.hasNext;
+
+    // Add click handlers
+    prevButton.onclick = () => {
+      if (pagination.hasPrev) {
+        currentPage = pagination.page - 1;
+        loadListings(currentPage, currentFilters);
+      }
+    };
+
+    nextButton.onclick = () => {
+      if (pagination.hasNext) {
+        currentPage = pagination.page + 1;
+        loadListings(currentPage, currentFilters);
+      }
+    };
+  }
+
+  function showError(message) {
+    const listingsGrid = document.getElementById('listingsGrid');
+    if (listingsGrid) {
+      listingsGrid.innerHTML = `
+        <div class="col-span-full text-center py-12">
+          <div class="text-red-400 text-lg mb-4">${message}</div>
+          <button onclick="loadListings(currentPage, currentFilters)"
+                  class="bg-yellow-400 text-black px-4 py-2 rounded-lg font-semibold hover:bg-yellow-300 transition">
+            Try Again
+          </button>
+        </div>
+      `;
+    }
+  }
+
+  // Handle filter changes
+  function setupFilterHandlers() {
+    const searchInput = document.getElementById('searchInput');
+    const categoryFilter = document.getElementById('categoryFilter');
+    const priceFilter = document.getElementById('priceFilter');
+    const sortFilter = document.getElementById('sortFilter');
+
+    // Debounced search
+    let searchTimeout;
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => {
+          currentFilters.query = e.target.value;
+          currentPage = 1;
+          loadListings(currentPage, currentFilters);
+        }, 300);
+      });
+    }
+
+    // Category filter
+    if (categoryFilter) {
+      categoryFilter.addEventListener('change', (e) => {
+        currentFilters.category = e.target.value;
+        currentPage = 1;
+        loadListings(currentPage, currentFilters);
+      });
+    }
+
+    // Price filter - convert to dollars for API
+    if (priceFilter) {
+      priceFilter.addEventListener('change', (e) => {
+        const priceRange = e.target.value;
+        if (priceRange === '0-15000') {
+          currentFilters.minPrice = '0';
+          currentFilters.maxPrice = '15000';
+        } else if (priceRange === '15000-35000') {
+          currentFilters.minPrice = '15000';
+          currentFilters.maxPrice = '35000';
+        } else if (priceRange === '35000+') {
+          currentFilters.minPrice = '35000';
+          currentFilters.maxPrice = '999999';
+        } else {
+          delete currentFilters.minPrice;
+          delete currentFilters.maxPrice;
+        }
+        currentPage = 1;
+        loadListings(currentPage, currentFilters);
+      });
+    }
+
+    // Sort filter
+    if (sortFilter) {
+      sortFilter.addEventListener('change', (e) => {
+        const [sortBy, sortOrder] = e.target.value.split('-');
+        currentFilters.sortBy = sortBy;
+        currentFilters.sortOrder = sortOrder;
+        currentPage = 1;
+        loadListings(currentPage, currentFilters);
+      });
+    }
+  }
+
+  // Initialize listings on page load
+  document.addEventListener('DOMContentLoaded', () => {
+    setupFilterHandlers();
+    loadListings(1, currentFilters);
+  });
 
   // Smooth scroll for navigation links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {

@@ -1,0 +1,216 @@
+---
+export interface Props {
+  currentPage?: string;
+}
+
+const { currentPage = '' } = Astro.props;
+---
+
+<nav class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm border-b border-yellow-400/20">
+  <div class="container mx-auto px-4 py-4">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <a href="/" class="flex items-center space-x-3">
+          <img src="/assets/techflunky-logo.png" alt="TechFlunky" class="w-10 h-10">
+          <span class="text-xl font-bold text-white">TechFlunky</span>
+        </a>
+      </div>
+
+      <div class="hidden md:flex items-center space-x-8">
+        <a href="/browse" class={`font-medium transition ${currentPage === 'browse' ? 'text-yellow-400' : 'text-gray-300 hover:text-yellow-400'}`}>Browse</a>
+        <a href="/invest" class={`font-medium transition ${currentPage === 'invest' ? 'text-yellow-400' : 'text-gray-300 hover:text-yellow-400'}`}>Invest</a>
+        <a href="/sell" class={`font-medium transition ${currentPage === 'sell' ? 'text-yellow-400' : 'text-gray-300 hover:text-yellow-400'}`}>Sell</a>
+        <a href="/pricing" class={`font-medium transition ${currentPage === 'pricing' ? 'text-yellow-400' : 'text-gray-300 hover:text-yellow-400'}`}>Pricing</a>
+        <a href="/about" class={`font-medium transition ${currentPage === 'about' ? 'text-yellow-400' : 'text-gray-300 hover:text-yellow-400'}`}>About</a>
+
+        <!-- Auth Section -->
+        <div id="authSection" class="flex items-center space-x-4">
+          <!-- Logged out state -->
+          <div id="loggedOutSection" class="flex items-center space-x-4">
+            <a href="/login" class="text-gray-300 hover:text-yellow-400 transition font-medium">Login</a>
+            <a href="/register" class="bg-yellow-400 text-black px-4 py-2 rounded-lg font-semibold hover:bg-yellow-300 transition">Sign Up</a>
+          </div>
+
+          <!-- Logged in state -->
+          <div id="loggedInSection" class="hidden flex items-center space-x-4">
+            <div class="relative group">
+              <button id="userMenuButton" class="flex items-center space-x-2 text-gray-300 hover:text-yellow-400 transition">
+                <div id="userAvatar" class="w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center">
+                  <span id="userInitial" class="text-black font-semibold text-sm"></span>
+                </div>
+                <span id="userName" class="font-medium"></span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+
+              <!-- Dropdown menu -->
+              <div id="userDropdown" class="hidden absolute right-0 mt-2 w-48 bg-gray-900 border border-gray-700 rounded-lg shadow-lg">
+                <div class="py-2">
+                  <div class="px-4 py-2 text-sm text-gray-400 border-b border-gray-700">
+                    <div id="userEmail" class="font-medium text-white"></div>
+                    <div id="userRole" class="text-xs text-yellow-400"></div>
+                  </div>
+                  <a id="dashboardLink" href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 hover:text-yellow-400 transition">
+                    Dashboard
+                  </a>
+                  <a href="/profile" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 hover:text-yellow-400 transition">
+                    Profile Settings
+                  </a>
+                  <button id="logoutButton" class="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 hover:text-red-400 transition">
+                    Sign Out
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile menu button -->
+      <button id="mobileMenuButton" class="md:hidden text-gray-300 hover:text-yellow-400">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="hidden md:hidden mt-4 py-4 border-t border-yellow-400/20">
+      <div class="flex flex-col space-y-4">
+        <a href="/browse" class="text-gray-300 hover:text-yellow-400 transition font-medium">Browse</a>
+        <a href="/invest" class="text-gray-300 hover:text-yellow-400 transition font-medium">Invest</a>
+        <a href="/sell" class="text-gray-300 hover:text-yellow-400 transition font-medium">Sell</a>
+        <a href="/pricing" class="text-gray-300 hover:text-yellow-400 transition font-medium">Pricing</a>
+        <a href="/about" class="text-gray-300 hover:text-yellow-400 transition font-medium">About</a>
+
+        <div id="mobileAuthSection" class="pt-4 border-t border-gray-700">
+          <div id="mobileLoggedOut" class="flex flex-col space-y-2">
+            <a href="/login" class="text-gray-300 hover:text-yellow-400 transition font-medium">Login</a>
+            <a href="/register" class="bg-yellow-400 text-black px-4 py-2 rounded-lg font-semibold hover:bg-yellow-300 transition text-center">Sign Up</a>
+          </div>
+          <div id="mobileLoggedIn" class="hidden flex flex-col space-y-2">
+            <div class="text-white font-medium">
+              <span id="mobileUserName"></span>
+              <div id="mobileUserEmail" class="text-sm text-gray-400"></div>
+            </div>
+            <a id="mobileDashboardLink" href="#" class="text-gray-300 hover:text-yellow-400 transition font-medium">Dashboard</a>
+            <a href="/profile" class="text-gray-300 hover:text-yellow-400 transition font-medium">Profile</a>
+            <button id="mobileLogoutButton" class="text-left text-gray-300 hover:text-red-400 transition font-medium">Sign Out</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  // Check authentication status on page load
+  async function checkAuth() {
+    try {
+      const response = await fetch('/api/auth/me');
+      if (response.ok) {
+        const data = await response.json();
+        if (data.success && data.data.user) {
+          showLoggedInState(data.data.user);
+        } else {
+          showLoggedOutState();
+        }
+      } else {
+        showLoggedOutState();
+      }
+    } catch (error) {
+      showLoggedOutState();
+    }
+  }
+
+  function showLoggedInState(user) {
+    // Desktop
+    document.getElementById('loggedOutSection').classList.add('hidden');
+    document.getElementById('loggedInSection').classList.remove('hidden');
+    document.getElementById('loggedInSection').classList.add('flex');
+
+    // Update user info
+    document.getElementById('userName').textContent = user.name;
+    document.getElementById('userEmail').textContent = user.email;
+    document.getElementById('userRole').textContent = user.role.charAt(0).toUpperCase() + user.role.slice(1);
+    document.getElementById('userInitial').textContent = user.name.charAt(0).toUpperCase();
+
+    // Set dashboard link based on role
+    const dashboardLink = getDashboardLink(user.role);
+    document.getElementById('dashboardLink').href = dashboardLink;
+    document.getElementById('mobileDashboardLink').href = dashboardLink;
+
+    // Mobile
+    document.getElementById('mobileLoggedOut').classList.add('hidden');
+    document.getElementById('mobileLoggedIn').classList.remove('hidden');
+    document.getElementById('mobileLoggedIn').classList.add('flex');
+    document.getElementById('mobileUserName').textContent = user.name;
+    document.getElementById('mobileUserEmail').textContent = user.email;
+  }
+
+  function showLoggedOutState() {
+    // Desktop
+    document.getElementById('loggedInSection').classList.add('hidden');
+    document.getElementById('loggedOutSection').classList.remove('hidden');
+
+    // Mobile
+    document.getElementById('mobileLoggedIn').classList.add('hidden');
+    document.getElementById('mobileLoggedOut').classList.remove('hidden');
+  }
+
+  function getDashboardLink(role) {
+    switch (role) {
+      case 'admin':
+        return '/dashboard/admin';
+      case 'seller':
+        return '/dashboard/seller';
+      case 'investor':
+        return '/dashboard/investor';
+      default:
+        return '/browse';
+    }
+  }
+
+  // Logout functionality
+  async function logout() {
+    try {
+      await fetch('/api/auth/logout', { method: 'POST' });
+      showLoggedOutState();
+      // Redirect to home page
+      window.location.href = '/';
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
+  }
+
+  // Event listeners
+  document.addEventListener('DOMContentLoaded', () => {
+    checkAuth();
+
+    // Logout buttons
+    document.getElementById('logoutButton')?.addEventListener('click', logout);
+    document.getElementById('mobileLogoutButton')?.addEventListener('click', logout);
+
+    // Dropdown toggle
+    document.getElementById('userMenuButton')?.addEventListener('click', () => {
+      const dropdown = document.getElementById('userDropdown');
+      dropdown.classList.toggle('hidden');
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+      const userMenu = document.getElementById('userMenuButton');
+      const dropdown = document.getElementById('userDropdown');
+      if (userMenu && dropdown && !userMenu.contains(e.target) && !dropdown.contains(e.target)) {
+        dropdown.classList.add('hidden');
+      }
+    });
+
+    // Mobile menu toggle
+    document.getElementById('mobileMenuButton')?.addEventListener('click', () => {
+      const mobileMenu = document.getElementById('mobileMenu');
+      mobileMenu.classList.toggle('hidden');
+    });
+  });
+</script>

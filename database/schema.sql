@@ -7,7 +7,7 @@ CREATE TABLE users (
   email TEXT UNIQUE NOT NULL,
   name TEXT NOT NULL,
   password_hash TEXT NOT NULL,
-  role TEXT DEFAULT 'user' CHECK (role IN ('user', 'admin')),
+  role TEXT DEFAULT 'user' CHECK (role IN ('user', 'seller', 'investor', 'admin')),
   stripe_customer_id TEXT,
   subscription_status TEXT DEFAULT 'free' CHECK (subscription_status IN ('free', 'pro', 'premium')),
   subscription_expires_at INTEGER,
@@ -23,11 +23,58 @@ CREATE TABLE profiles (
   website TEXT,
   linkedin TEXT,
   avatar_url TEXT,
+  github_id INTEGER,
+  github_login TEXT,
   seller_rating REAL DEFAULT 0,
   seller_reviews_count INTEGER DEFAULT 0,
   buyer_verified BOOLEAN DEFAULT FALSE,
   created_at INTEGER DEFAULT (unixepoch()),
   updated_at INTEGER DEFAULT (unixepoch())
+);
+
+-- GitHub App integrations for repository access
+CREATE TABLE github_integrations (
+  user_id TEXT PRIMARY KEY REFERENCES users(id),
+  access_token TEXT NOT NULL,
+  github_id INTEGER NOT NULL,
+  github_login TEXT NOT NULL,
+  installations TEXT, -- JSON array of installations
+  updated_at INTEGER DEFAULT (unixepoch())
+);
+
+-- GitHub App installations tracking
+CREATE TABLE github_installations (
+  installation_id INTEGER PRIMARY KEY,
+  account_id INTEGER NOT NULL,
+  account_login TEXT NOT NULL,
+  created_at INTEGER DEFAULT (unixepoch())
+);
+
+-- Repositories accessible through installations
+CREATE TABLE installation_repositories (
+  installation_id INTEGER NOT NULL REFERENCES github_installations(installation_id),
+  repo_id INTEGER NOT NULL,
+  repo_name TEXT NOT NULL,
+  repo_url TEXT NOT NULL,
+  PRIMARY KEY (installation_id, repo_id)
+);
+
+-- Track listing updates from GitHub webhooks
+CREATE TABLE listing_updates (
+  id TEXT PRIMARY KEY DEFAULT (lower(hex(randomblob(16)))),
+  listing_id TEXT NOT NULL REFERENCES listings(id),
+  update_type TEXT NOT NULL, -- 'code_push', 'release', 'archive'
+  github_commit_sha TEXT,
+  created_at INTEGER DEFAULT (unixepoch())
+);
+
+-- User sessions for authentication
+CREATE TABLE user_sessions (
+  id TEXT PRIMARY KEY DEFAULT (lower(hex(randomblob(16)))),
+  user_id TEXT NOT NULL REFERENCES users(id),
+  token TEXT UNIQUE NOT NULL,
+  expires_at INTEGER NOT NULL,
+  created_at INTEGER DEFAULT (unixepoch())
 );
 
 -- Business concepts/listings
@@ -126,7 +173,25 @@ CREATE TABLE analytics (
   created_at INTEGER DEFAULT (unixepoch())
 );
 
+-- Magic links table for passwordless authentication
+CREATE TABLE magic_links (
+  id TEXT PRIMARY KEY DEFAULT (lower(hex(randomblob(16)))),
+  user_id TEXT NOT NULL REFERENCES users(id),
+  token TEXT UNIQUE NOT NULL,
+  email TEXT NOT NULL,
+  expires_at INTEGER NOT NULL,
+  used BOOLEAN DEFAULT FALSE,
+  created_at INTEGER DEFAULT (unixepoch()),
+  updated_at INTEGER DEFAULT (unixepoch())
+);
+
 -- Indexes for performance
+CREATE INDEX idx_user_sessions_user ON user_sessions(user_id);
+CREATE INDEX idx_user_sessions_token ON user_sessions(token);
+CREATE INDEX idx_user_sessions_expires ON user_sessions(expires_at);
+CREATE INDEX idx_magic_links_token ON magic_links(token);
+CREATE INDEX idx_magic_links_user ON magic_links(user_id);
+CREATE INDEX idx_magic_links_expires ON magic_links(expires_at);
 CREATE INDEX idx_listings_seller ON listings(seller_id);
 CREATE INDEX idx_listings_status ON listings(status);
 CREATE INDEX idx_listings_category ON listings(category);

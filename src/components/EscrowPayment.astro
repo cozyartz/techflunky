@@ -187,7 +187,7 @@ const sellerAmount = platformPrice - platformFee;
 </div>
 
 <script>
-  import { loadStripe } from '@stripe/stripe-js';
+  // import { loadStripe } from '@stripe/stripe-js';
 
   class EscrowPaymentHandler {
     constructor() {
@@ -200,7 +200,7 @@ const sellerAmount = platformPrice - platformFee;
 
     async init() {
       // Load Stripe
-      this.stripe = await loadStripe(window.STRIPE_PUBLISHABLE_KEY);
+      // this.stripe = await loadStripe(window.STRIPE_PUBLISHABLE_KEY);
 
       // Initialize payment form
       await this.setupPaymentForm();

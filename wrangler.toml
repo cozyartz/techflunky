@@ -18,5 +18,11 @@ SITE_URL = "https://techflunky.com"
 # - KV namespace: "CACHE"
 # - Analytics Engine: "ANALYTICS"
 
+# D1 database bindings for local development
+[[d1_databases]]
+binding = "DB"
+database_name = "techflunky-db"
+database_id = "local"
+
 # For development with wrangler pages dev:
 # wrangler pages dev dist --d1 DB=techflunky-db --r2 BUCKET=techflunky-assets --kv CACHE --ai AI=@cf/meta/llama-3.1-70b-instruct

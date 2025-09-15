@@ -1,0 +1,76 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const token = Astro.url.searchParams.get('token');
+const error = Astro.url.searchParams.get('error');
+
+// If we have a token, this will be handled by the GET endpoint in magic-link.ts
+// This page is mainly for displaying errors or loading states
+---
+
+<Layout title="Verifying Magic Link - TechFlunky">
+  <main class="min-h-screen bg-gradient-to-br from-black to-gray-900 flex items-center justify-center px-4">
+    <div class="w-full max-w-md">
+      <div class="bg-gray-800/50 backdrop-blur-sm rounded-xl p-8 border border-gray-700">
+        <div class="text-center">
+          {!error ? (
+            <!-- Loading State -->
+            <div>
+              <div class="w-16 h-16 mx-auto mb-4 text-yellow-400">
+                <svg class="animate-spin" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+              </div>
+              <h1 class="text-2xl font-bold text-white mb-2">Verifying your magic link...</h1>
+              <p class="text-gray-400">Please wait while we sign you in.</p>
+            </div>
+          ) : (
+            <!-- Error State -->
+            <div>
+              <div class="w-16 h-16 mx-auto mb-4 text-red-400">
+                <svg fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                </svg>
+              </div>
+              <h1 class="text-2xl font-bold text-white mb-2">Verification Failed</h1>
+              <p class="text-gray-400 mb-6">
+                {error === 'invalid_token' && 'The magic link is invalid.'}
+                {error === 'invalid_or_expired_token' && 'The magic link has expired or is invalid.'}
+                {error === 'verification_failed' && 'Something went wrong during verification.'}
+                {error === 'oauth_failed' && 'OAuth authentication failed.'}
+                {!['invalid_token', 'invalid_or_expired_token', 'verification_failed', 'oauth_failed'].includes(error) && 'An unknown error occurred.'}
+              </p>
+              <div class="space-y-3">
+                <a
+                  href="/login"
+                  class="block w-full bg-yellow-400 text-black py-3 px-4 rounded-lg font-semibold hover:bg-yellow-300 transition-colors text-center"
+                >
+                  Try Again
+                </a>
+                <a
+                  href="/"
+                  class="block w-full text-gray-400 hover:text-white transition-colors text-center"
+                >
+                  Go to Homepage
+                </a>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // If we have a token but no error, try to verify it
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
+    const error = urlParams.get('error');
+
+    if (token && !error) {
+      // Redirect to the magic link verification endpoint
+      window.location.href = `/api/auth/magic-link?token=${token}`;
+    }
+  </script>
+</Layout>
