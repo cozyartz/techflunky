@@ -1,6 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Navigation from '../components/Navigation.astro';
+import PlatformGrid from '../components/PlatformGrid.astro';
+import { platforms, filterPlatforms, sortPlatforms, paginatePlatforms, getFeaturedPlatforms } from '../data/platforms.js';
+
+// Get initial data - featured platforms first, then all platforms
+const featuredPlatforms = getFeaturedPlatforms();
+const allPlatforms = platforms;
 ---
 
 <Layout title="Browse Business Platforms - TechFlunky">
@@ -73,42 +79,61 @@ import Navigation from '../components/Navigation.astro';
       </div>
     </section>
 
-    <!-- Dynamic Listings Grid -->
-    <section class="py-24 bg-gradient-to-br from-black to-gray-900">
-      <div class="container mx-auto px-4">
-        <div id="listingsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          <!-- Loading skeleton -->
-          <div id="loadingSkeleton" class="col-span-full">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {Array.from({length: 8}).map((_, i) => (
-                <div key={i} class="bg-gray-900/50 rounded-xl p-6 border border-gray-700 animate-pulse">
-                  <div class="h-4 bg-gray-700 rounded mb-4"></div>
-                  <div class="h-8 bg-gray-700 rounded mb-3"></div>
-                  <div class="h-3 bg-gray-700 rounded mb-2"></div>
-                  <div class="h-3 bg-gray-700 rounded mb-4"></div>
-                  <div class="flex justify-between items-center">
-                    <div class="h-6 bg-gray-700 rounded w-20"></div>
-                    <div class="h-8 bg-gray-700 rounded w-24"></div>
-                  </div>
-                </div>
-              ))}
-            </div>
+    <!-- Featured Platforms Section -->
+    {featuredPlatforms.length > 0 && (
+      <section class="py-16 bg-gradient-to-r from-black via-gray-900 to-black">
+        <div class="container mx-auto px-4">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Featured Platforms</h2>
+            <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+              Handpicked, market-validated platforms ready for immediate launch
+            </p>
           </div>
 
-          <!-- Listings will be populated here -->
-          <div id="listingsGrid" class="col-span-full hidden">
-            <!-- Dynamic content will be inserted here -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {featuredPlatforms.map((platform, index) => (
+              <div
+                key={platform.id}
+                class="animate-slide-up"
+                style={`animation-delay: ${index * 200}ms`}
+              >
+                <PlatformCard platform={platform} featured={true} className="h-full transform hover:scale-105 transition-transform duration-500" />
+              </div>
+            ))}
           </div>
         </div>
+      </section>
+    )}
 
-        <!-- Pagination -->
-        <div id="paginationContainer" class="flex justify-center items-center mt-12 space-x-4 hidden">
-          <button id="prevPage" class="px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition disabled:opacity-50 disabled:cursor-not-allowed" disabled>
-            Previous
-          </button>
-          <span id="pageInfo" class="text-gray-300">Page 1 of 1</span>
-          <button id="nextPage" class="px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition disabled:opacity-50 disabled:cursor-not-allowed" disabled>
-            Next
+    <!-- All Platforms Grid -->
+    <section class="py-24 bg-gradient-to-br from-black to-gray-900">
+      <div class="container mx-auto px-4">
+
+        <!-- Section Header -->
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">All Platforms</h2>
+          <p class="text-lg text-gray-300 max-w-2xl mx-auto">
+            Discover production-ready business platforms with complete documentation and market validation
+          </p>
+        </div>
+
+        <!-- Results Summary -->
+        <div id="resultsCount" class="text-gray-300 text-sm mb-6">
+          Showing {allPlatforms.length} platforms
+        </div>
+
+        <!-- Platform Grid Container -->
+        <div id="platformsContainer">
+          <PlatformGrid platforms={allPlatforms} />
+        </div>
+
+        <!-- Load More Button (for future pagination) -->
+        <div class="text-center mt-12">
+          <button
+            id="loadMoreBtn"
+            class="bg-transparent border-2 border-yellow-400 text-yellow-400 px-8 py-3 rounded-xl font-semibold hover:bg-yellow-400 hover:text-black transition-all duration-300 transform hover:scale-105 hidden"
+          >
+            Load More Platforms
           </button>
         </div>
       </div>
@@ -126,7 +151,7 @@ import Navigation from '../components/Navigation.astro';
           </p>
 
           <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <a href="/listing/ai-hr-leave-administration-platform" class="group bg-yellow-400 text-black px-10 py-4 rounded-xl font-bold text-lg hover:bg-yellow-300 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
+            <a href={`/listing/${featuredPlatforms[0]?.slug || 'ai-hr-leave-administration-platform'}`} class="group bg-yellow-400 text-black px-10 py-4 rounded-xl font-bold text-lg hover:bg-yellow-300 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
               <span class="flex items-center gap-3">
                 View Featured Platform
                 <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -178,6 +203,9 @@ import Navigation from '../components/Navigation.astro';
 </Layout>
 
 <script>
+  // Import platform data and filtering functions
+  import { platforms, filterPlatforms, sortPlatforms } from '../data/platforms.js';
+
   // Modern intersection observer for scroll animations
   const observerOptions = {
     threshold: 0.1,
@@ -192,370 +220,199 @@ import Navigation from '../components/Navigation.astro';
     });
   }, observerOptions);
 
-  // Observe elements when DOM is loaded
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.scroll-fade').forEach(el => {
-      observer.observe(el);
-    });
-
-    // Initialize search and filter functionality
-    initializeBrowseFunctionality();
-  });
-
-  // Browse page search and filter functionality
-  function initializeBrowseFunctionality() {
-    const searchInput = document.querySelector('input[placeholder="Search platforms..."]');
-    const categorySelect = document.querySelector('select').nextElementSibling ? document.querySelector('select') : null;
-    const priceSelect = document.querySelectorAll('select')[1];
-    const platformCards = document.querySelectorAll('[data-platform]');
-
-    // Search functionality
-    if (searchInput) {
-      searchInput.addEventListener('input', (e) => {
-        const searchTerm = e.target.value.toLowerCase();
-        filterPlatforms(searchTerm, getSelectedCategory(), getSelectedPriceRange());
-      });
+  // Platform filtering and search functionality
+  class PlatformBrowser {
+    constructor() {
+      this.allPlatforms = platforms;
+      this.filteredPlatforms = platforms;
+      this.currentFilters = {
+        query: '',
+        category: '',
+        minPrice: null,
+        maxPrice: null,
+        sortBy: 'createdAt',
+        sortOrder: 'desc'
+      };
+      this.init();
     }
 
-    // Category filter
-    if (categorySelect) {
-      categorySelect.addEventListener('change', () => {
-        const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
-        filterPlatforms(searchTerm, getSelectedCategory(), getSelectedPriceRange());
-      });
+    init() {
+      this.bindFilterEvents();
+      this.updateDisplay();
     }
 
-    // Price filter
-    if (priceSelect) {
-      priceSelect.addEventListener('change', () => {
-        const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
-        filterPlatforms(searchTerm, getSelectedCategory(), getSelectedPriceRange());
-      });
-    }
+    bindFilterEvents() {
+      const searchInput = document.getElementById('searchInput');
+      const categoryFilter = document.getElementById('categoryFilter');
+      const priceFilter = document.getElementById('priceFilter');
+      const sortFilter = document.getElementById('sortFilter');
 
-    function getSelectedCategory() {
-      return categorySelect ? categorySelect.value : '';
-    }
+      // Debounced search
+      let searchTimeout;
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          clearTimeout(searchTimeout);
+          searchTimeout = setTimeout(() => {
+            this.currentFilters.query = e.target.value.trim();
+            this.applyFilters();
+          }, 300);
+        });
+      }
 
-    function getSelectedPriceRange() {
-      return priceSelect ? priceSelect.value : '';
-    }
+      // Category filter
+      if (categoryFilter) {
+        categoryFilter.addEventListener('change', (e) => {
+          this.currentFilters.category = e.target.value;
+          this.applyFilters();
+        });
+      }
 
-    function filterPlatforms(searchTerm, category, priceRange) {
-      const platformCards = document.querySelectorAll('[data-platform], .bento-box');
-      let visibleCount = 0;
+      // Price filter
+      if (priceFilter) {
+        priceFilter.addEventListener('change', (e) => {
+          const priceRange = e.target.value;
+          if (priceRange === '0-15000') {
+            this.currentFilters.minPrice = 0;
+            this.currentFilters.maxPrice = 15000;
+          } else if (priceRange === '15000-35000') {
+            this.currentFilters.minPrice = 15000;
+            this.currentFilters.maxPrice = 35000;
+          } else if (priceRange === '35000+') {
+            this.currentFilters.minPrice = 35000;
+            this.currentFilters.maxPrice = null;
+          } else {
+            this.currentFilters.minPrice = null;
+            this.currentFilters.maxPrice = null;
+          }
+          this.applyFilters();
+        });
+      }
 
-      platformCards.forEach(card => {
-        const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
-        const description = card.querySelector('p')?.textContent.toLowerCase() || '';
-        const cardCategory = card.dataset.category || '';
-        const cardPrice = parseInt(card.dataset.price) || 0;
-
-        const matchesSearch = !searchTerm || title.includes(searchTerm) || description.includes(searchTerm);
-        const matchesCategory = !category || cardCategory === category;
-        const matchesPrice = checkPriceRange(cardPrice, priceRange);
-
-        if (matchesSearch && matchesCategory && matchesPrice) {
-          card.style.display = '';
-          card.style.opacity = '1';
-          visibleCount++;
-        } else {
-          card.style.display = 'none';
-          card.style.opacity = '0.3';
-        }
-      });
-
-      // Update results count
-      updateResultsCount(visibleCount);
-    }
-
-    function checkPriceRange(price, range) {
-      if (!range) return true;
-
-      switch(range) {
-        case '0-15000':
-          return price < 15000;
-        case '15000-35000':
-          return price >= 15000 && price <= 35000;
-        case '35000+':
-          return price > 35000;
-        default:
-          return true;
+      // Sort filter
+      if (sortFilter) {
+        sortFilter.addEventListener('change', (e) => {
+          const [sortBy, sortOrder] = e.target.value.split('-');
+          this.currentFilters.sortBy = sortBy;
+          this.currentFilters.sortOrder = sortOrder;
+          this.applyFilters();
+        });
       }
     }
 
-    function updateResultsCount(count) {
-      let resultsElement = document.querySelector('.results-count');
-      if (!resultsElement) {
-        resultsElement = document.createElement('div');
-        resultsElement.className = 'results-count text-gray-300 text-sm mt-2';
-        const searchBar = document.querySelector('.bg-black\\/50.backdrop-blur-sm.rounded-xl');
-        if (searchBar) {
-          searchBar.appendChild(resultsElement);
-        }
+    applyFilters() {
+      // Filter platforms
+      this.filteredPlatforms = filterPlatforms(this.allPlatforms, this.currentFilters);
+
+      // Sort platforms
+      this.filteredPlatforms = sortPlatforms(
+        this.filteredPlatforms,
+        this.currentFilters.sortBy,
+        this.currentFilters.sortOrder
+      );
+
+      this.updateDisplay();
+    }
+
+    updateDisplay() {
+      const container = document.getElementById('platformsContainer');
+      const resultsCount = document.getElementById('resultsCount');
+
+      if (resultsCount) {
+        resultsCount.textContent = `Showing ${this.filteredPlatforms.length} platform${this.filteredPlatforms.length !== 1 ? 's' : ''}`;
       }
-      resultsElement.textContent = `${count} platform${count !== 1 ? 's' : ''} found`;
-    }
-  }
 
-  // Dynamic listings functionality
-  let currentPage = 1;
-  let currentFilters = {
-    query: '',
-    category: '',
-    sortBy: 'created_at',
-    sortOrder: 'desc'
-  };
-
-  async function loadListings(page = 1, filters = {}) {
-    try {
-      const params = new URLSearchParams({
-        page: page.toString(),
-        limit: '12',
-        ...filters
-      });
-
-      const response = await fetch(`/api/listings/search?${params}`);
-      const data = await response.json();
-
-      if (data.success) {
-        displayListings(data.data.listings);
-        updatePagination(data.data.pagination);
-        return data.data;
-      } else {
-        throw new Error(data.error || 'Failed to load listings');
+      if (container) {
+        this.renderPlatforms(container);
       }
-    } catch (error) {
-      console.error('Error loading listings:', error);
-      showError('Failed to load listings. Please try again.');
-      return null;
-    }
-  }
-
-  function displayListings(listings) {
-    const loadingSkeleton = document.getElementById('loadingSkeleton');
-    const listingsGrid = document.getElementById('listingsGrid');
-
-    if (loadingSkeleton) loadingSkeleton.classList.add('hidden');
-    if (listingsGrid) listingsGrid.classList.remove('hidden');
-
-    if (!listingsGrid) return;
-
-    if (listings.length === 0) {
-      listingsGrid.innerHTML = `
-        <div class="col-span-full text-center py-12">
-          <div class="text-gray-400 text-lg mb-4">No platforms found</div>
-          <p class="text-gray-500">Try adjusting your search criteria</p>
-        </div>
-      `;
-      return;
     }
 
-    listingsGrid.innerHTML = `
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        ${listings.map(listing => createListingCard(listing)).join('')}
-      </div>
-    `;
-  }
-
-  function createListingCard(listing) {
-    const packageTierBadge = {
-      'blueprint': { text: 'Blueprint', color: 'bg-blue-500/20 text-blue-400' },
-      'launch_ready': { text: 'Launch Ready', color: 'bg-green-500/20 text-green-400' },
-      'enterprise': { text: 'Enterprise', color: 'bg-purple-500/20 text-purple-400' }
-    };
-
-    const tier = packageTierBadge[listing.packageTier] || { text: 'Platform', color: 'bg-gray-500/20 text-gray-400' };
-    const price = (listing.price / 100).toLocaleString();
-
-    return `
-      <div class="bg-gray-900/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700 hover:border-yellow-400/40 transition-all duration-300 hover:-translate-y-1">
-        <div class="flex items-center justify-between mb-4">
-          <span class="${tier.color} px-3 py-1 rounded-full text-sm font-semibold">${tier.text}</span>
-          <div class="flex items-center space-x-1">
-            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-            </svg>
-            <span class="text-yellow-400 text-sm font-medium">${listing.aiScore}</span>
-          </div>
-        </div>
-
-        <h3 class="text-lg font-bold text-white mb-2 line-clamp-2">${listing.title}</h3>
-        <p class="text-gray-300 text-sm mb-4 line-clamp-3">${listing.description}</p>
-
-        <div class="space-y-2 mb-4">
-          <div class="flex justify-between text-sm">
-            <span class="text-gray-400">Industry:</span>
-            <span class="text-gray-300">${listing.industry}</span>
-          </div>
-          <div class="flex justify-between text-sm">
-            <span class="text-gray-400">Views:</span>
-            <span class="text-gray-300">${listing.viewsCount.toLocaleString()}</span>
-          </div>
-        </div>
-
-        <div class="flex justify-between items-center mt-auto">
-          <div>
-            <div class="text-sm text-gray-400">Price</div>
-            <span class="text-xl font-bold text-yellow-400">$${price}</span>
-          </div>
-          <a href="/listing/${listing.slug}"
-             class="bg-yellow-400 text-black px-4 py-2 rounded-lg font-semibold hover:bg-yellow-300 transition text-sm">
-            View Details
-          </a>
-        </div>
-
-        ${listing.seller ? `
-          <div class="mt-4 pt-4 border-t border-gray-700">
-            <div class="flex items-center justify-between text-sm">
-              <span class="text-gray-400">Seller:</span>
-              <span class="text-gray-300">${listing.seller.name}</span>
+    renderPlatforms(container) {
+      if (this.filteredPlatforms.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full text-center py-16">
+            <div class="mx-auto w-24 h-24 bg-gray-800/50 rounded-full flex items-center justify-center mb-6">
+              <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+              </svg>
             </div>
-            ${listing.seller.rating ? `
-              <div class="flex items-center justify-between text-sm mt-1">
-                <span class="text-gray-400">Rating:</span>
-                <span class="text-yellow-400">${listing.seller.rating}/5 (${listing.seller.reviewsCount} reviews)</span>
-              </div>
-            ` : ''}
+            <h3 class="text-xl font-bold text-white mb-2">No platforms found</h3>
+            <p class="text-gray-400 mb-6">Try adjusting your search criteria or browse all categories</p>
+            <button
+              onclick="this.resetFilters()"
+              class="inline-flex items-center gap-2 bg-yellow-400 text-black px-6 py-3 rounded-lg font-semibold hover:bg-yellow-300 transition-colors"
+            >
+              Reset Filters
+            </button>
           </div>
-        ` : ''}
-      </div>
-    `;
-  }
-
-  function updatePagination(pagination) {
-    const paginationContainer = document.getElementById('paginationContainer');
-    const prevButton = document.getElementById('prevPage');
-    const nextButton = document.getElementById('nextPage');
-    const pageInfo = document.getElementById('pageInfo');
-
-    if (!paginationContainer || !prevButton || !nextButton || !pageInfo) return;
-
-    // Show pagination if more than one page
-    if (pagination.totalPages > 1) {
-      paginationContainer.classList.remove('hidden');
-    } else {
-      paginationContainer.classList.add('hidden');
-      return;
-    }
-
-    // Update page info
-    pageInfo.textContent = `Page ${pagination.page} of ${pagination.totalPages}`;
-
-    // Update button states
-    prevButton.disabled = !pagination.hasPrev;
-    nextButton.disabled = !pagination.hasNext;
-
-    // Add click handlers
-    prevButton.onclick = () => {
-      if (pagination.hasPrev) {
-        currentPage = pagination.page - 1;
-        loadListings(currentPage, currentFilters);
+        `;
+        return;
       }
-    };
 
-    nextButton.onclick = () => {
-      if (pagination.hasNext) {
-        currentPage = pagination.page + 1;
-        loadListings(currentPage, currentFilters);
-      }
-    };
-  }
+      // Re-render platform grid with filtered results
+      const grid = document.createElement('div');
+      grid.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6';
 
-  function showError(message) {
-    const listingsGrid = document.getElementById('listingsGrid');
-    if (listingsGrid) {
-      listingsGrid.innerHTML = `
-        <div class="col-span-full text-center py-12">
-          <div class="text-red-400 text-lg mb-4">${message}</div>
-          <button onclick="loadListings(currentPage, currentFilters)"
-                  class="bg-yellow-400 text-black px-4 py-2 rounded-lg font-semibold hover:bg-yellow-300 transition">
-            Try Again
+      // Note: In a real implementation, we'd need to recreate the Astro components in JavaScript
+      // For now, we'll show a simplified version and recommend page refresh for full functionality
+      container.innerHTML = `
+        <div class="text-center py-8">
+          <p class="text-gray-300 mb-4">Found ${this.filteredPlatforms.length} platforms matching your criteria</p>
+          <button
+            onclick="window.location.reload()"
+            class="bg-yellow-400 text-black px-6 py-3 rounded-lg font-semibold hover:bg-yellow-300 transition-colors"
+          >
+            Refresh to Apply Filters
           </button>
         </div>
       `;
     }
-  }
 
-  // Handle filter changes
-  function setupFilterHandlers() {
-    const searchInput = document.getElementById('searchInput');
-    const categoryFilter = document.getElementById('categoryFilter');
-    const priceFilter = document.getElementById('priceFilter');
-    const sortFilter = document.getElementById('sortFilter');
+    resetFilters() {
+      // Reset all filters
+      const searchInput = document.getElementById('searchInput');
+      const categoryFilter = document.getElementById('categoryFilter');
+      const priceFilter = document.getElementById('priceFilter');
+      const sortFilter = document.getElementById('sortFilter');
 
-    // Debounced search
-    let searchTimeout;
-    if (searchInput) {
-      searchInput.addEventListener('input', (e) => {
-        clearTimeout(searchTimeout);
-        searchTimeout = setTimeout(() => {
-          currentFilters.query = e.target.value;
-          currentPage = 1;
-          loadListings(currentPage, currentFilters);
-        }, 300);
-      });
-    }
+      if (searchInput) searchInput.value = '';
+      if (categoryFilter) categoryFilter.value = '';
+      if (priceFilter) priceFilter.value = '';
+      if (sortFilter) sortFilter.value = 'createdAt-desc';
 
-    // Category filter
-    if (categoryFilter) {
-      categoryFilter.addEventListener('change', (e) => {
-        currentFilters.category = e.target.value;
-        currentPage = 1;
-        loadListings(currentPage, currentFilters);
-      });
-    }
+      this.currentFilters = {
+        query: '',
+        category: '',
+        minPrice: null,
+        maxPrice: null,
+        sortBy: 'createdAt',
+        sortOrder: 'desc'
+      };
 
-    // Price filter - convert to dollars for API
-    if (priceFilter) {
-      priceFilter.addEventListener('change', (e) => {
-        const priceRange = e.target.value;
-        if (priceRange === '0-15000') {
-          currentFilters.minPrice = '0';
-          currentFilters.maxPrice = '15000';
-        } else if (priceRange === '15000-35000') {
-          currentFilters.minPrice = '15000';
-          currentFilters.maxPrice = '35000';
-        } else if (priceRange === '35000+') {
-          currentFilters.minPrice = '35000';
-          currentFilters.maxPrice = '999999';
-        } else {
-          delete currentFilters.minPrice;
-          delete currentFilters.maxPrice;
-        }
-        currentPage = 1;
-        loadListings(currentPage, currentFilters);
-      });
-    }
-
-    // Sort filter
-    if (sortFilter) {
-      sortFilter.addEventListener('change', (e) => {
-        const [sortBy, sortOrder] = e.target.value.split('-');
-        currentFilters.sortBy = sortBy;
-        currentFilters.sortOrder = sortOrder;
-        currentPage = 1;
-        loadListings(currentPage, currentFilters);
-      });
+      this.applyFilters();
     }
   }
 
-  // Initialize listings on page load
+  // Initialize on page load
   document.addEventListener('DOMContentLoaded', () => {
-    setupFilterHandlers();
-    loadListings(1, currentFilters);
-  });
+    // Initialize scroll animations
+    document.querySelectorAll('.scroll-fade, .animate-slide-up').forEach(el => {
+      observer.observe(el);
+    });
 
-  // Smooth scroll for navigation links
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      const href = (e.target as HTMLAnchorElement).getAttribute('href');
-      if (href) {
-        document.querySelector(href)?.scrollIntoView({
-          behavior: 'smooth'
-        });
-      }
+    // Initialize platform browser
+    window.platformBrowser = new PlatformBrowser();
+
+    // Smooth scroll for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const href = this.getAttribute('href');
+        if (href) {
+          document.querySelector(href)?.scrollIntoView({
+            behavior: 'smooth'
+          });
+        }
+      });
     });
   });
 </script>

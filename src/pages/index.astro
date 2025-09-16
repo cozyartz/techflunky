@@ -1,6 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Navigation from '../components/Navigation.astro';
+import { getFeaturedPlatforms } from '../data/platforms.js';
+
+// Get featured platform for hero section
+const featuredPlatforms = getFeaturedPlatforms(1);
+const heroFeaturedPlatform = featuredPlatforms[0];
 ---
 
 <Layout title="TechFlunky - Marketplace for Validated Business Ideas">
@@ -14,7 +19,7 @@ import Navigation from '../components/Navigation.astro';
         <div class="h-full w-full" style="background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" stroke="%23fff" stroke-width="1"%3E%3Cpath d="M0 0h60v60H0z"/%3E%3C/g%3E%3C/svg%3E'); background-size: 60px 60px;"></div>
       </div>
 
-      <div class="container mx-auto px-4 relative z-10">
+      <div class="container mx-auto px-4 relative z-10 pt-24">
         <div class="max-w-6xl mx-auto">
           <div class="grid lg:grid-cols-2 gap-12 items-center">
             <!-- Left: Typography-first content -->
@@ -91,37 +96,41 @@ import Navigation from '../components/Navigation.astro';
                     <span class="text-green-400 font-semibold">Available Now</span>
                   </div>
 
-                  <h3 class="text-2xl font-bold text-white">AI-Powered HR Compliance Platform</h3>
+{heroFeaturedPlatform && (
+                  <>
+                    <h3 class="text-2xl font-bold text-white">{heroFeaturedPlatform.title}</h3>
 
-                  <p class="text-gray-300 leading-relaxed">
-                    Complete multi-state leave administration system with automated compliance tracking. Built on Cloudflare with AI automation.
-                  </p>
+                    <p class="text-gray-300 leading-relaxed">
+                      {heroFeaturedPlatform.description}
+                    </p>
 
-                  <div class="grid grid-cols-2 gap-4">
-                    <div class="bg-black/50 rounded-lg p-4 border border-yellow-400/10">
-                      <div class="text-sm text-yellow-400 font-medium">Market Size</div>
-                      <div class="text-xl font-bold text-white">$800M+</div>
+                    <div class="grid grid-cols-2 gap-4">
+                      <div class="bg-black/50 rounded-lg p-4 border border-yellow-400/10">
+                        <div class="text-sm text-yellow-400 font-medium">Market Size</div>
+                        <div class="text-xl font-bold text-white">{heroFeaturedPlatform.marketSize}</div>
+                      </div>
+                      <div class="bg-black/50 rounded-lg p-4 border border-yellow-400/10">
+                        <div class="text-sm text-yellow-400 font-medium">Profit Margin</div>
+                        <div class="text-xl font-bold text-white">{heroFeaturedPlatform.profitMargin}</div>
+                      </div>
                     </div>
-                    <div class="bg-black/50 rounded-lg p-4 border border-yellow-400/10">
-                      <div class="text-sm text-yellow-400 font-medium">Profit Margin</div>
-                      <div class="text-xl font-bold text-white">95%</div>
-                    </div>
-                  </div>
 
-                  <div class="flex items-center justify-between pt-4">
-                    <div>
-                      <div class="text-sm text-gray-400">Complete Package</div>
-                      <div class="text-3xl font-bold text-yellow-400">$35,000</div>
+                    <div class="flex items-center justify-between pt-4">
+                      <div>
+                        <div class="text-sm text-gray-400">Complete Package</div>
+                        <div class="text-3xl font-bold text-yellow-400">${(heroFeaturedPlatform.price / 100).toLocaleString()}</div>
+                      </div>
+                      <a href={`/listing/${heroFeaturedPlatform.slug}`} class="bg-yellow-400 text-black px-6 py-3 rounded-lg font-semibold hover:bg-yellow-300 transition group">
+                        <span class="flex items-center gap-2">
+                          View Details
+                          <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                          </svg>
+                        </span>
+                      </a>
                     </div>
-                    <a href="/listing/ai-hr-leave-administration-platform" class="bg-yellow-400 text-black px-6 py-3 rounded-lg font-semibold hover:bg-yellow-300 transition group">
-                      <span class="flex items-center gap-2">
-                        View Details
-                        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
-                        </svg>
-                      </span>
-                    </a>
-                  </div>
+                  </>
+                )}
                 </div>
               </div>
 

@@ -6,58 +6,60 @@ export interface Props {
 const { currentPage = '' } = Astro.props;
 ---
 
-<nav class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm border-b border-yellow-400/20">
-  <div class="container mx-auto px-4 py-4">
-    <div class="flex items-center justify-between">
+<nav class="fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur-md border-b border-yellow-400/20 transition-all duration-300">
+  <div class="container mx-auto px-4">
+    <div class="flex items-center justify-between h-16">
+      <!-- Logo -->
       <div class="flex items-center space-x-3">
-        <a href="/" class="flex items-center space-x-3">
-          <img src="/assets/techflunky-logo.png" alt="TechFlunky" class="w-10 h-10">
-          <span class="text-xl font-bold text-white">TechFlunky</span>
+        <a href="/" class="flex items-center space-x-3 group">
+          <img src="/assets/techflunky-logo.png" alt="TechFlunky" class="w-10 h-10 transition-transform group-hover:scale-110">
+          <span class="text-xl font-bold text-white group-hover:text-yellow-400 transition-colors">TechFlunky</span>
         </a>
       </div>
 
+      <!-- Desktop Navigation -->
       <div class="hidden md:flex items-center space-x-8">
-        <a href="/browse" class={`font-medium transition ${currentPage === 'browse' ? 'text-yellow-400' : 'text-gray-300 hover:text-yellow-400'}`}>Browse</a>
-        <a href="/invest" class={`font-medium transition ${currentPage === 'invest' ? 'text-yellow-400' : 'text-gray-300 hover:text-yellow-400'}`}>Invest</a>
-        <a href="/sell" class={`font-medium transition ${currentPage === 'sell' ? 'text-yellow-400' : 'text-gray-300 hover:text-yellow-400'}`}>Sell</a>
-        <a href="/pricing" class={`font-medium transition ${currentPage === 'pricing' ? 'text-yellow-400' : 'text-gray-300 hover:text-yellow-400'}`}>Pricing</a>
-        <a href="/about" class={`font-medium transition ${currentPage === 'about' ? 'text-yellow-400' : 'text-gray-300 hover:text-yellow-400'}`}>About</a>
+        <a href="/browse" class={`font-medium transition-all duration-200 ${currentPage === 'browse' ? 'text-yellow-400' : 'text-gray-300 hover:text-yellow-400'} hover:scale-105`}>Browse</a>
+        <a href="/invest" class={`font-medium transition-all duration-200 ${currentPage === 'invest' ? 'text-yellow-400' : 'text-gray-300 hover:text-yellow-400'} hover:scale-105`}>Invest</a>
+        <a href="/sell" class={`font-medium transition-all duration-200 ${currentPage === 'sell' ? 'text-yellow-400' : 'text-gray-300 hover:text-yellow-400'} hover:scale-105`}>Sell</a>
+        <a href="/pricing" class={`font-medium transition-all duration-200 ${currentPage === 'pricing' ? 'text-yellow-400' : 'text-gray-300 hover:text-yellow-400'} hover:scale-105`}>Pricing</a>
+        <a href="/about" class={`font-medium transition-all duration-200 ${currentPage === 'about' ? 'text-yellow-400' : 'text-gray-300 hover:text-yellow-400'} hover:scale-105`}>About</a>
 
         <!-- Auth Section -->
         <div id="authSection" class="flex items-center space-x-4">
           <!-- Logged out state -->
           <div id="loggedOutSection" class="flex items-center space-x-4">
-            <a href="/login" class="text-gray-300 hover:text-yellow-400 transition font-medium">Login</a>
-            <a href="/register" class="bg-yellow-400 text-black px-4 py-2 rounded-lg font-semibold hover:bg-yellow-300 transition">Sign Up</a>
+            <a href="/login" class="text-gray-300 hover:text-yellow-400 transition-all duration-200 font-medium">Login</a>
+            <a href="/register" class="bg-yellow-400 text-black px-4 py-2 rounded-lg font-semibold hover:bg-yellow-300 transition-all duration-200 transform hover:scale-105 hover:shadow-lg">Sign Up</a>
           </div>
 
           <!-- Logged in state -->
           <div id="loggedInSection" class="hidden flex items-center space-x-4">
             <div class="relative group">
-              <button id="userMenuButton" class="flex items-center space-x-2 text-gray-300 hover:text-yellow-400 transition">
-                <div id="userAvatar" class="w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center">
+              <button id="userMenuButton" class="flex items-center space-x-2 text-gray-300 hover:text-yellow-400 transition-all duration-200">
+                <div id="userAvatar" class="w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center transition-transform hover:scale-110">
                   <span id="userInitial" class="text-black font-semibold text-sm"></span>
                 </div>
                 <span id="userName" class="font-medium"></span>
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg id="userMenuArrow" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
               </button>
 
               <!-- Dropdown menu -->
-              <div id="userDropdown" class="hidden absolute right-0 mt-2 w-48 bg-gray-900 border border-gray-700 rounded-lg shadow-lg">
+              <div id="userDropdown" class="hidden absolute right-0 mt-2 w-48 bg-gray-900/95 backdrop-blur-md border border-gray-700 rounded-lg shadow-xl transform transition-all duration-200 origin-top-right scale-95 opacity-0">
                 <div class="py-2">
                   <div class="px-4 py-2 text-sm text-gray-400 border-b border-gray-700">
                     <div id="userEmail" class="font-medium text-white"></div>
                     <div id="userRole" class="text-xs text-yellow-400"></div>
                   </div>
-                  <a id="dashboardLink" href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 hover:text-yellow-400 transition">
+                  <a id="dashboardLink" href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 hover:text-yellow-400 transition-all duration-200">
                     Dashboard
                   </a>
-                  <a href="/profile" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 hover:text-yellow-400 transition">
+                  <a href="/profile" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 hover:text-yellow-400 transition-all duration-200">
                     Profile Settings
                   </a>
-                  <button id="logoutButton" class="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 hover:text-red-400 transition">
+                  <button id="logoutButton" class="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 hover:text-red-400 transition-all duration-200">
                     Sign Out
                   </button>
                 </div>
@@ -68,149 +70,293 @@ const { currentPage = '' } = Astro.props;
       </div>
 
       <!-- Mobile menu button -->
-      <button id="mobileMenuButton" class="md:hidden text-gray-300 hover:text-yellow-400">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <button id="mobileMenuButton" class="md:hidden text-gray-300 hover:text-yellow-400 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 focus:ring-offset-black rounded-lg p-1" aria-label="Toggle menu">
+        <svg id="hamburgerIcon" class="w-6 h-6 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+        <svg id="closeIcon" class="w-6 h-6 hidden transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
         </svg>
       </button>
     </div>
 
     <!-- Mobile menu -->
-    <div id="mobileMenu" class="hidden md:hidden mt-4 py-4 border-t border-yellow-400/20">
-      <div class="flex flex-col space-y-4">
-        <a href="/browse" class="text-gray-300 hover:text-yellow-400 transition font-medium">Browse</a>
-        <a href="/invest" class="text-gray-300 hover:text-yellow-400 transition font-medium">Invest</a>
-        <a href="/sell" class="text-gray-300 hover:text-yellow-400 transition font-medium">Sell</a>
-        <a href="/pricing" class="text-gray-300 hover:text-yellow-400 transition font-medium">Pricing</a>
-        <a href="/about" class="text-gray-300 hover:text-yellow-400 transition font-medium">About</a>
+    <div id="mobileMenu" class="md:hidden overflow-hidden transition-all duration-300 max-h-0">
+      <div class="border-t border-yellow-400/20 py-4 space-y-4">
+        <div class="flex flex-col space-y-4">
+          <a href="/browse" class={`font-medium transition-colors duration-200 ${currentPage === 'browse' ? 'text-yellow-400' : 'text-gray-300 hover:text-yellow-400'} py-2`}>Browse</a>
+          <a href="/invest" class={`font-medium transition-colors duration-200 ${currentPage === 'invest' ? 'text-yellow-400' : 'text-gray-300 hover:text-yellow-400'} py-2`}>Invest</a>
+          <a href="/sell" class={`font-medium transition-colors duration-200 ${currentPage === 'sell' ? 'text-yellow-400' : 'text-gray-300 hover:text-yellow-400'} py-2`}>Sell</a>
+          <a href="/pricing" class={`font-medium transition-colors duration-200 ${currentPage === 'pricing' ? 'text-yellow-400' : 'text-gray-300 hover:text-yellow-400'} py-2`}>Pricing</a>
+          <a href="/about" class={`font-medium transition-colors duration-200 ${currentPage === 'about' ? 'text-yellow-400' : 'text-gray-300 hover:text-yellow-400'} py-2`}>About</a>
+        </div>
 
-        <div id="mobileAuthSection" class="pt-4 border-t border-gray-700">
-          <div id="mobileLoggedOut" class="flex flex-col space-y-2">
-            <a href="/login" class="text-gray-300 hover:text-yellow-400 transition font-medium">Login</a>
-            <a href="/register" class="bg-yellow-400 text-black px-4 py-2 rounded-lg font-semibold hover:bg-yellow-300 transition text-center">Sign Up</a>
+        <!-- Mobile Auth Section -->
+        <div id="mobileAuthSection" class="pt-4 border-t border-gray-700 space-y-3">
+          <div id="mobileLoggedOut" class="space-y-3">
+            <a href="/login" class="block text-gray-300 hover:text-yellow-400 transition-colors duration-200 font-medium py-2">Login</a>
+            <a href="/register" class="block bg-yellow-400 text-black px-4 py-3 rounded-lg font-semibold hover:bg-yellow-300 transition-all duration-200 text-center">Sign Up</a>
           </div>
-          <div id="mobileLoggedIn" class="hidden flex flex-col space-y-2">
-            <div class="text-white font-medium">
+          <div id="mobileLoggedIn" class="hidden space-y-3">
+            <div class="text-white font-medium py-2">
               <span id="mobileUserName"></span>
               <div id="mobileUserEmail" class="text-sm text-gray-400"></div>
             </div>
-            <a id="mobileDashboardLink" href="#" class="text-gray-300 hover:text-yellow-400 transition font-medium">Dashboard</a>
-            <a href="/profile" class="text-gray-300 hover:text-yellow-400 transition font-medium">Profile</a>
-            <button id="mobileLogoutButton" class="text-left text-gray-300 hover:text-red-400 transition font-medium">Sign Out</button>
+            <a id="mobileDashboardLink" href="#" class="block text-gray-300 hover:text-yellow-400 transition-colors duration-200 font-medium py-2">Dashboard</a>
+            <a href="/profile" class="block text-gray-300 hover:text-yellow-400 transition-colors duration-200 font-medium py-2">Profile</a>
+            <button id="mobileLogoutButton" class="text-left text-gray-300 hover:text-red-400 transition-colors duration-200 font-medium py-2">Sign Out</button>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Mobile overlay -->
+  <div id="mobileOverlay" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden opacity-0 pointer-events-none transition-opacity duration-300"></div>
 </nav>
 
 <script>
-  // Check authentication status on page load
-  async function checkAuth() {
-    try {
-      const response = await fetch('/api/auth/me');
-      if (response.ok) {
-        const data = await response.json();
-        if (data.success && data.data.user) {
-          showLoggedInState(data.data.user);
-        } else {
-          showLoggedOutState();
+  // Navigation state management
+  class NavigationManager {
+    constructor() {
+      this.mobileMenuOpen = false;
+      this.userDropdownOpen = false;
+      this.init();
+    }
+
+    init() {
+      this.bindEvents();
+      this.checkAuth();
+    }
+
+    bindEvents() {
+      // Mobile menu toggle
+      const mobileMenuButton = document.getElementById('mobileMenuButton');
+      const mobileOverlay = document.getElementById('mobileOverlay');
+
+      mobileMenuButton?.addEventListener('click', () => this.toggleMobileMenu());
+      mobileOverlay?.addEventListener('click', () => this.closeMobileMenu());
+
+      // User dropdown toggle
+      const userMenuButton = document.getElementById('userMenuButton');
+      userMenuButton?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.toggleUserDropdown();
+      });
+
+      // Close dropdowns when clicking outside
+      document.addEventListener('click', (e) => this.handleOutsideClick(e));
+
+      // Logout buttons
+      document.getElementById('logoutButton')?.addEventListener('click', this.logout);
+      document.getElementById('mobileLogoutButton')?.addEventListener('click', this.logout);
+
+      // Close mobile menu when clicking nav links
+      document.querySelectorAll('#mobileMenu a').forEach(link => {
+        link.addEventListener('click', () => this.closeMobileMenu());
+      });
+
+      // Handle escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          this.closeMobileMenu();
+          this.closeUserDropdown();
         }
+      });
+
+      // Handle screen resize
+      window.addEventListener('resize', () => {
+        if (window.innerWidth >= 768) {
+          this.closeMobileMenu();
+        }
+      });
+    }
+
+    toggleMobileMenu() {
+      this.mobileMenuOpen = !this.mobileMenuOpen;
+
+      const mobileMenu = document.getElementById('mobileMenu');
+      const mobileOverlay = document.getElementById('mobileOverlay');
+      const hamburgerIcon = document.getElementById('hamburgerIcon');
+      const closeIcon = document.getElementById('closeIcon');
+
+      if (this.mobileMenuOpen) {
+        // Open menu
+        mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px';
+        mobileOverlay.classList.remove('opacity-0', 'pointer-events-none');
+        hamburgerIcon.classList.add('hidden');
+        closeIcon.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
       } else {
-        showLoggedOutState();
+        // Close menu
+        mobileMenu.style.maxHeight = '0px';
+        mobileOverlay.classList.add('opacity-0', 'pointer-events-none');
+        hamburgerIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+        document.body.style.overflow = '';
       }
-    } catch (error) {
-      showLoggedOutState();
     }
-  }
 
-  function showLoggedInState(user) {
-    // Desktop
-    document.getElementById('loggedOutSection').classList.add('hidden');
-    document.getElementById('loggedInSection').classList.remove('hidden');
-    document.getElementById('loggedInSection').classList.add('flex');
+    closeMobileMenu() {
+      if (this.mobileMenuOpen) {
+        this.mobileMenuOpen = false;
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+        const hamburgerIcon = document.getElementById('hamburgerIcon');
+        const closeIcon = document.getElementById('closeIcon');
 
-    // Update user info
-    document.getElementById('userName').textContent = user.name;
-    document.getElementById('userEmail').textContent = user.email;
-    document.getElementById('userRole').textContent = user.role.charAt(0).toUpperCase() + user.role.slice(1);
-    document.getElementById('userInitial').textContent = user.name.charAt(0).toUpperCase();
-
-    // Set dashboard link based on role
-    const dashboardLink = getDashboardLink(user.role);
-    document.getElementById('dashboardLink').href = dashboardLink;
-    document.getElementById('mobileDashboardLink').href = dashboardLink;
-
-    // Mobile
-    document.getElementById('mobileLoggedOut').classList.add('hidden');
-    document.getElementById('mobileLoggedIn').classList.remove('hidden');
-    document.getElementById('mobileLoggedIn').classList.add('flex');
-    document.getElementById('mobileUserName').textContent = user.name;
-    document.getElementById('mobileUserEmail').textContent = user.email;
-  }
-
-  function showLoggedOutState() {
-    // Desktop
-    document.getElementById('loggedInSection').classList.add('hidden');
-    document.getElementById('loggedOutSection').classList.remove('hidden');
-
-    // Mobile
-    document.getElementById('mobileLoggedIn').classList.add('hidden');
-    document.getElementById('mobileLoggedOut').classList.remove('hidden');
-  }
-
-  function getDashboardLink(role) {
-    switch (role) {
-      case 'admin':
-        return '/dashboard/admin';
-      case 'seller':
-        return '/dashboard/seller';
-      case 'investor':
-        return '/dashboard/investor';
-      default:
-        return '/browse';
+        mobileMenu.style.maxHeight = '0px';
+        mobileOverlay.classList.add('opacity-0', 'pointer-events-none');
+        hamburgerIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
     }
-  }
 
-  // Logout functionality
-  async function logout() {
-    try {
-      await fetch('/api/auth/logout', { method: 'POST' });
-      showLoggedOutState();
-      // Redirect to home page
-      window.location.href = '/';
-    } catch (error) {
-      console.error('Logout error:', error);
-    }
-  }
+    toggleUserDropdown() {
+      this.userDropdownOpen = !this.userDropdownOpen;
 
-  // Event listeners
-  document.addEventListener('DOMContentLoaded', () => {
-    checkAuth();
-
-    // Logout buttons
-    document.getElementById('logoutButton')?.addEventListener('click', logout);
-    document.getElementById('mobileLogoutButton')?.addEventListener('click', logout);
-
-    // Dropdown toggle
-    document.getElementById('userMenuButton')?.addEventListener('click', () => {
       const dropdown = document.getElementById('userDropdown');
-      dropdown.classList.toggle('hidden');
-    });
+      const arrow = document.getElementById('userMenuArrow');
 
-    // Close dropdown when clicking outside
-    document.addEventListener('click', (e) => {
+      if (this.userDropdownOpen) {
+        dropdown.classList.remove('hidden', 'scale-95', 'opacity-0');
+        dropdown.classList.add('scale-100', 'opacity-100');
+        arrow.style.transform = 'rotate(180deg)';
+      } else {
+        dropdown.classList.remove('scale-100', 'opacity-100');
+        dropdown.classList.add('scale-95', 'opacity-0');
+        arrow.style.transform = 'rotate(0deg)';
+        setTimeout(() => {
+          if (!this.userDropdownOpen) {
+            dropdown.classList.add('hidden');
+          }
+        }, 200);
+      }
+    }
+
+    closeUserDropdown() {
+      if (this.userDropdownOpen) {
+        this.userDropdownOpen = false;
+        const dropdown = document.getElementById('userDropdown');
+        const arrow = document.getElementById('userMenuArrow');
+
+        dropdown.classList.remove('scale-100', 'opacity-100');
+        dropdown.classList.add('scale-95', 'opacity-0');
+        arrow.style.transform = 'rotate(0deg)';
+        setTimeout(() => dropdown.classList.add('hidden'), 200);
+      }
+    }
+
+    handleOutsideClick(e) {
       const userMenu = document.getElementById('userMenuButton');
       const dropdown = document.getElementById('userDropdown');
-      if (userMenu && dropdown && !userMenu.contains(e.target) && !dropdown.contains(e.target)) {
-        dropdown.classList.add('hidden');
-      }
-    });
 
-    // Mobile menu toggle
-    document.getElementById('mobileMenuButton')?.addEventListener('click', () => {
-      const mobileMenu = document.getElementById('mobileMenu');
-      mobileMenu.classList.toggle('hidden');
-    });
+      if (userMenu && dropdown && !userMenu.contains(e.target) && !dropdown.contains(e.target)) {
+        this.closeUserDropdown();
+      }
+    }
+
+    async checkAuth() {
+      try {
+        const response = await fetch('/api/auth/me');
+        if (response.ok) {
+          const data = await response.json();
+          if (data.success && data.data.user) {
+            this.showLoggedInState(data.data.user);
+          } else {
+            this.showLoggedOutState();
+          }
+        } else {
+          this.showLoggedOutState();
+        }
+      } catch (error) {
+        this.showLoggedOutState();
+      }
+    }
+
+    showLoggedInState(user) {
+      // Desktop
+      const loggedOutSection = document.getElementById('loggedOutSection');
+      const loggedInSection = document.getElementById('loggedInSection');
+
+      loggedOutSection?.classList.add('hidden');
+      loggedInSection?.classList.remove('hidden');
+      loggedInSection?.classList.add('flex');
+
+      // Update user info
+      const userName = document.getElementById('userName');
+      const userEmail = document.getElementById('userEmail');
+      const userRole = document.getElementById('userRole');
+      const userInitial = document.getElementById('userInitial');
+
+      if (userName) userName.textContent = user.name;
+      if (userEmail) userEmail.textContent = user.email;
+      if (userRole) userRole.textContent = user.role.charAt(0).toUpperCase() + user.role.slice(1);
+      if (userInitial) userInitial.textContent = user.name.charAt(0).toUpperCase();
+
+      // Set dashboard link based on role
+      const dashboardLink = this.getDashboardLink(user.role);
+      const desktopDashboardLink = document.getElementById('dashboardLink');
+      const mobileDashboardLink = document.getElementById('mobileDashboardLink');
+
+      if (desktopDashboardLink) desktopDashboardLink.href = dashboardLink;
+      if (mobileDashboardLink) mobileDashboardLink.href = dashboardLink;
+
+      // Mobile
+      const mobileLoggedOut = document.getElementById('mobileLoggedOut');
+      const mobileLoggedIn = document.getElementById('mobileLoggedIn');
+      const mobileUserName = document.getElementById('mobileUserName');
+      const mobileUserEmail = document.getElementById('mobileUserEmail');
+
+      mobileLoggedOut?.classList.add('hidden');
+      mobileLoggedIn?.classList.remove('hidden');
+      if (mobileUserName) mobileUserName.textContent = user.name;
+      if (mobileUserEmail) mobileUserEmail.textContent = user.email;
+    }
+
+    showLoggedOutState() {
+      // Desktop
+      const loggedInSection = document.getElementById('loggedInSection');
+      const loggedOutSection = document.getElementById('loggedOutSection');
+
+      loggedInSection?.classList.add('hidden');
+      loggedOutSection?.classList.remove('hidden');
+
+      // Mobile
+      const mobileLoggedIn = document.getElementById('mobileLoggedIn');
+      const mobileLoggedOut = document.getElementById('mobileLoggedOut');
+
+      mobileLoggedIn?.classList.add('hidden');
+      mobileLoggedOut?.classList.remove('hidden');
+    }
+
+    getDashboardLink(role) {
+      switch (role) {
+        case 'admin':
+          return '/dashboard/admin';
+        case 'seller':
+          return '/dashboard/seller';
+        case 'investor':
+          return '/dashboard/investor';
+        default:
+          return '/browse';
+      }
+    }
+
+    async logout() {
+      try {
+        await fetch('/api/auth/logout', { method: 'POST' });
+        // Redirect to home page
+        window.location.href = '/';
+      } catch (error) {
+        console.error('Logout error:', error);
+      }
+    }
+  }
+
+  // Initialize navigation when DOM is loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    new NavigationManager();
   });
 </script>

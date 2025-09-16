@@ -1,0 +1,182 @@
+---
+import PlatformCard from './PlatformCard.astro';
+
+export interface Props {
+  platforms: any[];
+  loading?: boolean;
+  className?: string;
+}
+
+const { platforms, loading = false, className = "" } = Astro.props;
+---
+
+<div class={`platform-grid ${className}`}>
+  {loading ? (
+    <!-- Loading skeleton -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      {Array.from({ length: 8 }, (_, i) => (
+        <div key={i} class="bg-gray-900/50 backdrop-blur-md rounded-2xl border border-gray-700/50 p-6 animate-pulse">
+          <!-- Header skeleton -->
+          <div class="flex items-center justify-between mb-4">
+            <div class="h-6 bg-gray-700 rounded-full w-24"></div>
+            <div class="h-6 bg-gray-700 rounded-full w-12"></div>
+          </div>
+
+          <!-- Title skeleton -->
+          <div class="h-5 bg-gray-700 rounded mb-2"></div>
+          <div class="h-5 bg-gray-700 rounded w-3/4 mb-4"></div>
+
+          <!-- Description skeleton -->
+          <div class="space-y-2 mb-4">
+            <div class="h-3 bg-gray-700 rounded"></div>
+            <div class="h-3 bg-gray-700 rounded"></div>
+            <div class="h-3 bg-gray-700 rounded w-2/3"></div>
+          </div>
+
+          <!-- Metrics skeleton -->
+          <div class="grid grid-cols-2 gap-3 mb-4">
+            <div class="bg-black/30 rounded-lg p-3 border border-gray-700/50">
+              <div class="h-3 bg-gray-700 rounded mb-1"></div>
+              <div class="h-4 bg-gray-700 rounded w-16"></div>
+            </div>
+            <div class="bg-black/30 rounded-lg p-3 border border-gray-700/50">
+              <div class="h-3 bg-gray-700 rounded mb-1"></div>
+              <div class="h-4 bg-gray-700 rounded w-12"></div>
+            </div>
+          </div>
+
+          <!-- Tech stack skeleton -->
+          <div class="mb-4">
+            <div class="h-3 bg-gray-700 rounded mb-2 w-20"></div>
+            <div class="flex gap-1">
+              <div class="h-6 bg-gray-700 rounded w-16"></div>
+              <div class="h-6 bg-gray-700 rounded w-12"></div>
+              <div class="h-6 bg-gray-700 rounded w-14"></div>
+            </div>
+          </div>
+
+          <!-- Stats skeleton -->
+          <div class="flex justify-between items-center mb-4">
+            <div class="h-4 bg-gray-700 rounded w-16"></div>
+            <div class="h-4 bg-gray-700 rounded w-20"></div>
+          </div>
+
+          <!-- Price and CTA skeleton -->
+          <div class="flex items-center justify-between">
+            <div>
+              <div class="h-3 bg-gray-700 rounded mb-1 w-24"></div>
+              <div class="h-6 bg-gray-700 rounded w-20"></div>
+            </div>
+            <div class="h-9 bg-gray-700 rounded w-24"></div>
+          </div>
+
+          <!-- Seller skeleton -->
+          <div class="mt-4 pt-4 border-t border-gray-700/50">
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
+              <div class="flex-1">
+                <div class="h-4 bg-gray-700 rounded mb-1 w-24"></div>
+                <div class="h-3 bg-gray-700 rounded w-16"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  ) : platforms.length === 0 ? (
+    <!-- Empty state -->
+    <div class="col-span-full text-center py-16">
+      <div class="mx-auto w-24 h-24 bg-gray-800/50 rounded-full flex items-center justify-center mb-6">
+        <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+        </svg>
+      </div>
+      <h3 class="text-xl font-bold text-white mb-2">No platforms found</h3>
+      <p class="text-gray-400 mb-6">Try adjusting your search criteria or browse all categories</p>
+      <a
+        href="/browse"
+        class="inline-flex items-center gap-2 bg-yellow-400 text-black px-6 py-3 rounded-lg font-semibold hover:bg-yellow-300 transition-colors"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+        </svg>
+        Reset Filters
+      </a>
+    </div>
+  ) : (
+    <!-- Platform cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      {platforms.map((platform, index) => (
+        <div
+          key={platform.id}
+          class="animate-fade-in-up"
+          style={`animation-delay: ${index * 100}ms`}
+        >
+          <PlatformCard
+            platform={platform}
+            featured={platform.isFeatured}
+            className="h-full"
+          />
+        </div>
+      ))}
+    </div>
+  )}
+</div>
+
+<style>
+  .platform-grid {
+    min-height: 400px;
+  }
+
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    opacity: 0;
+  }
+
+  /* Responsive grid adjustments */
+  @media (max-width: 768px) {
+    .platform-grid .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .platform-grid .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1025px) and (max-width: 1280px) {
+    .platform-grid .grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (min-width: 1281px) {
+    .platform-grid .grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  /* Enhanced hover effects for grid */
+  .platform-grid:hover .animate-fade-in-up:not(:hover) {
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+  }
+
+  .platform-grid .animate-fade-in-up:hover {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+</style>
