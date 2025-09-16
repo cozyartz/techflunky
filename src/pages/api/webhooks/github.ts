@@ -8,31 +8,34 @@ export const POST: APIRoute = async ({ request, locals }) => {
     const event = request.headers.get('x-github-event');
     const signature = request.headers.get('x-hub-signature-256');
 
+    // Access environment variables correctly for Cloudflare Pages
+    const env = locals.runtime?.env || {};
+
     // Verify webhook signature
-    const webhookSecret = locals.runtime.env.GITHUB_WEBHOOK_SECRET;
+    const webhookSecret = env.GITHUB_WEBHOOK_SECRET;
     if (!verifySignature(signature, JSON.stringify(payload), webhookSecret)) {
       return new Response('Invalid signature', { status: 401 });
     }
 
     switch (event) {
       case 'push':
-        await handlePushEvent(payload, locals.runtime.env);
+        await handlePushEvent(payload, env);
         break;
 
       case 'repository':
-        await handleRepositoryEvent(payload, locals.runtime.env);
+        await handleRepositoryEvent(payload, env);
         break;
 
       case 'installation':
-        await handleInstallationEvent(payload, locals.runtime.env);
+        await handleInstallationEvent(payload, env);
         break;
 
       case 'installation_repositories':
-        await handleInstallationRepositoriesEvent(payload, locals.runtime.env);
+        await handleInstallationRepositoriesEvent(payload, env);
         break;
 
       case 'release':
-        await handleReleaseEvent(payload, locals.runtime.env);
+        await handleReleaseEvent(payload, env);
         break;
     }
 

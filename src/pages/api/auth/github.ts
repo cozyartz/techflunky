@@ -8,11 +8,18 @@ export const GET: APIRoute = async ({ url, locals, redirect }) => {
   const setup_action = url.searchParams.get('setup_action');
   const state = url.searchParams.get('state');
 
+  // Access environment variables correctly for Cloudflare Pages
+  const env = locals.runtime?.env || {};
+
   if (!code) {
     // Redirect to GitHub App installation
-    const clientId = locals.runtime.env.GITHUB_APP_CLIENT_ID;
+    const clientId = env.GITHUB_APP_CLIENT_ID;
     const redirectUri = `${url.origin}/api/auth/github`;
     const stateParam = Math.random().toString(36).substring(7);
+
+    if (!clientId) {
+      return new Response('GitHub App not configured', { status: 500 });
+    }
 
     // For GitHub Apps, we redirect to installation URL using App ID
     const githubUrl = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&state=${stateParam}`;
@@ -23,10 +30,10 @@ export const GET: APIRoute = async ({ url, locals, redirect }) => {
   try {
     // Create App authentication
     const appAuth = createAppAuth({
-      appId: locals.runtime.env.GITHUB_APP_ID,
-      privateKey: locals.runtime.env.GITHUB_APP_PRIVATE_KEY,
-      clientId: locals.runtime.env.GITHUB_APP_CLIENT_ID,
-      clientSecret: locals.runtime.env.GITHUB_APP_CLIENT_SECRET,
+      appId: env.GITHUB_APP_ID,
+      privateKey: env.GITHUB_APP_PRIVATE_KEY,
+      clientId: env.GITHUB_APP_CLIENT_ID,
+      clientSecret: env.GITHUB_APP_CLIENT_SECRET,
     });
 
     // Exchange code for user access token
@@ -60,16 +67,16 @@ export const GET: APIRoute = async ({ url, locals, redirect }) => {
     };
 
     // Check if user exists
-    let user = await locals.runtime.env.DB.prepare(
+    let user = await env.DB.prepare(
       'SELECT id, email, name, role FROM users WHERE email = ?'
     ).bind(primaryEmail).first();
 
     if (!user) {
-      // Create new user - make first GitHub user an admin/seller
+      // Create new user - only cozyartz gets admin access
       const userId = crypto.randomUUID();
-      const isFirstUser = true; // You can check if this is the first user in the system
+      const isOwner = userData.login === 'cozyartz'; // Only you get admin access
 
-      await locals.runtime.env.DB.prepare(`
+      await env.DB.prepare(`
         INSERT INTO users (id, email, name, password_hash, role, created_at, updated_at)
         VALUES (?, ?, ?, ?, ?, ?, ?)
       `).bind(
@@ -77,13 +84,13 @@ export const GET: APIRoute = async ({ url, locals, redirect }) => {
         primaryEmail,
         userData.name || userData.login,
         'github_app', // GitHub App authentication
-        isFirstUser ? 'admin' : 'seller', // Default to seller for marketplace
+        isOwner ? 'admin' : 'seller', // Only cozyartz gets admin role
         Date.now(),
         Date.now()
       ).run();
 
       // Create profile with GitHub data
-      await locals.runtime.env.DB.prepare(`
+      await env.DB.prepare(`
         INSERT INTO profiles (user_id, bio, company, website, avatar_url, github_id, github_login, created_at, updated_at)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
       `).bind(
@@ -102,12 +109,12 @@ export const GET: APIRoute = async ({ url, locals, redirect }) => {
         id: userId,
         email: primaryEmail,
         name: userData.name || userData.login,
-        role: isFirstUser ? 'admin' : 'seller'
+        role: isOwner ? 'admin' : 'seller'
       };
     }
 
     // Store GitHub App data for repository access
-    await locals.runtime.env.DB.prepare(`
+    await env.DB.prepare(`
       INSERT OR REPLACE INTO github_integrations
       (user_id, access_token, github_id, github_login, installations, updated_at)
       VALUES (?, ?, ?, ?, ?, ?)
@@ -124,7 +131,7 @@ export const GET: APIRoute = async ({ url, locals, redirect }) => {
     const sessionToken = crypto.randomUUID();
     const expiresAt = Date.now() + (30 * 24 * 60 * 60 * 1000); // 30 days
 
-    await locals.runtime.env.DB.prepare(`
+    await env.DB.prepare(`
       INSERT INTO user_sessions (user_id, token, expires_at, created_at)
       VALUES (?, ?, ?, ?)
     `).bind(user.id, sessionToken, expiresAt, Date.now()).run();
