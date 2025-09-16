@@ -468,14 +468,54 @@ async function createStripeSubscription(
     };
   }
 
+  // Create or retrieve Stripe customer
+  let customerId;
+  try {
+    // First try to find existing customer
+    const existingCustomer = await fetch(`https://api.stripe.com/v1/customers/search?query=metadata['userId']:'${userId}'`, {
+      headers: { 'Authorization': `Bearer ${stripeSecretKey}` }
+    });
+
+    const customerData = await existingCustomer.json();
+
+    if (customerData.data && customerData.data.length > 0) {
+      customerId = customerData.data[0].id;
+    } else {
+      // Create new customer
+      const newCustomer = await fetch('https://api.stripe.com/v1/customers', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${stripeSecretKey}`,
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: new URLSearchParams({
+          'metadata[userId]': userId,
+          'metadata[platform]': 'techflunky'
+        })
+      });
+
+      const newCustomerData = await newCustomer.json();
+      customerId = newCustomerData.id;
+    }
+  } catch (error) {
+    // Fallback to mock customer ID for development
+    customerId = `cus_mock_${userId}`;
+  }
+
+  // Create product and price for the subscription tier
+  const productName = getTierDisplayName(tierSlug);
+
   const params = new URLSearchParams({
-    'customer': `cus_${userId}`, // In production, create/retrieve actual Stripe customer
+    'customer': customerId,
     'items[0][price_data][currency]': 'usd',
-    'items[0][price_data][product_data][name]': `TechFlunky ${tierSlug}`,
+    'items[0][price_data][product_data][name]': productName,
+    'items[0][price_data][product_data][description]': getTierDescription(tierSlug),
     'items[0][price_data][unit_amount]': price.toString(),
     'items[0][price_data][recurring][interval]': billingCycle === 'yearly' ? 'year' : 'month',
     'metadata[userId]': userId,
-    'metadata[tierSlug]': tierSlug
+    'metadata[tierSlug]': tierSlug,
+    'metadata[platform]': 'techflunky',
+    'metadata[memberBenefit]': 'fee_discount_8_percent'
   });
 
   if (trialDays > 0) {
@@ -492,10 +532,29 @@ async function createStripeSubscription(
   });
 
   if (!response.ok) {
-    throw new Error('Failed to create Stripe subscription');
+    const errorData = await response.json();
+    throw new Error(`Failed to create Stripe subscription: ${errorData.error?.message || 'Unknown error'}`);
   }
 
   return await response.json();
+}
+
+function getTierDisplayName(tierSlug: string): string {
+  const tierNames = {
+    'starter-investor': 'TechFlunky Starter Investor',
+    'professional-investor': 'TechFlunky Professional Investor',
+    'enterprise-investor': 'TechFlunky Enterprise Investor'
+  };
+  return tierNames[tierSlug] || `TechFlunky ${tierSlug}`;
+}
+
+function getTierDescription(tierSlug: string): string {
+  const descriptions = {
+    'starter-investor': '8% marketplace fee, basic deal discovery, 5 AI reports/month',
+    'professional-investor': '8% marketplace fee, unlimited AI assistance, advanced analytics',
+    'enterprise-investor': '8% marketplace fee, white-label portal, unlimited features'
+  };
+  return descriptions[tierSlug] || 'TechFlunky membership with fee discount and premium features';
 }
 
 async function updateStripeSubscription(

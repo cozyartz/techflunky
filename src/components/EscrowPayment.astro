@@ -5,6 +5,7 @@ export interface Props {
   platformPrice: number;
   sellerId: string;
   buyerId: string;
+  isMember?: boolean;
   certification?: {
     level: string;
     badge: string;
@@ -14,7 +15,10 @@ export interface Props {
 
 const { platformId, platformTitle, platformPrice, sellerId, buyerId, certification } = Astro.props;
 
-const platformFee = Math.round(platformPrice * 0.08);
+// Calculate fee based on member status (passed from parent component)
+const isMember = Astro.props.isMember || false;
+const feeRate = isMember ? 0.08 : 0.10; // 8% for members, 10% for non-members
+const platformFee = Math.round(platformPrice * feeRate);
 const sellerAmount = platformPrice - platformFee;
 ---
 
@@ -74,9 +78,15 @@ const sellerAmount = platformPrice - platformFee;
           <span class="text-gray-900">${(platformPrice / 100).toLocaleString()}</span>
         </div>
         <div class="flex justify-between">
-          <span class="text-gray-600">Platform Fee (8%)</span>
+          <span class="text-gray-600">Platform Fee ({Math.round(feeRate * 100)}%{isMember ? ' - Member Discount' : ''})</span>
           <span class="text-gray-900">-${(platformFee / 100).toLocaleString()}</span>
         </div>
+        {!isMember && (
+          <div class="flex justify-between text-sm text-yellow-600">
+            <span>💡 Join as member to save 2%</span>
+            <span>Save $<span class="font-medium">{Math.round(platformPrice * 0.02 / 100)}</span></span>
+          </div>
+        )}
         <div class="flex justify-between font-medium pt-2 border-t">
           <span class="text-gray-900">Seller Receives</span>
           <span class="text-gray-900">${(sellerAmount / 100).toLocaleString()}</span>
