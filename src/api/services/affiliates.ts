@@ -6,9 +6,9 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '');
 
 // Default commission rates by transaction type
 const COMMISSION_RATES = {
-  listing_sale: 0.10, // 10% of platform fee
+  listing_sale: 0.10, // 10% of platform fee (8-10% total fee)
   course_purchase: 0.20, // 20% of course price
-  service_purchase: 0.15, // 15% of service price
+  service_purchase: 0.10, // 10% of service price (updated from 15%)
   subscription: 0.25 // 25% of first month subscription
 };
 

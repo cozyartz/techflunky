@@ -8,11 +8,12 @@ export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 
 // Platform configuration
 export const PLATFORM_CONFIG = {
-  // Sliding scale platform commission: 8% - 18%
+  // Updated platform commission: 8% (members) - 10% (non-members)
   platformFeePercent: {
-    min: 0.08, // 8% for high-value or established sellers
-    max: 0.18, // 18% for new sellers or low-value items
-    standard: 0.15 // 15% default rate
+    member: 0.08, // 8% for members
+    standard: 0.10, // 10% standard rate for non-members
+    min: 0.08, // Minimum rate (member rate)
+    max: 0.12 // Maximum rate for low-readiness platforms
   },
   
   // Hold payments for 3-7 days for verification
@@ -71,19 +72,17 @@ export function calculatePlatformFee({
 }): number {
   let feeRate = PLATFORM_CONFIG.platformFeePercent.standard;
   
-  // Adjust based on seller tier
+  // Adjust based on seller tier (member status)
   switch (sellerTier) {
     case 'new':
-      feeRate = PLATFORM_CONFIG.platformFeePercent.max; // 18%
+      feeRate = PLATFORM_CONFIG.platformFeePercent.max; // 12% for low-readiness
       break;
     case 'established':
-      feeRate = PLATFORM_CONFIG.platformFeePercent.min; // 8%
-      break;
     case 'premium':
-      feeRate = 0.06; // 6% for top-tier sellers
+      feeRate = PLATFORM_CONFIG.platformFeePercent.member; // 8% for members
       break;
     default:
-      feeRate = PLATFORM_CONFIG.platformFeePercent.standard; // 15%
+      feeRate = PLATFORM_CONFIG.platformFeePercent.standard; // 10% standard
   }
   
   // Adjust based on transaction value
