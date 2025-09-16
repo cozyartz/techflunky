@@ -23,7 +23,7 @@ export const platforms = [
     longDescription: "Revolutionary HR compliance platform that automates leave administration across all 50 states. Features include automated FMLA calculations, real-time compliance monitoring, employee self-service portal, manager dashboards, and AI-powered policy recommendations. Built with modern cloud architecture for enterprise scale.",
     industry: "HR Technology",
     category: "hr-compliance",
-    price: 2200000, // $22,000 in cents
+    price: 22000, // $22,000
     currency: "USD",
     packageTier: "enterprise",
     ai_score: 94, // Matches ai_analysis_results.overall_score
@@ -158,7 +158,7 @@ export const platforms = [
 
     // Offer system fields
     acceptsOffers: true,
-    minOfferAmount: 1760000, // 80% of asking price
+    minOfferAmount: 17600, // 80% of asking price
     offerCount: 5,
     lastOfferDate: "2024-09-16T09:15:00Z"
   },
@@ -172,7 +172,7 @@ export const platforms = [
     longDescription: "Comprehensive restaurant management platform featuring advanced POS capabilities, real-time inventory tracking, employee management, customer relationship tools, and detailed analytics. Supports online ordering, delivery integration, and multi-location management.",
     industry: "Restaurant Technology",
     category: "restaurant-tech",
-    price: 2500000, // $25,000 in cents
+    price: 25000, // $25,000
     currency: "USD",
     packageTier: "launch_ready",
     ai_score: 89,
@@ -259,7 +259,7 @@ export const platforms = [
 
     // Offer system fields
     acceptsOffers: true,
-    minOfferAmount: 2000000, // 80% of asking price
+    minOfferAmount: 20000, // 80% of asking price
     offerCount: 2,
     lastOfferDate: "2024-09-14T14:45:00Z"
   },
@@ -273,7 +273,7 @@ export const platforms = [
     longDescription: "Advanced fitness center management platform featuring AI-driven personalized workout plans, comprehensive member management, automated billing and payment processing, equipment tracking, and detailed performance analytics.",
     industry: "Fitness Technology",
     category: "fitness-tech",
-    price: 1800000, // $18,000 in cents
+    price: 18000, // $18,000
     currency: "USD",
     packageTier: "launch_ready",
     ai_score: 86,
@@ -369,7 +369,7 @@ export const platforms = [
     longDescription: "Comprehensive legal technology platform that automates document creation, contract review, and client communication. Features advanced AI for legal research, automated compliance checking, and seamless integration with existing law firm workflows.",
     industry: "Legal Technology",
     category: "legal-saas",
-    price: 4200000, // $42,000 in cents
+    price: 42000, // $42,000
     currency: "USD",
     packageTier: "enterprise",
     ai_score: 91,
@@ -451,7 +451,7 @@ export const platforms = [
 
     // Offer system fields
     acceptsOffers: true,
-    minOfferAmount: 3360000, // 80% of asking price
+    minOfferAmount: 33600, // 80% of asking price
     offerCount: 8,
     lastOfferDate: "2024-09-15T16:20:00Z"
   },
@@ -465,7 +465,7 @@ export const platforms = [
     longDescription: "Comprehensive real estate CRM platform featuring intelligent lead management, automated marketing campaigns, property analytics, commission tracking, and seamless MLS integration. Built specifically for modern real estate professionals.",
     industry: "Real Estate Technology",
     category: "real-estate",
-    price: 2800000, // $28,000 in cents
+    price: 28000, // $28,000
     currency: "USD",
     packageTier: "launch_ready",
     ai_score: 88,
@@ -547,7 +547,7 @@ export const platforms = [
 
     // Offer system fields
     acceptsOffers: true,
-    minOfferAmount: 2240000, // 80% of asking price
+    minOfferAmount: 22400, // 80% of asking price
     offerCount: 3,
     lastOfferDate: "2024-09-16T10:30:00Z"
   },
@@ -561,7 +561,7 @@ export const platforms = [
     longDescription: "Enterprise-grade payment processing platform featuring advanced fraud detection, multi-currency support, real-time transaction monitoring, and comprehensive merchant tools. Supports all major payment methods including credit cards, digital wallets, and cryptocurrency.",
     industry: "Financial Technology",
     category: "fintech",
-    price: 2800000, // $28,000 in cents
+    price: 28000, // $28,000
     currency: "USD",
     packageTier: "enterprise",
     ai_score: 92,
@@ -643,7 +643,7 @@ export const platforms = [
 
     // Offer system fields
     acceptsOffers: true,
-    minOfferAmount: 2240000, // 80% of asking price
+    minOfferAmount: 22400, // 80% of asking price
     offerCount: 1,
     lastOfferDate: "2024-09-15T11:20:00Z"
   },
@@ -657,7 +657,7 @@ export const platforms = [
     longDescription: "Complete telehealth solution featuring secure video consultations, electronic health records, prescription management, appointment scheduling, and integrated insurance billing. Built with enterprise-grade security and full HIPAA compliance.",
     industry: "Healthcare Technology",
     category: "healthtech",
-    price: 3200000, // $32,000 in cents
+    price: 32000, // $32,000
     currency: "USD",
     packageTier: "enterprise",
     ai_score: 90,
@@ -739,7 +739,7 @@ export const platforms = [
 
     // Offer system fields
     acceptsOffers: true,
-    minOfferAmount: 2560000, // 80% of asking price
+    minOfferAmount: 25600, // 80% of asking price
     offerCount: 4,
     lastOfferDate: "2024-09-16T07:30:00Z"
   },
@@ -753,7 +753,7 @@ export const platforms = [
     longDescription: "Full-featured learning management system designed for modern education. Includes course authoring tools, student progress tracking, advanced analytics, assessment engine, certification management, and mobile learning support.",
     industry: "Education Technology",
     category: "edtech",
-    price: 2400000, // $24,000 in cents
+    price: 24000, // $24,000
     currency: "USD",
     packageTier: "launch_ready",
     ai_score: 87,
@@ -849,7 +849,7 @@ export const platforms = [
     longDescription: "Comprehensive marketplace platform enabling multiple vendors to sell products through a unified storefront. Features include vendor onboarding, product management, order processing, payment splitting, analytics, and mobile apps.",
     industry: "E-commerce Technology",
     category: "ecommerce",
-    price: 3500000, // $35,000 in cents
+    price: 35000, // $35,000
     currency: "USD",
     packageTier: "enterprise",
     ai_score: 89,
@@ -931,7 +931,7 @@ export const platforms = [
 
     // Offer system fields
     acceptsOffers: true,
-    minOfferAmount: 2800000, // 80% of asking price
+    minOfferAmount: 28000, // 80% of asking price
     offerCount: 3,
     lastOfferDate: "2024-09-16T08:45:00Z"
   },
@@ -945,7 +945,7 @@ export const platforms = [
     longDescription: "Advanced IoT platform providing complete device lifecycle management, real-time monitoring, predictive analytics, and automated control systems. Supports thousands of device types with edge computing capabilities.",
     industry: "Internet of Things",
     category: "iot-platform",
-    price: 2900000, // $29,000 in cents
+    price: 29000, // $29,000
     currency: "USD",
     packageTier: "enterprise",
     ai_score: 91,
@@ -1027,7 +1027,7 @@ export const platforms = [
 
     // Offer system fields
     acceptsOffers: true,
-    minOfferAmount: 2320000, // 80% of asking price
+    minOfferAmount: 23200, // 80% of asking price
     offerCount: 0,
     lastOfferDate: null
   },
@@ -1041,7 +1041,7 @@ export const platforms = [
     longDescription: "Comprehensive cryptocurrency trading platform featuring advanced trading tools, real-time market data, algorithmic trading capabilities, portfolio management, and bank-level security measures. Supports all major cryptocurrencies and trading pairs.",
     industry: "Cryptocurrency",
     category: "fintech",
-    price: 4500000, // $45,000 in cents
+    price: 45000, // $45,000
     currency: "USD",
     packageTier: "enterprise",
     ai_score: 93,

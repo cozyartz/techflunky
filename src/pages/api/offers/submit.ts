@@ -1,4 +1,5 @@
 import type { APIRoute } from 'astro';
+import { validateEmail } from '../../../lib/email-validation';
 
 interface Offer {
   id: string;
@@ -27,6 +28,46 @@ export const POST: APIRoute = async ({ request }) => {
         status: 400,
         headers: { 'Content-Type': 'application/json' }
       });
+    }
+
+    // Comprehensive email validation
+    console.log(`Validating email: ${buyerEmail}`);
+    const emailValidation = await validateEmail(buyerEmail, {
+      checkMxRecord: true,
+      checkDisposable: true,
+      checkFreeProvider: true,
+      checkRoleBased: true,
+      timeout: 5000
+    });
+
+    if (!emailValidation.isValid) {
+      return new Response(JSON.stringify({
+        error: 'Invalid email address',
+        details: emailValidation.errors.join(', '),
+        suggestion: emailValidation.domainSuggestion ? `Did you mean ${buyerEmail.split('@')[0]}@${emailValidation.domainSuggestion}?` : undefined
+      }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+
+    // Log email validation score for analytics
+    console.log(`Email ${buyerEmail} validated with score: ${emailValidation.score}`);
+
+    // Record email validation in analytics (for dashboard)
+    try {
+      await fetch('/api/admin/email-analytics', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: buyerEmail,
+          validationResult: emailValidation,
+          userType: 'buyer'
+        })
+      });
+    } catch (analyticsError) {
+      console.error('Failed to record email analytics:', analyticsError);
+      // Don't fail the offer submission if analytics recording fails
     }
 
     if (offerAmount < 1000) {
@@ -64,7 +105,18 @@ export const POST: APIRoute = async ({ request }) => {
     // 4. Validate buyer credentials
     // 5. Check platform availability
 
-    console.log(`New offer received: ${offerId} for platform ${platformId} - $${offerAmount}`);
+    console.log(`New offer received: ${offerId} for platform ${platformId} - $${offerAmount} from validated email: ${buyerEmail} (score: ${emailValidation.score})`);
+
+    // In production, you would also:
+    // 1. Store email validation score in database for future reference
+    // 2. Flag offers from disposable/role-based emails for manual review
+    // 3. Set up email notification preferences based on validation results
+    if (emailValidation.isDisposable) {
+      console.log(`⚠️  Warning: Offer from disposable email domain: ${buyerEmail}`);
+    }
+    if (emailValidation.isRoleBasedEmail) {
+      console.log(`⚠️  Warning: Offer from role-based email: ${buyerEmail}`);
+    }
 
     return new Response(JSON.stringify({
       success: true,

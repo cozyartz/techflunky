@@ -44,11 +44,24 @@ export default function BrowsePlatforms() {
   const [loading, setLoading] = useState(false);
   const [selectedPlatform, setSelectedPlatform] = useState<Platform | null>(null);
   const [showOfferModal, setShowOfferModal] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(12);
 
   // Get filtered and sorted platforms
   const filteredPlatforms = useMemo(() => {
     let filtered = filterPlatforms(platforms, filters);
     return sortPlatforms(filtered, filters.sortBy, filters.sortOrder);
+  }, [filters]);
+
+  // Pagination calculations
+  const totalPages = Math.ceil(filteredPlatforms.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentPlatforms = filteredPlatforms.slice(startIndex, endIndex);
+
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    setCurrentPage(1);
   }, [filters]);
 
   const featuredPlatforms = useMemo(() => getFeaturedPlatforms(), []);
@@ -93,6 +106,101 @@ export default function BrowsePlatforms() {
       sortBy: 'created_at',
       sortOrder: 'desc'
     });
+    setCurrentPage(1);
+  };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    // Scroll to top of results
+    document.getElementById('platforms-section')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const Pagination = () => {
+    if (totalPages <= 1) return null;
+
+    const pageNumbers = [];
+    const maxVisiblePages = 5;
+    let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+    let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+    if (endPage - startPage + 1 < maxVisiblePages) {
+      startPage = Math.max(1, endPage - maxVisiblePages + 1);
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      pageNumbers.push(i);
+    }
+
+    return (
+      <div className="flex justify-center items-center space-x-2 mt-12">
+        {/* Previous Button */}
+        <button
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+          className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+            currentPage === 1
+              ? 'bg-gray-800 text-gray-500 cursor-not-allowed'
+              : 'bg-gray-800 text-white hover:bg-gray-700 border border-gray-600'
+          }`}
+        >
+          Previous
+        </button>
+
+        {/* First page */}
+        {startPage > 1 && (
+          <>
+            <button
+              onClick={() => handlePageChange(1)}
+              className="px-4 py-2 rounded-lg font-medium bg-gray-800 text-white hover:bg-gray-700 border border-gray-600"
+            >
+              1
+            </button>
+            {startPage > 2 && <span className="text-gray-400">...</span>}
+          </>
+        )}
+
+        {/* Page numbers */}
+        {pageNumbers.map((page) => (
+          <button
+            key={page}
+            onClick={() => handlePageChange(page)}
+            className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+              page === currentPage
+                ? 'bg-yellow-400 text-black'
+                : 'bg-gray-800 text-white hover:bg-gray-700 border border-gray-600'
+            }`}
+          >
+            {page}
+          </button>
+        ))}
+
+        {/* Last page */}
+        {endPage < totalPages && (
+          <>
+            {endPage < totalPages - 1 && <span className="text-gray-400">...</span>}
+            <button
+              onClick={() => handlePageChange(totalPages)}
+              className="px-4 py-2 rounded-lg font-medium bg-gray-800 text-white hover:bg-gray-700 border border-gray-600"
+            >
+              {totalPages}
+            </button>
+          </>
+        )}
+
+        {/* Next Button */}
+        <button
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+          className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+            currentPage === totalPages
+              ? 'bg-gray-800 text-gray-500 cursor-not-allowed'
+              : 'bg-gray-800 text-white hover:bg-gray-700 border border-gray-600'
+          }`}
+        >
+          Next
+        </button>
+      </div>
+    );
   };
 
   const formatPrice = (price: number) => {

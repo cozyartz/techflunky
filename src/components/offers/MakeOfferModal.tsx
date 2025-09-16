@@ -16,6 +16,13 @@ interface MakeOfferModalProps {
   onSuccess: (offerId: string) => void;
 }
 
+interface EmailValidation {
+  isValid: boolean;
+  isValidating: boolean;
+  message?: string;
+  suggestion?: string;
+}
+
 export default function MakeOfferModal({ platform, isOpen, onClose, onSuccess }: MakeOfferModalProps) {
   const [formData, setFormData] = useState({
     buyerName: '',
@@ -25,6 +32,11 @@ export default function MakeOfferModal({ platform, isOpen, onClose, onSuccess }:
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
+  const [emailValidation, setEmailValidation] = useState<EmailValidation>({
+    isValid: false,
+    isValidating: false
+  });
+  const [emailValidationTimeout, setEmailValidationTimeout] = useState<NodeJS.Timeout | null>(null);
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('en-US', {
@@ -34,9 +46,82 @@ export default function MakeOfferModal({ platform, isOpen, onClose, onSuccess }:
     }).format(price);
   };
 
-  const askingPrice = platform.price / 100; // Convert from cents
-  const minOffer = platform.minOfferAmount ? platform.minOfferAmount / 100 : askingPrice * 0.6;
+  const askingPrice = platform.price; // Already in dollars
+  const minOffer = platform.minOfferAmount ? platform.minOfferAmount : askingPrice * 0.6;
   const suggestedOffer = Math.round(askingPrice * 0.85);
+
+  const validateEmailAddress = async (email: string) => {
+    if (!email || email.length < 5) {
+      setEmailValidation({ isValid: false, isValidating: false });
+      return;
+    }
+
+    setEmailValidation({ isValid: false, isValidating: true });
+
+    try {
+      const response = await fetch('/api/validate-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.validation) {
+        const validation = result.validation;
+        setEmailValidation({
+          isValid: validation.isValid,
+          isValidating: false,
+          message: validation.isValid ? 'Email verified' : validation.errors.join(', '),
+          suggestion: validation.domainSuggestion ? `Did you mean ${email.split('@')[0]}@${validation.domainSuggestion}?` : undefined
+        });
+
+        // Record validation in analytics for dashboard (non-blocking)
+        try {
+          fetch('/api/admin/email-analytics', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              email,
+              validationResult: validation,
+              userType: 'buyer'
+            })
+          }).catch(() => {}); // Silent fail for analytics
+        } catch (error) {
+          // Silent fail for analytics
+        }
+      } else {
+        setEmailValidation({
+          isValid: false,
+          isValidating: false,
+          message: 'Unable to verify email'
+        });
+      }
+    } catch (error) {
+      setEmailValidation({
+        isValid: false,
+        isValidating: false,
+        message: 'Email verification failed'
+      });
+    }
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const email = e.target.value;
+    setFormData(prev => ({ ...prev, buyerEmail: email }));
+
+    // Clear existing timeout
+    if (emailValidationTimeout) {
+      clearTimeout(emailValidationTimeout);
+    }
+
+    // Set new timeout for email validation (debounce)
+    const timeout = setTimeout(() => {
+      validateEmailAddress(email);
+    }, 1000);
+
+    setEmailValidationTimeout(timeout);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,6 +129,11 @@ export default function MakeOfferModal({ platform, isOpen, onClose, onSuccess }:
     setError('');
 
     try {
+      // Validate email before submission
+      if (!emailValidation.isValid) {
+        throw new Error('Please provide a valid email address');
+      }
+
       const offerAmount = parseInt(formData.offerAmount);
 
       if (offerAmount < minOffer) {
@@ -63,7 +153,7 @@ export default function MakeOfferModal({ platform, isOpen, onClose, onSuccess }:
           platformId: platform.id,
           buyerName: formData.buyerName,
           buyerEmail: formData.buyerEmail,
-          offerAmount: offerAmount * 100, // Convert to cents
+          offerAmount: offerAmount, // Already in dollars
           message: formData.message
         })
       });
@@ -94,7 +184,11 @@ export default function MakeOfferModal({ platform, isOpen, onClose, onSuccess }:
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    if (name === 'buyerEmail') {
+      handleEmailChange(e as React.ChangeEvent<HTMLInputElement>);
+    } else {
+      setFormData(prev => ({ ...prev, [name]: value }));
+    }
   };
 
   if (!platform.acceptsOffers) {
@@ -166,15 +260,52 @@ export default function MakeOfferModal({ platform, isOpen, onClose, onSuccess }:
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Email Address
                   </label>
-                  <input
-                    type="email"
-                    name="buyerEmail"
-                    value={formData.buyerEmail}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
-                    placeholder="john@example.com"
-                  />
+                  <div className="relative">
+                    <input
+                      type="email"
+                      name="buyerEmail"
+                      value={formData.buyerEmail}
+                      onChange={handleInputChange}
+                      required
+                      className={`w-full px-3 py-2 pr-10 border rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent ${
+                        formData.buyerEmail
+                          ? emailValidation.isValid
+                            ? 'border-green-300 bg-green-50'
+                            : emailValidation.isValidating
+                            ? 'border-yellow-300 bg-yellow-50'
+                            : 'border-red-300 bg-red-50'
+                          : 'border-gray-300'
+                      }`}
+                      placeholder="john@example.com"
+                    />
+                    {formData.buyerEmail && (
+                      <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                        {emailValidation.isValidating ? (
+                          <div className="animate-spin h-4 w-4 border-2 border-yellow-400 border-t-transparent rounded-full"></div>
+                        ) : emailValidation.isValid ? (
+                          <svg className="h-4 w-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                          </svg>
+                        ) : (
+                          <svg className="h-4 w-4 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                          </svg>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                  {emailValidation.message && (
+                    <div className={`mt-1 text-xs ${
+                      emailValidation.isValid ? 'text-green-600' : 'text-red-600'
+                    }`}>
+                      {emailValidation.message}
+                    </div>
+                  )}
+                  {emailValidation.suggestion && (
+                    <div className="mt-1 text-xs text-blue-600">
+                      💡 {emailValidation.suggestion}
+                    </div>
+                  )}
                 </div>
 
                 <div>
