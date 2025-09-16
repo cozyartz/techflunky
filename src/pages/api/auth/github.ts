@@ -18,7 +18,10 @@ export const GET: APIRoute = async ({ url, locals, redirect }) => {
     const stateParam = Math.random().toString(36).substring(7);
 
     if (!clientId) {
-      return new Response('GitHub App not configured', { status: 500 });
+      // Debug info for environment variables
+      console.error('Environment variables available:', Object.keys(env));
+      console.error('GITHUB_APP_CLIENT_ID:', env.GITHUB_APP_CLIENT_ID);
+      return new Response(`GitHub App not configured. Available env vars: ${Object.keys(env).join(', ')}`, { status: 500 });
     }
 
     // For GitHub Apps, we redirect to installation URL using App ID
