@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { validateEmail } from '../../lib/email-validation';
+import { validateEmailCF as validateEmail } from '../../lib/email-validation-cf';
 
 export const POST: APIRoute = async ({ request }) => {
   try {

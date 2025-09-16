@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { emailValidator } from '../../../lib/email-validation';
+import { cloudflareEmailValidator } from '../../../lib/email-validation-cf';
 
 // In production, this would connect to your Cloudflare D1 database
 // For now, we'll simulate with in-memory storage and real validation data
@@ -269,7 +269,8 @@ async function getValidationHistory(): Promise<Response> {
 }
 
 async function getQualityBreakdown(): Promise<Response> {
-  const cacheStats = emailValidator.getCacheStats();
+  // Note: Cache stats not available in Cloudflare version
+  const cacheStats = { size: 0, oldestEntry: null };
 
   return new Response(JSON.stringify({
     success: true,
