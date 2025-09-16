@@ -25,8 +25,8 @@ export const platforms = [
     price: 3500000, // $35,000 in cents
     currency: "USD",
     packageTier: "enterprise",
-    aiScore: 94, // Matches ai_analysis_results.overall_score
-    viewsCount: 1247,
+    ai_score: 94, // Matches ai_analysis_results.overall_score
+    views_count: 1247,
     isFeatured: true,
 
     // Technical details
@@ -152,8 +152,8 @@ export const platforms = [
 
     // SEO and metadata
     tags: ["HR", "Compliance", "AI", "SaaS", "Legal", "Enterprise"],
-    createdAt: "2024-09-15T10:00:00Z",
-    updatedAt: "2024-09-16T14:30:00Z"
+    created_at: "2024-09-15T10:00:00Z",
+    updated_at: "2024-09-16T14:30:00Z"
   },
 
   {
@@ -167,8 +167,8 @@ export const platforms = [
     price: 2500000, // $25,000 in cents
     currency: "USD",
     packageTier: "launch_ready",
-    aiScore: 89,
-    viewsCount: 892,
+    ai_score: 89,
+    views_count: 892,
     isFeatured: false,
 
     techStack: ["Next.js", "PostgreSQL", "Stripe", "React Native", "Node.js"],
@@ -246,8 +246,8 @@ export const platforms = [
     exclusive: false,
 
     tags: ["Restaurant", "POS", "Inventory", "Mobile", "SaaS"],
-    createdAt: "2024-09-10T09:00:00Z",
-    updatedAt: "2024-09-14T16:20:00Z"
+    created_at: "2024-09-10T09:00:00Z",
+    updated_at: "2024-09-14T16:20:00Z"
   },
 
   {
@@ -261,8 +261,8 @@ export const platforms = [
     price: 1800000, // $18,000 in cents
     currency: "USD",
     packageTier: "launch_ready",
-    aiScore: 86,
-    viewsCount: 654,
+    ai_score: 86,
+    views_count: 654,
     isFeatured: false,
 
     techStack: ["React", "Node.js", "MongoDB", "AI/ML APIs", "Stripe"],
@@ -335,8 +335,8 @@ export const platforms = [
     exclusive: false,
 
     tags: ["Fitness", "AI", "Membership", "Health", "SaaS"],
-    createdAt: "2024-09-08T11:30:00Z",
-    updatedAt: "2024-09-13T10:15:00Z"
+    created_at: "2024-09-08T11:30:00Z",
+    updated_at: "2024-09-13T10:15:00Z"
   },
 
   {
@@ -350,8 +350,8 @@ export const platforms = [
     price: 4200000, // $42,000 in cents
     currency: "USD",
     packageTier: "enterprise",
-    aiScore: 91,
-    viewsCount: 432,
+    ai_score: 91,
+    views_count: 432,
     isFeatured: true,
 
     techStack: ["Python", "Django", "PostgreSQL", "AI/NLP", "React"],
@@ -424,8 +424,8 @@ export const platforms = [
     exclusive: true,
 
     tags: ["Legal", "AI", "Automation", "Contracts", "Enterprise"],
-    createdAt: "2024-09-05T14:00:00Z",
-    updatedAt: "2024-09-15T09:45:00Z"
+    created_at: "2024-09-05T14:00:00Z",
+    updated_at: "2024-09-15T09:45:00Z"
   },
 
   {
@@ -439,8 +439,8 @@ export const platforms = [
     price: 2800000, // $28,000 in cents
     currency: "USD",
     packageTier: "launch_ready",
-    aiScore: 88,
-    viewsCount: 743,
+    ai_score: 88,
+    views_count: 743,
     isFeatured: false,
 
     techStack: ["Vue.js", "Laravel", "MySQL", "AI/ML APIs", "Twilio"],
@@ -513,8 +513,8 @@ export const platforms = [
     exclusive: false,
 
     tags: ["Real Estate", "CRM", "AI", "Lead Management", "MLS"],
-    createdAt: "2024-09-12T13:15:00Z",
-    updatedAt: "2024-09-16T11:20:00Z"
+    created_at: "2024-09-12T13:15:00Z",
+    updated_at: "2024-09-16T11:20:00Z"
   }
 ];
 
@@ -559,16 +559,16 @@ export function filterPlatforms(platforms, filters = {}) {
   return filtered;
 }
 
-export function sortPlatforms(platforms, sortBy = 'createdAt', sortOrder = 'desc') {
+export function sortPlatforms(platforms, sortBy = 'created_at', sortOrder = 'desc') {
   return [...platforms].sort((a, b) => {
     let aVal = a[sortBy];
     let bVal = b[sortBy];
 
     // Handle different data types
-    if (sortBy === 'price' || sortBy === 'aiScore' || sortBy === 'viewsCount') {
+    if (sortBy === 'price' || sortBy === 'ai_score' || sortBy === 'views_count') {
       aVal = Number(aVal);
       bVal = Number(bVal);
-    } else if (sortBy === 'createdAt' || sortBy === 'updatedAt') {
+    } else if (sortBy === 'created_at' || sortBy === 'updated_at') {
       aVal = new Date(aVal);
       bVal = new Date(bVal);
     }
