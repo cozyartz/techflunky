@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { platforms, filterPlatforms, sortPlatforms, getFeaturedPlatforms } from '../data/platforms.js';
+import { platforms, filterPlatforms, sortPlatforms, getFeaturedPlatforms } from '../data/platforms';
 
 interface Platform {
   id: string;

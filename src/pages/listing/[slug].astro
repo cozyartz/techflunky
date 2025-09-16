@@ -1,10 +1,10 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Navigation from '../../components/Navigation.astro';
-import { getPlatformBySlug } from '../../data/platforms.js';
+import { getPlatformBySlug } from '../../data/platforms';
 
 export async function getStaticPaths() {
-  const { platforms } = await import('../../data/platforms.js');
+  const { platforms } = await import('../../data/platforms');
 
   return platforms.map((platform) => ({
     params: { slug: platform.slug },
