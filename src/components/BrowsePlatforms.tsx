@@ -58,14 +58,14 @@ export default function BrowsePlatforms() {
     const value = e.target.value;
     let minPrice = null, maxPrice = null;
 
-    if (value === '0-15000') {
+    if (value === '0-25000') {
       minPrice = 0;
-      maxPrice = 15000;
-    } else if (value === '15000-35000') {
-      minPrice = 15000;
-      maxPrice = 35000;
-    } else if (value === '35000+') {
-      minPrice = 35000;
+      maxPrice = 25000;
+    } else if (value === '25000-75000') {
+      minPrice = 25000;
+      maxPrice = 75000;
+    } else if (value === '75000+') {
+      minPrice = 75000;
       maxPrice = null;
     }
 
@@ -198,7 +198,7 @@ export default function BrowsePlatforms() {
             <span className="block text-yellow-400">Business Platforms</span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 mb-8">
-            Production-ready codebases with full documentation — built by developers, validated by the market.
+            AI-validated platforms with complete business foundations, fair AI-powered pricing, and instant deployment capabilities.
           </p>
 
           <div className="bg-black/50 backdrop-blur-sm rounded-xl p-6 border border-yellow-400/20">
@@ -232,9 +232,9 @@ export default function BrowsePlatforms() {
                 className="px-4 py-3 rounded-lg bg-gray-900/50 backdrop-blur-sm border border-yellow-400/30 text-white focus:outline-none focus:border-yellow-400/60"
               >
                 <option value="">All Prices</option>
-                <option value="0-15000">Under $15K</option>
-                <option value="15000-35000">$15K - $35K</option>
-                <option value="35000+">$35K+</option>
+                <option value="0-25000">Under $25K</option>
+                <option value="25000-75000">$25K - $75K</option>
+                <option value="75000+">$75K+</option>
               </select>
               <select
                 value={`${filters.sortBy}-${filters.sortOrder}`}
@@ -260,7 +260,7 @@ export default function BrowsePlatforms() {
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Featured Platforms</h2>
               <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-                Handpicked, market-validated platforms ready for immediate launch
+                AI-certified, market-validated platforms with comprehensive business foundations
               </p>
             </div>
 
@@ -279,7 +279,7 @@ export default function BrowsePlatforms() {
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">All Platforms</h2>
             <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-              Discover production-ready business platforms with complete documentation and market validation
+              Discover AI-validated business platforms with complete foundations, fair pricing, and instant deployment
             </p>
           </div>
 
