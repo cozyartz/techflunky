@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro';
 import { createAppAuth } from '@octokit/auth-app';
 import { Octokit } from '@octokit/rest';
+import { createEmailService } from '../../../lib/email';
 
 export const GET: APIRoute = async ({ url, locals, redirect }) => {
   const code = url.searchParams.get('code');
@@ -9,7 +10,7 @@ export const GET: APIRoute = async ({ url, locals, redirect }) => {
   const state = url.searchParams.get('state');
 
   // Access environment variables correctly for Cloudflare Pages
-  const env = locals.runtime?.env || {};
+  const env = locals.runtime?.env || process.env || {};
 
   if (!code) {
     // Redirect to GitHub App installation
@@ -18,10 +19,7 @@ export const GET: APIRoute = async ({ url, locals, redirect }) => {
     const stateParam = Math.random().toString(36).substring(7);
 
     if (!clientId) {
-      // Debug info for environment variables
-      console.error('Environment variables available:', Object.keys(env));
-      console.error('GITHUB_APP_CLIENT_ID:', env.GITHUB_APP_CLIENT_ID);
-      return new Response(`GitHub App not configured. Available env vars: ${Object.keys(env).join(', ')}`, { status: 500 });
+      return new Response('GitHub App not configured', { status: 500 });
     }
 
     // For GitHub Apps, we redirect to installation URL using App ID
@@ -114,6 +112,20 @@ export const GET: APIRoute = async ({ url, locals, redirect }) => {
         name: userData.name || userData.login,
         role: isOwner ? 'admin' : 'seller'
       };
+
+      // Send welcome email for new users
+      try {
+        const emailService = createEmailService(env);
+        await emailService.sendWelcomeEmail(
+          primaryEmail,
+          userData.name || userData.login,
+          isOwner ? 'seller' : 'seller' // Default to seller for GitHub users
+        );
+        console.log(`Welcome email sent to ${primaryEmail}`);
+      } catch (emailError) {
+        console.error('Failed to send welcome email:', emailError);
+        // Continue without failing - user account creation is more important
+      }
     }
 
     // Store GitHub App data for repository access

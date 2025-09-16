@@ -1,8 +1,10 @@
 import type { APIRoute } from 'astro';
+import { createEmailService } from '../../../lib/email';
 
 export const POST: APIRoute = async ({ request, locals }) => {
   try {
     const { email } = await request.json();
+    const env = locals.runtime?.env || {};
 
     if (!email || !email.includes('@')) {
       return new Response(JSON.stringify({
@@ -19,7 +21,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
     const expiresAt = Date.now() + (15 * 60 * 1000); // 15 minutes
 
     // Check if user exists
-    let user = await locals.runtime.env.DB.prepare(
+    let user = await env.DB.prepare(
       'SELECT id, email, name, role FROM users WHERE email = ?'
     ).bind(email.toLowerCase()).first();
 
@@ -31,7 +33,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
       userId = crypto.randomUUID();
       isNewUser = true;
 
-      await locals.runtime.env.DB.prepare(`
+      await env.DB.prepare(`
         INSERT INTO users (id, email, name, password_hash, role, created_at, updated_at)
         VALUES (?, ?, ?, ?, ?, ?, ?)
       `).bind(
@@ -45,7 +47,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
       ).run();
 
       // Create basic profile
-      await locals.runtime.env.DB.prepare(`
+      await env.DB.prepare(`
         INSERT INTO profiles (user_id, bio, created_at, updated_at)
         VALUES (?, ?, ?, ?)
       `).bind(
@@ -59,7 +61,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
     }
 
     // Store magic link token
-    await locals.runtime.env.DB.prepare(`
+    await env.DB.prepare(`
       INSERT OR REPLACE INTO magic_links (id, user_id, token, email, expires_at, used, created_at)
       VALUES (?, ?, ?, ?, ?, ?, ?)
     `).bind(
@@ -72,14 +74,20 @@ export const POST: APIRoute = async ({ request, locals }) => {
       Date.now()
     ).run();
 
-    // In production, you would send this via email
-    // For development, we'll return the magic link
-    const magicLink = `${locals.runtime.env.SITE_URL || 'http://localhost:4321'}/auth/verify?token=${token}`;
+    // Generate magic link URL
+    const magicLink = `${env.SITE_URL || 'http://localhost:4321'}/auth/verify?token=${token}`;
+    const userName = user?.name || email.split('@')[0];
 
-    console.log(`Magic Link for ${email}: ${magicLink}`);
+    // Send magic link email via MailerSend
+    try {
+      const emailService = createEmailService(env);
+      await emailService.sendMagicLink(email.toLowerCase(), userName, magicLink);
 
-    // TODO: Send email with magic link
-    // await sendMagicLinkEmail(email, magicLink);
+      console.log(`Magic link sent to ${email}`);
+    } catch (emailError) {
+      console.error('Failed to send magic link email:', emailError);
+      // Continue without failing - the magic link is still created
+    }
 
     return new Response(JSON.stringify({
       success: true,
@@ -87,7 +95,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
         ? 'Account created! Check your email for the magic link to sign in.'
         : 'Magic link sent! Check your email to sign in.',
       // In development, include the link for testing
-      ...(locals.runtime.env.ENVIRONMENT === 'development' && {
+      ...(env.ENVIRONMENT === 'development' && {
         magicLink,
         note: 'This magic link is only shown in development mode'
       })
@@ -110,6 +118,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
 export const GET: APIRoute = async ({ url, locals, redirect }) => {
   const token = url.searchParams.get('token');
+  const env = locals.runtime?.env || {};
 
   if (!token) {
     return redirect('/login?error=invalid_token');
@@ -117,7 +126,7 @@ export const GET: APIRoute = async ({ url, locals, redirect }) => {
 
   try {
     // Verify magic link token
-    const magicLink = await locals.runtime.env.DB.prepare(`
+    const magicLink = await env.DB.prepare(`
       SELECT ml.*, u.id as user_id, u.email, u.name, u.role
       FROM magic_links ml
       JOIN users u ON ml.user_id = u.id
@@ -129,7 +138,7 @@ export const GET: APIRoute = async ({ url, locals, redirect }) => {
     }
 
     // Mark magic link as used
-    await locals.runtime.env.DB.prepare(`
+    await env.DB.prepare(`
       UPDATE magic_links SET used = 1, updated_at = ? WHERE token = ?
     `).bind(Date.now(), token).run();
 
@@ -137,7 +146,7 @@ export const GET: APIRoute = async ({ url, locals, redirect }) => {
     const sessionToken = crypto.randomUUID();
     const expiresAt = Date.now() + (30 * 24 * 60 * 60 * 1000); // 30 days
 
-    await locals.runtime.env.DB.prepare(`
+    await env.DB.prepare(`
       INSERT INTO user_sessions (user_id, token, expires_at, created_at)
       VALUES (?, ?, ?, ?)
     `).bind(magicLink.user_id, sessionToken, expiresAt, Date.now()).run();
