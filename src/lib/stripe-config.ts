@@ -12,7 +12,7 @@ export const PLATFORM_CONFIG = {
   platformFeePercent: {
     member: 0.08, // 8% for members
     standard: 0.10, // 10% standard rate for non-members
-    min: 0.08, // Minimum rate (member rate)
+    min: 0.06, // Minimum rate (premium/annual discount)
     max: 0.12 // Maximum rate for low-readiness platforms
   },
   
@@ -60,15 +60,17 @@ export async function createSellerAccount(seller: {
   return account;
 }
 
-// Calculate dynamic platform fee based on seller tier and transaction value
+// Calculate platform fee based on seller tier and subscription
 export function calculatePlatformFee({
   amount,
   sellerTier = 'standard',
-  transactionValue = 'medium'
+  subscriptionType = 'monthly',
+  membershipLevel = 'basic'
 }: {
   amount: number;
   sellerTier?: 'new' | 'standard' | 'established' | 'premium';
-  transactionValue?: 'low' | 'medium' | 'high';
+  subscriptionType?: 'monthly' | 'annual';
+  membershipLevel?: 'basic' | 'pro' | 'enterprise';
 }): number {
   let feeRate = PLATFORM_CONFIG.platformFeePercent.standard;
   
@@ -84,14 +86,15 @@ export function calculatePlatformFee({
     default:
       feeRate = PLATFORM_CONFIG.platformFeePercent.standard; // 10% standard
   }
-  
-  // Adjust based on transaction value
-  if (transactionValue === 'high' && amount >= 50000) { // $500+
-    feeRate *= 0.9; // 10% discount on fees for high-value transactions
-  } else if (transactionValue === 'low' && amount <= 1000) { // Under $10
-    feeRate = Math.min(feeRate * 1.2, PLATFORM_CONFIG.platformFeePercent.max); // 20% increase, capped at max
+
+  // Apply 2% discount for premium members or annual subscribers
+  const isPremiumMember = membershipLevel === 'enterprise';
+  const isAnnualSubscriber = subscriptionType === 'annual';
+
+  if (isPremiumMember || isAnnualSubscriber) {
+    feeRate = Math.max(feeRate - 0.02, PLATFORM_CONFIG.platformFeePercent.min); // 2% discount, minimum 6%
   }
-  
+
   return Math.round(amount * feeRate);
 }
 
@@ -111,9 +114,8 @@ export async function processListingPurchase({
   description: string;
   sellerTier?: 'new' | 'standard' | 'established' | 'premium';
 }) {
-  // Calculate dynamic platform fee
-  const transactionValue = amount >= 50000 ? 'high' : amount <= 1000 ? 'low' : 'medium';
-  const platformFee = calculatePlatformFee({ amount, sellerTier, transactionValue });
+  // Calculate platform fee
+  const platformFee = calculatePlatformFee({ amount, sellerTier });
   
   // Create payment intent with destination charge
   const paymentIntent = await stripe.paymentIntents.create({

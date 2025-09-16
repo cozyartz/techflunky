@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { cloudflareEmailValidator } from '../../../lib/email-validation-cf';
+import { mailerSendService } from '../../../lib/mailersend';
 
 // In production, this would connect to your Cloudflare D1 database
 // For now, we'll simulate with in-memory storage and real validation data
@@ -97,6 +98,8 @@ export const GET: APIRoute = async ({ url, request }) => {
         return getQualityBreakdown();
       case 'real-time-stats':
         return getRealTimeStats();
+      case 'send-verification':
+        return sendVerificationEmail(url);
       default:
         return getAllDashboardData();
     }
@@ -323,6 +326,57 @@ async function getRealTimeStats(): Promise<Response> {
     status: 200,
     headers: { 'Content-Type': 'application/json' }
   });
+}
+
+async function sendVerificationEmail(url: URL): Promise<Response> {
+  const email = url.searchParams.get('email');
+  const userName = url.searchParams.get('userName');
+
+  if (!email) {
+    return new Response(JSON.stringify({
+      error: 'Email parameter is required'
+    }), {
+      status: 400,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
+
+  try {
+    // Generate verification code
+    const verificationCode = Math.random().toString(36).substring(2, 8).toUpperCase();
+
+    // Send verification email using MailerSend
+    const emailSent = await mailerSendService.sendEmailVerification(
+      email,
+      verificationCode,
+      userName || undefined
+    );
+
+    if (emailSent) {
+      console.log(`📧 Verification email sent to ${email} with code: ${verificationCode}`);
+
+      return new Response(JSON.stringify({
+        success: true,
+        message: 'Verification email sent successfully',
+        verificationCode: verificationCode // In production, don't return this
+      }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    } else {
+      throw new Error('Failed to send email');
+    }
+
+  } catch (error) {
+    console.error('Failed to send verification email:', error);
+    return new Response(JSON.stringify({
+      error: 'Failed to send verification email',
+      details: error instanceof Error ? error.message : 'Unknown error'
+    }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
 }
 
 async function getAllDashboardData(): Promise<Response> {

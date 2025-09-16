@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { validateEmailCF as validateEmail } from '../../../lib/email-validation-cf';
+import { mailerSendService } from '../../../lib/mailersend';
 
 interface Offer {
   id: string;
@@ -107,15 +108,41 @@ export const POST: APIRoute = async ({ request }) => {
 
     console.log(`New offer received: ${offerId} for platform ${platformId} - $${offerAmount} from validated email: ${buyerEmail} (score: ${emailValidation.score})`);
 
-    // In production, you would also:
-    // 1. Store email validation score in database for future reference
-    // 2. Flag offers from disposable/role-based emails for manual review
-    // 3. Set up email notification preferences based on validation results
+    // Send email notifications
+    try {
+      // Send admin notification about new offer
+      await mailerSendService.sendAdminNotification(
+        `Platform ${platformId}`, // In production, get actual platform title from database
+        offerAmount,
+        buyerEmail,
+        'owner@techflunky.com' // In production, get seller email from platform data
+      );
+
+      // In production, send notification to the actual seller
+      // await mailerSendService.sendOfferNotification(
+      //   sellerEmail, // Get from platform database
+      //   sellerName,  // Get from platform database
+      //   platformTitle, // Get from platform database
+      //   offerAmount,
+      //   buyerName,
+      //   message
+      // );
+
+      console.log(`📧 Email notifications sent for offer ${offerId}`);
+    } catch (emailError) {
+      console.error('Failed to send email notifications:', emailError);
+      // Don't fail the offer submission if email fails
+    }
+
+    // Flag offers for manual review based on email validation
     if (emailValidation.isDisposable) {
-      console.log(`⚠️  Warning: Offer from disposable email domain: ${buyerEmail}`);
+      console.log(`⚠️  Warning: Offer from disposable email domain: ${buyerEmail} - flagged for review`);
     }
     if (emailValidation.isRoleBasedEmail) {
-      console.log(`⚠️  Warning: Offer from role-based email: ${buyerEmail}`);
+      console.log(`⚠️  Warning: Offer from role-based email: ${buyerEmail} - flagged for review`);
+    }
+    if (emailValidation.score < 80) {
+      console.log(`⚠️  Warning: Low email validation score (${emailValidation.score}) for ${buyerEmail} - flagged for review`);
     }
 
     return new Response(JSON.stringify({

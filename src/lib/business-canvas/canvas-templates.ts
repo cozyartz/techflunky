@@ -275,7 +275,7 @@ export class BusinessCanvasTemplates {
               'How does your pricing compare to alternatives?'
             ],
             examples: [
-              '15% commission on completed projects + payment processing fees',
+              '8-12% commission on completed projects + payment processing fees',
               '8% delivery fee from customers + 3% commission from restaurants',
               '5% booking fee + payment processing + premium listing fees'
             ],

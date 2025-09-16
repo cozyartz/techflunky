@@ -1,0 +1,296 @@
+---
+// Test page for Stripe sandbox integration
+---
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stripe Sandbox Testing - TechFlunky</title>
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f8fafc;
+        }
+        .container {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .header {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            color: white;
+            text-align: center;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            color: #fbbf24;
+            margin: 0;
+            font-size: 2rem;
+        }
+        .header p {
+            margin: 10px 0 0 0;
+            opacity: 0.8;
+        }
+        .test-section {
+            margin-bottom: 30px;
+        }
+        .test-section h3 {
+            color: #1f2937;
+            border-bottom: 2px solid #fbbf24;
+            padding-bottom: 8px;
+            margin-bottom: 16px;
+        }
+        .btn {
+            background: #fbbf24;
+            color: #000;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            margin: 8px 8px 8px 0;
+            transition: all 0.2s;
+        }
+        .btn:hover {
+            background: #f59e0b;
+            transform: translateY(-1px);
+        }
+        .btn-secondary {
+            background: #6b7280;
+            color: white;
+        }
+        .btn-secondary:hover {
+            background: #4b5563;
+        }
+        .result {
+            background: #f3f4f6;
+            border-left: 4px solid #10b981;
+            padding: 16px;
+            margin: 16px 0;
+            border-radius: 0 8px 8px 0;
+            font-family: monospace;
+            white-space: pre-wrap;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .error {
+            border-left-color: #ef4444;
+            background: #fef2f2;
+        }
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        .status-success { background: #10b981; }
+        .status-error { background: #ef4444; }
+        .status-pending { background: #f59e0b; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            margin: 8px 0;
+        }
+        label {
+            display: block;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🧪 Stripe Sandbox Testing</h1>
+        <p>Test Autimind Stripe integration in sandbox mode</p>
+    </div>
+
+    <div class="container">
+        <div class="test-section">
+            <h3>📊 Connection Status</h3>
+            <button class="btn" onclick="testConnection()">
+                <span class="status-indicator status-pending" id="connection-status"></span>
+                Test Stripe Connection
+            </button>
+            <div id="connection-result" class="result" style="display:none;"></div>
+        </div>
+    </div>
+
+    <div class="grid">
+        <div class="container">
+            <div class="test-section">
+                <h3>💰 Fee Calculation Tests</h3>
+                <p>Test platform fee calculations for different seller tiers and transaction amounts.</p>
+                <button class="btn" onclick="testFeeCalculation()">Run Fee Tests</button>
+                <div id="fee-result" class="result" style="display:none;"></div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="test-section">
+                <h3>💳 Payment Intent Test</h3>
+                <p>Create test payment intent for Autimind platform purchase.</p>
+                <button class="btn" onclick="testPaymentIntent()">Create Test Payment</button>
+                <div id="payment-result" class="result" style="display:none;"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="test-section">
+            <h3>🛒 Checkout Session Test</h3>
+            <p>Create a test checkout session for Autimind purchase.</p>
+
+            <div style="margin: 16px 0;">
+                <label for="product-name">Product Name:</label>
+                <input type="text" id="product-name" value="Autimind Lifestyle Platform" />
+
+                <label for="amount">Amount (cents):</label>
+                <input type="number" id="amount" value="9900" />
+
+                <label for="description">Description:</label>
+                <input type="text" id="description" value="Complete AI-powered lifestyle image generation platform" />
+            </div>
+
+            <button class="btn" onclick="createCheckoutSession()">Create Checkout Session</button>
+            <button class="btn btn-secondary" onclick="openTestCheckout()" id="open-checkout-btn" style="display:none;">Open Test Checkout</button>
+            <div id="checkout-result" class="result" style="display:none;"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="test-section">
+            <h3>🔄 Run All Tests</h3>
+            <p>Execute all Stripe tests in sequence to verify complete integration.</p>
+            <button class="btn" onclick="runAllTests()">Run All Tests</button>
+            <div id="all-tests-result" class="result" style="display:none;"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="test-section">
+            <h3>🎯 Test Card Numbers</h3>
+            <p>Use these test card numbers in Stripe checkout:</p>
+            <ul>
+                <li><strong>4242424242424242</strong> - Visa (success)</li>
+                <li><strong>4000000000000002</strong> - Visa (card declined)</li>
+                <li><strong>4000000000009995</strong> - Visa (insufficient funds)</li>
+                <li><strong>4000000000000069</strong> - Visa (expired card)</li>
+                <li><strong>4000000000000127</strong> - Visa (incorrect CVC)</li>
+            </ul>
+            <p><em>Use any future expiry date and any 3-digit CVC.</em></p>
+        </div>
+    </div>
+
+    <script>
+        let checkoutSessionUrl = null;
+
+        async function makeRequest(url, options = {}) {
+            try {
+                const response = await fetch(url, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        ...options.headers
+                    },
+                    ...options
+                });
+
+                const data = await response.json();
+                return { success: response.ok, data, status: response.status };
+            } catch (error) {
+                return { success: false, error: error.message };
+            }
+        }
+
+        function updateStatus(elementId, success, data) {
+            const element = document.getElementById(elementId);
+            const statusIndicator = element.parentElement?.querySelector('.status-indicator');
+
+            if (statusIndicator) {
+                statusIndicator.className = `status-indicator ${success ? 'status-success' : 'status-error'}`;
+            }
+
+            element.style.display = 'block';
+            element.className = `result ${success ? '' : 'error'}`;
+            element.textContent = JSON.stringify(data, null, 2);
+        }
+
+        async function testConnection() {
+            const result = await makeRequest('/api/stripe/test-sandbox?scenario=status');
+            updateStatus('connection-result', result.success, result.data || result);
+        }
+
+        async function testFeeCalculation() {
+            const result = await makeRequest('/api/stripe/test-sandbox?scenario=calculate-fees');
+            updateStatus('fee-result', result.success, result.data || result);
+        }
+
+        async function testPaymentIntent() {
+            const result = await makeRequest('/api/stripe/test-sandbox?scenario=payment-intent');
+            updateStatus('payment-result', result.success, result.data || result);
+        }
+
+        async function createCheckoutSession() {
+            const productName = document.getElementById('product-name').value;
+            const amount = parseInt(document.getElementById('amount').value);
+            const description = document.getElementById('description').value;
+
+            const result = await makeRequest('/api/stripe/test-sandbox', {
+                method: 'POST',
+                body: JSON.stringify({
+                    action: 'create-checkout-session',
+                    testData: {
+                        productName,
+                        amount,
+                        description,
+                        metadata: {
+                            platform: 'autimind',
+                            test: 'true'
+                        }
+                    }
+                })
+            });
+
+            updateStatus('checkout-result', result.success, result.data || result);
+
+            if (result.success && result.data.session?.url) {
+                checkoutSessionUrl = result.data.session.url;
+                document.getElementById('open-checkout-btn').style.display = 'inline-block';
+            }
+        }
+
+        function openTestCheckout() {
+            if (checkoutSessionUrl) {
+                window.open(checkoutSessionUrl, '_blank');
+            }
+        }
+
+        async function runAllTests() {
+            const result = await makeRequest('/api/stripe/test-sandbox?scenario=all');
+            updateStatus('all-tests-result', result.success, result.data || result);
+        }
+
+        // Auto-test connection on page load
+        window.addEventListener('load', () => {
+            testConnection();
+        });
+    </script>
+</body>
+</html>

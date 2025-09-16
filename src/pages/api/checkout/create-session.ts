@@ -1,14 +1,20 @@
 // API endpoint to create Stripe checkout session
 import type { APIRoute } from 'astro';
-import { stripe } from '../../../lib/stripe-config';
+import { stripe, calculatePlatformFee } from '../../../lib/stripe-config';
 
 export const POST: APIRoute = async ({ request, locals }) => {
   try {
-    const { listingId, listingPrice, listingTitle, sellerId } = await request.json();
-    
+    const { listingId, listingPrice, listingTitle, sellerId, sellerTier = 'standard' } = await request.json();
+
     // In production, verify the user is authenticated
     // const userId = locals.userId; // From auth middleware
-    
+
+    // Calculate platform fee based on seller tier
+    const platformFee = calculatePlatformFee({
+      amount: listingPrice,
+      sellerTier
+    });
+
     // Create checkout session
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -40,8 +46,8 @@ export const POST: APIRoute = async ({ request, locals }) => {
           sellerId,
           type: 'listing_purchase',
         },
-        // Take 15% platform fee
-        application_fee_amount: Math.round(listingPrice * 0.15),
+        // Take calculated platform fee based on seller tier
+        application_fee_amount: platformFee,
         // Send to seller's connected account
         transfer_data: {
           destination: sellerId,
