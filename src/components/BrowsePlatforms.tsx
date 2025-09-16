@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { platforms, filterPlatforms, sortPlatforms, getFeaturedPlatforms } from '../data/platforms';
+import MakeOfferModal from './offers/MakeOfferModal';
 
 interface Platform {
   id: string;
@@ -15,6 +16,10 @@ interface Platform {
   tech_stack: string[];
   category: string;
   isFeatured?: boolean;
+  acceptsOffers?: boolean;
+  minOfferAmount?: number;
+  offerCount?: number;
+  lastOfferDate?: string;
 }
 
 interface FilterState {
@@ -37,6 +42,8 @@ export default function BrowsePlatforms() {
   });
 
   const [loading, setLoading] = useState(false);
+  const [selectedPlatform, setSelectedPlatform] = useState<Platform | null>(null);
+  const [showOfferModal, setShowOfferModal] = useState(false);
 
   // Get filtered and sorted platforms
   const filteredPlatforms = useMemo(() => {
@@ -172,17 +179,47 @@ export default function BrowsePlatforms() {
 
       {/* Footer */}
       <div className="p-6 pt-0 mt-auto">
-        <div className="flex items-center justify-between">
-          <div>
-            <div className="text-xs text-gray-400">Starting at</div>
-            <div className="text-xl font-bold text-white">{formatPrice(platform.price)}</div>
+        <div className="space-y-3">
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="text-xs text-gray-400">Starting at</div>
+              <div className="text-xl font-bold text-white">{formatPrice(platform.price)}</div>
+            </div>
+            {platform.acceptsOffers && platform.offerCount && platform.offerCount > 0 && (
+              <div className="text-right">
+                <div className="text-xs text-yellow-400">{platform.offerCount} offer{platform.offerCount !== 1 ? 's' : ''}</div>
+                <div className="text-xs text-gray-400">Recent interest</div>
+              </div>
+            )}
           </div>
-          <a
-            href={`/listing/${platform.slug}`}
-            className="bg-yellow-400 text-black px-4 py-2 rounded-lg font-semibold text-sm hover:bg-yellow-300 transition-colors"
-          >
-            View Details
-          </a>
+
+          <div className="flex space-x-2">
+            <a
+              href={`/listing/${platform.slug}`}
+              className="flex-1 bg-yellow-400 text-black px-4 py-2 rounded-lg font-semibold text-sm hover:bg-yellow-300 transition-colors text-center"
+            >
+              View Details
+            </a>
+            {platform.acceptsOffers && (
+              <button
+                onClick={() => {
+                  setSelectedPlatform(platform);
+                  setShowOfferModal(true);
+                }}
+                className="px-4 py-2 border border-yellow-400 text-yellow-400 rounded-lg font-semibold text-sm hover:bg-yellow-400 hover:text-black transition-colors"
+              >
+                Make Offer
+              </button>
+            )}
+          </div>
+
+          {platform.acceptsOffers && (
+            <div className="text-center">
+              <div className="text-xs text-gray-400">
+                Accepts offers from {formatPrice(platform.minOfferAmount ? platform.minOfferAmount : platform.price * 0.6)}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -219,12 +256,12 @@ export default function BrowsePlatforms() {
                 <option value="hr-compliance">HR Compliance</option>
                 <option value="legal-saas">Legal SaaS</option>
                 <option value="fintech">FinTech</option>
-                <option value="healthcare">Healthcare</option>
-                <option value="marketing-tools">Marketing Tools</option>
+                <option value="healthtech">HealthTech</option>
                 <option value="restaurant-tech">Restaurant Tech</option>
                 <option value="real-estate">Real Estate</option>
                 <option value="fitness-tech">Fitness Tech</option>
-                <option value="education-tech">Education Tech</option>
+                <option value="edtech">EdTech</option>
+                <option value="ecommerce">E-commerce</option>
                 <option value="iot-platform">IoT Platform</option>
               </select>
               <select
@@ -330,6 +367,22 @@ export default function BrowsePlatforms() {
           )}
         </div>
       </section>
+
+      {/* Make Offer Modal */}
+      {selectedPlatform && (
+        <MakeOfferModal
+          platform={selectedPlatform}
+          isOpen={showOfferModal}
+          onClose={() => {
+            setShowOfferModal(false);
+            setSelectedPlatform(null);
+          }}
+          onSuccess={(offerId) => {
+            console.log('Offer submitted successfully:', offerId);
+            // You could add a success notification here
+          }}
+        />
+      )}
     </div>
   );
 }

@@ -23,11 +23,11 @@ export const platforms = [
     longDescription: "Revolutionary HR compliance platform that automates leave administration across all 50 states. Features include automated FMLA calculations, real-time compliance monitoring, employee self-service portal, manager dashboards, and AI-powered policy recommendations. Built with modern cloud architecture for enterprise scale.",
     industry: "HR Technology",
     category: "hr-compliance",
-    price: 3500000, // $35,000 in cents
+    price: 2200000, // $22,000 in cents
     currency: "USD",
     packageTier: "enterprise",
     ai_score: 94, // Matches ai_analysis_results.overall_score
-    views_count: 1247,
+    views_count: 89,
     isFeatured: true,
 
     // Technical details
@@ -154,7 +154,13 @@ export const platforms = [
     // SEO and metadata
     tags: ["HR", "Compliance", "AI", "SaaS", "Legal", "Enterprise"],
     created_at: "2024-09-15T10:00:00Z",
-    updated_at: "2024-09-16T14:30:00Z"
+    updated_at: "2024-09-16T14:30:00Z",
+
+    // Offer system fields
+    acceptsOffers: true,
+    minOfferAmount: 1760000, // 80% of asking price
+    offerCount: 5,
+    lastOfferDate: "2024-09-16T09:15:00Z"
   },
 
   {
@@ -170,7 +176,7 @@ export const platforms = [
     currency: "USD",
     packageTier: "launch_ready",
     ai_score: 89,
-    views_count: 892,
+    views_count: 67,
     isFeatured: false,
 
     tech_stack: ["Next.js", "PostgreSQL", "Stripe", "React Native", "Node.js"],
@@ -249,7 +255,13 @@ export const platforms = [
 
     tags: ["Restaurant", "POS", "Inventory", "Mobile", "SaaS"],
     created_at: "2024-09-10T09:00:00Z",
-    updated_at: "2024-09-14T16:20:00Z"
+    updated_at: "2024-09-14T16:20:00Z",
+
+    // Offer system fields
+    acceptsOffers: true,
+    minOfferAmount: 2000000, // 80% of asking price
+    offerCount: 2,
+    lastOfferDate: "2024-09-14T14:45:00Z"
   },
 
   {
@@ -265,7 +277,7 @@ export const platforms = [
     currency: "USD",
     packageTier: "launch_ready",
     ai_score: 86,
-    views_count: 654,
+    views_count: 42,
     isFeatured: false,
 
     tech_stack: ["React", "Node.js", "MongoDB", "AI/ML APIs", "Stripe"],
@@ -339,7 +351,13 @@ export const platforms = [
 
     tags: ["Fitness", "AI", "Membership", "Health", "SaaS"],
     created_at: "2024-09-08T11:30:00Z",
-    updated_at: "2024-09-13T10:15:00Z"
+    updated_at: "2024-09-13T10:15:00Z",
+
+    // Offer system fields
+    acceptsOffers: false, // Fixed price only
+    minOfferAmount: null,
+    offerCount: 0,
+    lastOfferDate: null
   },
 
   {
@@ -355,7 +373,7 @@ export const platforms = [
     currency: "USD",
     packageTier: "enterprise",
     ai_score: 91,
-    views_count: 432,
+    views_count: 156,
     isFeatured: true,
 
     tech_stack: ["Python", "Django", "PostgreSQL", "AI/NLP", "React"],
@@ -429,7 +447,13 @@ export const platforms = [
 
     tags: ["Legal", "AI", "Automation", "Contracts", "Enterprise"],
     created_at: "2024-09-05T14:00:00Z",
-    updated_at: "2024-09-15T09:45:00Z"
+    updated_at: "2024-09-15T09:45:00Z",
+
+    // Offer system fields
+    acceptsOffers: true,
+    minOfferAmount: 3360000, // 80% of asking price
+    offerCount: 8,
+    lastOfferDate: "2024-09-15T16:20:00Z"
   },
 
   {
@@ -445,7 +469,7 @@ export const platforms = [
     currency: "USD",
     packageTier: "launch_ready",
     ai_score: 88,
-    views_count: 743,
+    views_count: 23,
     isFeatured: false,
 
     tech_stack: ["Vue.js", "Laravel", "MySQL", "AI/ML APIs", "Twilio"],
@@ -519,7 +543,589 @@ export const platforms = [
 
     tags: ["Real Estate", "CRM", "AI", "Lead Management", "MLS"],
     created_at: "2024-09-12T13:15:00Z",
-    updated_at: "2024-09-16T11:20:00Z"
+    updated_at: "2024-09-16T11:20:00Z",
+
+    // Offer system fields
+    acceptsOffers: true,
+    minOfferAmount: 2240000, // 80% of asking price
+    offerCount: 3,
+    lastOfferDate: "2024-09-16T10:30:00Z"
+  },
+
+  {
+    id: "fintech-payment-processor",
+    slug: "advanced-payment-processing-platform",
+    title: "Advanced Payment Processing Platform",
+    description: "Complete payment processing solution with multi-currency support, fraud detection, and real-time analytics built for modern e-commerce.",
+    elevator_pitch: "Complete payment processing solution with multi-currency support, fraud detection, and real-time analytics built for modern e-commerce.",
+    longDescription: "Enterprise-grade payment processing platform featuring advanced fraud detection, multi-currency support, real-time transaction monitoring, and comprehensive merchant tools. Supports all major payment methods including credit cards, digital wallets, and cryptocurrency.",
+    industry: "Financial Technology",
+    category: "fintech",
+    price: 2800000, // $28,000 in cents
+    currency: "USD",
+    packageTier: "enterprise",
+    ai_score: 92,
+    views_count: 34,
+    isFeatured: false,
+
+    tech_stack: ["Node.js", "PostgreSQL", "Redis", "Stripe API", "Blockchain"],
+    architecture: "Microservices",
+    deployment: "Kubernetes + Cloud",
+
+    marketSize: "$128B+",
+    profitMargin: "96%",
+    developmentTime: "22+ months",
+    revenueModel: "Transaction Fees + SaaS",
+    targetCustomers: "E-commerce & Online Businesses",
+    projectedARR: "$1.5-4M",
+    timeToMarket: "4-6 months",
+
+    thumbnailUrl: "/assets/platforms/payment-platform-thumb.jpg",
+    galleryImages: [
+      {
+        url: "/assets/platforms/payment-dashboard.jpg",
+        alt: "Payment processing dashboard",
+        caption: "Real-time transaction monitoring and analytics dashboard"
+      }
+    ],
+
+    features: [
+      "Multi-currency payment processing",
+      "Advanced fraud detection",
+      "Real-time transaction monitoring",
+      "Merchant onboarding tools",
+      "Cryptocurrency support",
+      "API-first architecture",
+      "Compliance management",
+      "Analytics and reporting"
+    ],
+
+    includes: [
+      {
+        category: "Complete Platform",
+        items: [
+          "Full payment processing system",
+          "Fraud detection algorithms",
+          "Merchant dashboard",
+          "API documentation and SDKs"
+        ]
+      },
+      {
+        category: "Business Package",
+        items: [
+          "FinTech compliance guidelines",
+          "Merchant acquisition strategies",
+          "Revenue model documentation",
+          "Technical implementation guide"
+        ]
+      }
+    ],
+
+    seller: {
+      id: "fintech-builders",
+      name: "FinTech Builders",
+      avatar: "/assets/sellers/fintech-avatar.jpg",
+      rating: 4.8,
+      reviewsCount: 11,
+      verified: true,
+      expertise: ["Payment Processing", "FinTech", "Compliance"],
+      description: "FinTech specialists with deep payments industry experience and regulatory knowledge."
+    },
+
+    status: "available",
+    featured: false,
+    urgency: null,
+    exclusive: false,
+
+    tags: ["FinTech", "Payments", "E-commerce", "Fraud Detection", "API"],
+    created_at: "2024-09-03T08:45:00Z",
+    updated_at: "2024-09-15T14:30:00Z",
+
+    // Offer system fields
+    acceptsOffers: true,
+    minOfferAmount: 2240000, // 80% of asking price
+    offerCount: 1,
+    lastOfferDate: "2024-09-15T11:20:00Z"
+  },
+
+  {
+    id: "telemedicine-platform",
+    slug: "comprehensive-telemedicine-platform",
+    title: "Comprehensive Telemedicine Platform",
+    description: "HIPAA-compliant telemedicine platform with video consultations, patient management, prescription handling, and insurance billing.",
+    elevator_pitch: "HIPAA-compliant telemedicine platform with video consultations, patient management, prescription handling, and insurance billing.",
+    longDescription: "Complete telehealth solution featuring secure video consultations, electronic health records, prescription management, appointment scheduling, and integrated insurance billing. Built with enterprise-grade security and full HIPAA compliance.",
+    industry: "Healthcare Technology",
+    category: "healthtech",
+    price: 3200000, // $32,000 in cents
+    currency: "USD",
+    packageTier: "enterprise",
+    ai_score: 90,
+    views_count: 71,
+    isFeatured: true,
+
+    tech_stack: ["React", "Node.js", "PostgreSQL", "WebRTC", "AWS Health"],
+    architecture: "Cloud-Native",
+    deployment: "AWS Healthcare Cloud",
+
+    marketSize: "$659B+",
+    profitMargin: "93%",
+    developmentTime: "24+ months",
+    revenueModel: "SaaS Subscription + Transaction Fees",
+    targetCustomers: "Healthcare Providers & Clinics",
+    projectedARR: "$2-6M",
+    timeToMarket: "6-8 months",
+
+    thumbnailUrl: "/assets/platforms/telemedicine-thumb.jpg",
+    galleryImages: [
+      {
+        url: "/assets/platforms/telemedicine-dashboard.jpg",
+        alt: "Telemedicine platform dashboard",
+        caption: "Comprehensive healthcare provider dashboard with patient management"
+      }
+    ],
+
+    features: [
+      "Secure video consultations",
+      "Electronic health records",
+      "Prescription management",
+      "Insurance billing integration",
+      "Appointment scheduling",
+      "Patient portal",
+      "HIPAA compliance",
+      "Multi-provider support"
+    ],
+
+    includes: [
+      {
+        category: "Healthcare Platform",
+        items: [
+          "Complete telemedicine system",
+          "HIPAA compliance documentation",
+          "Security audit reports",
+          "Medical device integrations"
+        ]
+      },
+      {
+        category: "Regulatory & Business",
+        items: [
+          "Healthcare compliance framework",
+          "Provider onboarding materials",
+          "Insurance integration guides",
+          "Regulatory approval assistance"
+        ]
+      }
+    ],
+
+    seller: {
+      id: "healthtech-innovators",
+      name: "HealthTech Innovators",
+      avatar: "/assets/sellers/healthtech-avatar.jpg",
+      rating: 4.9,
+      reviewsCount: 14,
+      verified: true,
+      expertise: ["Healthcare IT", "HIPAA Compliance", "Telemedicine"],
+      description: "Healthcare technology experts with 12+ years experience in medical software and regulatory compliance."
+    },
+
+    status: "available",
+    featured: true,
+    urgency: null,
+    exclusive: false,
+
+    tags: ["Healthcare", "Telemedicine", "HIPAA", "Video Chat", "EHR"],
+    created_at: "2024-09-01T11:20:00Z",
+    updated_at: "2024-09-16T09:15:00Z",
+
+    // Offer system fields
+    acceptsOffers: true,
+    minOfferAmount: 2560000, // 80% of asking price
+    offerCount: 4,
+    lastOfferDate: "2024-09-16T07:30:00Z"
+  },
+
+  {
+    id: "lms-education-platform",
+    slug: "advanced-learning-management-system",
+    title: "Advanced Learning Management System",
+    description: "Comprehensive LMS with interactive content creation, student analytics, assessment tools, and certification management for educational institutions.",
+    elevator_pitch: "Comprehensive LMS with interactive content creation, student analytics, assessment tools, and certification management for educational institutions.",
+    longDescription: "Full-featured learning management system designed for modern education. Includes course authoring tools, student progress tracking, advanced analytics, assessment engine, certification management, and mobile learning support.",
+    industry: "Education Technology",
+    category: "edtech",
+    price: 2400000, // $24,000 in cents
+    currency: "USD",
+    packageTier: "launch_ready",
+    ai_score: 87,
+    views_count: 28,
+    isFeatured: false,
+
+    tech_stack: ["Vue.js", "Django", "PostgreSQL", "Redis", "Video APIs"],
+    architecture: "MVC + APIs",
+    deployment: "Docker Containers",
+
+    marketSize: "$350B+",
+    profitMargin: "91%",
+    developmentTime: "18+ months",
+    revenueModel: "SaaS Subscription",
+    targetCustomers: "Educational Institutions & Corporate Training",
+    projectedARR: "$800K-2.5M",
+    timeToMarket: "3-5 months",
+
+    thumbnailUrl: "/assets/platforms/lms-platform-thumb.jpg",
+    galleryImages: [
+      {
+        url: "/assets/platforms/lms-dashboard.jpg",
+        alt: "LMS dashboard interface",
+        caption: "Comprehensive learning management dashboard with analytics"
+      }
+    ],
+
+    features: [
+      "Interactive course authoring",
+      "Student progress tracking",
+      "Advanced analytics dashboard",
+      "Assessment and quiz engine",
+      "Certification management",
+      "Mobile learning support",
+      "Video content delivery",
+      "Multi-language support"
+    ],
+
+    includes: [
+      {
+        category: "Educational Platform",
+        items: [
+          "Complete LMS source code",
+          "Mobile learning apps",
+          "Content authoring tools",
+          "Assessment engine"
+        ]
+      },
+      {
+        category: "Business Development",
+        items: [
+          "Educational market research",
+          "Institution sales materials",
+          "Training and support guides",
+          "Implementation roadmap"
+        ]
+      }
+    ],
+
+    seller: {
+      id: "edtech-solutions",
+      name: "EdTech Solutions",
+      avatar: "/assets/sellers/edtech-avatar.jpg",
+      rating: 4.6,
+      reviewsCount: 7,
+      verified: true,
+      expertise: ["Educational Technology", "LMS Development", "Student Analytics"],
+      description: "Educational technology specialists with extensive experience in learning platforms and student engagement."
+    },
+
+    status: "available",
+    featured: false,
+    urgency: null,
+    exclusive: false,
+
+    tags: ["Education", "LMS", "E-learning", "Analytics", "Mobile"],
+    created_at: "2024-09-07T16:30:00Z",
+    updated_at: "2024-09-14T12:45:00Z",
+
+    // Offer system fields
+    acceptsOffers: false, // Educational sector prefers fixed pricing
+    minOfferAmount: null,
+    offerCount: 0,
+    lastOfferDate: null
+  },
+
+  {
+    id: "ecommerce-marketplace",
+    slug: "multi-vendor-marketplace-platform",
+    title: "Multi-Vendor Marketplace Platform",
+    description: "Complete marketplace solution with vendor management, payment processing, order fulfillment, and advanced analytics for multi-seller environments.",
+    elevator_pitch: "Complete marketplace solution with vendor management, payment processing, order fulfillment, and advanced analytics for multi-seller environments.",
+    longDescription: "Comprehensive marketplace platform enabling multiple vendors to sell products through a unified storefront. Features include vendor onboarding, product management, order processing, payment splitting, analytics, and mobile apps.",
+    industry: "E-commerce Technology",
+    category: "ecommerce",
+    price: 3500000, // $35,000 in cents
+    currency: "USD",
+    packageTier: "enterprise",
+    ai_score: 89,
+    views_count: 45,
+    isFeatured: false,
+
+    tech_stack: ["React", "Node.js", "MongoDB", "Elasticsearch", "AWS"],
+    architecture: "Microservices",
+    deployment: "Cloud Infrastructure",
+
+    marketSize: "$24.3T+",
+    profitMargin: "89%",
+    developmentTime: "20+ months",
+    revenueModel: "Commission + Subscription Fees",
+    targetCustomers: "Marketplace Operators & Retailers",
+    projectedARR: "$1.2-3.8M",
+    timeToMarket: "4-7 months",
+
+    thumbnailUrl: "/assets/platforms/marketplace-thumb.jpg",
+    galleryImages: [
+      {
+        url: "/assets/platforms/marketplace-dashboard.jpg",
+        alt: "Marketplace management dashboard",
+        caption: "Advanced vendor and product management dashboard"
+      }
+    ],
+
+    features: [
+      "Multi-vendor management",
+      "Product catalog system",
+      "Order processing automation",
+      "Payment splitting",
+      "Vendor analytics dashboard",
+      "Mobile marketplace apps",
+      "Review and rating system",
+      "Commission management"
+    ],
+
+    includes: [
+      {
+        category: "Marketplace Platform",
+        items: [
+          "Complete marketplace system",
+          "Vendor and admin dashboards",
+          "Mobile apps (iOS/Android)",
+          "Payment processing integration"
+        ]
+      },
+      {
+        category: "Business Operations",
+        items: [
+          "Vendor onboarding materials",
+          "Commission structure templates",
+          "Marketing toolkit",
+          "Operations playbook"
+        ]
+      }
+    ],
+
+    seller: {
+      id: "marketplace-experts",
+      name: "Marketplace Experts",
+      avatar: "/assets/sellers/marketplace-avatar.jpg",
+      rating: 4.7,
+      reviewsCount: 13,
+      verified: true,
+      expertise: ["E-commerce", "Marketplace Development", "Payment Systems"],
+      description: "E-commerce platform specialists with proven experience building scalable marketplace solutions."
+    },
+
+    status: "available",
+    featured: false,
+    urgency: "limited_time",
+    exclusive: false,
+
+    tags: ["E-commerce", "Marketplace", "Multi-vendor", "Mobile", "Analytics"],
+    created_at: "2024-08-28T09:15:00Z",
+    updated_at: "2024-09-16T11:30:00Z",
+
+    // Offer system fields
+    acceptsOffers: true,
+    minOfferAmount: 2800000, // 80% of asking price
+    offerCount: 3,
+    lastOfferDate: "2024-09-16T08:45:00Z"
+  },
+
+  {
+    id: "iot-device-management",
+    slug: "smart-iot-device-platform",
+    title: "Smart IoT Device Management Platform",
+    description: "Comprehensive IoT platform for device management, real-time monitoring, data analytics, and automated control systems for smart buildings and homes.",
+    elevator_pitch: "Comprehensive IoT platform for device management, real-time monitoring, data analytics, and automated control systems for smart buildings and homes.",
+    longDescription: "Advanced IoT platform providing complete device lifecycle management, real-time monitoring, predictive analytics, and automated control systems. Supports thousands of device types with edge computing capabilities.",
+    industry: "Internet of Things",
+    category: "iot-platform",
+    price: 2900000, // $29,000 in cents
+    currency: "USD",
+    packageTier: "enterprise",
+    ai_score: 91,
+    views_count: 19,
+    isFeatured: false,
+
+    tech_stack: ["Python", "InfluxDB", "MQTT", "Docker", "Kubernetes"],
+    architecture: "Edge + Cloud",
+    deployment: "Hybrid Cloud",
+
+    marketSize: "$1.1T+",
+    profitMargin: "94%",
+    developmentTime: "19+ months",
+    revenueModel: "SaaS + Device Licensing",
+    targetCustomers: "Smart Building & Home Automation",
+    projectedARR: "$900K-2.8M",
+    timeToMarket: "3-6 months",
+
+    thumbnailUrl: "/assets/platforms/iot-platform-thumb.jpg",
+    galleryImages: [
+      {
+        url: "/assets/platforms/iot-dashboard.jpg",
+        alt: "IoT device management dashboard",
+        caption: "Real-time IoT device monitoring and control interface"
+      }
+    ],
+
+    features: [
+      "Device lifecycle management",
+      "Real-time monitoring",
+      "Predictive analytics",
+      "Automated control systems",
+      "Edge computing support",
+      "Data visualization",
+      "Alert management",
+      "API integration"
+    ],
+
+    includes: [
+      {
+        category: "IoT Platform",
+        items: [
+          "Complete IoT management system",
+          "Edge computing modules",
+          "Device integration protocols",
+          "Analytics engine"
+        ]
+      },
+      {
+        category: "Implementation",
+        items: [
+          "Device integration guides",
+          "Deployment documentation",
+          "Training materials",
+          "Technical support"
+        ]
+      }
+    ],
+
+    seller: {
+      id: "iot-innovators",
+      name: "IoT Innovators",
+      avatar: "/assets/sellers/iot-avatar.jpg",
+      rating: 4.8,
+      reviewsCount: 9,
+      verified: true,
+      expertise: ["IoT Development", "Edge Computing", "Device Management"],
+      description: "IoT platform specialists with extensive experience in smart building and industrial automation systems."
+    },
+
+    status: "available",
+    featured: false,
+    urgency: null,
+    exclusive: false,
+
+    tags: ["IoT", "Smart Home", "Device Management", "Analytics", "Edge Computing"],
+    created_at: "2024-09-04T14:20:00Z",
+    updated_at: "2024-09-15T16:45:00Z",
+
+    // Offer system fields
+    acceptsOffers: true,
+    minOfferAmount: 2320000, // 80% of asking price
+    offerCount: 0,
+    lastOfferDate: null
+  },
+
+  {
+    id: "crypto-trading-platform",
+    slug: "advanced-crypto-trading-platform",
+    title: "Advanced Crypto Trading Platform",
+    description: "Professional cryptocurrency trading platform with advanced charting, algorithmic trading, portfolio management, and institutional-grade security.",
+    elevator_pitch: "Professional cryptocurrency trading platform with advanced charting, algorithmic trading, portfolio management, and institutional-grade security.",
+    longDescription: "Comprehensive cryptocurrency trading platform featuring advanced trading tools, real-time market data, algorithmic trading capabilities, portfolio management, and bank-level security measures. Supports all major cryptocurrencies and trading pairs.",
+    industry: "Cryptocurrency",
+    category: "fintech",
+    price: 4500000, // $45,000 in cents
+    currency: "USD",
+    packageTier: "enterprise",
+    ai_score: 93,
+    views_count: 127,
+    isFeatured: true,
+
+    tech_stack: ["Node.js", "React", "PostgreSQL", "WebSocket", "Blockchain APIs"],
+    architecture: "Real-time Trading",
+    deployment: "High-Performance Cloud",
+
+    marketSize: "$3.2T+",
+    profitMargin: "97%",
+    developmentTime: "26+ months",
+    revenueModel: "Trading Fees + Premium Features",
+    targetCustomers: "Crypto Traders & Institutions",
+    projectedARR: "$2.5-8M",
+    timeToMarket: "6-9 months",
+
+    thumbnailUrl: "/assets/platforms/crypto-platform-thumb.jpg",
+    galleryImages: [
+      {
+        url: "/assets/platforms/crypto-dashboard.jpg",
+        alt: "Crypto trading dashboard",
+        caption: "Professional trading interface with advanced charting and analytics"
+      }
+    ],
+
+    features: [
+      "Advanced trading interface",
+      "Real-time market data",
+      "Algorithmic trading bots",
+      "Portfolio management",
+      "Multi-exchange connectivity",
+      "Security & compliance",
+      "Mobile trading apps",
+      "Institutional features"
+    ],
+
+    includes: [
+      {
+        category: "Trading Platform",
+        items: [
+          "Complete trading system",
+          "Mobile trading apps",
+          "API trading tools",
+          "Security infrastructure"
+        ]
+      },
+      {
+        category: "Regulatory & Business",
+        items: [
+          "Compliance framework",
+          "Regulatory documentation",
+          "Exchange partnership guides",
+          "Institutional sales materials"
+        ]
+      }
+    ],
+
+    seller: {
+      id: "crypto-builders",
+      name: "Crypto Platform Builders",
+      avatar: "/assets/sellers/crypto-avatar.jpg",
+      rating: 4.9,
+      reviewsCount: 16,
+      verified: true,
+      expertise: ["Cryptocurrency", "Trading Systems", "Blockchain"],
+      description: "Cryptocurrency platform experts with deep trading system experience and regulatory knowledge."
+    },
+
+    status: "available",
+    featured: true,
+    urgency: null,
+    exclusive: true,
+
+    tags: ["Cryptocurrency", "Trading", "Blockchain", "FinTech", "Security"],
+    created_at: "2024-08-25T10:30:00Z",
+    updated_at: "2024-09-16T08:20:00Z",
+
+    // Offer system fields
+    acceptsOffers: false, // Premium platform, fixed price only
+    minOfferAmount: null,
+    offerCount: 0,
+    lastOfferDate: null
   }
 ];
 
