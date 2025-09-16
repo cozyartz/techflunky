@@ -19,6 +19,7 @@ export const platforms = [
     slug: "ai-hr-leave-administration-platform",
     title: "AI-Powered HR Compliance Platform",
     description: "Complete multi-state leave administration system with automated compliance tracking. Built on Cloudflare with AI automation for FMLA, PTO, and benefits management.",
+    elevator_pitch: "Complete multi-state leave administration system with automated compliance tracking. Built on Cloudflare with AI automation for FMLA, PTO, and benefits management.",
     longDescription: "Revolutionary HR compliance platform that automates leave administration across all 50 states. Features include automated FMLA calculations, real-time compliance monitoring, employee self-service portal, manager dashboards, and AI-powered policy recommendations. Built with modern cloud architecture for enterprise scale.",
     industry: "HR Technology",
     category: "hr-compliance",
@@ -30,7 +31,7 @@ export const platforms = [
     isFeatured: true,
 
     // Technical details
-    techStack: ["Cloudflare Workers", "D1 Database", "React", "TypeScript", "AI Integration"],
+    tech_stack: ["Cloudflare Workers", "D1 Database", "React", "TypeScript", "AI Integration"],
     architecture: "Serverless Cloud",
     deployment: "Cloudflare Pages + Workers",
 
@@ -161,6 +162,7 @@ export const platforms = [
     slug: "modern-restaurant-pos-platform",
     title: "Modern Restaurant POS Platform",
     description: "Complete point-of-sale system with inventory management, staff scheduling, customer loyalty programs, and real-time analytics built for modern restaurants.",
+    elevator_pitch: "Complete point-of-sale system with inventory management, staff scheduling, customer loyalty programs, and real-time analytics built for modern restaurants.",
     longDescription: "Comprehensive restaurant management platform featuring advanced POS capabilities, real-time inventory tracking, employee management, customer relationship tools, and detailed analytics. Supports online ordering, delivery integration, and multi-location management.",
     industry: "Restaurant Technology",
     category: "restaurant-tech",
@@ -171,7 +173,7 @@ export const platforms = [
     views_count: 892,
     isFeatured: false,
 
-    techStack: ["Next.js", "PostgreSQL", "Stripe", "React Native", "Node.js"],
+    tech_stack: ["Next.js", "PostgreSQL", "Stripe", "React Native", "Node.js"],
     architecture: "Full-stack Application",
     deployment: "Docker + Cloud",
 
@@ -255,6 +257,7 @@ export const platforms = [
     slug: "ai-fitness-membership-platform",
     title: "AI Fitness Membership Platform",
     description: "Complete gym and fitness center management system with AI-powered workout recommendations, member tracking, and automated billing.",
+    elevator_pitch: "Complete gym and fitness center management system with AI-powered workout recommendations, member tracking, and automated billing.",
     longDescription: "Advanced fitness center management platform featuring AI-driven personalized workout plans, comprehensive member management, automated billing and payment processing, equipment tracking, and detailed performance analytics.",
     industry: "Fitness Technology",
     category: "fitness-tech",
@@ -265,7 +268,7 @@ export const platforms = [
     views_count: 654,
     isFeatured: false,
 
-    techStack: ["React", "Node.js", "MongoDB", "AI/ML APIs", "Stripe"],
+    tech_stack: ["React", "Node.js", "MongoDB", "AI/ML APIs", "Stripe"],
     architecture: "MERN Stack",
     deployment: "AWS/Azure",
 
@@ -344,6 +347,7 @@ export const platforms = [
     slug: "ai-legal-document-platform",
     title: "AI Legal Document Automation",
     description: "Automated legal document generation platform for law firms with AI-powered contract analysis, template management, and client portal.",
+    elevator_pitch: "Automated legal document generation platform for law firms with AI-powered contract analysis, template management, and client portal.",
     longDescription: "Comprehensive legal technology platform that automates document creation, contract review, and client communication. Features advanced AI for legal research, automated compliance checking, and seamless integration with existing law firm workflows.",
     industry: "Legal Technology",
     category: "legal-saas",
@@ -354,7 +358,7 @@ export const platforms = [
     views_count: 432,
     isFeatured: true,
 
-    techStack: ["Python", "Django", "PostgreSQL", "AI/NLP", "React"],
+    tech_stack: ["Python", "Django", "PostgreSQL", "AI/NLP", "React"],
     architecture: "Django + React",
     deployment: "Cloud Infrastructure",
 
@@ -433,6 +437,7 @@ export const platforms = [
     slug: "ai-real-estate-crm-platform",
     title: "AI Real Estate CRM Platform",
     description: "Complete CRM solution for real estate agents and brokerages with AI-powered lead scoring, automated follow-ups, and market analytics.",
+    elevator_pitch: "Complete CRM solution for real estate agents and brokerages with AI-powered lead scoring, automated follow-ups, and market analytics.",
     longDescription: "Comprehensive real estate CRM platform featuring intelligent lead management, automated marketing campaigns, property analytics, commission tracking, and seamless MLS integration. Built specifically for modern real estate professionals.",
     industry: "Real Estate Technology",
     category: "real-estate",
@@ -443,7 +448,7 @@ export const platforms = [
     views_count: 743,
     isFeatured: false,
 
-    techStack: ["Vue.js", "Laravel", "MySQL", "AI/ML APIs", "Twilio"],
+    tech_stack: ["Vue.js", "Laravel", "MySQL", "AI/ML APIs", "Twilio"],
     architecture: "LAMP + Vue",
     deployment: "Cloud Hosting",
 
