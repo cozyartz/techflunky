@@ -1,23 +1,36 @@
-import { MailerSend, EmailParams, Sender, Recipient } from 'mailersend';
-
-// Email service for TechFlunky marketplace
+// Email service for TechFlunky marketplace using MailerSend REST API
 export class TechFlunkyEmailService {
-  private mailerSend: MailerSend;
-  private fromEmail: Sender;
+  private apiToken: string;
+  private baseUrl = 'https://api.mailersend.com/v1';
+  private fromEmail = {
+    email: 'noreply@techflunky.com',
+    name: 'TechFlunky Platform'
+  };
 
   constructor(apiToken: string) {
-    this.mailerSend = new MailerSend({
-      apiKey: apiToken,
+    this.apiToken = apiToken;
+  }
+
+  private async sendEmail(emailData: any) {
+    const response = await fetch(`${this.baseUrl}/email`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.apiToken}`,
+      },
+      body: JSON.stringify(emailData)
     });
 
-    // TechFlunky official sender
-    this.fromEmail = new Sender('noreply@techflunky.com', 'TechFlunky Platform');
+    if (!response.ok) {
+      const error = await response.text();
+      throw new Error(`MailerSend API error: ${response.status} - ${error}`);
+    }
+
+    return await response.json();
   }
 
   // Welcome email for new users
   async sendWelcomeEmail(userEmail: string, userName: string, userRole: 'seller' | 'investor' | 'user') {
-    const recipients = [new Recipient(userEmail, userName)];
-
     const roleMessages = {
       seller: {
         subject: 'Welcome to TechFlunky - Start Selling Your Platforms',
@@ -38,11 +51,11 @@ export class TechFlunkyEmailService {
 
     const content = roleMessages[userRole];
 
-    const emailParams = new EmailParams()
-      .setFrom(this.fromEmail)
-      .setTo(recipients)
-      .setSubject(content.subject)
-      .setHtml(`
+    const emailData = {
+      from: this.fromEmail,
+      to: [{ email: userEmail, name: userName }],
+      subject: content.subject,
+      html: `
         <!DOCTYPE html>
         <html>
         <head>
@@ -107,21 +120,20 @@ export class TechFlunkyEmailService {
           </div>
         </body>
         </html>
-      `)
-      .setText(`Welcome to TechFlunky, ${userName}! ${content.message} Get started at: https://techflunky.com/dashboard`);
+      `,
+      text: `Welcome to TechFlunky, ${userName}! ${content.message} Get started at: https://techflunky.com/dashboard`
+    };
 
-    return await this.mailerSend.email.send(emailParams);
+    return await this.sendEmail(emailData);
   }
 
   // Magic link authentication email
   async sendMagicLink(userEmail: string, userName: string, magicLink: string) {
-    const recipients = [new Recipient(userEmail, userName)];
-
-    const emailParams = new EmailParams()
-      .setFrom(this.fromEmail)
-      .setTo(recipients)
-      .setSubject('Your TechFlunky Login Link')
-      .setHtml(`
+    const emailData = {
+      from: this.fromEmail,
+      to: [{ email: userEmail, name: userName }],
+      subject: 'Your TechFlunky Login Link',
+      html: `
         <!DOCTYPE html>
         <html>
         <head>
@@ -161,21 +173,20 @@ export class TechFlunkyEmailService {
           </div>
         </body>
         </html>
-      `)
-      .setText(`Hi ${userName}, click this link to log in to TechFlunky: ${magicLink} (expires in 15 minutes)`);
+      `,
+      text: `Hi ${userName}, click this link to log in to TechFlunky: ${magicLink} (expires in 15 minutes)`
+    };
 
-    return await this.mailerSend.email.send(emailParams);
+    return await this.sendEmail(emailData);
   }
 
   // Platform listing approved notification
   async sendListingApproved(sellerEmail: string, sellerName: string, platformTitle: string, listingUrl: string) {
-    const recipients = [new Recipient(sellerEmail, sellerName)];
-
-    const emailParams = new EmailParams()
-      .setFrom(this.fromEmail)
-      .setTo(recipients)
-      .setSubject(`✅ "${platformTitle}" is now live on TechFlunky`)
-      .setHtml(`
+    const emailData = {
+      from: this.fromEmail,
+      to: [{ email: sellerEmail, name: sellerName }],
+      subject: `✅ "${platformTitle}" is now live on TechFlunky`,
+      html: `
         <!DOCTYPE html>
         <html>
         <head>
@@ -225,147 +236,11 @@ export class TechFlunkyEmailService {
           </div>
         </body>
         </html>
-      `)
-      .setText(`Congratulations ${sellerName}! "${platformTitle}" is now live on TechFlunky: ${listingUrl}`);
+      `,
+      text: `Congratulations ${sellerName}! "${platformTitle}" is now live on TechFlunky: ${listingUrl}`
+    };
 
-    return await this.mailerSend.email.send(emailParams);
-  }
-
-  // Sale notification for sellers
-  async sendSaleNotification(sellerEmail: string, sellerName: string, platformTitle: string, saleAmount: number, buyerName: string) {
-    const recipients = [new Recipient(sellerEmail, sellerName)];
-    const earnings = Math.round(saleAmount * 0.92); // 8% platform fee
-
-    const emailParams = new EmailParams()
-      .setFrom(this.fromEmail)
-      .setTo(recipients)
-      .setSubject(`🎉 Sale Confirmed - ${platformTitle} sold for $${saleAmount.toLocaleString()}`)
-      .setHtml(`
-        <!DOCTYPE html>
-        <html>
-        <head>
-          <meta charset="utf-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Sale Confirmed</title>
-          <style>
-            body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; margin: 0; padding: 0; background-color: #000000; }
-            .container { max-width: 600px; margin: 0 auto; background-color: #111111; }
-            .header { background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%); padding: 40px 20px; text-align: center; border-bottom: 2px solid #10b981; }
-            .logo { color: #fbbf24; font-size: 32px; font-weight: bold; margin-bottom: 10px; }
-            .content { padding: 40px 20px; color: #ffffff; }
-            .sale-amount { font-size: 36px; font-weight: bold; color: #10b981; text-align: center; margin: 20px 0; }
-            .earnings-box { background-color: #1f1f1f; border-radius: 8px; padding: 20px; margin: 20px 0; text-align: center; }
-            .message { font-size: 16px; line-height: 1.6; color: #d1d5db; margin-bottom: 20px; }
-            .cta-button { display: inline-block; background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%); color: #000000; text-decoration: none; padding: 16px 32px; border-radius: 8px; font-weight: 600; font-size: 16px; margin: 20px 0; }
-            .footer { background-color: #0a0a0a; padding: 20px; text-align: center; color: #6b7280; font-size: 14px; }
-          </style>
-        </head>
-        <body>
-          <div class="container">
-            <div class="header">
-              <div class="logo">TechFlunky</div>
-            </div>
-            <div class="content">
-              <div class="message">🎉 Great news, ${sellerName}!</div>
-              <div class="message">"${platformTitle}" has been sold to ${buyerName}!</div>
-
-              <div class="sale-amount">$${saleAmount.toLocaleString()}</div>
-
-              <div class="earnings-box">
-                <div style="color: #10b981; font-size: 18px; margin-bottom: 10px;">Your Earnings</div>
-                <div style="font-size: 28px; font-weight: bold; color: #10b981;">$${earnings.toLocaleString()}</div>
-                <div style="color: #9ca3af; font-size: 14px; margin-top: 5px;">After 8% platform fee</div>
-              </div>
-
-              <div class="message">Payment will be processed within 24 hours and transferred to your connected account.</div>
-
-              <a href="https://techflunky.com/dashboard/seller/earnings" class="cta-button">View Earnings</a>
-            </div>
-            <div class="footer">
-              <div>Thank you for being part of the TechFlunky marketplace!</div>
-            </div>
-          </div>
-        </body>
-        </html>
-      `)
-      .setText(`Congratulations ${sellerName}! "${platformTitle}" sold for $${saleAmount.toLocaleString()}. Your earnings: $${earnings.toLocaleString()}`);
-
-    return await this.mailerSend.email.send(emailParams);
-  }
-
-  // Purchase confirmation for buyers
-  async sendPurchaseConfirmation(buyerEmail: string, buyerName: string, platformTitle: string, amount: number, deploymentUrl?: string) {
-    const recipients = [new Recipient(buyerEmail, buyerName)];
-
-    const emailParams = new EmailParams()
-      .setFrom(this.fromEmail)
-      .setTo(recipients)
-      .setSubject(`Welcome to your new business - ${platformTitle}`)
-      .setHtml(`
-        <!DOCTYPE html>
-        <html>
-        <head>
-          <meta charset="utf-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Purchase Confirmed</title>
-          <style>
-            body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; margin: 0; padding: 0; background-color: #000000; }
-            .container { max-width: 600px; margin: 0 auto; background-color: #111111; }
-            .header { background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%); padding: 40px 20px; text-align: center; border-bottom: 2px solid #3b82f6; }
-            .logo { color: #fbbf24; font-size: 32px; font-weight: bold; margin-bottom: 10px; }
-            .content { padding: 40px 20px; color: #ffffff; }
-            .platform-title { font-size: 24px; font-weight: 600; color: #3b82f6; margin: 20px 0; text-align: center; }
-            .message { font-size: 16px; line-height: 1.6; color: #d1d5db; margin-bottom: 20px; }
-            .deployment-box { background-color: #1f1f1f; border-radius: 8px; padding: 20px; margin: 20px 0; }
-            .cta-button { display: inline-block; background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); color: #ffffff; text-decoration: none; padding: 16px 32px; border-radius: 8px; font-weight: 600; font-size: 16px; margin: 20px 0; }
-            .next-steps { background-color: #1f1f1f; border-radius: 8px; padding: 20px; margin: 20px 0; }
-            .footer { background-color: #0a0a0a; padding: 20px; text-align: center; color: #6b7280; font-size: 14px; }
-          </style>
-        </head>
-        <body>
-          <div class="container">
-            <div class="header">
-              <div class="logo">TechFlunky</div>
-            </div>
-            <div class="content">
-              <div class="message">Congratulations, ${buyerName}!</div>
-              <div class="platform-title">${platformTitle}</div>
-              <div class="message">Your purchase is confirmed and your business platform is ready to launch!</div>
-
-              ${deploymentUrl ? `
-                <div class="deployment-box">
-                  <div style="color: #3b82f6; font-weight: 600; margin-bottom: 10px;">🚀 Your Platform is Live</div>
-                  <div style="color: #d1d5db; margin-bottom: 15px;">Your business is deployed and running at:</div>
-                  <div style="background-color: #000000; padding: 10px; border-radius: 4px; font-family: monospace; word-break: break-all;">
-                    <a href="${deploymentUrl}" style="color: #3b82f6; text-decoration: none;">${deploymentUrl}</a>
-                  </div>
-                </div>
-              ` : ''}
-
-              <div class="next-steps">
-                <strong style="color: #3b82f6;">Next Steps:</strong>
-                <ol style="color: #d1d5db; margin-top: 10px;">
-                  <li>Access your admin dashboard and customize settings</li>
-                  <li>Set up your domain name and branding</li>
-                  <li>Configure payment processing</li>
-                  <li>Launch your marketing campaigns</li>
-                </ol>
-              </div>
-
-              <a href="https://techflunky.com/dashboard/buyer" class="cta-button">Access Dashboard</a>
-
-              <div class="message">Need help getting started? Our support team is here for you - just reply to this email!</div>
-            </div>
-            <div class="footer">
-              <div>Welcome to entrepreneurship! 🚀</div>
-            </div>
-          </div>
-        </body>
-        </html>
-      `)
-      .setText(`Congratulations ${buyerName}! Your "${platformTitle}" purchase is confirmed. ${deploymentUrl ? `Live at: ${deploymentUrl}` : ''} Get started: https://techflunky.com/dashboard/buyer`);
-
-    return await this.mailerSend.email.send(emailParams);
+    return await this.sendEmail(emailData);
   }
 }
 
