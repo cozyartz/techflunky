@@ -3,7 +3,9 @@ import type { APIContext } from 'astro';
 
 // Marketplace fee configuration
 const MARKETPLACE_FEES = {
-  SUCCESS_FEE_RATE: 0.08, // 8% success fee
+  BASE_SUCCESS_FEE_RATE: 0.10, // 10% base success fee for non-members
+  MEMBER_SUCCESS_FEE_RATE: 0.08, // 8% success fee for members (2% discount)
+  MEMBER_DISCOUNT: 0.02, // 2% member discount
   LISTING_FEE: 0, // Free listings
   PREMIUM_BOOST_FEE: 2900, // $29/month for premium boost
   SYNDICATE_SETUP_FEE: 29900, // $299 setup for syndicates
@@ -38,6 +40,7 @@ export async function POST({ request, locals }: APIContext) {
       grossAmount,
       transactionType = 'listing_sale',
       userId,
+      isMember = false, // Member status determines fee rate
       metadata = {}
     } = await request.json();
 
@@ -56,7 +59,7 @@ export async function POST({ request, locals }: APIContext) {
 
     switch (transactionType) {
       case 'listing_sale':
-        feeRate = MARKETPLACE_FEES.SUCCESS_FEE_RATE;
+        feeRate = isMember ? MARKETPLACE_FEES.MEMBER_SUCCESS_FEE_RATE : MARKETPLACE_FEES.BASE_SUCCESS_FEE_RATE;
         platformFee = Math.round(grossAmount * feeRate);
         break;
       case 'premium_boost':
@@ -69,7 +72,8 @@ export async function POST({ request, locals }: APIContext) {
         platformFee = grossAmount; // Full amount for subscription services
         break;
       default:
-        platformFee = Math.round(grossAmount * MARKETPLACE_FEES.SUCCESS_FEE_RATE);
+        feeRate = isMember ? MARKETPLACE_FEES.MEMBER_SUCCESS_FEE_RATE : MARKETPLACE_FEES.BASE_SUCCESS_FEE_RATE;
+        platformFee = Math.round(grossAmount * feeRate);
     }
 
     const netAmount = grossAmount - platformFee;
@@ -126,7 +130,9 @@ export async function GET({ url, locals }: APIContext) {
   try {
     let response = {
       marketplaceFees: {
-        successFeeRate: MARKETPLACE_FEES.SUCCESS_FEE_RATE * 100, // Return as percentage
+        baseSuccessFeeRate: MARKETPLACE_FEES.BASE_SUCCESS_FEE_RATE * 100, // 10% for non-members
+        memberSuccessFeeRate: MARKETPLACE_FEES.MEMBER_SUCCESS_FEE_RATE * 100, // 8% for members
+        memberDiscount: MARKETPLACE_FEES.MEMBER_DISCOUNT * 100, // 2% savings
         listingFee: MARKETPLACE_FEES.LISTING_FEE,
         premiumBoostFee: MARKETPLACE_FEES.PREMIUM_BOOST_FEE,
         syndicateSetupFee: MARKETPLACE_FEES.SYNDICATE_SETUP_FEE,
@@ -190,7 +196,7 @@ export async function GET({ url, locals }: APIContext) {
 // Calculate estimated fees for a transaction
 export async function PUT({ request, locals }: APIContext) {
   try {
-    const { amount, transactionType = 'listing_sale' } = await request.json();
+    const { amount, transactionType = 'listing_sale', isMember = false } = await request.json();
 
     if (!amount || amount <= 0) {
       return new Response(JSON.stringify({
@@ -206,7 +212,7 @@ export async function PUT({ request, locals }: APIContext) {
 
     switch (transactionType) {
       case 'listing_sale':
-        feeRate = MARKETPLACE_FEES.SUCCESS_FEE_RATE;
+        feeRate = isMember ? MARKETPLACE_FEES.MEMBER_SUCCESS_FEE_RATE : MARKETPLACE_FEES.BASE_SUCCESS_FEE_RATE;
         platformFee = Math.round(amount * feeRate);
         break;
       case 'premium_boost':
@@ -218,7 +224,7 @@ export async function PUT({ request, locals }: APIContext) {
         feeRate = platformFee / amount;
         break;
       default:
-        feeRate = MARKETPLACE_FEES.SUCCESS_FEE_RATE;
+        feeRate = isMember ? MARKETPLACE_FEES.MEMBER_SUCCESS_FEE_RATE : MARKETPLACE_FEES.BASE_SUCCESS_FEE_RATE;
         platformFee = Math.round(amount * feeRate);
     }
 

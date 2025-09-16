@@ -101,37 +101,37 @@ import Layout from '../layouts/Layout.astro';
                 </svg>
               </div>
               <h3 class="text-lg font-semibold text-gray-900">AI Section Assist</h3>
-              <div class="text-2xl font-bold text-blue-600 mb-1">$9</div>
-              <div class="text-sm text-gray-500">per section</div>
+              <div class="text-2xl font-bold text-green-600 mb-1">FREE</div>
+              <div class="text-sm text-gray-500">with premium tiers</div>
             </div>
             <ul class="space-y-2 text-sm text-gray-600 mb-6">
               <li class="flex items-center">
-                <svg class="w-4 h-4 text-blue-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                 </svg>
-                AI content suggestions
+                Unlimited AI assistance
               </li>
               <li class="flex items-center">
-                <svg class="w-4 h-4 text-blue-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                 </svg>
-                Contextual improvements
+                Included with membership
               </li>
               <li class="flex items-center">
-                <svg class="w-4 h-4 text-blue-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                 </svg>
                 Industry-specific insights
               </li>
               <li class="flex items-center">
-                <svg class="w-4 h-4 text-blue-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                 </svg>
-                Multiple suggestions
+                $9/section for non-members
               </li>
             </ul>
-            <button class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-colors">
-              Try AI Assist
+            <button class="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700 transition-colors">
+              Join for FREE AI
             </button>
           </div>
 
@@ -364,6 +364,37 @@ import Layout from '../layouts/Layout.astro';
       </div>
     </section>
 
+    <!-- Member Benefits -->
+    <section class="py-16 bg-gradient-to-r from-yellow-50 to-yellow-100">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Join Once, Save Forever</h2>
+          <p class="text-gray-600 max-w-3xl mx-auto mb-8">
+            Become a member and save 2% on every sale, plus get unlimited AI assistance and premium features.
+          </p>
+
+          <!-- ROI Examples -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            <div class="bg-white rounded-lg p-6 shadow-sm">
+              <div class="text-2xl font-bold text-green-600 mb-2">$200</div>
+              <div class="text-sm text-gray-600">Saved on $10K sale</div>
+              <div class="text-xs text-gray-500 mt-1">10.5x ROI on $19 membership</div>
+            </div>
+            <div class="bg-white rounded-lg p-6 shadow-sm">
+              <div class="text-2xl font-bold text-green-600 mb-2">$500</div>
+              <div class="text-sm text-gray-600">Saved on $25K sale</div>
+              <div class="text-xs text-gray-500 mt-1">26x ROI on $19 membership</div>
+            </div>
+            <div class="bg-white rounded-lg p-6 shadow-sm">
+              <div class="text-2xl font-bold text-green-600 mb-2">$1,000</div>
+              <div class="text-sm text-gray-600">Saved on $50K sale</div>
+              <div class="text-xs text-gray-500 mt-1">52x ROI on $19 membership</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Marketplace Fees -->
     <section class="py-16">
       <div class="container mx-auto px-6">
@@ -405,7 +436,7 @@ import Layout from '../layouts/Layout.astro';
             </div>
             <h3 class="text-xl font-semibold text-gray-900 mb-2">Success Fee</h3>
             <div class="text-3xl font-bold text-yellow-600 mb-2">8%</div>
-            <p class="text-gray-600 mb-4">Only pay when you sell (vs 15-20% industry standard)</p>
+            <p class="text-gray-600 mb-4">For members (10% non-member) vs 15-20% industry standard</p>
             <ul class="text-sm text-gray-600 space-y-1">
               <li>• 60% below competitors</li>
               <li>• Secure escrow included</li>

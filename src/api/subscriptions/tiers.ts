@@ -3,62 +3,96 @@ import type { APIContext } from 'astro';
 
 const DEFAULT_TIERS = [
   {
-    name: 'Pro Seller',
-    slug: 'pro-seller',
-    priceMonthly: 19900, // $199/month
-    priceYearly: 199000, // $1,990/year (save $398)
+    name: 'Starter Investor',
+    slug: 'starter-investor',
+    priceMonthly: 1900, // $19/month
+    priceYearly: 19000, // $190/year (save $38)
     features: [
-      'Unlimited business idea listings',
-      'Advanced analytics dashboard',
-      'Priority customer support',
-      'Featured listing placement',
-      'AI-powered market insights',
-      'Reduced platform fees (12% vs 15%)',
-      'Export capabilities',
-      'Custom branding options'
+      '8% marketplace fee (vs 10% non-member)',
+      'Basic deal discovery dashboard',
+      '5 AI analysis reports per month',
+      'Email support',
+      'Standard search and filtering',
+      'Direct messaging (50 messages/month)',
+      'Member-only features access'
+    ],
+    limits: {
+      listings: null, // unlimited viewing
+      ai_validations: 5,
+      expert_consultations: 0,
+      market_reports: 1,
+      api_calls: 1000,
+      messages: 50
+    },
+    aiFeatures: {
+      basic_analysis: true,
+      deal_scoring: true
+    },
+    priorityLevel: 1
+  },
+  {
+    name: 'Professional Investor',
+    slug: 'professional-investor',
+    priceMonthly: 4900, // $49/month
+    priceYearly: 49000, // $490/year (save $98)
+    features: [
+      'Everything in Starter',
+      '8% marketplace fee (vs 10% non-member)',
+      'Unlimited AI analysis reports',
+      'Unlimited AI section assistance included',
+      'Advanced filtering and search',
+      'Priority deal notifications',
+      'Portfolio tracking (25 investments)',
+      '500 messages/month',
+      'Basic analytics dashboard',
+      'Priority email support'
     ],
     limits: {
       listings: null, // unlimited
-      ai_validations: 10,
-      expert_consultations: 2,
+      ai_validations: null, // unlimited
+      expert_consultations: 1,
       market_reports: 5,
-      api_calls: 10000
+      api_calls: 10000,
+      messages: 500,
+      portfolio_tracking: 25
     },
     aiFeatures: {
       advanced_matching: true,
       market_predictions: true,
       competitor_analysis: true,
       pricing_optimization: true,
-      trend_alerts: true
+      trend_alerts: true,
+      deal_scoring: true,
+      risk_assessment: true
     },
     priorityLevel: 2
   },
   {
-    name: 'Enterprise',
-    slug: 'enterprise',
-    priceMonthly: 89900, // $899/month
-    priceYearly: 899000, // $8,990/year (save $1,798)
+    name: 'Enterprise Investor',
+    slug: 'enterprise-investor',
+    priceMonthly: 14900, // $149/month
+    priceYearly: 149000, // $1,490/year (save $298)
     features: [
-      'Everything in Pro Seller',
-      'White-label platform access',
-      'Custom domain support',
-      'API access with higher limits',
-      'Dedicated account manager',
-      'Custom integrations',
-      'Advanced reporting suite',
-      'Team collaboration tools',
-      'Priority expert matching',
-      'Custom contract terms',
-      'Bulk operations',
-      'Advanced security features'
+      'Everything in Professional',
+      '8% marketplace fee (vs 10% non-member)',
+      'White-label portal (basic)',
+      'Unlimited portfolio tracking',
+      'Advanced analytics and reporting',
+      'Syndicate creation tools',
+      'Unlimited messaging',
+      'Phone support',
+      'API access',
+      'Team collaboration tools'
     ],
     limits: {
       listings: null, // unlimited
-      ai_validations: 100,
-      expert_consultations: 10,
-      market_reports: 50,
-      api_calls: 100000,
-      team_members: 25
+      ai_validations: null, // unlimited
+      expert_consultations: 5,
+      market_reports: null, // unlimited
+      api_calls: 50000,
+      messages: null, // unlimited
+      portfolio_tracking: null, // unlimited
+      team_members: 10
     },
     aiFeatures: {
       advanced_matching: true,
@@ -68,43 +102,13 @@ const DEFAULT_TIERS = [
       trend_alerts: true,
       custom_ai_models: true,
       predictive_analytics: true,
-      market_forecasting: true
-    },
-    priorityLevel: 5
-  },
-  {
-    name: 'Investor Access',
-    slug: 'investor-access',
-    priceMonthly: 49900, // $499/month
-    priceYearly: 499000, // $4,990/year (save $998)
-    features: [
-      'Access to vetted deal flow',
-      'Advanced filtering and search',
-      'Due diligence tools',
-      'Portfolio tracking',
-      'Startup analytics dashboard',
-      'Direct founder communication',
-      'Investment tracking',
-      'Market intelligence reports',
-      'Early access to top deals',
-      'Investor network access'
-    ],
-    limits: {
-      deal_flow_access: null, // unlimited
-      due_diligence_reports: 20,
-      portfolio_tracking: 100,
-      market_reports: 25,
-      founder_messages: 500
-    },
-    aiFeatures: {
+      market_forecasting: true,
       deal_scoring: true,
       risk_assessment: true,
-      market_analysis: true,
-      founder_matching: true,
       portfolio_optimization: true
     },
-    priorityLevel: 4
-  }
+    priorityLevel: 3
+  },
 ];
 
 // Get all subscription tiers
