@@ -99,7 +99,6 @@
 *.jpg *.jpeg *.png *.gif *.webp *.svg *.ico
   Cache-Control: public, max-age=2592000
   X-Content-Type-Options: nosniff
-  Content-Type: image/*
 
 # Security-sensitive files - Block access
 /.env*
