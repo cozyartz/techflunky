@@ -4,8 +4,9 @@ main = "index.ts"
 compatibility_date = "2024-01-01"
 
 # Workers for Platforms configuration
-[dispatch_namespaces.techflunky-users]
+[[dispatch_namespaces]]
 binding = "USER_WORKER"
+namespace = "techflunky-tenants"
 
 # Environment variables
 [vars]
@@ -22,9 +23,9 @@ database_id = "330b8406-f05f-4e5b-966a-a58fcd2ba3d1"
 binding = "BUCKET"
 bucket_name = "techflunky-assets"
 
-[[kv_namespaces]]
-binding = "CACHE"
-id = "your-kv-namespace-id"
+# [[kv_namespaces]]
+# binding = "CACHE"
+# id = "your-kv-namespace-id"
 
 [[analytics_engine_datasets]]
 binding = "ANALYTICS"
