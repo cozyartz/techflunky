@@ -1,0 +1,1 @@
+- Do not use emoji in our codebases, docs, or copy
