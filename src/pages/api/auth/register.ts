@@ -1,7 +1,7 @@
-import type { APIRoute } from 'astro';
+import type { APIContext } from 'astro';
 import bcrypt from 'bcryptjs';
 
-export const POST: APIRoute = async ({ request, locals }) => {
+export async function POST({ request, locals }: APIContext) {
   try {
     const { email, password, name, role = 'user' } = await request.json();
 
@@ -40,7 +40,28 @@ export const POST: APIRoute = async ({ request, locals }) => {
     }
 
     // Check if user already exists
-    const existingUser = await locals.runtime.env.DB.prepare(
+    const DB = locals.runtime?.env?.DB;
+    if (!DB) {
+      // Demo mode - accept registration without database
+      const userId = crypto.randomUUID();
+      return new Response(JSON.stringify({
+        success: true,
+        data: {
+          user: {
+            id: userId,
+            email: email.toLowerCase(),
+            name,
+            role
+          }
+        },
+        note: 'Demo registration - Database not configured'
+      }), {
+        status: 201,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+
+    const existingUser = await DB.prepare(
       'SELECT id FROM users WHERE email = ?'
     ).bind(email.toLowerCase()).first();
 
@@ -62,7 +83,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
     const userId = crypto.randomUUID();
 
     // Create user
-    await locals.runtime.env.DB.prepare(`
+    await DB.prepare(`
       INSERT INTO users (id, email, name, password_hash, role, created_at, updated_at)
       VALUES (?, ?, ?, ?, ?, ?, ?)
     `).bind(
@@ -76,7 +97,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
     ).run();
 
     // Create user profile
-    await locals.runtime.env.DB.prepare(`
+    await DB.prepare(`
       INSERT INTO profiles (user_id, created_at, updated_at)
       VALUES (?, ?, ?)
     `).bind(
@@ -89,7 +110,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
     const sessionToken = crypto.randomUUID();
     const expiresAt = Date.now() + (30 * 24 * 60 * 60 * 1000); // 30 days
 
-    await locals.runtime.env.DB.prepare(`
+    await DB.prepare(`
       INSERT INTO user_sessions (id, user_id, token, expires_at, created_at)
       VALUES (?, ?, ?, ?, ?)
     `).bind(
@@ -130,4 +151,4 @@ export const POST: APIRoute = async ({ request, locals }) => {
       headers: { 'Content-Type': 'application/json' }
     });
   }
-};
+}

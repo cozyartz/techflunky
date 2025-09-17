@@ -186,6 +186,14 @@ async function testFeeCalculation() {
 
   return new Response(JSON.stringify({
     success: allCorrect,
+    data: {
+      calculations,
+      summary: {
+        total: calculations.length,
+        correct: calculations.filter(c => c.isCorrect).length,
+        incorrect: calculations.filter(c => !c.isCorrect).length
+      }
+    },
     calculations,
     summary: {
       total: calculations.length,

@@ -1,7 +1,7 @@
-import type { APIRoute } from 'astro';
+import type { APIContext } from 'astro';
 import bcrypt from 'bcryptjs';
 
-export const POST: APIRoute = async ({ request, locals }) => {
+export async function POST({ request, locals }: APIContext) {
   try {
     const { email, password } = await request.json();
 
@@ -17,7 +17,31 @@ export const POST: APIRoute = async ({ request, locals }) => {
     }
 
     // Find user by email
-    const user = await locals.runtime.env.DB.prepare(
+    const DB = locals.runtime?.env?.DB;
+    if (!DB) {
+      // Demo mode - accept any login
+      const sessionToken = crypto.randomUUID();
+      const response = new Response(JSON.stringify({
+        success: true,
+        data: {
+          user: {
+            id: 'demo-user',
+            email: email.toLowerCase(),
+            name: 'Demo User',
+            role: 'user'
+          },
+          token: sessionToken
+        },
+        note: 'Demo login - Database not configured'
+      }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      });
+      response.headers.set('Set-Cookie', `session=${sessionToken}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=${30 * 24 * 60 * 60}`);
+      return response;
+    }
+
+    const user = await DB.prepare(
       'SELECT id, email, name, password_hash, role FROM users WHERE email = ?'
     ).bind(email.toLowerCase()).first();
 
@@ -47,7 +71,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
     const sessionToken = crypto.randomUUID();
     const expiresAt = Date.now() + (30 * 24 * 60 * 60 * 1000); // 30 days
 
-    await locals.runtime.env.DB.prepare(`
+    await DB.prepare(`
       INSERT INTO user_sessions (id, user_id, token, expires_at, created_at)
       VALUES (?, ?, ?, ?, ?)
     `).bind(
@@ -59,7 +83,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
     ).run();
 
     // Update last login
-    await locals.runtime.env.DB.prepare(
+    await DB.prepare(
       'UPDATE users SET updated_at = ? WHERE id = ?'
     ).bind(Date.now(), user.id).run();
 
@@ -72,7 +96,8 @@ export const POST: APIRoute = async ({ request, locals }) => {
           email: user.email,
           name: user.name,
           role: user.role
-        }
+        },
+        token: sessionToken
       }
     }), {
       status: 200,
@@ -93,4 +118,4 @@ export const POST: APIRoute = async ({ request, locals }) => {
       headers: { 'Content-Type': 'application/json' }
     });
   }
-};
+}

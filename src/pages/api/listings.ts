@@ -75,6 +75,7 @@ export async function GET({ url, locals }: APIContext) {
 
       return new Response(JSON.stringify({
         success: true,
+        data: paginatedListings,
         listings: paginatedListings,
         total: filteredListings.length,
         page: Math.floor(offset / limit) + 1,
@@ -141,7 +142,8 @@ export async function GET({ url, locals }: APIContext) {
 
     return new Response(JSON.stringify({
       success: true,
-      listings: listings.results || [],
+      data: listings.results || listings || [],
+      listings: listings.results || listings || [],
       total,
       page: Math.floor(offset / limit) + 1,
       totalPages: Math.ceil(total / limit)

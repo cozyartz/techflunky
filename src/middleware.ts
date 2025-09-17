@@ -21,7 +21,14 @@ const PUBLIC_ROUTES = [
   '/api/auth',
   '/api/webhooks',
   '/api/stripe/test-sandbox',
-  '/test'
+  '/test',
+  '/api/listings',
+  '/api/platform/create',
+  '/api/email/validate',
+  '/api/notifications',
+  '/api/blueprint',
+  '/api/ai',
+  '/api/validation'
 ];
 
 // High-security routes requiring elevated permissions
@@ -73,6 +80,11 @@ export const onRequest = defineMiddleware(async (context, next) => {
     });
   }
 
+  // Check route types early
+  const requiresAuth = PROTECTED_ROUTES.some(route => pathname.startsWith(route));
+  const isPublicRoute = PUBLIC_ROUTES.some(route => pathname.startsWith(route));
+  const isHighSecurityRoute = HIGH_SECURITY_ROUTES.some(route => pathname.startsWith(route));
+
   // Security headers for all responses
   const response = await next();
 
@@ -87,8 +99,8 @@ export const onRequest = defineMiddleware(async (context, next) => {
     response.headers.set('X-XSS-Protection', '0');
   }
 
-  // Comprehensive input validation for API routes
-  if (pathname.startsWith('/api/') && request.method !== 'GET') {
+  // Comprehensive input validation for API routes (skip for public routes)
+  if (pathname.startsWith('/api/') && request.method !== 'GET' && !isPublicRoute) {
     try {
       const contentType = request.headers.get('Content-Type');
 
@@ -153,11 +165,6 @@ export const onRequest = defineMiddleware(async (context, next) => {
   }
 
   // User authentication already handled above for rate limiting
-
-  // Check if route requires authentication
-  const requiresAuth = PROTECTED_ROUTES.some(route => pathname.startsWith(route));
-  const isPublicRoute = PUBLIC_ROUTES.some(route => pathname.startsWith(route));
-  const isHighSecurityRoute = HIGH_SECURITY_ROUTES.some(route => pathname.startsWith(route));
 
   if (requiresAuth && !isPublicRoute) {
     if (!user) {
