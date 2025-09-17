@@ -1,26 +1,37 @@
-// Platform Creation API
+// Platform Creation API with Tenant Isolation
 import type { APIContext } from 'astro';
+import { withTenantIsolation, validateTenantAccess, sanitizeForTenant, createTenantDb } from '../../../lib/tenant-isolation.js';
 
-export async function POST({ request, locals }: APIContext) {
-  const { DB } = locals.runtime?.env || {};
+export const POST = withTenantIsolation(async (request, locals, ctx, tenant) => {
+  const { DB, CACHE } = locals.runtime?.env || {};
 
   try {
-    // Check for authorization header
-    const authHeader = request.headers.get('Authorization');
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    // Validate tenant has permission to create platforms
+    if (!validateTenantAccess(tenant, 'platform', undefined, 'create')) {
       return new Response(JSON.stringify({
         success: false,
-        error: 'Authentication required'
+        error: 'Insufficient permissions to create platforms'
       }), {
-        status: 401,
+        status: 403,
         headers: { 'Content-Type': 'application/json' }
       });
     }
 
     const body = await request.json();
-    const { name, description, category, price, technologies, features } = body;
+    let { name, description, category, price, technologies, features } = body;
 
-    if (!name || !description || !category || !price) {
+    // Sanitize data for tenant context
+    const sanitizedData = sanitizeForTenant({
+      name,
+      description,
+      category,
+      price,
+      technologies,
+      features,
+      seller_id: tenant?.sellerId
+    }, tenant, 'platform');
+
+    if (!sanitizedData.name || !sanitizedData.description || !sanitizedData.category || !sanitizedData.price) {
       return new Response(JSON.stringify({
         success: false,
         error: 'Missing required fields'
@@ -30,45 +41,76 @@ export async function POST({ request, locals }: APIContext) {
       });
     }
 
-    const platformId = `platform_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    const platformId = crypto.randomUUID();
+    const slug = sanitizedData.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
     if (DB) {
+      // Use tenant-aware database
+      const tenantDb = createTenantDb(DB, tenant);
+
+      // Insert into listings table (the main table for platforms)
       await DB.prepare(`
-        INSERT INTO business_blueprints (
+        INSERT INTO listings (
           id,
-          platform_name,
+          seller_id,
+          title,
+          slug,
           description,
           category,
+          industry,
           price,
-          technologies,
-          features,
+          technical_specs,
           status,
-          created_at
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+          package_tier,
+          created_at,
+          updated_at
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       `).bind(
         platformId,
-        name,
-        description,
-        category,
-        price,
-        JSON.stringify(technologies || []),
-        JSON.stringify(features || []),
-        'pending',
-        new Date().toISOString()
+        sanitizedData.seller_id,
+        sanitizedData.name,
+        slug,
+        sanitizedData.description,
+        sanitizedData.category,
+        sanitizedData.category, // Use category as industry for now
+        Math.round(sanitizedData.price * 100), // Convert to cents
+        JSON.stringify({
+          technologies: sanitizedData.technologies || [],
+          features: sanitizedData.features || []
+        }),
+        'draft',
+        'concept',
+        Date.now(),
+        Date.now()
       ).run();
     }
 
     return new Response(JSON.stringify({
       success: true,
-      platformId,
+      data: {
+        id: platformId,
+        seller_id: sanitizedData.seller_id,
+        title: sanitizedData.name,
+        slug,
+        description: sanitizedData.description,
+        category: sanitizedData.category,
+        price: Math.round(sanitizedData.price * 100),
+        status: 'draft',
+        package_tier: 'concept'
+      },
+      tenant: tenant ? {
+        id: tenant.id,
+        type: tenant.type
+      } : null,
       message: 'Platform created successfully',
-      note: DB ? 'Live platform creation' : 'Demo platform creation - Database not configured'
+      note: DB ? 'Live platform creation with tenant isolation' : 'Demo platform creation - Database not configured'
     }), {
       status: 201,
       headers: { 'Content-Type': 'application/json' }
     });
 
   } catch (error) {
+    console.error('Platform creation error:', error);
     return new Response(JSON.stringify({
       success: false,
       error: 'Platform creation failed',
@@ -78,4 +120,4 @@ export async function POST({ request, locals }: APIContext) {
       headers: { 'Content-Type': 'application/json' }
     });
   }
-}
+});

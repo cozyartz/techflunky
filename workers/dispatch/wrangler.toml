@@ -1,0 +1,54 @@
+# TechFlunky Dispatch Worker for Workers for Platforms
+name = "techflunky-dispatch"
+main = "index.ts"
+compatibility_date = "2024-01-01"
+
+# Workers for Platforms configuration
+[dispatch_namespaces.techflunky-users]
+binding = "USER_WORKER"
+
+# Environment variables
+[vars]
+ENVIRONMENT = "production"
+SITE_URL = "https://techflunky.com"
+
+# Shared resource bindings
+[[d1_databases]]
+binding = "DB"
+database_name = "techflunky-db"
+database_id = "330b8406-f05f-4e5b-966a-a58fcd2ba3d1"
+
+[[r2_buckets]]
+binding = "BUCKET"
+bucket_name = "techflunky-assets"
+
+[[kv_namespaces]]
+binding = "CACHE"
+id = "your-kv-namespace-id"
+
+[[analytics_engine_datasets]]
+binding = "ANALYTICS"
+
+[ai]
+binding = "AI"
+
+# Route configuration for custom domain
+[[routes]]
+pattern = "techflunky.com/*"
+zone_name = "techflunky.com"
+
+[[routes]]
+pattern = "*.techflunky.com/*"
+zone_name = "techflunky.com"
+
+# Development configuration
+[env.development]
+[env.development.vars]
+ENVIRONMENT = "development"
+SITE_URL = "http://localhost:4321"
+
+# Production secrets (configure in Cloudflare dashboard)
+# - STRIPE_SECRET_KEY
+# - STRIPE_WEBHOOK_SECRET_TEST
+# - STRIPE_WEBHOOK_SECRET_LIVE
+# - AUTIMIND_STRIPE_KEY

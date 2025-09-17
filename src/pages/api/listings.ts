@@ -1,9 +1,11 @@
-// Platform Listings API
+// Platform Listings API with Tenant Isolation
 // Provides marketplace listings for the browse page
 import type { APIContext } from 'astro';
+import { withTenantIsolation, createTenantDb, validateTenantAccess } from '../../lib/tenant-isolation.js';
 
-export async function GET({ url, locals }: APIContext) {
+export const GET = withTenantIsolation(async (request, locals, ctx, tenant) => {
   const { DB } = locals.runtime?.env || {};
+  const url = new URL(request.url);
   const search = url.searchParams.get('search') || '';
   const category = url.searchParams.get('category') || '';
   const limit = parseInt(url.searchParams.get('limit') || '20');
@@ -87,72 +89,91 @@ export async function GET({ url, locals }: APIContext) {
       });
     }
 
-    // Real database query (when DB is available)
-    let query = `
+    // Real database query with tenant isolation
+    const tenantDb = createTenantDb(DB, tenant);
+
+    let baseQuery = `
       SELECT
-        bp.id,
-        bp.platform_name,
-        bp.description,
-        bp.category,
-        bp.price,
-        bp.ai_validation_score,
-        bp.technologies,
-        bp.features,
-        bp.created_at,
-        bp.is_featured,
-        sp.name as seller_name
-      FROM business_blueprints bp
-      LEFT JOIN seller_profiles sp ON bp.seller_id = sp.user_id
-      WHERE bp.status = 'approved'
+        l.id,
+        l.title as platform_name,
+        l.description,
+        l.category,
+        l.price,
+        l.ai_score as ai_validation_score,
+        l.technical_specs,
+        l.created_at,
+        l.status,
+        u.name as seller_name,
+        p.seller_rating
+      FROM listings l
+      LEFT JOIN users u ON l.seller_id = u.id
+      LEFT JOIN profiles p ON l.seller_id = p.user_id
     `;
 
+    // Apply tenant filtering
+    let whereClause = '';
     const params = [];
 
+    if (tenant?.type === 'seller') {
+      // Sellers see only their own listings
+      whereClause = 'WHERE l.seller_id = ?';
+      params.push(tenant.sellerId);
+    } else {
+      // Buyers and public see only active listings
+      whereClause = 'WHERE l.status = ?';
+      params.push('active');
+    }
+
     if (search) {
-      query += ` AND (bp.platform_name LIKE ? OR bp.description LIKE ?)`;
+      whereClause += ` AND (l.title LIKE ? OR l.description LIKE ?)`;
       params.push(`%${search}%`, `%${search}%`);
     }
 
     if (category && category !== 'all') {
-      query += ` AND bp.category = ?`;
+      whereClause += ` AND l.category = ?`;
       params.push(category);
     }
 
-    query += ` ORDER BY bp.is_featured DESC, bp.created_at DESC LIMIT ? OFFSET ?`;
+    const query = `${baseQuery} ${whereClause} ORDER BY l.created_at DESC LIMIT ? OFFSET ?`;
     params.push(limit, offset);
 
     const listings = await DB.prepare(query).bind(...params).all();
 
     // Get total count for pagination
-    let countQuery = `SELECT COUNT(*) as total FROM business_blueprints bp WHERE bp.status = 'approved'`;
-    const countParams = [];
-
-    if (search) {
-      countQuery += ` AND (bp.platform_name LIKE ? OR bp.description LIKE ?)`;
-      countParams.push(`%${search}%`, `%${search}%`);
-    }
-
-    if (category && category !== 'all') {
-      countQuery += ` AND bp.category = ?`;
-      countParams.push(category);
-    }
+    const countQuery = `SELECT COUNT(*) as total FROM listings l ${whereClause}`;
+    const countParams = params.slice(0, -2); // Remove limit and offset
 
     const totalResult = await DB.prepare(countQuery).bind(...countParams).first();
-    const total = totalResult.total;
+    const total = totalResult?.total || 0;
+
+    // Process technical_specs to extract technologies and features
+    const processedListings = (listings.results || listings || []).map(listing => ({
+      ...listing,
+      technologies: listing.technical_specs ?
+        JSON.parse(listing.technical_specs).technologies || [] : [],
+      features: listing.technical_specs ?
+        JSON.parse(listing.technical_specs).features || [] : [],
+      ai_validation_score: listing.ai_validation_score || 0
+    }));
 
     return new Response(JSON.stringify({
       success: true,
-      data: listings.results || listings || [],
-      listings: listings.results || listings || [],
+      data: processedListings,
+      listings: processedListings,
       total,
       page: Math.floor(offset / limit) + 1,
-      totalPages: Math.ceil(total / limit)
+      totalPages: Math.ceil(total / limit),
+      tenant: tenant ? {
+        id: tenant.id,
+        type: tenant.type
+      } : null
     }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' }
     });
 
   } catch (error) {
+    console.error('Listings API error:', error);
     return new Response(JSON.stringify({
       success: false,
       error: 'Failed to fetch listings',
@@ -162,11 +183,22 @@ export async function GET({ url, locals }: APIContext) {
       headers: { 'Content-Type': 'application/json' }
     });
   }
-}
+});
 
-// POST endpoint for creating new listings
-export async function POST({ request, locals }: APIContext) {
+// POST endpoint for creating new listings with tenant isolation
+export const POST = withTenantIsolation(async (request, locals, ctx, tenant) => {
   const { DB } = locals.runtime?.env || {};
+
+  // Validate tenant has permission to create listings
+  if (!validateTenantAccess(tenant, 'listing', undefined, 'create')) {
+    return new Response(JSON.stringify({
+      success: false,
+      error: 'Insufficient permissions to create listings'
+    }), {
+      status: 403,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
 
   if (!DB) {
     return new Response(JSON.stringify({
@@ -180,18 +212,28 @@ export async function POST({ request, locals }: APIContext) {
 
   try {
     const body = await request.json();
-    const {
+    let {
       platform_name,
       description,
       category,
       price,
       technologies,
-      features,
-      seller_id
+      features
     } = body;
 
+    // Sanitize data for tenant context
+    const sanitizedData = sanitizeForTenant({
+      title: platform_name,
+      description,
+      category,
+      price,
+      technologies,
+      features,
+      seller_id: tenant?.sellerId
+    }, tenant, 'listing');
+
     // Validate required fields
-    if (!platform_name || !description || !category || !price || !seller_id) {
+    if (!sanitizedData.title || !sanitizedData.description || !sanitizedData.category || !sanitizedData.price) {
       return new Response(JSON.stringify({
         success: false,
         error: 'Missing required fields'
@@ -201,44 +243,68 @@ export async function POST({ request, locals }: APIContext) {
       });
     }
 
-    const listingId = `listing_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    const listingId = crypto.randomUUID();
+    const slug = sanitizedData.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
     await DB.prepare(`
-      INSERT INTO business_blueprints (
+      INSERT INTO listings (
         id,
-        platform_name,
+        seller_id,
+        title,
+        slug,
         description,
         category,
+        industry,
         price,
-        technologies,
-        features,
-        seller_id,
+        technical_specs,
         status,
-        created_at
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        package_tier,
+        created_at,
+        updated_at
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `).bind(
       listingId,
-      platform_name,
-      description,
-      category,
-      price,
-      JSON.stringify(technologies || []),
-      JSON.stringify(features || []),
-      seller_id,
-      'pending',
-      new Date().toISOString()
+      sanitizedData.seller_id,
+      sanitizedData.title,
+      slug,
+      sanitizedData.description,
+      sanitizedData.category,
+      sanitizedData.category, // Use category as industry
+      Math.round(sanitizedData.price * 100), // Convert to cents
+      JSON.stringify({
+        technologies: sanitizedData.technologies || [],
+        features: sanitizedData.features || []
+      }),
+      'draft',
+      'concept',
+      Date.now(),
+      Date.now()
     ).run();
 
     return new Response(JSON.stringify({
       success: true,
-      listingId,
-      message: 'Listing created successfully'
+      data: {
+        id: listingId,
+        seller_id: sanitizedData.seller_id,
+        title: sanitizedData.title,
+        slug,
+        description: sanitizedData.description,
+        category: sanitizedData.category,
+        price: Math.round(sanitizedData.price * 100),
+        status: 'draft'
+      },
+      tenant: tenant ? {
+        id: tenant.id,
+        type: tenant.type
+      } : null,
+      message: 'Listing created successfully with tenant isolation'
     }), {
       status: 201,
       headers: { 'Content-Type': 'application/json' }
     });
 
   } catch (error) {
+    console.error('Listing creation error:', error);
     return new Response(JSON.stringify({
       success: false,
       error: 'Failed to create listing',
@@ -248,4 +314,4 @@ export async function POST({ request, locals }: APIContext) {
       headers: { 'Content-Type': 'application/json' }
     });
   }
-}
+});

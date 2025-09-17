@@ -1,18 +1,23 @@
 {
-  "timestamp": "2025-09-17T20:20:07.859Z",
+  "timestamp": "2025-09-17T21:17:46.892Z",
   "summary": {
-    "total": 41,
-    "passed": 35,
-    "failed": 6,
-    "passRate": "85.37%"
+    "total": 42,
+    "passed": 31,
+    "failed": 11,
+    "passRate": "73.81%"
   },
   "errors": [
     "Login returns valid authentication token",
     "Listings endpoint returns array of platforms",
+    "Platform search functionality works",
+    "Individual platform details load correctly",
+    "Platform creation endpoint exists and handles auth properly",
     "Stripe sandbox connection is working",
     "All Stripe test scenarios pass",
+    "/api/listings responds successfully",
     "Email validation accepts valid emails",
-    "Blueprint validation catches all field errors"
+    "Blueprint validation catches all field errors",
+    "SQL injection attempts are handled safely"
   ],
   "environment": {
     "baseUrl": "http://localhost:4324",
