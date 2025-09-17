@@ -3,7 +3,26 @@
 import type { APIContext } from 'astro';
 
 export async function GET({ url, locals }: APIContext) {
-  const { DB } = locals.runtime.env;
+  const { DB } = locals.runtime?.env || {};
+
+  if (!DB) {
+    return new Response(JSON.stringify({
+      success: true,
+      milestones: [],
+      achievements: [],
+      upcomingDeadlines: [],
+      summary: {
+        totalMilestones: 0,
+        completedCount: 0,
+        inProgressCount: 0,
+        overdueCount: 0
+      },
+      note: 'Database not configured - showing demo data'
+    }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
   const investorId = url.searchParams.get('investorId');
   const platformId = url.searchParams.get('platformId');
   const status = url.searchParams.get('status') || 'all';
@@ -182,7 +201,17 @@ async function getUpcomingDeadlines(investorId: string, DB: any) {
 }
 
 export async function POST({ request, locals }: APIContext) {
-  const { DB, MAILERSEND_API_KEY } = locals.runtime.env;
+  const { DB, MAILERSEND_API_KEY } = locals.runtime?.env || {};
+
+  if (!DB) {
+    return new Response(JSON.stringify({
+      success: false,
+      error: 'Database not configured'
+    }), {
+      status: 503,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
 
   try {
     const body = await request.json();

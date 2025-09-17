@@ -3,18 +3,9 @@
 import type { APIContext } from 'astro';
 
 export async function GET({ url, locals }: APIContext) {
-  // Environment-aware Stripe key selection
-  const isProduction = process.env.NODE_ENV === 'production';
-
-  // For production: use AUTIMIND_STRIPE_KEY (secret) from Cloudflare secrets + live publishable key
-  // For development: use test keys from environment
-  const STRIPE_SECRET_KEY = isProduction
-    ? locals.runtime?.env?.AUTIMIND_STRIPE_KEY
-    : (locals.runtime?.env?.STRIPE_SECRET_KEY || process.env.STRIPE_SECRET_KEY);
-
-  const STRIPE_PUBLISHABLE_KEY = isProduction
-    ? (locals.runtime?.env?.STRIPE_PUBLISHABLE_KEY_LIVE || process.env.STRIPE_PUBLISHABLE_KEY_LIVE)
-    : (locals.runtime?.env?.STRIPE_PUBLISHABLE_KEY_TEST || process.env.STRIPE_PUBLISHABLE_KEY_TEST || process.env.STRIPE_SECRET_KEY || 'pk_test_fallback');
+  // Try to get from runtime env first (production), then fallback to process.env (development)
+  const STRIPE_SECRET_KEY = locals.runtime?.env?.STRIPE_SECRET_KEY || process.env.STRIPE_SECRET_KEY;
+  const STRIPE_PUBLISHABLE_KEY = locals.runtime?.env?.STRIPE_PUBLISHABLE_KEY || process.env.STRIPE_PUBLISHABLE_KEY;
   const scenario = url.searchParams.get('scenario') || 'status';
 
   // Ensure we're using test keys in sandbox mode
@@ -61,10 +52,7 @@ export async function GET({ url, locals }: APIContext) {
 }
 
 export async function POST({ request, locals }: APIContext) {
-  const isProduction = process.env.NODE_ENV === 'production';
-  const STRIPE_SECRET_KEY = isProduction
-    ? locals.runtime?.env?.AUTIMIND_STRIPE_KEY
-    : (locals.runtime?.env?.STRIPE_SECRET_KEY || process.env.STRIPE_SECRET_KEY);
+  const STRIPE_SECRET_KEY = locals.runtime?.env?.STRIPE_SECRET_KEY || process.env.STRIPE_SECRET_KEY;
 
   try {
     const body = await request.json();
@@ -269,9 +257,6 @@ async function createTestCheckoutSession(testData: any, secretKey: string) {
         quantity: 1
       }],
       mode: 'payment',
-      automatic_tax: {
-        enabled: true
-      },
       success_url: `${process.env.SITE_URL || 'http://localhost:4321'}/purchase/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.SITE_URL || 'http://localhost:4321'}/browse`,
       metadata: {

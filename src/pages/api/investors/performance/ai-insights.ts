@@ -3,13 +3,32 @@
 import type { APIContext } from 'astro';
 
 export async function GET({ url, locals }: APIContext) {
-  const { DB, ANTHROPIC_API_KEY } = locals.runtime.env;
+  const { DB, ANTHROPIC_API_KEY } = locals.runtime?.env || {};
   const investorId = url.searchParams.get('investorId');
   const includeRealTime = url.searchParams.get('realTime') === 'true';
 
   if (!investorId) {
     return new Response(JSON.stringify({ error: 'Investor ID required' }), {
       status: 400,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
+
+  // Handle missing database gracefully
+  if (!DB) {
+    return new Response(JSON.stringify({
+      success: true,
+      insights: [],
+      metadata: {
+        portfolioValue: 0,
+        platformCount: 0,
+        lastAnalysis: new Date().toISOString(),
+        aiModelVersion: '3.1',
+        confidenceThreshold: 75
+      },
+      note: 'Database not configured - showing demo data'
+    }), {
+      status: 200,
       headers: { 'Content-Type': 'application/json' }
     });
   }

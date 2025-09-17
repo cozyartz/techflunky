@@ -1,0 +1,35 @@
+# Cloudflare Worker configuration for TechFlunky Security Center
+name = "techflunky-security"
+main = "src/index.ts"
+compatibility_date = "2024-12-16"
+
+# Route configuration for custom domain (commented out until DNS is configured)
+# routes = [
+#   "security.techflunky.com/*"
+# ]
+
+# Environment variables
+[vars]
+ENVIRONMENT = "production"
+SECURITY_VERSION = "2.1"
+LAST_AUDIT = "2024-12-16"
+NEXT_AUDIT = "2025-03-16"
+
+# KV namespace for security metrics
+[[kv_namespaces]]
+binding = "SECURITY_METRICS"
+id = "d4cabb3594c74b5c9f582f83c697fe56"
+
+# Additional bindings can be added later as needed
+# [[d1_databases]]
+# binding = "SECURITY_DB"
+# database_name = "techflunky-security"
+# database_id = "your-d1-database-id"
+
+# [[r2_buckets]]
+# binding = "SECURITY_REPORTS"
+# bucket_name = "techflunky-security-reports"
+
+# [[analytics_engine_datasets]]
+# binding = "SECURITY_ANALYTICS"
+# dataset = "techflunky_security_events"

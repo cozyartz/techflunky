@@ -1,0 +1,19 @@
+name = "techflunky-status"
+main = "src/index.ts"
+compatibility_date = "2024-12-16"
+
+# Routes for custom domain (comment out for initial deployment)
+# routes = ["status.techflunky.com/*"]
+
+# KV namespace for status data and incident history
+[[kv_namespaces]]
+binding = "STATUS_KV"
+id = "6e2b46abfc9d40598f0c30c6e29ce556"
+
+# Environment variables
+[vars]
+ENVIRONMENT = "production"
+STATUS_VERSION = "1.0"
+COMPANY_NAME = "TechFlunky"
+CONTACT_EMAIL = "support@techflunky.com"
+SECURITY_PAGE_URL = "https://security.techflunky.com"

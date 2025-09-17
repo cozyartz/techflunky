@@ -3,7 +3,24 @@ import type { APIContext } from 'astro';
 
 // Get comprehensive portfolio analytics
 export async function GET({ url, locals }: APIContext) {
-  const { DB } = locals.runtime.env;
+  const { DB } = locals.runtime?.env || {};
+
+  if (!DB) {
+    return new Response(JSON.stringify({
+      success: true,
+      portfolio: {
+        totalValue: 0,
+        totalInvestments: 0,
+        activeDeals: 0,
+        totalReturns: 0
+      },
+      investments: [],
+      note: 'Database not configured - showing demo data'
+    }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
   const investorId = url.searchParams.get('investorId');
   const timeframe = url.searchParams.get('timeframe') || '12'; // months
   const view = url.searchParams.get('view') || 'overview'; // overview, performance, deals

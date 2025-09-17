@@ -1,0 +1,472 @@
+---
+// TechFlunky Security Center - Comprehensive security documentation
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+---
+
+<Layout title="Security Center - TechFlunky">
+  <main class="min-h-screen bg-black text-white">
+    <Navigation currentPage="security" />
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 bg-gradient-to-br from-black via-gray-900 to-black">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto text-center">
+          <div class="flex justify-center mb-6">
+            <div class="bg-green-600/20 border border-green-500/30 rounded-full p-6">
+              <svg class="w-12 h-12 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
+              </svg>
+            </div>
+          </div>
+          <h1 class="text-5xl md:text-6xl font-black mb-6">
+            <span class="text-white">Enterprise</span>
+            <span class="text-green-400 block">Security Center</span>
+          </h1>
+          <p class="text-xl text-gray-300 mb-8 leading-relaxed">
+            Military-grade security architecture protecting your business platforms, investments, and communications
+            with zero-trust principles and end-to-end encryption.
+          </p>
+          <div class="flex justify-center items-center space-x-8 text-sm text-gray-400">
+            <div class="flex items-center space-x-2">
+              <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+              <span>All Systems Operational</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+              <span>99.99% Uptime</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+              <span>24/7 Monitoring</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Security Overview -->
+    <section class="py-16 bg-gray-900/50">
+      <div class="container mx-auto px-4">
+        <div class="max-w-6xl mx-auto">
+          <h2 class="text-3xl font-bold text-center mb-12">
+            <span class="text-white">Zero Trust</span>
+            <span class="text-green-400"> Security Architecture</span>
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- End-to-End Encryption -->
+            <div class="bg-black/50 border border-green-500/20 rounded-xl p-6">
+              <div class="text-green-400 mb-4">
+                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M18 8a6 6 0 01-7.743 5.743L10 14l-1 1-1 1H6v2H2v-4l4.257-4.257A6 6 0 1118 8zm-6-4a1 1 0 100 2 2 2 0 012 2 1 1 0 102 0 4 4 0 00-4-4z" clip-rule="evenodd"></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold text-white mb-3">End-to-End Encryption</h3>
+              <p class="text-gray-400 text-sm mb-4">
+                All communications protected by Signal Protocol with perfect forward secrecy.
+                Messages encrypted with AES-256-GCM before leaving your device.
+              </p>
+              <div class="space-y-2">
+                <div class="flex items-center text-xs text-gray-500">
+                  <svg class="w-3 h-3 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Signal Protocol implementation
+                </div>
+                <div class="flex items-center text-xs text-gray-500">
+                  <svg class="w-3 h-3 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Perfect Forward Secrecy
+                </div>
+                <div class="flex items-center text-xs text-gray-500">
+                  <svg class="w-3 h-3 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Key rotation every 24 hours
+                </div>
+              </div>
+            </div>
+
+            <!-- OWASP Protection -->
+            <div class="bg-black/50 border border-blue-500/20 rounded-xl p-6">
+              <div class="text-blue-400 mb-4">
+                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold text-white mb-3">OWASP Top 10 Protection</h3>
+              <p class="text-gray-400 text-sm mb-4">
+                Complete protection against OWASP Top 10 vulnerabilities with automated
+                scanning and real-time threat detection.
+              </p>
+              <div class="space-y-2">
+                <div class="flex items-center text-xs text-gray-500">
+                  <svg class="w-3 h-3 text-blue-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  SQL injection prevention
+                </div>
+                <div class="flex items-center text-xs text-gray-500">
+                  <svg class="w-3 h-3 text-blue-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  XSS attack mitigation
+                </div>
+                <div class="flex items-center text-xs text-gray-500">
+                  <svg class="w-3 h-3 text-blue-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  CSRF token validation
+                </div>
+              </div>
+            </div>
+
+            <!-- Infrastructure Security -->
+            <div class="bg-black/50 border border-purple-500/20 rounded-xl p-6">
+              <div class="text-purple-400 mb-4">
+                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold text-white mb-3">Cloudflare Edge Security</h3>
+              <p class="text-gray-400 text-sm mb-4">
+                Global edge computing infrastructure with DDoS protection,
+                Web Application Firewall, and sub-100ms response times.
+              </p>
+              <div class="space-y-2">
+                <div class="flex items-center text-xs text-gray-500">
+                  <svg class="w-3 h-3 text-purple-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  DDoS protection (100+ Gbps)
+                </div>
+                <div class="flex items-center text-xs text-gray-500">
+                  <svg class="w-3 h-3 text-purple-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Edge compute security
+                </div>
+                <div class="flex items-center text-xs text-gray-500">
+                  <svg class="w-3 h-3 text-purple-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Global anycast network
+                </div>
+              </div>
+            </div>
+
+            <!-- Authentication -->
+            <div class="bg-black/50 border border-yellow-500/20 rounded-xl p-6">
+              <div class="text-yellow-400 mb-4">
+                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd"></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold text-white mb-3">Multi-Factor Authentication</h3>
+              <p class="text-gray-400 text-sm mb-4">
+                JWT-based authentication with multi-factor support, role-based access control,
+                and session management with automatic expiry.
+              </p>
+              <div class="space-y-2">
+                <div class="flex items-center text-xs text-gray-500">
+                  <svg class="w-3 h-3 text-yellow-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  JWT with 24h expiry
+                </div>
+                <div class="flex items-center text-xs text-gray-500">
+                  <svg class="w-3 h-3 text-yellow-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Role-based access control
+                </div>
+                <div class="flex items-center text-xs text-gray-500">
+                  <svg class="w-3 h-3 text-yellow-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  MFA for sensitive operations
+                </div>
+              </div>
+            </div>
+
+            <!-- Monitoring -->
+            <div class="bg-black/50 border border-red-500/20 rounded-xl p-6">
+              <div class="text-red-400 mb-4">
+                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold text-white mb-3">24/7 Threat Monitoring</h3>
+              <p class="text-gray-400 text-sm mb-4">
+                Real-time security monitoring with AI-powered threat detection,
+                automated incident response, and comprehensive audit logging.
+              </p>
+              <div class="space-y-2">
+                <div class="flex items-center text-xs text-gray-500">
+                  <svg class="w-3 h-3 text-red-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  AI threat detection
+                </div>
+                <div class="flex items-center text-xs text-gray-500">
+                  <svg class="w-3 h-3 text-red-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Automated incident response
+                </div>
+                <div class="flex items-center text-xs text-gray-500">
+                  <svg class="w-3 h-3 text-red-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Comprehensive audit logs
+                </div>
+              </div>
+            </div>
+
+            <!-- Data Protection -->
+            <div class="bg-black/50 border border-green-500/20 rounded-xl p-6">
+              <div class="text-green-400 mb-4">
+                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"/>
+                  <path fill-rule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold text-white mb-3">Data Protection & Privacy</h3>
+              <p class="text-gray-400 text-sm mb-4">
+                GDPR-compliant data handling with encrypted storage,
+                right to deletion, and transparent privacy controls.
+              </p>
+              <div class="space-y-2">
+                <div class="flex items-center text-xs text-gray-500">
+                  <svg class="w-3 h-3 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  GDPR compliance
+                </div>
+                <div class="flex items-center text-xs text-gray-500">
+                  <svg class="w-3 h-3 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Encrypted at-rest storage
+                </div>
+                <div class="flex items-center text-xs text-gray-500">
+                  <svg class="w-3 h-3 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Privacy by design
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Compliance & Certifications -->
+    <section class="py-16 bg-black">
+      <div class="container mx-auto px-4">
+        <div class="max-w-6xl mx-auto">
+          <h2 class="text-3xl font-bold text-center mb-12">
+            <span class="text-white">Compliance &</span>
+            <span class="text-blue-400"> Certifications</span>
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            <!-- SOC 2 -->
+            <div class="bg-gray-900/50 border border-green-500/20 rounded-xl p-8 text-center">
+              <div class="bg-green-600/20 border border-green-500/30 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6">
+                <svg class="w-10 h-10 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold text-white mb-3">SOC 2 Type II</h3>
+              <p class="text-gray-400 text-sm mb-4">
+                Comprehensive security controls audit covering Security, Availability,
+                Processing Integrity, Confidentiality, and Privacy.
+              </p>
+              <div class="text-xs text-green-400 font-semibold">Compliant Since 2024</div>
+            </div>
+
+            <!-- GDPR -->
+            <div class="bg-gray-900/50 border border-blue-500/20 rounded-xl p-8 text-center">
+              <div class="bg-blue-600/20 border border-blue-500/30 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6">
+                <svg class="w-10 h-10 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold text-white mb-3">GDPR Ready</h3>
+              <p class="text-gray-400 text-sm mb-4">
+                Full compliance with General Data Protection Regulation including
+                right to deletion, data portability, and consent management.
+              </p>
+              <div class="text-xs text-blue-400 font-semibold">EU Regulation Compliant</div>
+            </div>
+
+            <!-- PCI DSS -->
+            <div class="bg-gray-900/50 border border-purple-500/20 rounded-xl p-8 text-center">
+              <div class="bg-purple-600/20 border border-purple-500/30 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6">
+                <svg class="w-10 h-10 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold text-white mb-3">PCI DSS Level 1</h3>
+              <p class="text-gray-400 text-sm mb-4">
+                Payment Card Industry Data Security Standard compliance for
+                secure payment processing and cardholder data protection.
+              </p>
+              <div class="text-xs text-purple-400 font-semibold">Level 1 Merchant</div>
+            </div>
+          </div>
+
+          <!-- Security Standards -->
+          <div class="bg-gray-900/30 border border-gray-700 rounded-xl p-8">
+            <h3 class="text-xl font-semibold text-white mb-6 text-center">Security Standards & Frameworks</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+              <div class="space-y-2">
+                <div class="text-sm text-gray-400">Encryption</div>
+                <div class="text-lg font-semibold text-yellow-400">AES-256-GCM</div>
+              </div>
+              <div class="space-y-2">
+                <div class="text-sm text-gray-400">Key Management</div>
+                <div class="text-lg font-semibold text-yellow-400">NIST SP 800-57</div>
+              </div>
+              <div class="space-y-2">
+                <div class="text-sm text-gray-400">Network Security</div>
+                <div class="text-lg font-semibold text-yellow-400">Zero Trust</div>
+              </div>
+              <div class="space-y-2">
+                <div class="text-sm text-gray-400">Vulnerability Mgmt</div>
+                <div class="text-lg font-semibold text-yellow-400">NIST CSF</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bug Bounty & Contact -->
+    <section class="py-16 bg-gray-900/50">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Bug Bounty -->
+            <div class="bg-black/50 border border-red-500/20 rounded-xl p-8">
+              <div class="text-red-400 mb-4">
+                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold text-white mb-3">Bug Bounty Program</h3>
+              <p class="text-gray-400 text-sm mb-6">
+                Help us maintain the highest security standards. Report vulnerabilities
+                and earn rewards up to $10,000 for critical findings.
+              </p>
+              <div class="space-y-3 mb-6">
+                <div class="flex justify-between items-center">
+                  <span class="text-sm text-gray-500">Critical</span>
+                  <span class="text-sm font-semibold text-red-400">$5,000 - $10,000</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-sm text-gray-500">High</span>
+                  <span class="text-sm font-semibold text-orange-400">$1,000 - $5,000</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-sm text-gray-500">Medium</span>
+                  <span class="text-sm font-semibold text-yellow-400">$500 - $1,000</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-sm text-gray-500">Low</span>
+                  <span class="text-sm font-semibold text-green-400">$100 - $500</span>
+                </div>
+              </div>
+              <a href="/bug-bounty" class="inline-flex items-center px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition text-sm font-semibold">
+                View Program Details
+                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                </svg>
+              </a>
+            </div>
+
+            <!-- Security Contact -->
+            <div class="bg-black/50 border border-green-500/20 rounded-xl p-8">
+              <div class="text-green-400 mb-4">
+                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+                  <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold text-white mb-3">Security Contact</h3>
+              <p class="text-gray-400 text-sm mb-6">
+                For security issues, vulnerability reports, or general security questions.
+                We guarantee response within 24 hours for all security matters.
+              </p>
+              <div class="space-y-4 mb-6">
+                <div class="flex items-center space-x-3">
+                  <div class="text-green-400">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+                      <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="text-white font-semibold">security@techflunky.com</div>
+                    <div class="text-xs text-gray-500">Encrypted communication preferred</div>
+                  </div>
+                </div>
+                <div class="flex items-center space-x-3">
+                  <div class="text-green-400">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="text-white font-semibold">Response SLA: 24 hours</div>
+                    <div class="text-xs text-gray-500">Critical issues: 4 hours</div>
+                  </div>
+                </div>
+              </div>
+              <a href="mailto:security@techflunky.com" class="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition text-sm font-semibold">
+                Contact Security Team
+                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Security Transparency -->
+    <section class="py-16 bg-black">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto text-center">
+          <h2 class="text-3xl font-bold mb-8">
+            <span class="text-white">Security</span>
+            <span class="text-blue-400"> Transparency</span>
+          </h2>
+          <p class="text-gray-400 mb-8 text-lg">
+            We believe in transparency. Our security practices are open to review,
+            and we regularly publish security updates and incident reports.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+            <div class="bg-gray-900/30 border border-gray-700 rounded-lg p-6">
+              <div class="text-2xl font-bold text-green-400 mb-2">99.99%</div>
+              <div class="text-sm text-gray-400">Security Uptime</div>
+            </div>
+            <div class="bg-gray-900/30 border border-gray-700 rounded-lg p-6">
+              <div class="text-2xl font-bold text-blue-400 mb-2">< 4h</div>
+              <div class="text-sm text-gray-400">Incident Response</div>
+            </div>
+            <div class="bg-gray-900/30 border border-gray-700 rounded-lg p-6">
+              <div class="text-2xl font-bold text-purple-400 mb-2">0</div>
+              <div class="text-sm text-gray-400">Data Breaches</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

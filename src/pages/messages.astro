@@ -1,0 +1,677 @@
+---
+// Secure Messaging Interface for TechFlunky Marketplace
+// Enterprise-grade E2E encrypted messaging between buyers, sellers, and investors
+
+import Layout from '../layouts/Layout.astro';
+import { getCurrentUser } from '../lib/security/auth';
+
+const user = await getCurrentUser(Astro.request, Astro.locals.runtime?.env);
+
+if (!user) {
+  return Astro.redirect('/login');
+}
+
+// Get contacts/conversations from database
+// This would fetch from your conversations table
+const conversations = [
+  {
+    id: 'conv_1',
+    participantId: 'user_123',
+    participantName: 'John Seller',
+    participantRole: 'seller',
+    lastMessage: 'Thanks for your interest in the e-commerce platform!',
+    lastMessageTime: Date.now() - 1000 * 60 * 30, // 30 minutes ago
+    unreadCount: 2,
+    avatar: '/api/avatar/user_123'
+  },
+  {
+    id: 'conv_2',
+    participantId: 'user_456',
+    participantName: 'Sarah Investor',
+    participantRole: 'investor',
+    lastMessage: 'I\'d like to discuss potential investment opportunities.',
+    lastMessageTime: Date.now() - 1000 * 60 * 60 * 2, // 2 hours ago
+    unreadCount: 0,
+    avatar: '/api/avatar/user_456'
+  }
+];
+---
+
+<Layout title="Secure Messages - TechFlunky">
+  <div class="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+    <!-- Security Status Banner -->
+    <div class="bg-green-600 text-white px-4 py-2 text-center text-sm font-medium">
+      🔒 End-to-End Encrypted • Signal Protocol • Messages are secured with military-grade encryption
+    </div>
+
+    <div class="container mx-auto px-4 py-8">
+      <div class="bg-white rounded-xl shadow-lg overflow-hidden h-[calc(100vh-200px)]">
+        <div class="flex h-full">
+          <!-- Conversations Sidebar -->
+          <div class="w-1/3 border-r border-gray-200 flex flex-col">
+            <!-- Header -->
+            <div class="p-4 border-b border-gray-200 bg-gray-50">
+              <div class="flex items-center justify-between">
+                <h2 class="text-lg font-semibold text-gray-800">Messages</h2>
+                <div class="flex items-center space-x-2">
+                  <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse" title="Encrypted Connection Active"></div>
+                  <span class="text-xs text-gray-600">Secure</span>
+                </div>
+              </div>
+              <div class="mt-3">
+                <div class="relative">
+                  <input
+                    type="text"
+                    placeholder="Search conversations..."
+                    class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    id="search-conversations"
+                  />
+                  <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Conversations List -->
+            <div class="flex-1 overflow-y-auto">
+              {conversations.map((conversation) => (
+                <div
+                  class="conversation-item p-4 border-b border-gray-100 hover:bg-gray-50 cursor-pointer transition-colors"
+                  data-conversation-id={conversation.id}
+                  data-participant-id={conversation.participantId}
+                >
+                  <div class="flex items-start space-x-3">
+                    <div class="relative">
+                      <img
+                        src={conversation.avatar}
+                        alt={conversation.participantName}
+                        class="w-12 h-12 rounded-full object-cover"
+                        onerror="this.src='/images/default-avatar.png'"
+                      />
+                      <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                      <div class="flex items-center justify-between">
+                        <h3 class="text-sm font-medium text-gray-900 truncate">
+                          {conversation.participantName}
+                        </h3>
+                        <span class="text-xs text-gray-500">
+                          {new Date(conversation.lastMessageTime).toLocaleTimeString([], {
+                            hour: '2-digit',
+                            minute: '2-digit'
+                          })}
+                        </span>
+                      </div>
+                      <div class="flex items-center justify-between mt-1">
+                        <p class="text-sm text-gray-600 truncate">
+                          {conversation.lastMessage}
+                        </p>
+                        {conversation.unreadCount > 0 && (
+                          <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-blue-600 rounded-full">
+                            {conversation.unreadCount}
+                          </span>
+                        )}
+                      </div>
+                      <div class="flex items-center mt-2">
+                        <span class={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
+                          conversation.participantRole === 'seller' ? 'bg-green-100 text-green-800' :
+                          conversation.participantRole === 'investor' ? 'bg-purple-100 text-purple-800' :
+                          'bg-blue-100 text-blue-800'
+                        }`}>
+                          {conversation.participantRole}
+                        </span>
+                        <div class="ml-2 flex items-center">
+                          <svg class="w-3 h-3 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
+                          </svg>
+                          <span class="text-xs text-green-600 ml-1">E2E</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Message Thread -->
+          <div class="flex-1 flex flex-col">
+            <!-- Chat Header -->
+            <div class="p-4 border-b border-gray-200 bg-gray-50">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                  <img
+                    id="current-chat-avatar"
+                    src="/images/default-avatar.png"
+                    alt="Chat Participant"
+                    class="w-10 h-10 rounded-full object-cover"
+                  />
+                  <div>
+                    <h3 id="current-chat-name" class="text-lg font-medium text-gray-900">
+                      Select a conversation
+                    </h3>
+                    <div class="flex items-center space-x-2">
+                      <div id="current-chat-status" class="w-2 h-2 bg-gray-400 rounded-full"></div>
+                      <span id="current-chat-presence" class="text-sm text-gray-500">Offline</span>
+                      <div class="flex items-center">
+                        <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                          <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="text-sm text-green-600 ml-1">Signal Protocol</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <button class="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                    </svg>
+                  </button>
+                  <button class="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Messages Container -->
+            <div id="messages-container" class="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
+              <div class="text-center text-gray-500 text-sm">
+                Select a conversation to start messaging
+              </div>
+            </div>
+
+            <!-- Typing Indicator -->
+            <div id="typing-indicator" class="px-4 py-2 text-sm text-gray-500 hidden">
+              <div class="flex items-center space-x-2">
+                <div class="flex space-x-1">
+                  <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                  <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+                  <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                </div>
+                <span>Someone is typing...</span>
+              </div>
+            </div>
+
+            <!-- Message Input -->
+            <div class="border-t border-gray-200 p-4 bg-white">
+              <div class="flex items-end space-x-3">
+                <button class="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full transition-colors">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"></path>
+                  </svg>
+                </button>
+                <div class="flex-1">
+                  <textarea
+                    id="message-input"
+                    placeholder="Type your encrypted message..."
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    rows="1"
+                    disabled
+                  ></textarea>
+                </div>
+                <button
+                  id="send-button"
+                  class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  disabled
+                >
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                  </svg>
+                </button>
+              </div>
+              <div class="mt-2 flex items-center justify-between text-xs text-gray-500">
+                <div class="flex items-center space-x-4">
+                  <div class="flex items-center">
+                    <svg class="w-3 h-3 text-green-500 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>Messages are end-to-end encrypted</span>
+                  </div>
+                  <div class="flex items-center">
+                    <div class="w-2 h-2 bg-green-500 rounded-full mr-1"></div>
+                    <span id="connection-status">Connected</span>
+                  </div>
+                </div>
+                <div>
+                  Press Enter to send, Shift+Enter for new line
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    import { SecureWebSocketClient } from '../lib/messaging/websocket';
+
+    class SecureMessagingApp {
+      constructor() {
+        this.websocket = null;
+        this.currentConversation = null;
+        this.currentParticipant = null;
+        this.messages = new Map();
+        this.typingTimers = new Map();
+
+        this.initializeElements();
+        this.bindEvents();
+        this.connectWebSocket();
+      }
+
+      initializeElements() {
+        this.conversationItems = document.querySelectorAll('.conversation-item');
+        this.messagesContainer = document.getElementById('messages-container');
+        this.messageInput = document.getElementById('message-input');
+        this.sendButton = document.getElementById('send-button');
+        this.typingIndicator = document.getElementById('typing-indicator');
+        this.connectionStatus = document.getElementById('connection-status');
+        this.currentChatName = document.getElementById('current-chat-name');
+        this.currentChatAvatar = document.getElementById('current-chat-avatar');
+        this.currentChatStatus = document.getElementById('current-chat-status');
+        this.currentChatPresence = document.getElementById('current-chat-presence');
+      }
+
+      bindEvents() {
+        // Conversation selection
+        this.conversationItems.forEach(item => {
+          item.addEventListener('click', () => {
+            this.selectConversation(
+              item.dataset.conversationId,
+              item.dataset.participantId
+            );
+          });
+        });
+
+        // Message input events
+        this.messageInput.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            this.sendMessage();
+          }
+        });
+
+        this.messageInput.addEventListener('input', () => {
+          this.handleTyping();
+        });
+
+        this.sendButton.addEventListener('click', () => {
+          this.sendMessage();
+        });
+
+        // Auto-resize textarea
+        this.messageInput.addEventListener('input', () => {
+          this.messageInput.style.height = 'auto';
+          this.messageInput.style.height = Math.min(this.messageInput.scrollHeight, 120) + 'px';
+        });
+      }
+
+      async connectWebSocket() {
+        const config = {
+          endpoint: `wss://${window.location.host}/ws`,
+          authToken: localStorage.getItem('auth_token') || 'demo_token',
+          userId: 'current_user_id', // Get from auth context
+          reconnectAttempts: 5,
+          heartbeatInterval: 30000,
+          encryption: true
+        };
+
+        this.websocket = new SecureWebSocketClient(config);
+
+        // Register event handlers
+        this.websocket.on('connected', () => {
+          this.updateConnectionStatus('Connected', 'green');
+          console.log('WebSocket connected with E2E encryption');
+        });
+
+        this.websocket.on('disconnected', () => {
+          this.updateConnectionStatus('Disconnected', 'red');
+        });
+
+        this.websocket.on('message', (message) => {
+          this.handleIncomingMessage(message);
+        });
+
+        this.websocket.on('typing', (data) => {
+          this.handleTypingIndicator(data);
+        });
+
+        this.websocket.on('presence', (data) => {
+          this.updateUserPresence(data);
+        });
+
+        this.websocket.on('read', (data) => {
+          this.markMessageAsRead(data.messageId);
+        });
+
+        this.websocket.on('delivery', (data) => {
+          this.markMessageAsDelivered(data.messageId);
+        });
+
+        try {
+          await this.websocket.connect();
+        } catch (error) {
+          console.error('Failed to connect to WebSocket:', error);
+          this.updateConnectionStatus('Connection Failed', 'red');
+        }
+      }
+
+      selectConversation(conversationId, participantId) {
+        // Update UI
+        this.conversationItems.forEach(item => {
+          item.classList.remove('bg-blue-50', 'border-r-4', 'border-blue-500');
+        });
+
+        const selectedItem = document.querySelector(`[data-conversation-id="${conversationId}"]`);
+        selectedItem.classList.add('bg-blue-50', 'border-r-4', 'border-blue-500');
+
+        // Update current conversation
+        this.currentConversation = conversationId;
+        this.currentParticipant = participantId;
+
+        // Update chat header
+        const participantName = selectedItem.querySelector('h3').textContent;
+        const participantAvatar = selectedItem.querySelector('img').src;
+
+        this.currentChatName.textContent = participantName;
+        this.currentChatAvatar.src = participantAvatar;
+
+        // Enable message input
+        this.messageInput.disabled = false;
+        this.sendButton.disabled = false;
+        this.messageInput.placeholder = `Send encrypted message to ${participantName}...`;
+
+        // Load conversation messages
+        this.loadConversationMessages(conversationId);
+
+        // Update presence status
+        this.updatePresenceStatus('online');
+      }
+
+      async loadConversationMessages(conversationId) {
+        // In production, fetch from API
+        const demoMessages = [
+          {
+            id: 'msg_1',
+            senderId: 'user_123',
+            content: 'Hi! I saw your AI-powered e-commerce platform listing. Very impressive work!',
+            timestamp: Date.now() - 1000 * 60 * 60,
+            isSent: false
+          },
+          {
+            id: 'msg_2',
+            senderId: 'current_user_id',
+            content: 'Thank you! I\'d be happy to discuss the technical details and business model with you.',
+            timestamp: Date.now() - 1000 * 60 * 50,
+            isSent: true
+          },
+          {
+            id: 'msg_3',
+            senderId: 'user_123',
+            content: 'Perfect! I\'m particularly interested in the AI recommendation engine. What technologies did you use?',
+            timestamp: Date.now() - 1000 * 60 * 45,
+            isSent: false
+          }
+        ];
+
+        this.messages.set(conversationId, demoMessages);
+        this.renderMessages(conversationId);
+      }
+
+      renderMessages(conversationId) {
+        const messages = this.messages.get(conversationId) || [];
+        this.messagesContainer.innerHTML = '';
+
+        messages.forEach(message => {
+          const messageElement = this.createMessageElement(message);
+          this.messagesContainer.appendChild(messageElement);
+        });
+
+        // Scroll to bottom
+        this.messagesContainer.scrollTop = this.messagesContainer.scrollHeight;
+      }
+
+      createMessageElement(message) {
+        const div = document.createElement('div');
+        div.className = `flex ${message.isSent ? 'justify-end' : 'justify-start'}`;
+        div.setAttribute('data-message-id', message.id);
+
+        const messageTime = new Date(message.timestamp).toLocaleTimeString([], {
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+
+        div.innerHTML = `
+          <div class="max-w-xs lg:max-w-md ${message.isSent ? 'bg-blue-600 text-white' : 'bg-white text-gray-800'} rounded-lg px-4 py-2 shadow-md">
+            <p class="text-sm">${this.escapeHtml(message.content)}</p>
+            <div class="flex items-center justify-between mt-2">
+              <span class="text-xs ${message.isSent ? 'text-blue-100' : 'text-gray-500'}">${messageTime}</span>
+              <div class="flex items-center space-x-1">
+                <svg class="w-3 h-3 ${message.isSent ? 'text-blue-200' : 'text-green-500'}" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
+                </svg>
+                ${message.isSent ? '<span class="text-xs text-blue-200">✓✓</span>' : ''}
+              </div>
+            </div>
+          </div>
+        `;
+
+        return div;
+      }
+
+      async sendMessage() {
+        const content = this.messageInput.value.trim();
+        if (!content || !this.currentParticipant) return;
+
+        try {
+          // Send encrypted message via WebSocket
+          const messageId = await this.websocket.sendMessage(this.currentParticipant, content);
+
+          // Add to local messages
+          const message = {
+            id: messageId,
+            senderId: 'current_user_id',
+            content: content,
+            timestamp: Date.now(),
+            isSent: true
+          };
+
+          const conversationMessages = this.messages.get(this.currentConversation) || [];
+          conversationMessages.push(message);
+          this.messages.set(this.currentConversation, conversationMessages);
+
+          // Update UI
+          const messageElement = this.createMessageElement(message);
+          this.messagesContainer.appendChild(messageElement);
+          this.messagesContainer.scrollTop = this.messagesContainer.scrollHeight;
+
+          // Clear input
+          this.messageInput.value = '';
+          this.messageInput.style.height = 'auto';
+
+        } catch (error) {
+          console.error('Failed to send message:', error);
+          this.showErrorNotification('Failed to send message. Please try again.');
+        }
+      }
+
+      handleIncomingMessage(message) {
+        // Add to conversation messages
+        const conversationMessages = this.messages.get(this.currentConversation) || [];
+        conversationMessages.push({
+          id: message.id,
+          senderId: message.senderId,
+          content: message.content,
+          timestamp: message.timestamp,
+          isSent: false
+        });
+        this.messages.set(this.currentConversation, conversationMessages);
+
+        // Update UI if this conversation is active
+        if (message.senderId === this.currentParticipant) {
+          const messageElement = this.createMessageElement({
+            id: message.id,
+            senderId: message.senderId,
+            content: message.content,
+            timestamp: message.timestamp,
+            isSent: false
+          });
+          this.messagesContainer.appendChild(messageElement);
+          this.messagesContainer.scrollTop = this.messagesContainer.scrollHeight;
+
+          // Mark as read
+          this.websocket.markAsRead(message.id, message.senderId);
+        }
+
+        // Update conversation list
+        this.updateConversationLastMessage(message.senderId, message.content, message.timestamp);
+      }
+
+      handleTyping() {
+        if (!this.currentParticipant) return;
+
+        // Send typing indicator
+        this.websocket.sendTypingIndicator(this.currentParticipant, true);
+
+        // Clear existing timer
+        if (this.typingTimers.has(this.currentParticipant)) {
+          clearTimeout(this.typingTimers.get(this.currentParticipant));
+        }
+
+        // Set timer to stop typing indicator
+        const timer = setTimeout(() => {
+          this.websocket.sendTypingIndicator(this.currentParticipant, false);
+          this.typingTimers.delete(this.currentParticipant);
+        }, 2000);
+
+        this.typingTimers.set(this.currentParticipant, timer);
+      }
+
+      handleTypingIndicator(data) {
+        if (data.userId === this.currentParticipant) {
+          if (data.isTyping) {
+            this.typingIndicator.classList.remove('hidden');
+          } else {
+            this.typingIndicator.classList.add('hidden');
+          }
+        }
+      }
+
+      updateUserPresence(data) {
+        // Update presence status in UI
+        if (data.userId === this.currentParticipant) {
+          this.updatePresenceStatus(data.status);
+        }
+      }
+
+      updatePresenceStatus(status) {
+        const statusColors = {
+          online: 'bg-green-500',
+          away: 'bg-yellow-500',
+          offline: 'bg-gray-400'
+        };
+
+        this.currentChatStatus.className = `w-2 h-2 rounded-full ${statusColors[status] || 'bg-gray-400'}`;
+        this.currentChatPresence.textContent = status.charAt(0).toUpperCase() + status.slice(1);
+      }
+
+      updateConnectionStatus(status, color) {
+        this.connectionStatus.textContent = status;
+        this.connectionStatus.className = `text-${color}-600`;
+      }
+
+      updateConversationLastMessage(senderId, content, timestamp) {
+        const conversationItem = document.querySelector(`[data-participant-id="${senderId}"]`);
+        if (conversationItem) {
+          const lastMessageElement = conversationItem.querySelector('.text-gray-600');
+          const timeElement = conversationItem.querySelector('.text-gray-500');
+
+          lastMessageElement.textContent = content.length > 50 ? content.substring(0, 50) + '...' : content;
+          timeElement.textContent = new Date(timestamp).toLocaleTimeString([], {
+            hour: '2-digit',
+            minute: '2-digit'
+          });
+        }
+      }
+
+      markMessageAsRead(messageId) {
+        const messageElement = document.querySelector(`[data-message-id="${messageId}"]`);
+        if (messageElement) {
+          const checkmark = messageElement.querySelector('.text-blue-200');
+          if (checkmark) {
+            checkmark.textContent = '✓✓';
+            checkmark.classList.add('text-green-400');
+          }
+        }
+      }
+
+      markMessageAsDelivered(messageId) {
+        const messageElement = document.querySelector(`[data-message-id="${messageId}"]`);
+        if (messageElement) {
+          const checkmark = messageElement.querySelector('.text-blue-200');
+          if (checkmark) {
+            checkmark.textContent = '✓';
+          }
+        }
+      }
+
+      escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+      }
+
+      showErrorNotification(message) {
+        // Create toast notification
+        const toast = document.createElement('div');
+        toast.className = 'fixed top-4 right-4 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+        toast.textContent = message;
+        document.body.appendChild(toast);
+
+        setTimeout(() => {
+          toast.remove();
+        }, 5000);
+      }
+    }
+
+    // Initialize the messaging app
+    document.addEventListener('DOMContentLoaded', () => {
+      new SecureMessagingApp();
+    });
+  </script>
+</Layout>
+
+<style>
+  .conversation-item {
+    transition: all 0.2s ease;
+  }
+
+  .conversation-item:hover {
+    transform: translateX(2px);
+  }
+
+  #messages-container::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  #messages-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+  }
+
+  #messages-container::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+  }
+
+  #messages-container::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+  }
+</style>

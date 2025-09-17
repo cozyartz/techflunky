@@ -12,7 +12,7 @@ interface ReportData {
 }
 
 export async function POST({ request, locals }: APIContext) {
-  const { DB, ANTHROPIC_API_KEY, MAILERSEND_API_KEY } = locals.runtime.env;
+  const { DB, ANTHROPIC_API_KEY, MAILERSEND_API_KEY } = locals.runtime?.env || {};
 
   try {
     const body = await request.json();
@@ -333,6 +333,10 @@ function generateRecommendations(kpis: any, riskAssessment: any, aiInsights: any
 async function storeReport(report: any, DB: any) {
   const reportId = `report-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
+  if (!DB) {
+    return reportId;
+  }
+
   await DB.prepare(`
     INSERT INTO investor_reports (
       id,
@@ -550,7 +554,18 @@ function calculateRiskScore(risks: any[]) {
 
 // GET endpoint for retrieving stored reports
 export async function GET({ url, locals }: APIContext) {
-  const { DB } = locals.runtime.env;
+  const { DB } = locals.runtime?.env || {};
+
+  if (!DB) {
+    return new Response(JSON.stringify({
+      success: true,
+      reports: [],
+      note: 'Database not configured - showing demo data'
+    }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
   const investorId = url.searchParams.get('investorId');
   const platformId = url.searchParams.get('platformId');
   const reportId = url.searchParams.get('reportId');

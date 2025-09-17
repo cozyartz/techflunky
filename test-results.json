@@ -1,0 +1,33 @@
+{
+  "timestamp": "2025-09-17T19:49:52.731Z",
+  "summary": {
+    "total": 41,
+    "passed": 24,
+    "failed": 17,
+    "passRate": "58.54%"
+  },
+  "errors": [
+    "Registration endpoint responds correctly",
+    "Login returns valid authentication token",
+    "Listings endpoint returns array of platforms",
+    "Platform creation endpoint exists and handles auth properly",
+    "Stripe sandbox connection is working",
+    "Checkout session creation works and returns URL",
+    "All Stripe test scenarios pass",
+    "/api/notifications handles authentication properly",
+    "/api/admin/analytics handles authentication properly",
+    "/api/trust/verification handles authentication properly",
+    "/api/growth/referrals handles authentication properly",
+    "/api/analytics/advanced handles authentication properly",
+    "Email validation accepts valid emails",
+    "Notification preferences endpoint exists",
+    "Blueprint validation catches all field errors",
+    "Blueprint validation accepts valid data",
+    "Cloudflare AI endpoint exists and responds"
+  ],
+  "environment": {
+    "baseUrl": "http://localhost:4324",
+    "nodeVersion": "v24.8.0",
+    "platform": "darwin"
+  }
+}

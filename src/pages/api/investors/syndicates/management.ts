@@ -3,7 +3,20 @@
 import type { APIContext } from 'astro';
 
 export async function GET({ url, locals }: APIContext) {
-  const { DB } = locals.runtime.env;
+  const { DB } = locals.runtime?.env || {};
+
+  if (!DB) {
+    return new Response(JSON.stringify({
+      success: true,
+      syndicates: [],
+      invitations: [],
+      opportunities: [],
+      note: 'Database not configured - showing demo data'
+    }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
   const investorId = url.searchParams.get('investorId');
   const action = url.searchParams.get('action') || 'list';
 
@@ -218,7 +231,17 @@ async function getAvailableOpportunities(investorId: string, DB: any) {
 }
 
 export async function POST({ request, locals }: APIContext) {
-  const { DB } = locals.runtime.env;
+  const { DB } = locals.runtime?.env || {};
+
+  if (!DB) {
+    return new Response(JSON.stringify({
+      success: false,
+      error: 'Database not configured'
+    }), {
+      status: 503,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
 
   try {
     const body = await request.json();

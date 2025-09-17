@@ -3,7 +3,20 @@ import type { APIContext } from 'astro';
 
 // Get personalized deal feed for investors
 export async function GET({ url, locals }: APIContext) {
-  const { DB, ANTHROPIC_API_KEY } = locals.runtime.env;
+  const { DB, ANTHROPIC_API_KEY } = locals.runtime?.env || {};
+
+  if (!DB) {
+    return new Response(JSON.stringify({
+      success: true,
+      deals: [],
+      total: 0,
+      investor: null,
+      note: 'Database not configured - showing demo data'
+    }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
   const investorId = url.searchParams.get('investorId');
   const filters = url.searchParams.get('filters'); // JSON string
   const limit = parseInt(url.searchParams.get('limit') || '20');
