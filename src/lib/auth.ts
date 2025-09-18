@@ -20,6 +20,16 @@ export async function getCurrentUser(request: Request, env: any): Promise<User |
     if (!env.DB) {
       // Validate demo session token format (should be UUID)
       if (sessionToken && sessionToken.match(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i)) {
+        // In demo mode, validate session expiration (stored in token after :)
+        // Format: uuid:timestamp (if timestamp exists)
+        const parts = sessionToken.split(':');
+        if (parts.length === 2) {
+          const timestamp = parseInt(parts[1]);
+          if (timestamp && Date.now() > timestamp) {
+            return null; // Expired demo session
+          }
+        }
+
         return {
           id: 'demo-user',
           email: 'test@example.com',

@@ -2,6 +2,7 @@ import { defineMiddleware } from 'astro:middleware';
 import { getCurrentUser } from './lib/auth';
 import { SecurityLogger } from './lib/security/auth';
 import { RateLimitValidator, AdvancedSanitizer, CSRFValidator, CSPValidator } from './lib/security/validation';
+import { CSRFProtection } from './lib/csrf';
 
 // Protected routes that require authentication
 const PROTECTED_ROUTES = [
@@ -258,20 +259,34 @@ export const onRequest = defineMiddleware(async (context, next) => {
       const csrfToken = request.headers.get('X-CSRF-Token');
       const origin = request.headers.get('Origin');
 
-      // Validate CSRF token if user is authenticated
+      // Enhanced CSRF protection for authenticated users
       if (user) {
-        const sessionId = request.headers.get('X-Session-ID');
-        if (!sessionId || !CSRFValidator.validateToken(sessionId, csrfToken || '')) {
+        if (!csrfToken) {
           await SecurityLogger.logEvent({
             type: 'suspicious_activity',
             userId: user.id,
             ipAddress: clientIP,
             userAgent,
-            details: { path: pathname, reason: 'Invalid CSRF token' },
+            details: { path: pathname, error: 'Missing CSRF token' },
             severity: 'high'
           });
 
-          return new Response('CSRF token validation failed', { status: 403 });
+          return new Response('CSRF token required', { status: 403 });
+        }
+
+        // Validate CSRF token with enhanced security
+        const isValidCSRF = CSRFProtection.validateToken(csrfToken, user.id);
+        if (!isValidCSRF) {
+          await SecurityLogger.logEvent({
+            type: 'suspicious_activity',
+            userId: user.id,
+            ipAddress: clientIP,
+            userAgent,
+            details: { path: pathname, error: 'Invalid CSRF token' },
+            severity: 'high'
+          });
+
+          return new Response('Invalid CSRF token', { status: 403 });
         }
       }
 

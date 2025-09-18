@@ -1,4 +1,5 @@
 import type { APIRoute } from 'astro';
+import { SecureCookieManager } from '../../../lib/cookies';
 
 export const POST: APIRoute = async ({ request, locals }) => {
   try {
@@ -14,7 +15,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
       }
     }
 
-    // Clear session cookie
+    // Clear session cookie with enhanced security
     const response = new Response(JSON.stringify({
       success: true,
       message: 'Logged out successfully'
@@ -23,7 +24,10 @@ export const POST: APIRoute = async ({ request, locals }) => {
       headers: { 'Content-Type': 'application/json' }
     });
 
-    response.headers.set('Set-Cookie', 'session=; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=0');
+    const isDevelopment = process.env.NODE_ENV === 'development';
+    const logoutCookie = SecureCookieManager.createLogoutCookie(isDevelopment);
+    response.headers.set('Set-Cookie', logoutCookie);
+    SecureCookieManager.addSecurityHeaders(response);
 
     return response;
 

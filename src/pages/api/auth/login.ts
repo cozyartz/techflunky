@@ -1,11 +1,13 @@
 import type { APIContext } from 'astro';
 import bcrypt from 'bcryptjs';
+import { InputSanitizer } from '../../../lib/sanitization';
+import { SecureCookieManager } from '../../../lib/cookies';
 
 export async function POST({ request, locals }: APIContext) {
   try {
     const { email, password } = await request.json();
 
-    // Validate input
+    // Validate and sanitize input
     if (!email || !password) {
       return new Response(JSON.stringify({
         success: false,
@@ -16,34 +18,56 @@ export async function POST({ request, locals }: APIContext) {
       });
     }
 
+    let sanitizedEmail: string;
+    let validatedPassword: string;
+
+    try {
+      sanitizedEmail = InputSanitizer.validateAndSanitizeInput(email, 'email');
+      validatedPassword = InputSanitizer.validateAndSanitizeInput(password, 'password');
+    } catch (sanitizeError) {
+      return new Response(JSON.stringify({
+        success: false,
+        error: sanitizeError instanceof Error ? sanitizeError.message : 'Invalid input format'
+      }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+
     // Find user by email
     const DB = locals.runtime?.env?.DB || process.env.D1_DATABASE;
     if (!DB) {
-      // Demo mode - accept any login
-      const sessionToken = crypto.randomUUID();
+      // Demo mode - accept any login with expiring session
+      const baseToken = crypto.randomUUID();
+      const expiresAt = Date.now() + (2 * 60 * 60 * 1000); // 2 hours for demo
+      const sessionToken = `${baseToken}:${expiresAt}`;
+
       const response = new Response(JSON.stringify({
         success: true,
         data: {
           user: {
             id: 'demo-user',
-            email: email.toLowerCase(),
+            email: sanitizedEmail,
             name: 'Demo User',
             role: 'user'
           },
-          token: sessionToken
+          token: baseToken
         },
         note: 'Demo login - Database not configured'
       }), {
         status: 200,
         headers: { 'Content-Type': 'application/json' }
       });
-      response.headers.set('Set-Cookie', `session=${sessionToken}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=${30 * 24 * 60 * 60}`);
+      const isDevelopment = process.env.NODE_ENV === 'development';
+      const cookieString = SecureCookieManager.createSessionCookie(sessionToken, 2 * 60 * 60, isDevelopment);
+      response.headers.set('Set-Cookie', cookieString);
+      SecureCookieManager.addSecurityHeaders(response);
       return response;
     }
 
     const user = await DB.prepare(
       'SELECT id, email, name, password_hash, role FROM users WHERE email = ?'
-    ).bind(email.toLowerCase()).first();
+    ).bind(sanitizedEmail).first();
 
     if (!user) {
       return new Response(JSON.stringify({
@@ -56,7 +80,7 @@ export async function POST({ request, locals }: APIContext) {
     }
 
     // Verify password
-    const passwordValid = await bcrypt.compare(password, user.password_hash);
+    const passwordValid = await bcrypt.compare(validatedPassword, user.password_hash);
     if (!passwordValid) {
       return new Response(JSON.stringify({
         success: false,
@@ -104,7 +128,10 @@ export async function POST({ request, locals }: APIContext) {
       headers: { 'Content-Type': 'application/json' }
     });
 
-    response.headers.set('Set-Cookie', `session=${sessionToken}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=${30 * 24 * 60 * 60}`);
+    const isDevelopment = process.env.NODE_ENV === 'development';
+    const cookieString = SecureCookieManager.createSessionCookie(sessionToken, 30 * 24 * 60 * 60, isDevelopment);
+    response.headers.set('Set-Cookie', cookieString);
+    SecureCookieManager.addSecurityHeaders(response);
 
     return response;
 
