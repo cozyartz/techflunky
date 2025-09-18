@@ -16,6 +16,20 @@ export async function getCurrentUser(request: Request, env: any): Promise<User |
       return null;
     }
 
+    // Demo mode fallback when database is not configured
+    if (!env.DB) {
+      // Validate demo session token format (should be UUID)
+      if (sessionToken && sessionToken.match(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i)) {
+        return {
+          id: 'demo-user',
+          email: 'test@example.com',
+          name: 'Demo User',
+          role: 'user'
+        };
+      }
+      return null;
+    }
+
     const session = await env.DB.prepare(`
       SELECT us.user_id, us.expires_at, u.email, u.name, u.role, p.bio, p.company, p.avatar_url
       FROM user_sessions us

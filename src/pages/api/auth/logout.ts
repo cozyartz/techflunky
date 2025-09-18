@@ -6,9 +6,12 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
     if (sessionToken) {
       // Delete session from database
-      await locals.runtime.env.DB.prepare(
-        'DELETE FROM user_sessions WHERE token = ?'
-      ).bind(sessionToken).run();
+      const DB = locals.runtime?.env?.DB || process.env.D1_DATABASE;
+      if (DB) {
+        await DB.prepare(
+          'DELETE FROM user_sessions WHERE token = ?'
+        ).bind(sessionToken).run();
+      }
     }
 
     // Clear session cookie

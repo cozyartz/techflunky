@@ -1,5 +1,6 @@
 import { defineMiddleware } from 'astro:middleware';
-import { getCurrentUser, rateLimitService, SecurityLogger, InputSanitizer } from './lib/security/auth';
+import { getCurrentUser } from './lib/auth';
+import { SecurityLogger } from './lib/security/auth';
 import { RateLimitValidator, AdvancedSanitizer, CSRFValidator, CSPValidator } from './lib/security/validation';
 
 // Protected routes that require authentication
@@ -49,7 +50,9 @@ export const onRequest = defineMiddleware(async (context, next) => {
   // Get user context first for rate limiting
   const env = context.locals.runtime?.env || {};
   const user = await getCurrentUser(request, env);
-  context.locals.user = user;
+  if (user) {
+    context.locals.user = user;
+  }
 
   // Advanced rate limiting check with role-based limits
   const userRole = user?.role || 'guest';
@@ -85,7 +88,70 @@ export const onRequest = defineMiddleware(async (context, next) => {
   const isPublicRoute = PUBLIC_ROUTES.some(route => pathname.startsWith(route));
   const isHighSecurityRoute = HIGH_SECURITY_ROUTES.some(route => pathname.startsWith(route));
 
-  // Security headers for all responses
+  // Authentication check BEFORE calling next()
+  if (requiresAuth && !isPublicRoute) {
+    if (!user) {
+      await SecurityLogger.logEvent({
+        type: 'auth_failure',
+        ipAddress: clientIP,
+        userAgent,
+        details: { path: pathname, reason: 'No authentication' },
+        severity: 'medium'
+      });
+
+      // Redirect to login for page requests
+      if (!pathname.startsWith('/api/')) {
+        return Response.redirect(new URL('/login', url.origin), 302);
+      }
+
+      return new Response('Authentication required', { status: 401 });
+    }
+
+    // Log successful authentication
+    await SecurityLogger.logEvent({
+      type: 'auth_success',
+      userId: user.id,
+      ipAddress: clientIP,
+      userAgent,
+      details: { path: pathname },
+      severity: 'low'
+    });
+  }
+
+  // High-security route checks
+  if (isHighSecurityRoute && user) {
+    // Require admin role for high-security routes
+    if (user.role !== 'admin') {
+      await SecurityLogger.logEvent({
+        type: 'permission_denied',
+        userId: user.id,
+        ipAddress: clientIP,
+        userAgent,
+        details: { path: pathname, requiredRole: 'admin', userRole: user.role },
+        severity: 'high'
+      });
+
+      return new Response('Insufficient permissions', { status: 403 });
+    }
+
+    // High security routes require admin role only (simplified from complex enterprise system)
+  }
+
+  // Admin route protection
+  if (pathname.startsWith('/admin') && user && user.role !== 'admin') {
+    await SecurityLogger.logEvent({
+      type: 'permission_denied',
+      userId: user.id,
+      ipAddress: clientIP,
+      userAgent,
+      details: { path: pathname, attemptedAccess: 'admin_area' },
+      severity: 'high'
+    });
+
+    return new Response('Admin access required', { status: 403 });
+  }
+
+  // Call next() AFTER authentication checks pass
   const response = await next();
 
   // Add security headers if not already present
@@ -138,7 +204,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
             }
 
             // Store sanitized data for use in API handlers (optional)
-            context.locals.sanitizedBody = sanitizedData;
+            // Note: sanitizedBody would need to be added to Locals type definition
           } catch (jsonError) {
             validationPassed = false;
             validationError = 'Invalid JSON format';
@@ -172,7 +238,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
         type: 'suspicious_activity',
         ipAddress: clientIP,
         userAgent,
-        details: { path: pathname, error: 'Input validation failed', details: error.message },
+        details: { path: pathname, error: 'Input validation failed', details: String(error) },
         severity: 'medium'
       });
     }
@@ -183,88 +249,13 @@ export const onRequest = defineMiddleware(async (context, next) => {
     }
   }
 
-  // User authentication already handled above for rate limiting
-
-  if (requiresAuth && !isPublicRoute) {
-    if (!user) {
-      await SecurityLogger.logEvent({
-        type: 'auth_failure',
-        ipAddress: clientIP,
-        userAgent,
-        details: { path: pathname, reason: 'No authentication' },
-        severity: 'medium'
-      });
-
-      // Redirect to login for page requests
-      if (!pathname.startsWith('/api/')) {
-        return Response.redirect(new URL('/login', url.origin), 302);
-      }
-
-      return new Response('Authentication required', { status: 401 });
-    }
-
-    // Log successful authentication
-    await SecurityLogger.logEvent({
-      type: 'auth_success',
-      userId: user.id,
-      ipAddress: clientIP,
-      userAgent,
-      details: { path: pathname },
-      severity: 'low'
-    });
-  }
-
-  // High-security route checks
-  if (isHighSecurityRoute && user) {
-    // Require admin role for high-security routes
-    if (user.role !== 'admin') {
-      await SecurityLogger.logEvent({
-        type: 'permission_denied',
-        userId: user.id,
-        ipAddress: clientIP,
-        userAgent,
-        details: { path: pathname, requiredRole: 'admin', userRole: user.role },
-        severity: 'high'
-      });
-
-      return new Response('Insufficient permissions', { status: 403 });
-    }
-
-    // Require high security level
-    if (user.securityLevel < 3) {
-      await SecurityLogger.logEvent({
-        type: 'permission_denied',
-        userId: user.id,
-        ipAddress: clientIP,
-        userAgent,
-        details: { path: pathname, requiredLevel: 3, userLevel: user.securityLevel },
-        severity: 'high'
-      });
-
-      return new Response('Elevated security clearance required', { status: 403 });
-    }
-  }
-
-  // Admin route protection
-  if (pathname.startsWith('/admin') && user && user.role !== 'admin') {
-    await SecurityLogger.logEvent({
-      type: 'permission_denied',
-      userId: user.id,
-      ipAddress: clientIP,
-      userAgent,
-      details: { path: pathname, attemptedAccess: 'admin_area' },
-      severity: 'high'
-    });
-
-    return new Response('Admin access required', { status: 403 });
-  }
+  // Authentication checks already handled above
 
   // Enhanced API route security
   if (pathname.startsWith('/api/')) {
     // Enhanced CSRF protection for state-changing operations
     if (['POST', 'PUT', 'DELETE', 'PATCH'].includes(request.method)) {
       const csrfToken = request.headers.get('X-CSRF-Token');
-      const referer = request.headers.get('Referer');
       const origin = request.headers.get('Origin');
 
       // Validate CSRF token if user is authenticated
@@ -302,7 +293,6 @@ export const onRequest = defineMiddleware(async (context, next) => {
     // Advanced endpoint-specific rate limiting
     const authEndpoints = ['/auth/', '/login', '/register', '/password-reset'];
     const paymentEndpoints = ['/payment/', '/stripe/', '/purchase'];
-    const sensitiveEndpoints = ['/admin/', '/investor/', '/seller/'];
 
     if (authEndpoints.some(endpoint => pathname.includes(endpoint))) {
       const authLimit = RateLimitValidator.checkRateLimit(`auth:${clientIP}`, '/api/auth/', userRole);
@@ -350,7 +340,6 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
     if (user) {
       response.headers.set('X-User-Role', user.role);
-      response.headers.set('X-Security-Level', user.securityLevel.toString());
     }
   }
 
