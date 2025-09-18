@@ -8,10 +8,18 @@ export default defineConfig({
       title: 'TechFlunky Documentation',
       description: 'Complete documentation for the TechFlunky marketplace platform',
       favicon: '/favicon.ico',
-      social: {
-        github: 'https://github.com/cozyartz/techflunky',
-        twitter: 'https://twitter.com/techflunky',
-      },
+      social: [
+        {
+          label: 'GitHub',
+          icon: 'github',
+          href: 'https://github.com/cozyartz/techflunky',
+        },
+        {
+          label: 'Twitter',
+          icon: 'twitter',
+          href: 'https://twitter.com/techflunky',
+        },
+      ],
       customCss: [
         './src/styles/custom.css',
       ],
