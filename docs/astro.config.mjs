@@ -8,6 +8,16 @@ export default defineConfig({
       title: 'TechFlunky Documentation',
       description: 'Complete documentation for the TechFlunky marketplace platform',
       favicon: '/favicon.ico',
+      defaultLocale: 'root',
+      locales: {
+        root: {
+          label: 'English',
+          lang: 'en',
+        },
+      },
+      components: {
+        ThemeSelect: './src/components/ThemeSelect.astro',
+      },
       social: [
         {
           label: 'GitHub',

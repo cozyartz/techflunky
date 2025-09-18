@@ -1,0 +1,89 @@
+---
+import type { Props } from '@astrojs/starlight/props';
+import Default from '@astrojs/starlight/components/ThemeSelect.astro';
+---
+
+<Default {...Astro.props}>
+  <slot />
+</Default>
+
+<script>
+  // Ensure theme switching works properly with custom CSS
+  function initThemeToggle() {
+    const themeSelect = document.querySelector('starlight-theme-select');
+    if (themeSelect) {
+      // Force update CSS custom properties when theme changes
+      const observer = new MutationObserver(() => {
+        const theme = document.documentElement.getAttribute('data-theme');
+        updateThemeColors(theme);
+      });
+
+      observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['data-theme']
+      });
+
+      // Initial theme setup
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      updateThemeColors(currentTheme);
+    }
+  }
+
+  function updateThemeColors(theme: string | null) {
+    const root = document.documentElement;
+
+    if (theme === 'light') {
+      // Light theme overrides
+      root.style.setProperty('--sl-color-bg', '#ffffff');
+      root.style.setProperty('--sl-color-text', '#111827');
+      root.style.setProperty('--sl-color-bg-nav', '#f8fafc');
+      root.style.setProperty('--sl-color-bg-sidebar', '#f1f5f9');
+      root.style.setProperty('--sl-color-gray-6', '#64748b');
+      root.style.setProperty('--sl-color-hairline', '#e2e8f0');
+      root.style.setProperty('--sl-color-hairline-shade', '#cbd5e1');
+    } else {
+      // Dark theme (default)
+      root.style.setProperty('--sl-color-bg', '#09090b');
+      root.style.setProperty('--sl-color-text', '#ffffff');
+      root.style.setProperty('--sl-color-bg-nav', '#111827');
+      root.style.setProperty('--sl-color-bg-sidebar', '#1f2937');
+      root.style.setProperty('--sl-color-gray-6', '#374151');
+      root.style.setProperty('--sl-color-hairline', '#374151');
+      root.style.setProperty('--sl-color-hairline-shade', '#1f2937');
+    }
+  }
+
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initThemeToggle);
+  } else {
+    initThemeToggle();
+  }
+</script>
+
+<style>
+  /* Ensure theme select is visible and styled properly */
+  starlight-theme-select {
+    display: block;
+  }
+
+  starlight-theme-select select {
+    background: var(--sl-color-bg-nav);
+    border: 1px solid var(--sl-color-hairline);
+    border-radius: 6px;
+    color: var(--sl-color-text);
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+  }
+
+  starlight-theme-select select:hover {
+    border-color: var(--color-brand-yellow-primary);
+  }
+
+  starlight-theme-select select:focus {
+    border-color: var(--color-brand-yellow-primary);
+    box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.2);
+    outline: none;
+  }
+</style>
