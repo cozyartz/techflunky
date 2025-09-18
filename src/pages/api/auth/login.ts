@@ -17,7 +17,7 @@ export async function POST({ request, locals }: APIContext) {
     }
 
     // Find user by email
-    const DB = locals.runtime?.env?.DB;
+    const DB = locals.runtime?.env?.DB || process.env.D1_DATABASE;
     if (!DB) {
       // Demo mode - accept any login
       const sessionToken = crypto.randomUUID();

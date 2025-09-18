@@ -15,6 +15,10 @@ export interface TenantRequest extends Request {
 
 // Extract tenant context from request headers
 export function extractTenantContext(request: Request): TenantContext | null {
+  if (!request || !request.headers) {
+    return null;
+  }
+
   const tenantId = request.headers.get('X-Tenant-ID');
   const tenantType = request.headers.get('X-Tenant-Type');
 
@@ -173,9 +177,9 @@ export function createTenantQuery(
 
 // Tenant-aware middleware for API routes
 export function withTenantIsolation(
-  handler: (request: TenantRequest, env: any, ctx: ExecutionContext, tenant: TenantContext | null) => Promise<Response>
+  handler: (request: TenantRequest, locals: any, ctx: ExecutionContext, tenant: TenantContext | null) => Promise<Response>
 ) {
-  return async (request: Request, env: any, ctx: ExecutionContext): Promise<Response> => {
+  return async ({ request, locals }: { request: Request; locals: any }): Promise<Response> => {
     const tenant = extractTenantContext(request);
 
     // Add tenant context to request
@@ -183,7 +187,7 @@ export function withTenantIsolation(
     tenantRequest.tenant = tenant || undefined;
 
     try {
-      return await handler(tenantRequest, env, ctx, tenant);
+      return await handler(tenantRequest, locals, {} as ExecutionContext, tenant);
     } catch (error) {
       console.error('Tenant isolation error:', error);
       return new Response('Tenant access error', { status: 500 });

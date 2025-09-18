@@ -59,9 +59,12 @@ export class AuthenticationService {
   private secretKey: Uint8Array;
 
   constructor(env?: any) {
+    // Use Cloudflare secret store for production, fallback for development
+    const jwtSecret = env?.JWT_SECRET || process.env.JWT_SECRET || 'dev-secret-change-in-production-min32chars';
+
     this.config = {
       ...DEFAULT_CONFIG,
-      jwtSecret: env?.JWT_SECRET || process.env.JWT_SECRET || 'dev-secret-change-in-production'
+      jwtSecret
     };
 
     this.secretKey = new TextEncoder().encode(this.config.jwtSecret);

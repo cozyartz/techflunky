@@ -48,8 +48,11 @@ zone_name = "techflunky.com"
 ENVIRONMENT = "development"
 SITE_URL = "http://localhost:4321"
 
-# Production secrets (configure in Cloudflare dashboard)
+# Production secrets (configure in Cloudflare dashboard using wrangler secret put)
+# - JWT_SECRET
 # - STRIPE_SECRET_KEY
 # - STRIPE_WEBHOOK_SECRET_TEST
 # - STRIPE_WEBHOOK_SECRET_LIVE
 # - AUTIMIND_STRIPE_KEY
+# - MAILERSEND_API_KEY
+# - ENCRYPTION_KEY

@@ -1,40 +1,48 @@
 # Architecture Overview
 
-## System Architecture
+## Workers for Platforms Multi-Tenant SaaS Architecture
 
-TechFlunky is built on a modern, serverless architecture leveraging Cloudflare's global network for maximum performance and scalability.
+TechFlunky is built on **Cloudflare Workers for Platforms**, providing true multi-tenant SaaS architecture with complete tenant isolation. This enterprise-grade system delivers sub-100ms global response times while maintaining the industry's lowest marketplace fee at 8%.
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                         TechFlunky Platform                       │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                   │
-│  ┌─────────────────┐     ┌─────────────────┐    ┌────────────┐ │
-│  │   Web Frontend  │     │   API Gateway   │    │  Database  │ │
-│  │  (Astro+React) │────▶│ (CF Workers)    │───▶│   (D1)     │ │
-│  └─────────────────┘     └─────────────────┘    └────────────┘ │
-│           │                        │                     │       │
-│           │                        │                     │       │
-│           ▼                        ▼                     ▼       │
-│  ┌─────────────────┐     ┌─────────────────┐    ┌────────────┐ │
-│  │  Static Assets  │     │ Payment Handler │    │  Storage   │ │
-│  │  (CF Pages)     │     │ (Stripe Connect)│    │   (R2)     │ │
-│  └─────────────────┘     └─────────────────┘    └────────────┘ │
-│                                    │                             │
-│                                    ▼                             │
-│                          ┌─────────────────┐                    │
-│                          │   Deployment    │                    │
-│                          │    Manager      │                    │
-│                          └─────────────────┘                    │
-│                                    │                             │
-└────────────────────────────────────┼─────────────────────────────┘
-                                     │
-                                     ▼
-                          ┌─────────────────┐
-                          │  Buyer's        │
-                          │  Cloudflare     │
-                          │  Account        │
-                          └─────────────────┘
+┌───────────────────────────────────────────────────────────────────────────┐
+│                          TechFlunky Platform                                │
+│                    (Workers for Platforms Architecture)                    │
+├───────────────────────────────────────────────────────────────────────────┤
+│                                                                             │
+│  ┌─────────────────┐     ┌──────────────────────┐    ┌────────────────┐  │
+│  │   Web Frontend  │     │   Dispatch Worker    │    │  Shared Assets │  │
+│  │  (Astro+React) │────▶│  (techflunky.com)   │    │ (CDN/R2/Pages) │  │
+│  └─────────────────┘     └──────────┬───────────┘    └────────────────┘  │
+│           │                         │                          │           │
+│           │                         ▼                          │           │
+│           │              ┌──────────────────────┐              │           │
+│           │              │  Dispatch Namespace  │              │           │
+│           │              │ "techflunky-tenants" │              │           │
+│           │              └──────────┬───────────┘              │           │
+│           │                         │                          │           │
+│           ▼                         ▼                          ▼           │
+│  ┌─────────────────┐       ┌────────────────┐       ┌────────────────┐   │
+│  │   Security &    │       │  Tenant Worker │       │   Shared D1    │   │
+│  │  Auth Systems   │       │ (Per Seller/   │       │   Database     │   │
+│  │ (JWT/Sessions)  │       │    Buyer)      │       │ (Multi-tenant) │   │
+│  └─────────────────┘       └────────────────┘       └────────────────┘   │
+│                                      │                        │           │
+│                                      ▼                        │           │
+│                           ┌─────────────────────┐            │           │
+│                           │  Tenant Isolation   │            │           │
+│                           │    Middleware       │            │           │
+│                           │ (Data Separation)   │            │           │
+│                           └─────────────────────┘            │           │
+│                                      │                        │           │
+└──────────────────────────────────────┼────────────────────────┼───────────┘
+                                       │                        │
+                                       ▼                        ▼
+                            ┌─────────────────────┐  ┌─────────────────────┐
+                            │  Seller Subdomain  │  │  Buyer Subdomain   │
+                            │ seller.techflunky   │  │ buyer.techflunky    │
+                            │     .com/*          │  │     .com/*          │
+                            └─────────────────────┘  └─────────────────────┘
 ```
 
 ## Core Components
@@ -56,16 +64,26 @@ The frontend is built with Astro for optimal performance and React for interacti
 - `/dashboard/deploy` - Deployment interface
 - `/seller/onboarding` - Seller registration
 
-### 2. API Gateway (Cloudflare Workers)
+### 2. Workers for Platforms Multi-Tenant System
 
-All API requests are handled by edge Workers for minimal latency.
+**Dispatch Worker (techflunky-dispatch)**
+- Routes requests to tenant-specific Workers
+- Handles subdomain routing (`seller.techflunky.com`, `buyer.techflunky.com`)
+- JWT token validation and tenant identification
+- Security and rate limiting
 
-**Endpoints:**
-- `POST /api/checkout/create-session` - Create Stripe checkout
-- `POST /api/checkout/webhook` - Handle Stripe webhooks
-- `POST /api/deploy` - Deploy package to buyer's account
-- `GET /api/deploy?deploymentId=X` - Check deployment status
-- `POST /api/seller/create-account` - Create seller account
+**User Worker (techflunky-user-worker)**
+- Deployed to `techflunky-tenants` dispatch namespace
+- Complete tenant isolation
+- Per-tenant data access controls
+- Seller/buyer specific business logic
+
+**API Endpoints with Tenant Isolation:**
+- `GET /api/listings` - Tenant-filtered marketplace data
+- `POST /api/platform/create` - Seller platform creation
+- `POST /api/auth/login` - Multi-tenant authentication
+- `POST /api/auth/register` - Tenant-aware registration
+- `GET /api/investors/performance` - Isolated investor data
 
 ### 3. Deployment System
 
@@ -125,23 +143,33 @@ Stripe Connect handles all payment processing with platform fees.
 
 ## Security Architecture
 
-### API Token Handling
-- Tokens are never stored
-- Used only during deployment
-- Scoped to minimum permissions
-- Transmitted over HTTPS only
+### Multi-Tenant Security
+- **Complete Tenant Isolation**: Database queries filtered by tenant context
+- **Request-Level Validation**: Every API call validates tenant permissions
+- **Data Sanitization**: All input/output sanitized for tenant context
+- **JWT Secret Management**: Stored in Cloudflare secret store
+- **CSRF Protection**: Enhanced token validation
+- **Rate Limiting**: Per-tenant limits (sellers: 1000/hr, buyers: 500/hr)
 
-### Isolation
-- Each deployment is isolated
-- No cross-account access
-- Separate namespaces per business
-- Independent DNS configuration
+### Workers for Platforms Security
+- **Dispatch Namespace Isolation**: `techflunky-tenants` provides complete separation
+- **Subdomain Routing**: Automatic tenant identification via subdomains
+- **Environment Isolation**: Separate runtime contexts per tenant
+- **Resource Access Control**: Tenant-scoped database and storage access
+
+### Authentication & Authorization
+- **JWT Token Management**: Production secrets in Cloudflare secret store
+- **Session Management**: Secure session tokens with 30-day expiration
+- **Role-Based Access**: Admin, Seller, Buyer, Investor permissions
+- **MFA Support**: Multi-factor authentication ready
+- **Password Security**: bcrypt hashing with 12 salt rounds
 
 ### Data Protection
-- All data encrypted at rest
-- TLS 1.3 for all connections
-- No sensitive data in logs
-- GDPR compliant
+- **Encryption**: All data encrypted at rest and in transit
+- **TLS 1.3**: Latest security protocols
+- **No Cross-Tenant Access**: Strict data isolation
+- **Audit Logging**: Comprehensive security event tracking
+- **GDPR Compliance**: Privacy by design implementation
 
 ## Scalability
 

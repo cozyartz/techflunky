@@ -2,7 +2,14 @@
 
 ## Overview
 
-TechFlunky's deployment system automates the process of deploying complete business solutions to a buyer's Cloudflare account. This guide covers both deploying the TechFlunky platform itself and how businesses are deployed for buyers.
+TechFlunky's **Workers for Platforms** deployment system provides enterprise-grade multi-tenant SaaS architecture with complete tenant isolation. This guide covers deploying the TechFlunky platform using Cloudflare Workers for Platforms and the business deployment system for buyers.
+
+**Key Features:**
+- **True Multi-Tenancy**: Complete tenant isolation using dispatch namespaces
+- **Sub-100ms Response Times**: Global edge computing via Cloudflare
+- **Industry-Leading Pricing**: 8% marketplace fee vs 15-20% competitors
+- **Enterprise Security**: JWT secrets in Cloudflare secret store
+- **Automatic Scaling**: Handles millions of requests without configuration
 
 ## Deploying TechFlunky Platform
 
@@ -61,17 +68,50 @@ npm run build
 npm run deploy
 ```
 
-### Step 4: Configure Cloudflare for SaaS
+### Step 4: Deploy Workers for Platforms
 
-1. Go to Cloudflare Dashboard → Your Zone → SSL/TLS → Custom Hostnames
-2. Enable Cloudflare for SaaS
-3. Set fallback origin to your platform domain
-4. Configure SSL settings
+**Deploy Dispatch Worker:**
+```bash
+cd workers/dispatch
+wrangler deploy
+```
 
-### Step 5: Set Up Stripe Webhooks
+**Create Dispatch Namespace:**
+```bash
+wrangler dispatch-namespace create techflunky-tenants
+```
 
+**Deploy User Worker to Namespace:**
+```bash
+cd workers/user
+wrangler deploy --dispatch-namespace techflunky-tenants
+```
+
+**Configure JWT Secrets:**
+```bash
+wrangler secret put JWT_SECRET
+wrangler secret put ENCRYPTION_KEY
+wrangler secret put MAILERSEND_API_KEY
+```
+
+### Step 5: Configure Multi-Tenant Routing
+
+**Set up subdomain routing:**
+```bash
+# Configure routes for dispatch Worker
+wrangler route add "techflunky.com/*" techflunky-dispatch
+wrangler route add "*.techflunky.com/*" techflunky-dispatch
+```
+
+**DNS Configuration:**
+- Main domain: `techflunky.com` → Dispatch Worker
+- Seller subdomains: `seller.techflunky.com` → Tenant routing
+- Buyer subdomains: `buyer.techflunky.com` → Tenant routing
+- Documentation: `docs.techflunky.com` → Starlight docs
+
+**Set Up Stripe Webhooks:**
 1. Go to Stripe Dashboard → Webhooks
-2. Add endpoint: `https://your-domain.com/api/checkout/webhook`
+2. Add endpoint: `https://techflunky.com/api/checkout/webhook`
 3. Select events:
    - `checkout.session.completed`
    - `payment_intent.succeeded`

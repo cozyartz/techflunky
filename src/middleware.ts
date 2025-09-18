@@ -99,37 +99,50 @@ export const onRequest = defineMiddleware(async (context, next) => {
     response.headers.set('X-XSS-Protection', '0');
   }
 
+  // Store original request for body validation without consuming it
+  let validationPassed = true;
+  let validationError: string | null = null;
+
   // Comprehensive input validation for API routes (skip for public routes)
   if (pathname.startsWith('/api/') && request.method !== 'GET' && !isPublicRoute) {
     try {
       const contentType = request.headers.get('Content-Type');
 
       if (contentType?.includes('application/json')) {
-        const body = await request.text();
+        // Clone request to read body without consuming original
+        const clonedRequest = request.clone();
+        const body = await clonedRequest.text();
+
         if (body) {
           // Advanced JSON validation and sanitization
-          const sanitizedData = AdvancedSanitizer.sanitizeJson(body);
+          try {
+            const sanitizedData = AdvancedSanitizer.sanitizeJson(body);
 
-          // Validate content for CSP violations
-          const cspValidation = CSPValidator.validateInlineContent(body);
-          if (!cspValidation.safe) {
-            await SecurityLogger.logEvent({
-              type: 'suspicious_activity',
-              ipAddress: clientIP,
-              userAgent,
-              details: {
-                path: pathname,
-                violations: cspValidation.violations,
-                error: 'CSP violation in request body'
-              },
-              severity: 'high'
-            });
+            // Validate content for CSP violations
+            const cspValidation = CSPValidator.validateInlineContent(body);
+            if (!cspValidation.safe) {
+              validationPassed = false;
+              validationError = 'Request contains unsafe content';
 
-            return new Response('Request contains unsafe content', { status: 400 });
+              await SecurityLogger.logEvent({
+                type: 'suspicious_activity',
+                ipAddress: clientIP,
+                userAgent,
+                details: {
+                  path: pathname,
+                  violations: cspValidation.violations,
+                  error: 'CSP violation in request body'
+                },
+                severity: 'high'
+              });
+            }
+
+            // Store sanitized data for use in API handlers (optional)
+            context.locals.sanitizedBody = sanitizedData;
+          } catch (jsonError) {
+            validationPassed = false;
+            validationError = 'Invalid JSON format';
           }
-
-          // Store sanitized data for use in API handlers
-          context.locals.sanitizedBody = sanitizedData;
         }
       }
 
@@ -152,6 +165,9 @@ export const onRequest = defineMiddleware(async (context, next) => {
       }
 
     } catch (error) {
+      validationPassed = false;
+      validationError = 'Input validation failed';
+
       await SecurityLogger.logEvent({
         type: 'suspicious_activity',
         ipAddress: clientIP,
@@ -159,8 +175,11 @@ export const onRequest = defineMiddleware(async (context, next) => {
         details: { path: pathname, error: 'Input validation failed', details: error.message },
         severity: 'medium'
       });
+    }
 
-      return new Response('Invalid request format', { status: 400 });
+    // Return validation errors after checking, but before calling next()
+    if (!validationPassed) {
+      return new Response(validationError || 'Invalid request format', { status: 400 });
     }
   }
 

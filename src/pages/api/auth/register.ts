@@ -40,7 +40,7 @@ export async function POST({ request, locals }: APIContext) {
     }
 
     // Check if user already exists
-    const DB = locals.runtime?.env?.DB;
+    const DB = locals.runtime?.env?.DB || process.env.D1_DATABASE;
     if (!DB) {
       // Demo mode - accept registration without database
       const userId = crypto.randomUUID();

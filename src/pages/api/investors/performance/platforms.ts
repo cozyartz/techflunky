@@ -3,7 +3,7 @@
 import type { APIContext } from 'astro';
 
 export async function GET({ url, locals }: APIContext) {
-  const { DB, ANTHROPIC_API_KEY } = locals.runtime?.env || {};
+  const { DB, ANTHROPIC_API_KEY } = locals.runtime?.env || process.env || {};
   const investorId = url.searchParams.get('investorId');
   const timeframe = url.searchParams.get('timeframe') || '30d';
 
@@ -225,7 +225,7 @@ async function calculateGrowthTrajectory(platformId: string, timeframe: string, 
 
 // POST endpoint for updating platform metrics
 export async function POST({ request, locals }: APIContext) {
-  const { DB } = locals.runtime.env;
+  const { DB } = locals.runtime?.env || process.env || {};
 
   try {
     const body = await request.json();
