@@ -1,0 +1,101 @@
+name: Bug Report
+description: Report a bug in TechFlunky platform
+title: "[BUG] "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug! This helps make TechFlunky better for the entire indie developer community.
+
+  - type: input
+    id: contact
+    attributes:
+      label: Contact Details (Optional)
+      description: How can we get in touch if we need more info?
+      placeholder: ex. email@example.com or @username
+    validations:
+      required: false
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Describe the bug in detail
+      placeholder: Tell us what you see!
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect to happen?
+      description: What should have happened instead?
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: How can we reproduce this bug?
+      placeholder: |
+        1. Go to...
+        2. Click on...
+        3. Scroll down to...
+        4. See error
+    validations:
+      required: true
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: Which component is affected?
+      multiple: true
+      options:
+        - Marketplace browsing
+        - Business canvas creation
+        - AI validation system
+        - Payment processing
+        - Deployment system
+        - Investor portal
+        - Authentication
+        - Dashboard
+        - Documentation
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: browser
+    attributes:
+      label: Browser & Version
+      placeholder: ex. Chrome 119, Safari 17, Firefox 120
+    validations:
+      required: false
+
+  - type: input
+    id: os
+    attributes:
+      label: Operating System
+      placeholder: ex. macOS 14, Windows 11, Ubuntu 22.04
+    validations:
+      required: false
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Error messages or logs
+      description: Any error messages, console output, or relevant logs
+      render: shell
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our indie community guidelines
+      options:
+        - label: I agree to follow TechFlunky's Code of Conduct
+          required: true

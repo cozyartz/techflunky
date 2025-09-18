@@ -1,6 +1,8 @@
 # Contributing to TechFlunky
 
-First off, thank you for considering contributing to TechFlunky! It's people like you that make TechFlunky such a great platform for entrepreneurs worldwide.
+Hey there! Thanks for wanting to help build the indie marketplace that's changing how developers monetize their work and how entrepreneurs access validated business platforms.
+
+We're built by indie developers, for indie developers - and every contribution makes a real difference in democratizing business ownership.
 
 ## Code of Conduct
 
@@ -395,8 +397,9 @@ Contributors are recognized in:
 
 By contributing, you agree that:
 1. You have the right to submit the work
-2. You grant us a perpetual, worldwide license
-3. Your contributions are under MIT license
+2. You grant us a perpetual, worldwide license to use your contributions
+3. Your contributions become part of the commercial TechFlunky platform
+4. You understand this is a commercial platform, not open source
 
 ### Code Attribution
 

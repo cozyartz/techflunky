@@ -1,0 +1,90 @@
+name: Marketplace Feedback
+description: Feedback about business packages, sellers, or marketplace experience
+title: "[MARKETPLACE] "
+labels: ["marketplace", "feedback"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Your marketplace feedback helps us improve the TechFlunky experience for all indie developers, entrepreneurs, and investors.
+
+  - type: dropdown
+    id: feedback-type
+    attributes:
+      label: What type of feedback is this?
+      options:
+        - "Business package quality issue"
+        - "Seller communication issue"
+        - "Deployment problem"
+        - "AI validation concern"
+        - "Pricing feedback"
+        - "General marketplace suggestion"
+        - "Investor experience feedback"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: user-role
+    attributes:
+      label: I am a...
+      options:
+        - "Developer/Seller"
+        - "Entrepreneur/Buyer"
+        - "Investor"
+        - "Platform Admin"
+        - "Other"
+    validations:
+      required: true
+
+  - type: textarea
+    id: experience
+    attributes:
+      label: Describe your experience
+      description: What happened? What worked well or didn't work?
+    validations:
+      required: true
+
+  - type: input
+    id: package-id
+    attributes:
+      label: Package ID (if applicable)
+      description: If this relates to a specific business package
+      placeholder: ex. pkg_abc123
+    validations:
+      required: false
+
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: How could we improve this?
+      description: What would make the marketplace experience better?
+    validations:
+      required: false
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: How urgent is this issue?
+      options:
+        - "Critical - Affecting transactions"
+        - "High - Major inconvenience"
+        - "Medium - Minor issue"
+        - "Low - Suggestion only"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: confidential
+    attributes:
+      label: Privacy
+      options:
+        - label: This feedback contains sensitive information that should be handled confidentially
+          required: false
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      options:
+        - label: I agree to follow TechFlunky's Code of Conduct
+          required: true

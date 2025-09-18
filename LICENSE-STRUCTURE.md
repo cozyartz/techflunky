@@ -1,6 +1,6 @@
 # License Structure for TechFlunky
 
-TechFlunky uses a **dual licensing model** to balance commercial interests with community contributions:
+TechFlunky uses a **source-available commercial license** that balances transparency with sustainable business operations:
 
 ## 1. Commercial License (Primary)
 
@@ -20,31 +20,32 @@ The TechFlunky platform itself is licensed under a commercial license by Autimin
 - ❌ Cannot remove attribution
 - ❌ Cannot create competing platforms
 
-## 2. Open Source Components
+## 2. Source Available Components
 
 **File**: `LICENSE-OSS`
 
-Certain components are available under open source licenses:
+Selected components are available under permissive licenses for community use:
 
-### MIT Licensed Components
+### Community Licensed Components
 - Example business packages in `/packages/examples/`
-- Package creation templates
-- CLI tool core functionality
-- Documentation and guides
+- Package creation templates and utilities
+- Documentation and developer guides
+- Selected development tools
 
-### Why This Split?
+### Why Source Available?
 
-1. **Platform Protection**: The core platform remains proprietary to protect the business model
-2. **Community Growth**: Examples and tools are open source to help the ecosystem grow
-3. **Fair Use**: Buyers can modify their deployments without restriction
-4. **Clear Boundaries**: No ambiguity about what can be freely used
+1. **Transparency**: Full source code visibility builds trust
+2. **Platform Protection**: Core platform remains commercially licensed
+3. **Community Growth**: Tools and examples help the ecosystem grow
+4. **Fair Revenue Model**: 8% success fee sustains platform development
+5. **Clear Boundaries**: No ambiguity about commercial vs community use
 
 ## 3. Package Licenses
 
 Individual business packages can be licensed however the creator chooses:
 - Package creators retain full ownership
 - Can use any license (MIT, GPL, proprietary, etc.)
-- Platform takes 15% fee regardless of package license
+- Platform takes 8% fee regardless of package license (industry-leading low rate)
 
 ## 4. Contributing
 
