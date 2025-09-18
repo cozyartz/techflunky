@@ -346,94 +346,53 @@ import Navigation from '../components/Navigation.astro';
       </div>
     </section>
 
-    <!-- Bug Bounty & Contact -->
+    <!-- Security Contact -->
     <section class="py-16 bg-gray-900/50">
       <div class="container mx-auto px-4">
-        <div class="max-w-4xl mx-auto">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <!-- Bug Bounty -->
-            <div class="bg-black/50 border border-red-500/20 rounded-xl p-8">
-              <div class="text-red-400 mb-4">
-                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
-                </svg>
-              </div>
-              <h3 class="text-xl font-semibold text-white mb-3">Bug Bounty Program</h3>
-              <p class="text-gray-400 text-sm mb-6">
-                Help us maintain the highest security standards. Report vulnerabilities
-                and earn rewards up to $10,000 for critical findings.
-              </p>
-              <div class="space-y-3 mb-6">
-                <div class="flex justify-between items-center">
-                  <span class="text-sm text-gray-500">Critical</span>
-                  <span class="text-sm font-semibold text-red-400">$5,000 - $10,000</span>
-                </div>
-                <div class="flex justify-between items-center">
-                  <span class="text-sm text-gray-500">High</span>
-                  <span class="text-sm font-semibold text-orange-400">$1,000 - $5,000</span>
-                </div>
-                <div class="flex justify-between items-center">
-                  <span class="text-sm text-gray-500">Medium</span>
-                  <span class="text-sm font-semibold text-yellow-400">$500 - $1,000</span>
-                </div>
-                <div class="flex justify-between items-center">
-                  <span class="text-sm text-gray-500">Low</span>
-                  <span class="text-sm font-semibold text-green-400">$100 - $500</span>
-                </div>
-              </div>
-              <a href="/bug-bounty" class="inline-flex items-center px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition text-sm font-semibold">
-                View Program Details
-                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
-                </svg>
-              </a>
+        <div class="max-w-2xl mx-auto">
+          <div class="bg-black/50 border border-green-500/20 rounded-xl p-8 text-center">
+            <div class="text-green-400 mb-4 flex justify-center">
+              <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+              </svg>
             </div>
-
-            <!-- Security Contact -->
-            <div class="bg-black/50 border border-green-500/20 rounded-xl p-8">
-              <div class="text-green-400 mb-4">
-                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
-                  <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
-                </svg>
-              </div>
-              <h3 class="text-xl font-semibold text-white mb-3">Security Contact</h3>
-              <p class="text-gray-400 text-sm mb-6">
-                For security issues, vulnerability reports, or general security questions.
-                We guarantee response within 24 hours for all security matters.
-              </p>
-              <div class="space-y-4 mb-6">
-                <div class="flex items-center space-x-3">
-                  <div class="text-green-400">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
-                      <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
-                    </svg>
-                  </div>
-                  <div>
-                    <div class="text-white font-semibold">security@techflunky.com</div>
-                    <div class="text-xs text-gray-500">Encrypted communication preferred</div>
-                  </div>
+            <h3 class="text-xl font-semibold text-white mb-3">Security Contact</h3>
+            <p class="text-gray-400 text-sm mb-6">
+              For security issues, vulnerability reports, or general security questions.
+              We guarantee response within 24 hours for all security matters.
+            </p>
+            <div class="space-y-4 mb-6 text-left max-w-md mx-auto">
+              <div class="flex items-center space-x-3">
+                <div class="text-green-400">
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+                  </svg>
                 </div>
-                <div class="flex items-center space-x-3">
-                  <div class="text-green-400">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
-                    </svg>
-                  </div>
-                  <div>
-                    <div class="text-white font-semibold">Response SLA: 24 hours</div>
-                    <div class="text-xs text-gray-500">Critical issues: 4 hours</div>
-                  </div>
+                <div>
+                  <div class="text-white font-semibold">security@techflunky.com</div>
+                  <div class="text-xs text-gray-500">Encrypted communication preferred</div>
                 </div>
               </div>
-              <a href="mailto:security@techflunky.com" class="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition text-sm font-semibold">
-                Contact Security Team
-                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
-                </svg>
-              </a>
+              <div class="flex items-center space-x-3">
+                <div class="text-green-400">
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="text-white font-semibold">Response SLA: 24 hours</div>
+                  <div class="text-xs text-gray-500">Critical issues: 4 hours</div>
+                </div>
+              </div>
             </div>
+            <a href="mailto:security@techflunky.com" class="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition text-sm font-semibold">
+              Contact Security Team
+              <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+              </svg>
+            </a>
           </div>
         </div>
       </div>

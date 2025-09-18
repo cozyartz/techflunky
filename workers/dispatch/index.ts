@@ -173,45 +173,61 @@ async function handlePlatformRoute(
   env: Env,
   ctx: ExecutionContext
 ): Promise<Response> {
-  // Import the main Astro application
-  // This will be the existing TechFlunky application
-
-  // For now, return a simple response indicating platform handling
-  // This will be replaced with the actual Astro app integration
-
+  // Route all platform requests to the TechFlunky Pages deployment
   const url = new URL(request.url);
 
-  // Handle API routes that should remain centralized
-  if (url.pathname.startsWith('/api/auth/') ||
-      url.pathname === '/api/stripe/webhook' ||
-      url.pathname.startsWith('/api/admin/')) {
+  // Special handling for security subdomain - route to /security page for HTML requests only
+  let targetPath = url.pathname;
 
-    // Route to existing API handlers
-    return new Response(JSON.stringify({
-      message: 'Platform API route - will integrate with existing handlers',
-      path: url.pathname,
-      method: request.method
-    }), {
-      headers: { 'Content-Type': 'application/json' }
-    });
+  if (url.hostname === 'security.techflunky.com' || url.hostname.includes('security.techflunky.com')) {
+    // Only redirect to /security for HTML page requests, not static assets
+    if (!url.pathname.match(/\.(css|js|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|webp|map)$/)) {
+      targetPath = '/security';
+    }
   }
 
-  // Handle static pages
-  return new Response(`
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <title>TechFlunky - AI-Powered Developer Marketplace</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-      </head>
-      <body>
-        <h1>TechFlunky Platform</h1>
-        <p>Main platform route: ${url.pathname}</p>
-        <p>Served by dispatch Worker - will integrate with Astro app</p>
-      </body>
-    </html>
-  `, {
-    headers: { 'Content-Type': 'text/html' }
+  // Create new URL pointing to the TechFlunky Pages deployment
+  const pagesUrl = new URL(targetPath + url.search, 'https://techflunky.pages.dev');
+
+  // Create new request with the updated URL
+  const pagesRequest = new Request(pagesUrl, {
+    method: request.method,
+    headers: request.headers,
+    body: request.body,
+    redirect: 'manual'
   });
+
+  try {
+    // Proxy the request to TechFlunky Pages
+    const response = await fetch(pagesRequest);
+
+    // Return the response from Pages
+    return new Response(response.body, {
+      status: response.status,
+      statusText: response.statusText,
+      headers: response.headers
+    });
+  } catch (error) {
+    console.error('Failed to proxy to TechFlunky Pages:', error);
+
+    // Fallback response if Pages is unavailable
+    return new Response(`
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <title>TechFlunky - Temporarily Unavailable</title>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+        </head>
+        <body>
+          <h1>TechFlunky Platform</h1>
+          <p>Platform temporarily unavailable. Please try again later.</p>
+          <p>Route: ${url.pathname}</p>
+        </body>
+      </html>
+    `, {
+      status: 503,
+      headers: { 'Content-Type': 'text/html' }
+    });
+  }
 }

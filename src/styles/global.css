@@ -23,6 +23,9 @@
   body {
     @apply bg-black text-white antialiased;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    /* Force dark theme with !important to prevent overrides */
+    background-color: #000000 !important;
+    color: #ffffff !important;
   }
 
   /* Custom scrollbar styling */
@@ -212,23 +215,34 @@
   }
 }
 
-/* Print styles */
-@media print {
-  * {
+/* Print styles - Only apply to actual print media, not screen */
+@media print and (not screen) {
+  body {
     background: white !important;
-    color: black !important;
-  }
-
-  .bg-black {
-    background: white !important;
-  }
-
-  .text-white {
     color: black !important;
   }
 
   .text-brand-yellow-400 {
     color: #000000 !important;
     font-weight: bold;
+  }
+
+  /* Hide decorative elements for print */
+  .animate-glow,
+  .animate-float,
+  .animate-pulse {
+    animation: none !important;
+  }
+}
+
+/* Force dark theme on all screen media */
+@media screen {
+  html {
+    background-color: #000000 !important;
+  }
+
+  body {
+    background-color: #000000 !important;
+    color: #ffffff !important;
   }
 }
