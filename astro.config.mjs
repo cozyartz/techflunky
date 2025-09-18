@@ -21,8 +21,11 @@ export default defineConfig({
     },
     build: {
       rollupOptions: {
-        external: ['@cloudflare/ai']
+        external: ['@cloudflare/ai', 'https', 'http', 'net', 'tls', 'url', 'querystring', 'stream', 'assert']
       }
+    },
+    define: {
+      global: 'globalThis'
     }
   }
 });
