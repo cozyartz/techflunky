@@ -49,13 +49,13 @@ TechFlunky supports any technology stack through our universal deployment system
 
 ## Platform Categories
 
-### 🏢 SaaS Platforms ($15K - $25K)
+### 🏢 SaaS Platforms
 - Multi-tenant architecture
 - Subscription billing systems
 - User management and analytics
 - API integrations
 
-### 🤖 AI-Powered Systems ($25K - $40K)
+### 🤖 AI-Powered Systems
 - Machine learning integration
 - Automated workflows
 - Intelligent data processing

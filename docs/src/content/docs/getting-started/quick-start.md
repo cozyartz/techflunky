@@ -15,7 +15,7 @@ Visit [TechFlunky Marketplace](https://techflunky.com/browse) to explore availab
 ### Step 2: Evaluate Options
 Use our filtering system to find platforms that match your needs:
 - **Category**: SaaS, AI Tools, E-commerce, Enterprise
-- **Price Range**: $1K - $100K
+- **Price Range**: 
 - **Technology Stack**: Your preferred frameworks and databases
 - **Deployment**: Your preferred cloud provider
 

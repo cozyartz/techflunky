@@ -5,7 +5,7 @@ description: Everything you need to know about selling business platforms on Tec
 
 # Seller Overview
 
-Welcome to TechFlunky's seller program! As a platform creator, you have the opportunity to turn your complete business platforms into a sustainable revenue stream while helping entrepreneurs launch successful businesses.
+Welcome to TechFlunky's indie seller marketplace! We're built by developers, for developers. As a platform creator, you have complete freedom to monetize your work on your terms - set your own prices, keep your intellectual property, and build direct relationships with buyers who value quality code.
 
 ## What We're Looking For
 
@@ -34,9 +34,9 @@ We don't accept incomplete projects or simple templates. Every platform must be:
 - Competitive analysis available
 - Growth potential documented
 
-## Platform Categories & Pricing
+## Platform Categories
 
-### SaaS Platforms ($15K - $25K)
+### SaaS Platforms
 Perfect for subscription-based business models:
 - **Multi-tenant architecture** with proper data isolation
 - **Subscription billing** integration (Stripe, Paddle)
@@ -46,7 +46,7 @@ Perfect for subscription-based business models:
 
 **Examples**: CRM systems, project management tools, marketing automation
 
-### AI-Powered Systems ($25K - $40K)
+### AI-Powered Systems
 Platforms leveraging artificial intelligence:
 - **Machine learning** integration (OpenAI, Anthropic, Hugging Face)
 - **Automated workflows** and intelligent processing
@@ -56,7 +56,7 @@ Platforms leveraging artificial intelligence:
 
 **Examples**: Content generation tools, automated customer service, intelligent document processing
 
-### Enterprise Solutions ($40K+)
+### Enterprise Solutions
 Complex business platforms for larger organizations:
 - **Advanced workflows** and approval processes
 - **Compliance features** (GDPR, HIPAA, SOX)
@@ -81,14 +81,14 @@ Complex business platforms for larger organizations:
 4. Automatic payout after successful deployment
 5. Wire transfer or ACH to your account
 
-### Example Earnings
-```
-Platform Sale Price: $25,000
-Platform Fee (8%): $2,000
-Your Earnings: $23,000
-
-Annual Potential (4 sales): $92,000
-```
+### Complete Seller Freedom
+- **Set your own price** based on your platform's value
+- **No price restrictions** - charge what your work is worth
+- **Market-driven pricing** determined by you and your buyers
+- **Flexible pricing models** - one-time, tiered, or custom arrangements
+- **Keep your intellectual property** with full ownership rights
+- **Direct buyer relationships** for ongoing support and updates
+- **No platform lock-in** - you control the entire transaction experience
 
 ## Supported Technology Stacks
 
@@ -157,7 +157,7 @@ Our team helps optimize your listing:
 - **Market analysis** and competitive positioning
 - **Business case** development and validation
 - **Demo environment** setup for buyer evaluation
-- **Pricing strategy** based on complexity and market potential
+- **Market positioning** to help you find the right buyers
 
 ### Step 3: Quality Assurance
 Comprehensive review process:
