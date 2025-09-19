@@ -4,10 +4,24 @@
 
 <div align="center">
   <img src="https://img.shields.io/badge/Built%20on-Cloudflare-F38020?style=flat-square&logo=cloudflare&logoColor=white" />
-  <img src="https://img.shields.io/badge/AI%20Powered-Claude-000000?style=flat-square&logo=anthropic&logoColor=white" />
+  <img src="https://img.shields.io/badge/AI%20Powered-Cloudflare%20AI-FF6600?style=flat-square&logo=cloudflare&logoColor=white" />
   <img src="https://img.shields.io/badge/Platform-Independent-green?style=flat-square" />
   <img src="https://img.shields.io/badge/Success%20Fee-8%25-blue?style=flat-square" />
+  <img src="https://img.shields.io/badge/Development-Active-brightgreen?style=flat-square" />
+  <img src="https://img.shields.io/badge/Started-Sep%202025-lightblue?style=flat-square" />
 </div>
+
+## Partnership Opportunities
+
+**Looking for strategic partnerships to accelerate platform growth:**
+
+We're seeking partnerships with:
+- **Investment firms** interested in early-stage platform equity
+- **Technology companies** for integration partnerships
+- **Developer communities** for platform adoption
+- **Educational institutions** for student entrepreneur programs
+
+**Contact:** [cozycoding@proton.me](mailto:cozycoding@proton.me) for partnership discussions.
 
 ## What We're Building
 
@@ -61,30 +75,43 @@ TechFlunky is the **first three-sided marketplace** designed specifically for th
 Built on Cloudflare's edge infrastructure for maximum performance and minimal costs:
 
 ```
-TechFlunky Platform
-├── Frontend (Astro + React + Tailwind)
-│   ├── Three-sided marketplace interface
+TechFlunky Platform (Active Development - Sep 2025)
+├── Frontend (Astro + React + Tailwind CSS)
+│   ├── Multi-domain architecture (techflunky.com, security.*, status.*)
+│   ├── Hybrid rendering (SSR + static pre-rendering)
+│   ├── 232+ source files across marketplace interfaces
+│   ├── Three-sided marketplace (sellers, buyers, investors)
 │   ├── AI-powered business canvas creator
 │   ├── Investment portal and syndicate tools
 │   └── Real-time deployment dashboard
 │
-├── Backend (Cloudflare Workers + D1)
-│   ├── AI validation engine (Cloudflare AI)
-│   ├── Secure payment processing (Stripe)
-│   ├── Multi-tenant data isolation
-│   └── Advanced authentication system
+├── Backend (Cloudflare Workers + D1 SQLite)
+│   ├── 50+ API endpoints for comprehensive functionality
+│   ├── AI validation engine (Cloudflare AI - Llama models)
+│   ├── Secure payment processing (Stripe with escrow)
+│   ├── Multi-tenant data isolation (6 database schemas)
+│   ├── Advanced authentication (GitHub, Google, Magic Link)
+│   ├── Comprehensive user roles (user, seller, investor, admin)
+│   └── Real-time WebSocket messaging
 │
 ├── AI Analysis System
-│   ├── Business blueprint validation
-│   ├── Claims verification engine
-│   ├── Investment opportunity scoring
-│   └── Market analysis automation
+│   ├── Business blueprint validation and certification
+│   ├── Repository analysis and codebase evaluation
+│   ├── Investment opportunity scoring and due diligence
+│   ├── Market analysis automation
+│   └── Claims verification without exposing trade secrets
 │
-└── Edge Deployment
-    ├── Sub-100ms global response times
-    ├── Auto-scaling infrastructure
-    ├── Enterprise-grade security
-    └── Complete buyer ownership
+├── Multi-Domain Infrastructure
+│   ├── Dispatch worker for optimized routing
+│   ├── Custom domain support for subdomains
+│   ├── Edge caching with performance optimization
+│   └── Global CDN with sub-100ms response times
+│
+└── Development Status
+    ├── 60+ commits since September 13, 2025
+    ├── Active development with daily iterations
+    ├── Modern tooling (Wrangler 4.38.0, latest Astro)
+    └── Production-ready Cloudflare deployment
 ```
 
 ## Revenue Model
@@ -105,7 +132,7 @@ TechFlunky Platform
 - **Frontend**: Astro + React + Tailwind CSS
 - **Backend**: Cloudflare Workers (edge computing)
 - **Database**: Cloudflare D1 (SQLite at the edge)
-- **AI Engine**: Cloudflare AI (Llama 3.1 70B)
+- **AI Engine**: Cloudflare AI (Llama models)
 - **Payments**: Stripe with escrow services
 - **Storage**: Cloudflare R2 (S3-compatible)
 - **Authentication**: Enterprise-grade security with CSRF protection
@@ -119,7 +146,7 @@ Want to start selling your pre-built platforms? Here's how:
 
 ```bash
 # Clone and set up the platform
-git clone https://github.com/yourusername/techflunky.git
+git clone https://github.com/cozyartz/techflunky.git
 cd techflunky
 npm install
 
@@ -135,17 +162,20 @@ npm run dev
 
 You'll need:
 - **Node.js 18+**
-- **Cloudflare account** (free tier works)
-- **Stripe account** (for payments)
-- **AI API access** (Cloudflare AI or Anthropic Claude)
+- **Cloudflare account** (free tier works for development)
+- **Stripe account** (for payment processing and escrow)
+- **Cloudflare AI** (included with Cloudflare Workers)
+- **Wrangler CLI 4.38.0+** (latest version required)
 
 ### Development Commands
 
 ```bash
 npm run dev          # Start development server
-npm run build        # Build for production
+npm run build        # Build for production (includes CSS optimization)
 npm run deploy       # Deploy to Cloudflare Pages
 npm run docs:dev     # Run documentation site
+npm run docs:deploy  # Deploy documentation to Pages
+npm run deploy:all   # Deploy both main platform and docs
 ```
 
 ## How It Works
@@ -259,16 +289,37 @@ We're built by the indie developer community, for the indie developer community.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
-## Roadmap
+## Development Roadmap
 
-**Building the future of indie business:**
+**Building the future of indie business marketplace (Started September 2025):**
 
-- **Q1 2025**: Enhanced AI validation system
-- **Q2 2025**: Mobile app for sellers and investors
-- **Q3 2025**: White-label platform offering
-- **Q4 2025**: Acquisition marketplace integration
+### Current Status (September 2025)
+- **Core Platform**: Multi-domain architecture operational
+- **AI Integration**: Cloudflare AI implementation complete
+- **Payment System**: Stripe integration with escrow functionality
+- **Authentication**: Multiple providers (GitHub, Google, Magic Link)
+- **Database**: Comprehensive schema with 6 specialized schemas
+- **API**: 50+ endpoints covering all platform functionality
 
-Vote on features and track progress in our [GitHub Projects](https://github.com/yourusername/techflunky/projects).
+### Q4 2025
+- **Public Beta Launch**: Platform goes live for early adopters
+- **Enhanced AI validation**: Advanced business analysis algorithms
+- **Seller onboarding**: Streamlined platform creation process
+- **Investor portal**: Portfolio management and syndicate tools
+
+### Q1 2026
+- **Mobile app**: React Native app for sellers and investors
+- **Advanced analytics**: Real-time platform performance tracking
+- **White-label offering**: Custom-branded marketplace instances
+- **Community features**: Developer forums and knowledge sharing
+
+### Q2 2026
+- **Acquisition marketplace**: Platform trading and business transfers
+- **International expansion**: Multi-currency and localization
+- **Enterprise features**: Advanced compliance and reporting tools
+- **Partnership integrations**: Third-party developer tool ecosystem
+
+Track development progress and contribute ideas in our [GitHub Issues](https://github.com/cozyartz/techflunky/issues).
 
 ## License & Legal
 
@@ -281,14 +332,30 @@ Vote on features and track progress in our [GitHub Projects](https://github.com/
 
 See [LICENSE](LICENSE) for complete terms and [LICENSE-STRUCTURE.md](LICENSE-STRUCTURE.md) for details.
 
+## Platform Statistics
+
+**Current Development Progress (as of September 19, 2025):**
+
+- **Development Timeline**: 6 days of active development
+- **Code Commits**: 60+ commits with daily iterations
+- **Source Files**: 232+ files across frontend and backend
+- **API Endpoints**: 50+ comprehensive REST API endpoints
+- **Database Schemas**: 6 specialized schemas for different platform functions
+- **Multi-Domain Architecture**: Operational with optimized routing
+- **AI Integration**: Cloudflare AI with Llama models fully integrated
+- **Payment Processing**: Stripe with escrow system implemented
+- **Authentication**: Multiple providers with enterprise-grade security
+
 ---
 
 <div align="center">
 
 **Ready to join the indie marketplace revolution?**
 
-[🚀 Start Selling](https://techflunky.com/sell) • [💰 Start Investing](https://techflunky.com/invest) • [🛒 Browse Platforms](https://techflunky.com/marketplace)
+[🚀 View Repository](https://github.com/cozyartz/techflunky) • [📧 Partnership Inquiries](mailto:cozycoding@proton.me) • [🔒 Security Info](https://security.techflunky.com) • [📊 Platform Status](https://status.techflunky.com)
 
-*Built with ❤️ by indie developers, for indie developers*
+*Built by indie developers, for indie developers - Seeking partnerships for platform growth*
+
+**Partnership Contact: [cozycoding@proton.me](mailto:cozycoding@proton.me)**
 
 </div>
