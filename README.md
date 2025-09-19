@@ -11,18 +11,6 @@
   <img src="https://img.shields.io/badge/Started-Sep%202025-lightblue?style=flat-square" />
 </div>
 
-## Partnership Opportunities
-
-**Looking for strategic partnerships to accelerate platform growth:**
-
-We're seeking partnerships with:
-- **Investment firms** interested in early-stage platform equity
-- **Technology companies** for integration partnerships
-- **Developer communities** for platform adoption
-- **Educational institutions** for student entrepreneur programs
-
-**Contact:** [cozycoding@proton.me](mailto:cozycoding@proton.me) for partnership discussions.
-
 ## What We're Building
 
 TechFlunky is the **first three-sided marketplace** designed specifically for the indie developer economy:
@@ -32,6 +20,8 @@ TechFlunky is the **first three-sided marketplace** designed specifically for th
 - **Investors** discover and fund validated opportunities through AI-powered analysis
 
 **Why we exist**: Traditional marketplaces charge 15-20% fees and make you start from scratch. We charge just 8% and help you sell complete, working businesses.
+
+*Building something this ambitious as indie developers? We're always open to collaborating with fellow builders, investment partners, and dev communities who share our vision. Drop us a line: [cozycoding@proton.me](mailto:cozycoding@proton.me)*
 
 ## Core Features
 
@@ -354,8 +344,6 @@ See [LICENSE](LICENSE) for complete terms and [LICENSE-STRUCTURE.md](LICENSE-STR
 
 [🚀 View Repository](https://github.com/cozyartz/techflunky) • [📧 Partnership Inquiries](mailto:cozycoding@proton.me) • [🔒 Security Info](https://security.techflunky.com) • [📊 Platform Status](https://status.techflunky.com)
 
-*Built by indie developers, for indie developers - Seeking partnerships for platform growth*
-
-**Partnership Contact: [cozycoding@proton.me](mailto:cozycoding@proton.me)**
+*Built by indie developers, for indie developers*
 
 </div>
