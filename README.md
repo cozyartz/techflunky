@@ -11,7 +11,7 @@
 <img src="https://img.shields.io/badge/AI%20Powered-Cloudflare%20AI-FF6600?style=for-the-badge&logo=cloudflare&logoColor=white" />
 <br>
 <img src="https://img.shields.io/badge/Platform-Independent-28a745?style=for-the-badge" />
-<img src="https://img.shields.io/badge/Success%20Fee-8%25-007bff?style=for-the-badge" />
+<img src="https://img.shields.io/badge/Success%20Fee-10%25-007bff?style=for-the-badge" />
 <br>
 <img src="https://img.shields.io/badge/Development-Active-brightgreen?style=for-the-badge" />
 <img src="https://img.shields.io/badge/Started-Sep%202025-gold?style=for-the-badge" />
@@ -46,7 +46,7 @@ TechFlunky is the **first three-sided marketplace** designed specifically for th
 - **Entrepreneurs** buy complete, deployable business solutions
 - **Investors** discover and fund validated opportunities through AI-powered analysis
 
-**Why we exist**: Traditional marketplaces charge 15-20% fees and make you start from scratch. We charge just 8% and help you sell complete, working businesses.
+**Why we exist**: Traditional marketplaces charge 15-20% fees and make you start from scratch. We charge 10% (negotiable to 8% for quality platforms) and help you sell complete, working businesses.
 
 ## **Core Features**
 
@@ -58,7 +58,7 @@ TechFlunky is the **first three-sided marketplace** designed specifically for th
 - **FREE Business Canvas Creation** - Start with zero upfront costs
 - **AI Blueprint Generation** - $49 for comprehensive business plans
 - **Certification Tiers** - FREE to $599 validation levels
-- **Only 8% Success Fee** - Pay when you sell, not before
+- **10% Success Fee (8% for quality platforms)** - Pay when you sell, not before
 - **Complete Code Ownership** - Your work stays yours
 
 <div align="center">
@@ -92,7 +92,7 @@ TechFlunky is the **first three-sided marketplace** designed specifically for th
 
 - **FREE core services** - Business canvas, listings, basic certification
 - **Pay-when-you-succeed model** - No upfront platform fees
-- **Industry-leading low fees** - 8% vs 15-20% industry standard
+- **Industry-leading low fees** - 10% (8% for quality platforms) vs 15-20% industry standard
 - **No subscription model** - Single transactions, complete ownership
 
 <div align="center">
@@ -153,12 +153,12 @@ TechFlunky Platform (Active Development - Sep 2025)
 
 **Industry-leading low fees with indie-friendly pricing:**
 
-- **Marketplace Success Fee**: 8% (vs 15-20% industry standard)
+- **Marketplace Success Fee**: 10% (negotiable to 8% for quality platforms) vs 15-20% industry standard
 - **Business Creation Services**: $9-$599 for AI-powered blueprints
 - **Investor Services**: $299-$999 for syndicate setup and white-label portals
 - **Professional Services**: $99-$499 for expert reviews and due diligence
 
-**Example**: $50,000 platform sale = $4,000 platform fee (vs $7,500-$10,000 elsewhere)
+**Example**: $50,000 platform sale = $5,000 platform fee ($4,000 for quality platforms) vs $7,500-$10,000 elsewhere
 
 ## Technology Stack
 
@@ -221,7 +221,7 @@ npm run deploy:all   # Deploy both main platform and docs
 2. **AI Blueprint Generation** - $49 for comprehensive 15-30 page business plans
 3. **Get Certified** - FREE basic to $599 elite validation
 4. **List Your Platform** - FREE marketplace listing
-5. **Get Paid** - 8% success fee only when you sell
+5. **Get Paid** - 10% success fee (8% for quality platforms) only when you sell
 
 ### For Buyers (Entrepreneurs)
 
@@ -290,7 +290,7 @@ npm run deploy:all   # Deploy both main platform and docs
 
 ### Success Stories
 
-> "TechFlunky helped me sell my AI platform for $45,000. The AI validation gave buyers confidence, and the 8% fee meant I kept more profit than anywhere else." - *Alex, Full-Stack Developer*
+> "TechFlunky helped me sell my AI platform for $45,000. The AI validation gave buyers confidence, and the low fee structure meant I kept more profit than anywhere else." - *Alex, Full-Stack Developer*
 
 > "As an investor, the AI due diligence is incredible. 94% accuracy means I can evaluate opportunities quickly without exposing my investment thesis." - *Sarah, Angel Investor*
 
@@ -298,7 +298,7 @@ npm run deploy:all   # Deploy both main platform and docs
 
 **Growing indie marketplace:**
 
-- **Success Fee**: 8% (industry-leading low)
+- **Success Fee**: 10% (8% for quality platforms) - industry-leading low
 - **AI Accuracy**: 94% expert agreement
 - **Deployment Time**: Sub-5 minutes average
 - **Global Response**: <100ms worldwide
@@ -363,7 +363,7 @@ Track development progress and contribute ideas in our [GitHub Issues](https://g
 - **Platform Core**: Commercial license with transparent source code
 - **Your Business Packages**: You retain full ownership and licensing control
 - **Community Tools**: Selected utilities available under permissive licenses
-- **Revenue Model**: Fair 8% success fee only when you sell
+- **Revenue Model**: Fair 10% success fee (8% for quality platforms) only when you sell
 
 See [LICENSE](LICENSE) for complete terms and [LICENSE-STRUCTURE.md](LICENSE-STRUCTURE.md) for details.
 
