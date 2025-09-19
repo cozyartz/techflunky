@@ -2,6 +2,17 @@ import type { APIRoute } from 'astro';
 
 export const GET: APIRoute = async ({ request, locals }) => {
   try {
+    // Guard against build-time execution
+    if (!locals?.runtime?.env) {
+      return new Response(JSON.stringify({
+        success: false,
+        error: 'Service temporarily unavailable'
+      }), {
+        status: 503,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+
     const sessionToken = request.headers.get('cookie')?.split('session=')[1]?.split(';')[0];
 
     if (!sessionToken) {

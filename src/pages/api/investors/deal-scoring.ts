@@ -18,6 +18,16 @@ const RISK_FACTORS = {
 
 // Generate AI-powered deal score
 export async function POST({ request, locals }: APIContext) {
+  // Guard against build-time execution
+  if (!locals?.runtime?.env) {
+    return new Response(JSON.stringify({
+      error: 'Service temporarily unavailable'
+    }), {
+      status: 503,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
+
   const { DB, ANTHROPIC_API_KEY } = locals.runtime.env;
 
   try {
@@ -142,6 +152,16 @@ export async function POST({ request, locals }: APIContext) {
 
 // Get deal scores with filtering and sorting
 export async function GET({ url, locals }: APIContext) {
+  // Guard against build-time execution
+  if (!locals?.runtime?.env) {
+    return new Response(JSON.stringify({
+      error: 'Service temporarily unavailable'
+    }), {
+      status: 503,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
+
   const { DB } = locals.runtime.env;
   const listingId = url.searchParams.get('listingId');
   const investorId = url.searchParams.get('investorId');

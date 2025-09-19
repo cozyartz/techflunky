@@ -313,16 +313,6 @@ npm run deploy:all   # Deploy both main platform and docs
 - **Documentation**: [Comprehensive guides and API docs](https://docs.techflunky.com)
 - **Status Page**: [Real-time platform status](https://status.techflunky.com)
 
-### Contributing
-
-We're built by the indie developer community, for the indie developer community. Every contribution matters:
-
-1. **Fork the repo** and create your feature branch
-2. **Follow our coding standards** (Prettier, ESLint, TypeScript)
-3. **Write tests** for new features
-4. **Submit a PR** with a clear description
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 ## Development Roadmap
 
@@ -354,18 +344,13 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 - **Enterprise features**: Advanced compliance and reporting tools
 - **Partnership integrations**: Third-party developer tool ecosystem
 
-Track development progress and contribute ideas in our [GitHub Issues](https://github.com/cozyartz/techflunky/issues).
+Track development progress in our [GitHub Issues](https://github.com/cozyartz/techflunky/issues).
 
-## License & Legal
+## License
 
-**Source-available commercial platform:**
+**Commercial platform with transparent source code:**
 
-- **Platform Core**: Commercial license with transparent source code
-- **Your Business Packages**: You retain full ownership and licensing control
-- **Community Tools**: Selected utilities available under permissive licenses
-- **Revenue Model**: Fair 10% success fee (8% for quality platforms) only when you sell
-
-See [LICENSE](LICENSE) for complete terms and [LICENSE-STRUCTURE.md](LICENSE-STRUCTURE.md) for details.
+TechFlunky is a commercial marketplace platform. The source code is available for review and learning purposes, but commercial use requires proper licensing. When you sell business platforms through TechFlunky, you retain complete ownership and licensing control of your code - we only facilitate the transaction with our 10% success fee (8% for quality platforms).
 
 ## Platform Statistics
 

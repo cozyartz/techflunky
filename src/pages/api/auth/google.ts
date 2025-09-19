@@ -4,6 +4,11 @@ export const GET: APIRoute = async ({ url, locals, redirect }) => {
   const code = url.searchParams.get('code');
   const state = url.searchParams.get('state');
 
+  // Guard against build-time execution
+  if (!locals?.runtime?.env) {
+    return new Response('Service temporarily unavailable', { status: 503 });
+  }
+
   if (!code) {
     // Redirect to Google OAuth
     const clientId = locals.runtime.env.GOOGLE_CLIENT_ID;

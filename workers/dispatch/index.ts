@@ -197,12 +197,30 @@ async function handlePlatformRoute(
   if (url.hostname.includes('security.techflunky.com')) {
     const isStaticAsset = /\.(css|js|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|webp|map)$/.test(url.pathname);
     if (!isStaticAsset) {
-      targetPath = '/security';
+      // Route root requests to /security/, preserve other paths
+      if (url.pathname === '/') {
+        targetPath = '/security/';
+      } else if (!url.pathname.startsWith('/security/')) {
+        targetPath = '/security' + url.pathname;
+      }
+    }
+  }
+
+  // Status subdomain routing - only for HTML pages
+  if (url.hostname.includes('status.techflunky.com')) {
+    const isStaticAsset = /\.(css|js|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|webp|map)$/.test(url.pathname);
+    if (!isStaticAsset) {
+      // Route root requests to /status/, preserve other paths
+      if (url.pathname === '/') {
+        targetPath = '/status/';
+      } else if (!url.pathname.startsWith('/status/')) {
+        targetPath = '/status' + url.pathname;
+      }
     }
   }
 
   // Construct target URL efficiently
-  const pagesUrl = new URL(targetPath + url.search, 'https://7859fef8.techflunky.pages.dev');
+  const pagesUrl = new URL(targetPath + url.search, 'https://4ab668d0.techflunky.pages.dev');
 
   try {
     // Optimized proxy request with minimal overhead
