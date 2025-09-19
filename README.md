@@ -1,14 +1,41 @@
-# TechFlunky
+<div align="center">
 
-> **The indie marketplace where developers sell validated business platforms and investors discover opportunities through AI-powered due diligence**
+<img src="https://raw.githubusercontent.com/cozyartz/techflunky/main/public/assets/techflunky-logo.png" alt="TechFlunky Logo" width="200" height="200">
+
+# TechFlunky
+### 🚀 The Indie Marketplace Revolution
+
+**Where developers sell validated business platforms and investors discover opportunities through AI-powered due diligence**
+
+<img src="https://img.shields.io/badge/Built%20on-Cloudflare-F38020?style=for-the-badge&logo=cloudflare&logoColor=white" />
+<img src="https://img.shields.io/badge/AI%20Powered-Cloudflare%20AI-FF6600?style=for-the-badge&logo=cloudflare&logoColor=white" />
+<br>
+<img src="https://img.shields.io/badge/Platform-Independent-28a745?style=for-the-badge" />
+<img src="https://img.shields.io/badge/Success%20Fee-8%25-007bff?style=for-the-badge" />
+<br>
+<img src="https://img.shields.io/badge/Development-Active-brightgreen?style=for-the-badge" />
+<img src="https://img.shields.io/badge/Started-Sep%202025-gold?style=for-the-badge" />
+
+---
+
+</div>
+
+## 🎯 **Looking for Collaborators & Partners!**
 
 <div align="center">
-  <img src="https://img.shields.io/badge/Built%20on-Cloudflare-F38020?style=flat-square&logo=cloudflare&logoColor=white" />
-  <img src="https://img.shields.io/badge/AI%20Powered-Cloudflare%20AI-FF6600?style=flat-square&logo=cloudflare&logoColor=white" />
-  <img src="https://img.shields.io/badge/Platform-Independent-green?style=flat-square" />
-  <img src="https://img.shields.io/badge/Success%20Fee-8%25-blue?style=flat-square" />
-  <img src="https://img.shields.io/badge/Development-Active-brightgreen?style=flat-square" />
-  <img src="https://img.shields.io/badge/Started-Sep%202025-lightblue?style=flat-square" />
+
+### 🤝 **Building the Future of Indie Business Together**
+
+*Hey fellow builders! We're creating something ambitious and we'd love to collaborate with:*
+
+🏢 **Investment Partners** • 🔧 **Tech Integration Partners** • 👥 **Developer Communities** • 🎓 **Educational Institutions**
+
+**Ready to chat?** Drop us a line: **[cozycoding@proton.me](mailto:cozycoding@proton.me)**
+
+*Let's build the indie marketplace that developers actually want to use* ⚡
+
+---
+
 </div>
 
 ## What We're Building
@@ -21,44 +48,62 @@ TechFlunky is the **first three-sided marketplace** designed specifically for th
 
 **Why we exist**: Traditional marketplaces charge 15-20% fees and make you start from scratch. We charge just 8% and help you sell complete, working businesses.
 
-*Building something this ambitious as indie developers? We're always open to collaborating with fellow builders, investment partners, and dev communities who share our vision. Drop us a line: [cozycoding@proton.me](mailto:cozycoding@proton.me)*
+## 🎨 **Core Features**
 
-## Core Features
+<div align="center">
 
-### For Developers (Sellers)
-- **FREE Business Canvas Creation** - Start with zero upfront costs
-- **AI Blueprint Generation** - $49 for comprehensive business plans
-- **Certification Tiers** - FREE to $599 validation levels
-- **Only 8% Success Fee** - Pay when you sell, not before
-- **Complete Code Ownership** - Your work stays yours
+### 🛠️ **For Developers (Sellers)**
+</div>
 
-### For Entrepreneurs (Buyers)
-- **Browse Validated Platforms** - AI-certified business opportunities
-- **One-Click Deployment** - Deploy to your own Cloudflare infrastructure
-- **Instant Global Edge** - Sub-100ms response times worldwide
-- **60-80% Lower Hosting Costs** - Edge computing efficiency
-- **Complete Ownership** - Code deploys to YOUR accounts
+🆓 **FREE Business Canvas Creation** - Start with zero upfront costs
+🤖 **AI Blueprint Generation** - $49 for comprehensive business plans
+🏆 **Certification Tiers** - FREE to $599 validation levels
+💰 **Only 8% Success Fee** - Pay when you sell, not before
+🔐 **Complete Code Ownership** - Your work stays yours
 
-### For Investors
-- **AI-Powered Due Diligence** - 94% accuracy business analysis
-- **Investment Tiers** - Angel ($5K-$250K) to VC Fund ($100K-$10M)
-- **Syndicate Creation** - Group investment tools
-- **Portfolio Management** - Real-time performance tracking
-- **Revenue Sharing** - Beta partner opportunities
+<div align="center">
 
-## Why Choose TechFlunky
+### 🚀 **For Entrepreneurs (Buyers)**
+</div>
 
-### Budget-Friendly Indie Focus
-- **FREE core services** - Business canvas, listings, basic certification
-- **Pay-when-you-succeed model** - No upfront platform fees
-- **Industry-leading low fees** - 8% vs 15-20% industry standard
-- **No subscription model** - Single transactions, complete ownership
+✅ **Browse Validated Platforms** - AI-certified business opportunities
+⚡ **One-Click Deployment** - Deploy to your own Cloudflare infrastructure
+🌍 **Instant Global Edge** - Sub-100ms response times worldwide
+💸 **60-80% Lower Hosting Costs** - Edge computing efficiency
+🏠 **Complete Ownership** - Code deploys to YOUR accounts
 
-### AI-First Validation
-- **94% Expert Agreement** - AI analysis matches human experts
-- **Business viability scoring** - Multi-dimensional assessment
-- **Claims verification** - Validate without exposing trade secrets
-- **Investment opportunity identification** - Market potential analysis
+<div align="center">
+
+### 💼 **For Investors**
+</div>
+
+🧠 **AI-Powered Due Diligence** - 94% accuracy business analysis
+📊 **Investment Tiers** - Angel ($5K-$250K) to VC Fund ($100K-$10M)
+🤝 **Syndicate Creation** - Group investment tools
+📈 **Portfolio Management** - Real-time performance tracking
+💎 **Revenue Sharing** - Beta partner opportunities
+
+## 🌟 **Why Choose TechFlunky**
+
+<div align="center">
+
+### 💰 **Budget-Friendly Indie Focus**
+</div>
+
+🆓 **FREE core services** - Business canvas, listings, basic certification
+🎯 **Pay-when-you-succeed model** - No upfront platform fees
+🏆 **Industry-leading low fees** - 8% vs 15-20% industry standard
+🚫 **No subscription model** - Single transactions, complete ownership
+
+<div align="center">
+
+### 🤖 **AI-First Validation**
+</div>
+
+✅ **94% Expert Agreement** - AI analysis matches human experts
+📊 **Business viability scoring** - Multi-dimensional assessment
+🔒 **Claims verification** - Validate without exposing trade secrets
+🎯 **Investment opportunity identification** - Market potential analysis
 
 ## Technical Architecture
 
@@ -340,10 +385,28 @@ See [LICENSE](LICENSE) for complete terms and [LICENSE-STRUCTURE.md](LICENSE-STR
 
 <div align="center">
 
-**Ready to join the indie marketplace revolution?**
+<img src="https://raw.githubusercontent.com/cozyartz/techflunky/main/public/assets/techflunky-logo.png" alt="TechFlunky" width="80" height="80">
 
-[🚀 View Repository](https://github.com/cozyartz/techflunky) • [📧 Partnership Inquiries](mailto:cozycoding@proton.me) • [🔒 Security Info](https://security.techflunky.com) • [📊 Platform Status](https://status.techflunky.com)
+## **Ready to join the indie marketplace revolution?**
 
-*Built by indie developers, for indie developers*
+<div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin: 20px 0;">
+
+[![View Repository](https://img.shields.io/badge/🚀_View_Repository-gold?style=for-the-badge&logo=github&logoColor=black)](https://github.com/cozyartz/techflunky)
+
+[![Partnership Inquiries](https://img.shields.io/badge/📧_Partnership_Inquiries-brightgreen?style=for-the-badge&logo=protonmail&logoColor=white)](mailto:cozycoding@proton.me)
+
+[![Security Info](https://img.shields.io/badge/🔒_Security_Info-red?style=for-the-badge&logo=security&logoColor=white)](https://security.techflunky.com)
+
+[![Platform Status](https://img.shields.io/badge/📊_Platform_Status-blue?style=for-the-badge&logo=statuspage&logoColor=white)](https://status.techflunky.com)
+
+</div>
+
+### 🏗️ *Built by indie developers, for indie developers*
+
+**💡 Have an idea? Want to collaborate? We're always excited to chat with fellow builders!**
+
+---
+
+*TechFlunky - Where indie dreams become profitable realities* ⚡
 
 </div>
