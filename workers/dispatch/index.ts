@@ -187,7 +187,7 @@ async function handlePlatformRoute(
   }
 
   // Create new URL pointing to the TechFlunky Pages deployment
-  const pagesUrl = new URL(targetPath + url.search, 'https://techflunky.pages.dev');
+  const pagesUrl = new URL(targetPath + url.search, 'https://7f72f172.techflunky.pages.dev');
 
   // Create new request with the updated URL
   const pagesRequest = new Request(pagesUrl, {
