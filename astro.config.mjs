@@ -6,19 +6,12 @@ import tailwind from '@astrojs/tailwind';
 export default defineConfig({
   output: 'server',
   adapter: cloudflare({
-    // Use advanced mode for proper Cloudflare Pages SSR
-    mode: 'advanced',
-    // For Cloudflare Pages, bindings are configured in the dashboard
-    // No runtime configuration needed - environment variables and bindings
-    // are automatically available via locals.runtime.env
+    mode: 'directory',
   }),
   integrations: [
     react(),
     tailwind()
   ],
-  build: {
-    assets: '_astro'
-  },
   vite: {
     ssr: {
       external: ['node:buffer', 'node:crypto', 'node:stream', '@cloudflare/ai']
