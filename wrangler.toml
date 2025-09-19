@@ -1,23 +1,13 @@
 # Cloudflare Pages configuration
 name = "techflunky"
-compatibility_date = "2024-09-23"
+compatibility_date = "2024-12-01"
 compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = "dist"
 
-# Note: For Cloudflare Pages, bindings are configured through the dashboard
-# The following are reference configurations for development and dashboard setup:
-
-# Environment variables for development
+# Environment variables
 [vars]
 ENVIRONMENT = "production"
 SITE_URL = "https://techflunky.com"
-
-# Required bindings to configure in Cloudflare dashboard:
-# - AI binding: "AI"
-# - D1 database: "DB" (database: techflunky-db)
-# - R2 bucket: "BUCKET" (bucket: techflunky-assets)
-# - KV namespace: "CACHE"
-# - Analytics Engine: "ANALYTICS"
 
 # D1 database bindings
 [[d1_databases]]
@@ -25,5 +15,20 @@ binding = "DB"
 database_name = "techflunky-db"
 database_id = "330b8406-f05f-4e5b-966a-a58fcd2ba3d1"
 
-# For development with wrangler pages dev:
-# wrangler pages dev dist --d1 DB=techflunky-db --r2 BUCKET=techflunky-assets --kv CACHE --ai AI=@cf/meta/llama-3.1-70b-instruct
+# R2 bucket bindings
+[[r2_buckets]]
+binding = "BUCKET"
+bucket_name = "techflunky-assets"
+
+# KV namespace bindings
+[[kv_namespaces]]
+binding = "CACHE"
+id = "your-kv-namespace-id"
+
+# Analytics Engine bindings
+[[analytics_engine_datasets]]
+binding = "ANALYTICS"
+
+# AI bindings
+[ai]
+binding = "AI"

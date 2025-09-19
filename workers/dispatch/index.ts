@@ -1,5 +1,20 @@
-// TechFlunky Dispatch Worker for Workers for Platforms
-// Routes requests to tenant-specific Workers based on seller context
+// TechFlunky Dispatch Worker - Multi-Domain Routing
+//
+// ARCHITECTURE OVERVIEW:
+// This worker provides centralized routing for all TechFlunky domains:
+// - techflunky.com (main platform)
+// - security.techflunky.com (security documentation)
+// - status.techflunky.com (system status)
+// - docs.techflunky.com (documentation - separate Pages project)
+//
+// BENEFITS:
+// 1. Single point of routing configuration
+// 2. Consistent subdomain handling logic
+// 3. Future-ready for Workers for Platforms tenant isolation
+// 4. Performance optimization through edge routing
+// 5. Centralized error handling and fallbacks
+//
+// Routes all requests to the main TechFlunky Pages deployment with subdomain-aware routing
 
 export interface Env {
   // Workers for Platforms binding
@@ -167,67 +182,84 @@ async function routeToTenantWorker(
   }
 }
 
-// Handle main platform routes
+// Handle main platform routes with optimized proxying
 async function handlePlatformRoute(
   request: Request,
   env: Env,
   ctx: ExecutionContext
 ): Promise<Response> {
-  // Route all platform requests to the TechFlunky Pages deployment
   const url = new URL(request.url);
 
-  // Special handling for security subdomain - route to /security page for HTML requests only
+  // Optimized subdomain routing logic
   let targetPath = url.pathname;
 
-  if (url.hostname === 'security.techflunky.com' || url.hostname.includes('security.techflunky.com')) {
-    // Only redirect to /security for HTML page requests, not static assets
-    if (!url.pathname.match(/\.(css|js|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|webp|map)$/)) {
+  // Security subdomain routing - only for HTML pages
+  if (url.hostname.includes('security.techflunky.com')) {
+    const isStaticAsset = /\.(css|js|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|webp|map)$/.test(url.pathname);
+    if (!isStaticAsset) {
       targetPath = '/security';
     }
   }
 
-  // Create new URL pointing to the TechFlunky Pages deployment
-  const pagesUrl = new URL(targetPath + url.search, 'https://4a9923a0.techflunky.pages.dev');
-
-  // Create new request with the updated URL
-  const pagesRequest = new Request(pagesUrl, {
-    method: request.method,
-    headers: request.headers,
-    body: request.body,
-    redirect: 'manual'
-  });
+  // Construct target URL efficiently
+  const pagesUrl = new URL(targetPath + url.search, 'https://7859fef8.techflunky.pages.dev');
 
   try {
-    // Proxy the request to TechFlunky Pages
-    const response = await fetch(pagesRequest);
+    // Optimized proxy request with minimal overhead
+    const response = await fetch(pagesUrl, {
+      method: request.method,
+      headers: request.headers,
+      body: request.body,
+      redirect: 'manual'
+    });
 
-    // Return the response from Pages
+    // Stream response directly with minimal copying
     return new Response(response.body, {
       status: response.status,
       statusText: response.statusText,
-      headers: response.headers
+      headers: {
+        ...Object.fromEntries(response.headers.entries()),
+        // Add cache headers for performance
+        'Cache-Control': response.headers.get('Cache-Control') || 'public, max-age=300',
+        // Add routing identification
+        'X-Routed-By': 'techflunky-dispatch'
+      }
     });
-  } catch (error) {
-    console.error('Failed to proxy to TechFlunky Pages:', error);
 
-    // Fallback response if Pages is unavailable
-    return new Response(`
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <title>TechFlunky - Temporarily Unavailable</title>
-          <meta charset="utf-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1">
-        </head>
-        <body>
-          <h1>TechFlunky Platform</h1>
-          <p>Platform temporarily unavailable. Please try again later.</p>
-          <p>Route: ${url.pathname}</p>
-        </body>
-      </html>
-    `, {
+  } catch (error) {
+    console.error('Pages proxy error:', error);
+
+    // Optimized fallback with proper error handling
+    return new Response(getErrorPage(url.pathname), {
       status: 503,
-      headers: { 'Content-Type': 'text/html' }
+      headers: {
+        'Content-Type': 'text/html',
+        'Cache-Control': 'no-cache'
+      }
     });
   }
+}
+
+// Optimized error page generation
+function getErrorPage(pathname: string): string {
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TechFlunky - Service Temporarily Unavailable</title>
+  <style>
+    body { font-family: system-ui, sans-serif; text-align: center; padding: 2rem; background: #000; color: #fff; }
+    .container { max-width: 600px; margin: 0 auto; }
+    h1 { color: #fbbf24; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>TechFlunky Platform</h1>
+    <p>Service temporarily unavailable. Please try again in a moment.</p>
+    <p><small>Route: ${pathname}</small></p>
+  </div>
+</body>
+</html>`;
 }

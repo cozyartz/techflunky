@@ -1,1 +1,2 @@
 - Do not use emoji in our codebases, docs, or copy
+- always make sure we are using an updated version of wrangler.

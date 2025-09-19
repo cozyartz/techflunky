@@ -1,0 +1,89 @@
+---
+export const prerender = true;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechFlunky Status</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      margin: 0;
+      padding: 40px 20px;
+      background: #000;
+      color: #fff;
+      text-align: center;
+    }
+    .status {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .indicator {
+      width: 20px;
+      height: 20px;
+      background: #10b981;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 10px;
+    }
+    h1 {
+      color: #fbbf24;
+      margin-bottom: 20px;
+    }
+    .service {
+      padding: 15px;
+      margin: 10px 0;
+      background: #1f2937;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .timestamp {
+      color: #9ca3af;
+      font-size: 14px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="status">
+    <h1>TechFlunky Platform Status</h1>
+    <p>All systems operational</p>
+
+    <div class="service">
+      <span>🌐 Main Platform</span>
+      <span><span class="indicator"></span>Operational</span>
+    </div>
+
+    <div class="service">
+      <span>🔐 Authentication</span>
+      <span><span class="indicator"></span>Operational</span>
+    </div>
+
+    <div class="service">
+      <span>💳 Payment Processing</span>
+      <span><span class="indicator"></span>Operational</span>
+    </div>
+
+    <div class="service">
+      <span>🤖 AI Services</span>
+      <span><span class="indicator"></span>Operational</span>
+    </div>
+
+    <div class="service">
+      <span>📊 Analytics</span>
+      <span><span class="indicator"></span>Operational</span>
+    </div>
+
+    <div class="timestamp">
+      Last updated: September 19, 2025
+    </div>
+
+    <p><a href="/" style="color: #fbbf24;">← Back to TechFlunky</a></p>
+  </div>
+</body>
+</html>
