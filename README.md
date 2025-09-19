@@ -30,7 +30,7 @@
 
 **Investment Partners** • **Tech Integration Partners** • **Developer Communities** • **Educational Institutions**
 
-**Ready to chat?** Drop us a line: **[cozycoding@proton.me](mailto:cozycoding@proton.me)**
+**Ready to chat?** Drop us a line: **[andrea@techflunky.com](mailto:andrea@techflunky.com)**
 
 *Let's build the indie marketplace that developers actually want to use*
 
@@ -393,7 +393,7 @@ See [LICENSE](LICENSE) for complete terms and [LICENSE-STRUCTURE.md](LICENSE-STR
 
 [![View Repository](https://img.shields.io/badge/View_Repository-gold?style=for-the-badge&logo=github&logoColor=black)](https://github.com/cozyartz/techflunky)
 
-[![Partnership Inquiries](https://img.shields.io/badge/Partnership_Inquiries-brightgreen?style=for-the-badge&logo=protonmail&logoColor=white)](mailto:cozycoding@proton.me)
+[![Partnership Inquiries](https://img.shields.io/badge/Partnership_Inquiries-brightgreen?style=for-the-badge&logo=mail&logoColor=white)](mailto:andrea@techflunky.com)
 
 [![Security Info](https://img.shields.io/badge/Security_Info-red?style=for-the-badge&logo=security&logoColor=white)](https://security.techflunky.com)
 
